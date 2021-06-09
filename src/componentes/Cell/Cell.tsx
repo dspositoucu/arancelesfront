@@ -22,10 +22,11 @@ const useStyles = makeStyles(() =>
 )
 
 //styled and build new cell component
-const StyledTableCell = withStyles(theme => ({
+const StyledTableCell = withStyles( () => ({
     head: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white
+        backgroundColor: "#F2F0F9",
+        color: "#6E6893",
+        padding: 7,
     },
     body: {
         fontSize: 14,
@@ -37,7 +38,7 @@ const StyledTableCell = withStyles(theme => ({
 
 export const Cell: FC<Props> = ({ children }) => {
     return (
-        <StyledTableCell>
+        <StyledTableCell variant="body">
             {children}
         </StyledTableCell>
     )
@@ -48,7 +49,7 @@ export const CellCheckBox: FC<Props> = ( {check=false} ) => {
     const classes = useStyles()
 
     return (
-        <StyledTableCell>
+        <StyledTableCell variant="body">
             <div className={classes.IconCell}>
                 {
                     check 
@@ -65,10 +66,18 @@ export const CellAction: FC<Props> = ( {children} ) => {
     const classes = useStyles()
 
     return (
-        <StyledTableCell style={{ width: 100 }}>
+        <StyledTableCell variant="body" style={{ width: 100 }}>
             <div className={classes.IconCell}>
                 {children}
             </div>
         </StyledTableCell>
     )
 }
+
+export const CellHeader: FC<Props> = ({ children }) => {
+    return(
+        <StyledTableCell variant="head">
+            {children}
+        </StyledTableCell>
+    )
+} 

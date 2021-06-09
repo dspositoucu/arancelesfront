@@ -18,7 +18,8 @@ import LastPageIcon from '@material-ui/icons/LastPage';
 import {personas} from '../../dataTable.json';
 
 //component
-import Row from '../Row';
+import { Row, RowHeader } from '../Row';
+import MenuHeaderTable from './MenuHeaderTable';
 
 const useStyles1 = makeStyles((theme: Theme) =>
     createStyles({
@@ -127,11 +128,12 @@ export default function CustomPaginationActionsTable() {
 
     return (
         <TableContainer className={classes.tableContainer} component={Paper}>
+
+            <MenuHeaderTable label={"Buscar por nombre"}/>
+
             <Table className={classes.table} aria-label="tabla">
                 <TableBody>
-                    <TableRow >
-                        <TableCell colSpan={15} />
-                    </TableRow>
+                    <RowHeader data={personas[0]} />
                     {(rowsPerPage > 0
                         ? personas.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                         : personas

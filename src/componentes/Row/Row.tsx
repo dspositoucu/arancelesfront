@@ -1,16 +1,15 @@
-import React, { FC } from 'react'
+import React, { FC, ReactNode } from 'react'
 import { withStyles } from "@material-ui/core/styles";
 import TableRow from '@material-ui/core/TableRow';
-import { Cell, CellCheckBox, CellAction } from '../Cell'
+import { Cell, CellCheckBox, CellAction, CellHeader } from '../Cell'
 
 //icons 
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-
 interface Props {
   data: any
 }
-//styled and build Component 
 
+//styled and build Component 
 const StyledTableRow = withStyles(() => ({
   root: {
     "&:nth-of-type(odd)": {
@@ -19,8 +18,7 @@ const StyledTableRow = withStyles(() => ({
   }
 }))(TableRow);
 
-
-const Row: FC<Props> = ({ data }) => {
+export const Row: FC<Props> = ({ data }) => {
   const keysData: string[] = Object.keys(data)
 
   console.log(keysData.length)
@@ -43,4 +41,24 @@ const Row: FC<Props> = ({ data }) => {
   )
 }
 
-export default Row
+//Row Header Table
+export const RowHeader: FC<Props> = ({ data }) => {
+  const keysData: string[] = Object.keys(data)
+  
+  let rowHeader: ReactNode[] = keysData.map(( key, index ) => {
+    return(
+      <CellHeader key={ index }>
+        { key }
+      </CellHeader>
+    )})
+      rowHeader.push(<CellHeader>ACCIONES</CellHeader>);
+      rowHeader.unshift(<CellHeader/>);
+
+  return(
+    <StyledTableRow>
+      {rowHeader}
+    </StyledTableRow>
+  )
+}
+
+
