@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react'
 import PropTypes from 'prop-types';
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
+
 import {
     List,
     ListItem,
@@ -14,7 +15,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 //Icons
 import {IconList} from '../../Icons'
 
-import { menuData } from '../../data.json'
+import { menuData } from '../../dataMenuList.json'
 
 interface Props { }
 

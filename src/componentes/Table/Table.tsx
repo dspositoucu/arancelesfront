@@ -14,6 +14,12 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 
+//data example
+import {personas} from '../../dataTable.json';
+
+//component
+import Row from '../Row';
+
 const useStyles1 = makeStyles((theme: Theme) =>
     createStyles({
         root: {
@@ -85,35 +91,28 @@ function createData(name: string, calories: number, fat: number) {
     return { name, calories, fat };
 }
 
-const rows = [
-    createData('Cupcake', 305, 3.7),
-    createData('Donut', 452, 25.0),
-    createData('Eclair', 262, 16.0),
-    createData('Frozen yoghurt', 159, 6.0),
-    createData('Gingerbread', 356, 16.0),
-    createData('Honeycomb', 408, 3.2),
-    createData('Ice cream sandwich', 237, 9.0),
-    createData('Jelly Bean', 375, 0.0),
-    createData('KitKat', 518, 26.0),
-    createData('Lollipop', 392, 0.2),
-    createData('Marshmallow', 318, 0),
-    createData('Nougat', 360, 19.0),
-    createData('Oreo', 437, 18.0),
-    createData('Oreo', 437, 18.0),
-].sort((a, b) => (a.calories < b.calories ? -1 : 1));
-
-const useStyles2 = makeStyles({
+const useStyles2 = makeStyles( (theme: Theme)=>
+createStyles({
     table: {
-        minWidth: 500,
+        minWidth: 600,
     },
-});
+    styleRow: {
+        height: "auto"
+    },
+    tableContainer:{
+        borderRadius:15
+    },
+    paginationTable:{
+        color: '#6E6893',
+    }
+}));
 
 export default function CustomPaginationActionsTable() {
     const classes = useStyles2();
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(14);
+    const [rowsPerPage, setRowsPerPage] = React.useState(15);
 
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, personas.length - page * rowsPerPage);
 
     const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
         setPage(newPage);
@@ -127,37 +126,32 @@ export default function CustomPaginationActionsTable() {
     };
 
     return (
-        <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="custom pagination table">
+        <TableContainer className={classes.tableContainer} component={Paper}>
+            <Table className={classes.table} aria-label="tabla">
                 <TableBody>
+                    <TableRow >
+                        <TableCell colSpan={15} />
+                    </TableRow>
                     {(rowsPerPage > 0
-                        ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                        : rows
-                    ).map((row) => (
-                        <TableRow key={row.name}>
-                            <TableCell component="th" scope="row">
-                                {row.name}
-                            </TableCell>
-                            <TableCell style={{ width: 160 }} align="right">
-                                {row.calories}
-                            </TableCell>
-                            <TableCell style={{ width: 160 }} align="right">
-                                {row.fat}
-                            </TableCell>
-                        </TableRow>
+                        ? personas.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                        : personas
+                    ).map((persona) => (
+                        <Row data={persona}/>
                     ))}
                     {emptyRows > 0 && (
-                        <TableRow style={{ height: 30 * emptyRows }}>
-                            <TableCell colSpan={6} />
+                        <TableRow style={{ height: 39 * emptyRows }}>
+                            <TableCell colSpan={15} />
                         </TableRow>
                     )}
                 </TableBody>
                 <TableFooter>
                     <TableRow>
                         <TablePagination
-                            rowsPerPageOptions={[14, { label: 'All', value: -1 }]}
-                            colSpan={3}
-                            count={rows.length}
+                            className={classes.paginationTable}
+                            align="right"
+                            rowsPerPageOptions={[5,10,15, { label: 'All', value: -1 }]}
+                            colSpan={9}
+                            count={personas.length}
                             rowsPerPage={rowsPerPage}
                             page={page}
                             SelectProps={{
