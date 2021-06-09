@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react'
 import { withStyles } from "@material-ui/core/styles";
 import TableRow from '@material-ui/core/TableRow';
-import { Cell, CellCheckBox, CellAction, CellHeader } from '../Cell'
+import { Cell, CellCheckBox, CellAction } from '../Cell'
 
 //icons 
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
@@ -47,12 +47,12 @@ export const RowHeader: FC<Props> = ({ data }) => {
   
   let rowHeader: ReactNode[] = keysData.map(( key, index ) => {
     return(
-      <CellHeader key={ index }>
+      <Cell variant="head" key={ index }>
         { key }
-      </CellHeader>
+      </Cell>
     )})
-      rowHeader.push(<CellHeader>ACCIONES</CellHeader>);
-      rowHeader.unshift(<CellHeader/>);
+      rowHeader.push(<Cell variant="head">ACCIONES</Cell>);
+      rowHeader.unshift(<CellCheckBox variant="head"/>);
 
   return(
     <StyledTableRow>

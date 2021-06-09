@@ -1,4 +1,5 @@
 import React, { FC, ReactNode } from 'react'
+import clsx from 'clsx' 
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import { withStyles } from "@material-ui/core/styles";
@@ -8,6 +9,7 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 interface Props {
     children?: ReactNode | any,
     check?: Boolean,
+    variant?: "body"|"head"|"footer"|undefined
 }
 
 //Style align center checkbox
@@ -36,20 +38,20 @@ const StyledTableCell = withStyles( () => ({
     },
 }))(TableCell);
 
-export const Cell: FC<Props> = ({ children }) => {
+export const Cell: FC<Props> = ({ children, variant="body",check }) => {
     return (
-        <StyledTableCell variant="body">
+        <StyledTableCell variant={variant}>
             {children}
         </StyledTableCell>
     )
 }
 
 // Cell checkBox
-export const CellCheckBox: FC<Props> = ( {check=false} ) => {
+export const CellCheckBox: FC<Props> = ( {check=false , variant="body"} ) => {
     const classes = useStyles()
 
     return (
-        <StyledTableCell variant="body">
+        <StyledTableCell variant={variant}>
             <div className={classes.IconCell}>
                 {
                     check 
@@ -73,11 +75,3 @@ export const CellAction: FC<Props> = ( {children} ) => {
         </StyledTableCell>
     )
 }
-
-export const CellHeader: FC<Props> = ({ children }) => {
-    return(
-        <StyledTableCell variant="head">
-            {children}
-        </StyledTableCell>
-    )
-} 
