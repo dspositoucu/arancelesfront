@@ -38,7 +38,7 @@ const StyledTableCell = withStyles( () => ({
     },
 }))(TableCell);
 
-export const Cell: FC<Props> = ({ children, variant="body",check }) => {
+export const Cell: FC<Props> = ({ children, variant="body"}) => {
     return (
         <StyledTableCell variant={variant}>
             {children}

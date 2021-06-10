@@ -12,7 +12,8 @@ import ButtonHeader from '../Button'
 import SearchBarTable from './SearchBarTable'
 
 interface Props {
-    label: string
+    label?: string,
+    filter?: any
 }
 
 const useStyles = makeStyles(() => 
@@ -29,7 +30,7 @@ createStyles({
         }
 }))
 
-const MenuHeaderTable: FC<Props> = ({ label = "Buscar por Nombre" }) => {
+const MenuHeaderTable: FC<Props> = ({ filter, label = "Buscar por Nombre" }) => {
     const classes = useStyles()
     return (
         <Toolbar className={classes.root}>
@@ -37,7 +38,7 @@ const MenuHeaderTable: FC<Props> = ({ label = "Buscar por Nombre" }) => {
             <ButtonHeader label={"Imprimir"} icon={<PrintIcon/>}/>
             <ButtonHeader label={"Nuevo"} icon={<PersonAddIcon/>}/>
             <ButtonHeader label={"Borrar"} icon={<DeleteIcon/>}/>
-            <SearchBarTable/>
+            <SearchBarTable filter={filter}/>
         </Toolbar>
     )
 }

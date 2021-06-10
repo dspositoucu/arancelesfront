@@ -19,6 +19,7 @@ const StyledTableRow = withStyles(() => ({
 }))(TableRow);
 
 export const Row: FC<Props> = ({ data }) => {
+  if(!data)return null
   const keysData: string[] = Object.keys(data)
 
   console.log(keysData.length)
@@ -43,6 +44,7 @@ export const Row: FC<Props> = ({ data }) => {
 
 //Row Header Table
 export const RowHeader: FC<Props> = ({ data }) => {
+  if(!data)return null
   const keysData: string[] = Object.keys(data)
   
   let rowHeader: ReactNode[] = keysData.map(( key, index ) => {

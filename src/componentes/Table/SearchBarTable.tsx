@@ -3,7 +3,9 @@ import {IconButton, InputBase, Paper, Divider } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 
-interface Props { }
+interface Props { 
+    filter: any
+}
 
 const useStyles = makeStyles((theme:Theme) =>
     createStyles({
@@ -38,7 +40,7 @@ const useStyles = makeStyles((theme:Theme) =>
     }),
 );
 
-const SearchBarTable: FC<Props> = (props) => {
+const SearchBarTable: FC<Props> = ({ filter }) => {
     const classes = useStyles();
 
     return (
@@ -47,10 +49,10 @@ const SearchBarTable: FC<Props> = (props) => {
                 <SearchIcon />
             </IconButton>
             <Divider className={classes.divider} orientation="vertical" />
-
             <InputBase
                 className={classes.input}
                 placeholder={"Buscar por Nombre"}
+                onChange={(e)=>filter(e)}
             />
         </Paper>
     )

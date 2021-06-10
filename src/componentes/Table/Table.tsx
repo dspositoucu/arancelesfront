@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -39,8 +39,14 @@ createStyles({
 
 export default function CustomPaginationActionsTable() {
     const classes = useStyles();
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(15);
+    const [dataPersona, setDataPersona] = useState(personas)
+    const [dataFilter, setDataFilter] = useState(personas)
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(18);
+
+    useEffect(()=>{
+        setDataPersona(personas)
+    },[])
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, personas.length - page * rowsPerPage);
 
@@ -55,17 +61,31 @@ export default function CustomPaginationActionsTable() {
         setPage(0);
     };
 
+    //filter searchbar for name  
+    const filter = (event: React.ChangeEvent<HTMLInputElement>):void => {
+        event.preventDefault();
+        let nameSearch = event.target.value;
+        let filter = dataPersona.filter(persona=>{
+            let per = persona.NOMBRE.toLowerCase() 
+            return per.includes(nameSearch.toLowerCase())
+        });
+        setDataFilter(filter);
+    }
+
     return (
         <TableContainer className={classes.tableContainer} component={Paper}>
 
-            <MenuHeaderTable label={"Buscar por nombre"}/>
+            <MenuHeaderTable 
+                label={"Buscar por nombre"} 
+                filter={filter}
+            />
 
             <Table className={classes.table} aria-label="tabla">
                 <TableBody>
-                    <RowHeader data={personas[0]} />
+                    <RowHeader data={dataPersona[0]} />
                     {(rowsPerPage > 0
-                        ? personas.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                        : personas
+                        ? dataFilter.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) || dataPersona.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) 
+                        : dataFilter || dataPersona
                     ).map((persona) => (
                         <Row data={persona}/>
                     ))}
@@ -80,9 +100,9 @@ export default function CustomPaginationActionsTable() {
                         <TablePagination
                             className={classes.paginationTable}
                             align="right"
-                            rowsPerPageOptions={[5,10,15, { label: 'All', value: -1 }]}
+                            rowsPerPageOptions={[5,10,18,/*  { label: 'All', value: -1 } */]}
                             colSpan={9}
-                            count={personas.length}
+                            count={dataPersona.length}
                             rowsPerPage={rowsPerPage}
                             page={page}
                             SelectProps={{
