@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -17,7 +17,7 @@ import { Row, RowHeader } from '../Row';
 import MenuHeaderTable from './MenuHeaderTable';
 import TablePaginationActions from './TablePaginationActions'
 
-const useStyles2 = makeStyles( (theme: Theme)=>
+const useStyles = makeStyles( (theme: Theme)=>
 createStyles({
     table: {
         minWidth: 600,
@@ -26,15 +26,19 @@ createStyles({
         height: "auto"
     },
     tableContainer:{
-        borderRadius:15
+        borderRadius:10
     },
     paginationTable:{
         color: '#6E6893',
+        height:35
+    },
+    footer:{
+        height:35
     }
 }));
 
 export default function CustomPaginationActionsTable() {
-    const classes = useStyles2();
+    const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(15);
 
@@ -71,8 +75,8 @@ export default function CustomPaginationActionsTable() {
                         </TableRow>
                     )}
                 </TableBody>
-                <TableFooter>
-                    <TableRow>
+                <TableFooter >
+                    <TableRow className={classes.footer}>
                         <TablePagination
                             className={classes.paginationTable}
                             align="right"

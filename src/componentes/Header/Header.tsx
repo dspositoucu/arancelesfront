@@ -3,12 +3,11 @@ import {
     AppBar,
     Toolbar,
     Typography,
-    Box
 } from '@material-ui/core'
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
 //Icons
-import { UserIcon } from '../../Icons';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExpandMore from "@material-ui/icons/ExpandMore";
 
 //img UCU_header
@@ -32,8 +31,14 @@ const useStyles = makeStyles((theme: Theme) =>
             flex:1,
             flexGrow: 1
         },
-        headerImg:{
-            width:'240px'
+        containerImg:{
+            width:'170px',
+            display: 'flex',
+            alignItems: 'center'
+        },
+        img:{
+            width:"auto",
+            height:35
         },
         headerUser:{
             display:'flex',
@@ -50,14 +55,14 @@ const Header: FC<Props> = ({ title }) => {
     return (
         <AppBar position="fixed" className={classes.appBar}>
             <Toolbar>
-                <div className={classes.headerImg}>
-                    <img src={UCUimg.default}/>
+                <div className={classes.containerImg}>
+                    <img className={classes.img} src={UCUimg.default}/>
                 </div>
-                <Typography className={classes.headerTitle} variant="h4" noWrap>
+                <Typography className={classes.headerTitle} variant="h5" noWrap>
                     {title}
                 </Typography>
                 <div className={classes.headerUser}>
-                    <UserIcon/>
+                    <AccountCircleIcon/>
                     <Typography variant="subtitle1">
                             Nombre Usuario
                     </Typography>

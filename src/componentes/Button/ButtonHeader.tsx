@@ -1,6 +1,5 @@
 import React, { FC, ReactNode } from 'react'
-import PropTypes from 'prop-types';
-import { makeStyles, useTheme, Theme, createStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme, createStyles, } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core/';
 
 

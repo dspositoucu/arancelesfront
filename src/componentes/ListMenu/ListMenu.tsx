@@ -1,8 +1,4 @@
 import React, { FC, useState } from 'react'
-import PropTypes from 'prop-types';
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
-
 import {
     List,
     ListItem,
@@ -13,8 +9,10 @@ import {
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 //Icons
-import {IconList} from '../../Icons'
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
 
+//Example data
 import { menuData } from '../../dataMenuList.json'
 
 interface Props { }
@@ -23,24 +21,24 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         menu: {
             background: '#E3E0EE',
-            color:'#6E6893'
+            color: '#6E6893'
         },
         menuContainer: {
             overflow: 'auto',
             background: '#E3E0EE',
             height: '100vh'
         },
-        nested: {
-            marginLeft: '5px',
-        },
         subMenuOpt: {
-            fontSize: '14px',
+            fontSize: '12px',
         },
-        selected:{
-            color:'#7B61FF'
+        selected: {
+            color: '#7B61FF'
         },
-        menuOpt:{
-            fontSize:"18px"
+        menuOpt: {
+            fontSize: "16px"
+        },
+        ul: {
+            listStyleType: "disc"
         }
 
     })
@@ -50,7 +48,7 @@ const Menu: FC<Props> = (props) => {
     const classes = useStyles()
     const [open, setOpen] = useState<any>({ open: '' });
 
-//Funcion para desplegar opciones del menu de manera independiente. 
+    //Funcion para desplegar opciones del menu de manera independiente. 
     const handleClick = (value: string): void => {
         setOpen(
             { [value]: !open[value] }
@@ -63,7 +61,7 @@ const Menu: FC<Props> = (props) => {
                 {menuData.map((menuOp) => (
                     <>
                         <ListItem onClick={() => handleClick(menuOp.MenuOption)} button key={menuOp.MenuOption}>
-                            <ListItemText classes={{primary:classes.menuOpt}} primary={menuOp.MenuOption} />
+                            <ListItemText classes={{ primary: classes.menuOpt }} primary={menuOp.MenuOption} />
                             {open[menuOp.MenuOption] ? (
                                 <Tooltip title="Collapse" placement="bottom">
                                     <ExpandLess />
@@ -76,12 +74,11 @@ const Menu: FC<Props> = (props) => {
                         </ListItem>
                         {menuOp.SubMenu.map(submenu => (
                             <Collapse in={open[menuOp.MenuOption]} timeout="auto" unmountOnExit key={submenu}>
-                                <List className={classes.nested}>
-                                    <ListItem button>
-                                        <IconList/>
+                                <ul className={classes.ul}>
+                                    <li>
                                         <ListItemText classes={{ primary: classes.subMenuOpt }} primary={submenu} />
-                                    </ListItem>
-                                </List>
+                                    </li>
+                                </ul>
                             </Collapse>
                         ))}
 
@@ -90,13 +87,5 @@ const Menu: FC<Props> = (props) => {
             </List>
         </div>
     )
-}
-
-Menu.propTypes = {
-    // your expected props
-}
-
-Menu.defaultProps = {
-    // your default props
 }
 export default Menu
