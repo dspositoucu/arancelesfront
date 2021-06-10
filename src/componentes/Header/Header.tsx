@@ -1,9 +1,9 @@
-import React, { FC } from 'react'
+import React, { FC } from 'react';
 import {
     AppBar,
     Toolbar,
     Typography,
-} from '@material-ui/core'
+} from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
 //Icons

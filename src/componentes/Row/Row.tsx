@@ -54,7 +54,7 @@ export const RowHeader: FC<Props> = ({ data }) => {
       </Cell>
     )})
       rowHeader.push(<Cell variant="head">ACCIONES</Cell>);
-      rowHeader.unshift(<CellCheckBox variant="head"/>);
+      rowHeader.unshift(<CellCheckBox checkAll variant="head"/>);
 
   return(
     <StyledTableRow>

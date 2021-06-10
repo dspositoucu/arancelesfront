@@ -21,3 +21,14 @@
   ::-webkit-scrollbar-track{
     border-radius: 10px;
   }
+
+a{
+  text-decoration: none !important;
+  outline: none !important;
+  color:#6E6893;
+}
+
+a:active:link:focus{
+  text-decoration: none;
+  color:currentColor
+}

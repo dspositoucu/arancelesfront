@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react'
+import React, { FC, ReactNode, useState } from 'react'
 import clsx from 'clsx' 
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
@@ -8,8 +8,9 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 interface Props {
     children?: ReactNode | any,
-    check?: Boolean,
+    check?: boolean,
     variant?: "body"|"head"|"footer"|undefined
+    checkAll?:boolean
 }
 
 //Style align center checkbox
@@ -19,6 +20,9 @@ const useStyles = makeStyles(() =>
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-around',
+            width:30,
+            marginLeft:20,
+            cursor:"pointer"
         },
     })
 )
@@ -47,14 +51,19 @@ export const Cell: FC<Props> = ({ children, variant="body"}) => {
 }
 
 // Cell checkBox
-export const CellCheckBox: FC<Props> = ( {check=false , variant="body"} ) => {
+export const CellCheckBox: FC<Props> = ( {checkAll, check=false , variant="body"} ) => {
     const classes = useStyles()
+    const [checkBox, setCheckBox] = useState<boolean> (check)
+
+    const handleClick = ():void => {
+        setCheckBox(!checkBox)
+    }
 
     return (
-        <StyledTableCell variant={variant}>
-            <div className={classes.IconCell}>
+        <StyledTableCell title={checkAll ? 'Seleccionar Todos': ''} variant={variant}>
+            <div className={classes.IconCell} onClick={handleClick}>
                 {
-                    check 
+                    checkBox 
                         ? <CheckBoxIcon/> 
                         : <CheckBoxOutlineBlankIcon/>
                 }
@@ -68,7 +77,7 @@ export const CellAction: FC<Props> = ( {children} ) => {
     const classes = useStyles()
 
     return (
-        <StyledTableCell variant="body" style={{ width: 100 }}>
+        <StyledTableCell  variant="body" style={{ width: 100 }}>
             <div className={classes.IconCell}>
                 {children}
             </div>

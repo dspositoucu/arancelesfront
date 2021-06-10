@@ -37,7 +37,7 @@ createStyles({
     }
 }));
 
-export default function CustomPaginationActionsTable() {
+    const CustomTable = () => {
     const classes = useStyles();
     const [dataPersona, setDataPersona] = useState(personas)
     const [dataFilter, setDataFilter] = useState(personas)
@@ -74,7 +74,6 @@ export default function CustomPaginationActionsTable() {
 
     return (
         <TableContainer className={classes.tableContainer} component={Paper}>
-
             <MenuHeaderTable 
                 label={"Buscar por nombre"} 
                 filter={filter}
@@ -102,7 +101,7 @@ export default function CustomPaginationActionsTable() {
                             align="right"
                             rowsPerPageOptions={[5,10,18,/*  { label: 'All', value: -1 } */]}
                             colSpan={9}
-                            count={dataPersona.length}
+                            count={ dataFilter ? dataFilter.length : dataPersona.length }
                             rowsPerPage={rowsPerPage}
                             page={page}
                             SelectProps={{
@@ -119,3 +118,5 @@ export default function CustomPaginationActionsTable() {
         </TableContainer>
     );
 }
+
+export default CustomTable

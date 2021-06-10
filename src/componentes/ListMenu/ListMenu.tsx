@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState } from 'react';
 import {
     List,
     ListItem,
@@ -13,7 +13,10 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 
 //Example data
-import { menuData } from '../../dataMenuList.json'
+import { menuData } from '../../dataMenuList.json';
+
+//Components
+import ListSubMenuItem from './ListSubMenuItem';
 
 interface Props { }
 
@@ -28,19 +31,12 @@ const useStyles = makeStyles((theme: Theme) =>
             background: '#E3E0EE',
             height: '100vh'
         },
-        subMenuOpt: {
-            fontSize: '12px',
-        },
         selected: {
             color: '#7B61FF'
         },
         menuOpt: {
             fontSize: "16px"
         },
-        ul: {
-            listStyleType: "disc"
-        }
-
     })
 )
 
@@ -74,14 +70,9 @@ const Menu: FC<Props> = (props) => {
                         </ListItem>
                         {menuOp.SubMenu.map(submenu => (
                             <Collapse in={open[menuOp.MenuOption]} timeout="auto" unmountOnExit key={submenu}>
-                                <ul className={classes.ul}>
-                                    <li>
-                                        <ListItemText classes={{ primary: classes.subMenuOpt }} primary={submenu} />
-                                    </li>
-                                </ul>
+                                <ListSubMenuItem subMenuData={submenu}/>
                             </Collapse>
                         ))}
-
                     </>
                 ))}
             </List>
