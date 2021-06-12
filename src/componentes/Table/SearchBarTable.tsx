@@ -44,7 +44,7 @@ const SearchBarTable: FC<Props> = ({ filter }) => {
     const classes = useStyles();
 
     return (
-        <Paper component="form" className={classes.root}>
+        <Paper className={classes.root}>
             <IconButton className={classes.iconButton} aria-label="search">
                 <SearchIcon />
             </IconButton>
@@ -52,7 +52,7 @@ const SearchBarTable: FC<Props> = ({ filter }) => {
             <InputBase
                 className={classes.input}
                 placeholder={"Buscar por Nombre"}
-                onChange={(e)=>filter(e)}
+                onChange={filter}
             />
         </Paper>
     )

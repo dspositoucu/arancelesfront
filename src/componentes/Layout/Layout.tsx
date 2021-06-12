@@ -21,7 +21,7 @@ const theme = createMuiTheme({
         regular: {
           '@media(min-width:600px)' : {
             minHeight:"48px",
-            padding: "0px 7px"
+            padding: "0px 7px 0px 14px"
           }
         }
       }

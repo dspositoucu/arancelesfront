@@ -20,14 +20,15 @@ const StyledTableRow = withStyles(() => ({
 
 export const Row: FC<Props> = ({ data }) => {
   if(!data)return null
-  const keysData: string[] = Object.keys(data)
 
+  const keysData: string[] = Object.keys(data)
   console.log(keysData.length)
   return (
     <StyledTableRow>
-      <CellCheckBox />
+      <CellCheckBox check={data.selected} />
       {
         keysData.map((key, index) => {
+          if(key === 'selected') return
           return (
             <Cell key={index}>
               {data[key]}

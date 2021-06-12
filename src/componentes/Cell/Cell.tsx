@@ -1,6 +1,5 @@
-import React, { FC, ReactNode, useState } from 'react'
-import clsx from 'clsx' 
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import React, { FC, ReactNode } from 'react'
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import { withStyles } from "@material-ui/core/styles";
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
@@ -51,22 +50,18 @@ export const Cell: FC<Props> = ({ children, variant="body"}) => {
 }
 
 // Cell checkBox
-export const CellCheckBox: FC<Props> = ( {checkAll, check=false , variant="body"} ) => {
+export const CellCheckBox: FC<Props> = ( { children, checkAll, check=false , variant="body"} ) => {
     const classes = useStyles()
-    const [checkBox, setCheckBox] = useState<boolean> (check)
-
-    const handleClick = ():void => {
-        setCheckBox(!checkBox)
-    }
-
     return (
         <StyledTableCell title={checkAll ? 'Seleccionar Todos': ''} variant={variant}>
-            <div className={classes.IconCell} onClick={handleClick}>
+            <div className={classes.IconCell}>
                 {
-                    checkBox 
+                    check 
                         ? <CheckBoxIcon/> 
                         : <CheckBoxOutlineBlankIcon/>
                 }
+
+                {children}
             </div>
         </StyledTableCell>
     )

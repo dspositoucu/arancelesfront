@@ -12,6 +12,9 @@ import Paper from '@material-ui/core/Paper';
 //data example
 import {personas} from '../../dataTable.json';
 
+//models
+import { IPersona } from '../../models'
+
 //component
 import { Row, RowHeader } from '../Row';
 import MenuHeaderTable from './MenuHeaderTable';
@@ -39,8 +42,8 @@ createStyles({
 
     const CustomTable = () => {
     const classes = useStyles();
-    const [dataPersona, setDataPersona] = useState(personas)
-    const [dataFilter, setDataFilter] = useState(personas)
+    const [dataPersona, setDataPersona] = useState<IPersona[]>(personas)
+    const [dataFilter, setDataFilter] = useState<IPersona[] | []>(personas)
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(18);
 
@@ -62,11 +65,11 @@ createStyles({
     };
 
     //filter searchbar for name  
-    const filter = (event: React.ChangeEvent<HTMLInputElement>):void => {
-        event.preventDefault();
-        let nameSearch = event.target.value;
-        let filter = dataPersona.filter(persona=>{
-            let per = persona.NOMBRE.toLowerCase() 
+    const filter = ({ target }: React.ChangeEvent<HTMLInputElement>):void => {
+        if(!personas.length) return
+        let nameSearch = target.value;
+         let filter = dataPersona.filter(persona=>{
+            let per = persona.nombre.toLowerCase() 
             return per.includes(nameSearch.toLowerCase())
         });
         setDataFilter(filter);

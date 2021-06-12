@@ -1,22 +1,23 @@
-import React,{ FC } from 'react'
+import { FC } from 'react'
 
-export interface RouteItem {
-    key: String
-    title: String
-    tooltip?: String
-    path?: String
+export interface IRouteItem {
+    key: string
+    title: string
+    tooltip?: string
+    path?: string
     component?: FC<{}>
     enabled: boolean
-    subRoutes?: Array<RouteItem>
+    subRoutes?: Array<IRouteItem>
     appendDivider?: boolean
 }
 
-export interface Persona {
-    id:Number
-    nombre:String
-    n_doc:String
-    telefono:String
-    email:String
-    domicilio:String
+export interface IPersona {
+    id:number|string
+    nombre:string
+    n_doc:string
+    telefono:string
+    email:string
+    domicilio:string
+    selected?:boolean
 }
 
