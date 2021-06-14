@@ -9,7 +9,6 @@
         {
             "MenuOption": "Personas",
             "SubMenu": [
-                "Nueva Personas",
                 "Listado de Personas",
                 "Asignar Cuentas"
             ]

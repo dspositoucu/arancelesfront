@@ -1,6 +1,8 @@
 import React, { FC } from 'react'
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Typography, Toolbar } from '@material-ui/core';
+import { NavLink, useLocation } from "react-router-dom";
+
 
 //icons
 import PrintIcon from '@material-ui/icons/Print';
@@ -36,7 +38,9 @@ const MenuHeaderTable: FC<Props> = ({ filter, label = "Buscar por Nombre" }) => 
         <Toolbar className={classes.root}>
             <Typography className={classes.titleTable} variant="subtitle1">Listado de Personas</Typography>
             <ButtonHeader label={"Imprimir"} icon={<PrintIcon/>}/>
-            <ButtonHeader label={"Nuevo"} icon={<PersonAddIcon/>}/>
+            <NavLink to={"/addPerson"}>
+                <ButtonHeader label={"Nuevo"} icon={<PersonAddIcon/>}/>
+            </NavLink>
             <ButtonHeader label={"Borrar"} icon={<DeleteIcon/>}/>
             <SearchBarTable functionFilter={filter}/>
         </Toolbar>
