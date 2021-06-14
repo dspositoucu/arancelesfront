@@ -2,55 +2,74 @@ import { Reducer } from 'redux';
 import { PersonActions, PersonActionTypes } from '../actions/personActionTypes'
 import { IPersonInitialState } from '../state/AppState';
 
-const InitialState :IPersonInitialState = {
-    listPerson:[],
-    selectListPerson:[],
-    personDetails:{}
+const InitialState: IPersonInitialState = {
+    listPerson: [],
+    selectListPerson: [],
+    personDetails: {},
+    allSelect:false
 }
 
-const personReducer :Reducer<IPersonInitialState, PersonActions> = (state = InitialState, action:PersonActions) =>{
-    
-    switch(action.type){
+const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = InitialState, action: PersonActions) => {
 
-        case PersonActionTypes.ADD_PERSON :{
+    switch (action.type) {
+
+        case PersonActionTypes.ADD_PERSON: {
             return {
                 ...state,
                 listPerson: [action.person, ...state.listPerson]
             }
         }
 
-        case PersonActionTypes.GET_PERSON_LIST : {
+        case PersonActionTypes.GET_PERSON_LIST: {
             return {
                 ...state,
-                listPerson:action.listPerson
+                listPerson: action.listPerson
             }
         }
-        case PersonActionTypes.SELECT_PERSON : {
+        case PersonActionTypes.SELECT_PERSON: {
+
+            // se verifica si el dato existe en el array selectList
+            const existe = !!state.selectListPerson.filter(data => data.id === action.selectPerson.id)[0]
+            console.log("EXISTE =", existe)
             return {
                 ...state,
-                selectListPerson: [...state.selectListPerson, action.selectPerson]
+                // si existe se quita del listado, sino, se agrega
+                selectListPerson: !existe
+                    ? [...state.selectListPerson, action.selectPerson]
+                    : state.selectListPerson.filter(data => data.id !== action.selectPerson.id),
+                allSelect: state.selectListPerson.length > 0
             }
         }
-        case PersonActionTypes.GET_PERSON_DETAILS : {
+
+        case PersonActionTypes.SELECT_ALL_PERSON: {
+            const allDatos = state.selectListPerson.length > 0
+            return {
+                ...state,
+                selectListPerson: !allDatos ? [...state.listPerson] : [],
+                allSelect: !state.allSelect
+            }
+        }
+
+        case PersonActionTypes.GET_PERSON_DETAILS: {
             return {
                 ...state,
                 personDetails: action.personDetails
             }
         }
-        case PersonActionTypes.DELETE_PERSON : {
+        case PersonActionTypes.DELETE_PERSON: {
             return {
                 ...state,
-                listPerson: state.listPerson.slice(action.index, 1)
+                listPerson: state.listPerson.filter(person => person.id !== action.personId)
             }
         }
-        case PersonActionTypes.UPDATE_PERSON : {
+        case PersonActionTypes.UPDATE_PERSON: {
             return {
                 ...state,
-                listPerson: state.listPerson.splice(action.index,1,action.person)
+                personDetails: state.listPerson.filter(person => person.id === action.personId)
             }
         }
 
-     default: return state;
+        default: return state;
     }
 }
 

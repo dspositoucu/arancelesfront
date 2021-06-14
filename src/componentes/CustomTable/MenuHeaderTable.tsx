@@ -38,7 +38,7 @@ const MenuHeaderTable: FC<Props> = ({ filter, label = "Buscar por Nombre" }) => 
             <ButtonHeader label={"Imprimir"} icon={<PrintIcon/>}/>
             <ButtonHeader label={"Nuevo"} icon={<PersonAddIcon/>}/>
             <ButtonHeader label={"Borrar"} icon={<DeleteIcon/>}/>
-            <SearchBarTable filter={filter}/>
+            <SearchBarTable functionFilter={filter}/>
         </Toolbar>
     )
 }

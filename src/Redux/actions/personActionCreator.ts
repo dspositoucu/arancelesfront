@@ -3,6 +3,7 @@ import {
     GetPersonListAction,
     GetPersonDetailsAction,
     SelectPersonAction,
+    SelectAllPersonAction,
     DeletePeronAction,
     UpdatePersonAction,
     PersonActionTypes
@@ -31,26 +32,31 @@ export const getPersonDetails = (personDetails :IPersona):GetPersonDetailsAction
     }
 }
 
-export const SelectListPersonAction = (selectPerson :IPersona):SelectPersonAction => {
+export const selectPerson = (selectPerson :IPersona):SelectPersonAction => {
     return {
         type: PersonActionTypes.SELECT_PERSON,
         selectPerson
     }
 }
 
-export const deletePerson = (personId: number|string, index:number):DeletePeronAction => {
+export const selectAllPerson = ():SelectAllPersonAction => {
     return {
-        type: PersonActionTypes.DELETE_PERSON,
-        personId,
-        index
+        type: PersonActionTypes.SELECT_ALL_PERSON,
     }
 }
 
-export const updatePerson = (personId: number|string, index: number, person:IPersona):UpdatePersonAction => {
+export const deletePerson = (personId: number|string):DeletePeronAction => {
+    return {
+        type: PersonActionTypes.DELETE_PERSON,
+        personId,
+    }
+}
+
+export const updatePerson = (personId: number|string, person:IPersona, index:number):UpdatePersonAction => {
     return {
         type: PersonActionTypes.UPDATE_PERSON,
         personId,
-        index,
-        person
+        person,
+        index
     }
 }

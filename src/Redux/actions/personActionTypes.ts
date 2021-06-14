@@ -8,6 +8,7 @@ export enum PersonActionTypes {
   GET_PERSON_DETAILS = 'GET_PERSON_DETAILS',
   
   SELECT_PERSON = 'SELECT_PERSON',
+  SELECT_ALL_PERSON = "SELECT_ALL_PERSON",
 
   DELETE_PERSON = 'DELETE_PERSON',
   
@@ -35,17 +36,20 @@ export interface SelectPersonAction {
   selectPerson: IPersona
 }
 
+export interface SelectAllPersonAction {
+  type: PersonActionTypes.SELECT_ALL_PERSON,
+}
+
 export interface DeletePeronAction {
   type: PersonActionTypes.DELETE_PERSON,
   personId: number|string,
-  index: number
 }
 
 export interface UpdatePersonAction {
   type: PersonActionTypes.UPDATE_PERSON,
   personId: number|string, 
-  index: number,
-  person:IPersona
+  person:IPersona,
+  index:number
 }
 
 export type PersonActions =
@@ -53,5 +57,6 @@ AddPersonAction
   |GetPersonListAction
   |GetPersonDetailsAction
   |SelectPersonAction
+  |SelectAllPersonAction
   |DeletePeronAction
   |UpdatePersonAction

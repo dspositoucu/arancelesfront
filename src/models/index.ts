@@ -12,12 +12,11 @@ export interface IRouteItem {
 }
 
 export interface IPersona {
-    id:number|string
-    nombre:string
-    n_doc:string
-    telefono:string
-    email:string
-    domicilio:string
-    selected?:boolean
+    id:number|string;
+    nombre:string;
+    n_doc:string;
+    telefono:string;
+    email:string;
+    domicilio:string;
 }
 

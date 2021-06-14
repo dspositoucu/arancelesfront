@@ -6,6 +6,7 @@ export interface IPersonInitialState{
     listPerson: [] | IPersona[]
     selectListPerson: [] | IPersona[]
     personDetails: {} | IPersona
+    allSelect : boolean
 }
 
 //interface del conbine reducer en Store.ts
