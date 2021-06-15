@@ -15,29 +15,29 @@ import { getPersonList } from '../Redux/actions/personActionCreator'
 
 const ListaPersonas = () => {
 
-const { listPerson } = useSelector((state:AppState) => state.PersonState)
+  const { listPerson } = useSelector((state: AppState) => state.PersonState)
 
-const dispatch = useDispatch()
+  const dispatch = useDispatch()
+
   
-const cargarDatos = () => {
-    dispatch(getPersonList(personas))
-}
-useEffect(() => {
+  const cargarDatos = () => {
+    if(listPerson.length<=0){
+      dispatch(getPersonList(personas))
+    }
+  }
+  useEffect(() => {
     cargarDatos()
-}, [])
+  }, [])
 
 
   // El componente Table recibe dos props 
-    //tableData: correspone a los datos que se quieren renderizar 
-    // columns: corresponde a las columnas de la tabla que se quieren renderizar 
-                // si esta vacio renderizara todas las columnas,   
+  //tableData: correspone a los datos que se quieren renderizar 
+  // columns: corresponde a las columnas de la tabla que se quieren renderizar 
 
-  return  listPerson.length
-            ? <Table
-              tableData={listPerson}
-              columns={["uno", "dos"]}
-            />
-            : <></>
- }
+  return <Table
+          tableData={listPerson}
+          columns={["id", "nombre", "n_doc", "telefono", "email", "domicilio"]}
+    />
+}
 
 export default ListaPersonas

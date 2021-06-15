@@ -6,7 +6,7 @@ const InitialState: IPersonInitialState = {
     listPerson: [],
     selectListPerson: [],
     personDetails: {},
-    allSelect:false
+    allSelect: false
 }
 
 const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = InitialState, action: PersonActions) => {
@@ -14,9 +14,10 @@ const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = Init
     switch (action.type) {
 
         case PersonActionTypes.ADD_PERSON: {
+            let newArray = [action.person, ...state.listPerson]
             return {
                 ...state,
-                listPerson: [action.person, ...state.listPerson]
+                listPerson: [...newArray]
             }
         }
 
@@ -37,7 +38,8 @@ const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = Init
                 selectListPerson: !existe
                     ? [...state.selectListPerson, action.selectPerson]
                     : state.selectListPerson.filter(data => data.id !== action.selectPerson.id),
-                allSelect: state.selectListPerson.length > 0
+                allSelect: state.selectListPerson.length > 0,
+                personDetails: action.selectPerson
             }
         }
 
@@ -57,10 +59,20 @@ const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = Init
             }
         }
         case PersonActionTypes.DELETE_PERSON: {
+            let copyArray = [...state.listPerson]
+
+            state.selectListPerson.forEach(data=>{
+                copyArray.forEach((data2,j)=>{
+                    if(data.id===data2.id){
+                        copyArray.splice(j,1)
+                    }
+                })
+            })
+
             return {
                 ...state,
-                listPerson: state.listPerson.filter(person => person.id !== action.personId)
-            }
+                listPerson: copyArray 
+            }                 
         }
         case PersonActionTypes.UPDATE_PERSON: {
             return {
@@ -72,5 +84,4 @@ const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = Init
         default: return state;
     }
 }
-
 export default personReducer

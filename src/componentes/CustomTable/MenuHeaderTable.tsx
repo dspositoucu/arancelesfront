@@ -1,8 +1,11 @@
-import React, { FC } from 'react'
+import  { FC } from 'react'
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Typography, Toolbar } from '@material-ui/core';
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useDispatch } from 'react-redux'; 
 
+//actions
+import { deletePerson } from '../../Redux/actions/personActionCreator'
 
 //icons
 import PrintIcon from '@material-ui/icons/Print';
@@ -33,6 +36,8 @@ createStyles({
 }))
 
 const MenuHeaderTable: FC<Props> = ({ filter, label = "Buscar por Nombre" }) => {
+    const dispatch = useDispatch()
+
     const classes = useStyles()
     return (
         <Toolbar className={classes.root}>
@@ -41,7 +46,10 @@ const MenuHeaderTable: FC<Props> = ({ filter, label = "Buscar por Nombre" }) => 
             <NavLink to={"/addPerson"}>
                 <ButtonHeader label={"Nuevo"} icon={<PersonAddIcon/>}/>
             </NavLink>
-            <ButtonHeader label={"Borrar"} icon={<DeleteIcon/>}/>
+            <ButtonHeader 
+                onClick={()=>{dispatch(deletePerson())}}
+                label={"Borrar"} 
+                icon={<DeleteIcon/>}/>
             <SearchBarTable functionFilter={filter}/>
         </Toolbar>
     )

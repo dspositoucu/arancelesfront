@@ -42,7 +42,6 @@ export interface SelectAllPersonAction {
 
 export interface DeletePeronAction {
   type: PersonActionTypes.DELETE_PERSON,
-  personId: number|string,
 }
 
 export interface UpdatePersonAction {

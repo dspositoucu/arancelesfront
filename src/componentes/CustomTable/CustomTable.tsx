@@ -22,8 +22,7 @@ import TablePaginationActions from './TablePaginationActions'
 
 interface Props {
     tableData: Object[],
-    columns?: string[],
-
+    columns: string[],
 }
 
 // estilos css-in-js
@@ -51,8 +50,7 @@ const CustomTable:FC<Props> = ({tableData, columns}) => {
 
     const classes = useStyles();
 
-    console.log("Lista de personas en la tabla",tableData)
-
+    
     // custom hooks
     const { dataFilter, handleFilter } = useFilter(tableData)
     const {
@@ -60,13 +58,14 @@ const CustomTable:FC<Props> = ({tableData, columns}) => {
         rowsPerPage, 
         handleChangePage, 
         handleChangeRowsPerPage } = usePagination(18)
-
+        
+    console.log("Lista de filtrada ",dataFilter)
     /* 
     emptyRows se usa para rellenar el espacio faltante 
     de la tabla para mantener el tamaño correspondiente 
     a filas por pagina 
     */
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, dataFilter.length - page * rowsPerPage);
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, (dataFilter.length || tableData.length) - page * rowsPerPage);
 
     // filas correspondientes a la pagina ctual
     const ActualPage = (listData: Object[]) => {
@@ -84,12 +83,12 @@ const CustomTable:FC<Props> = ({tableData, columns}) => {
                 <TableBody>
 
                     {/* RowHeader recive "data" como props que es una lista de  */}
-                    <RowHeader data={tableData[0]} />
-                    {(rowsPerPage > 0
-                        ? ActualPage(dataFilter) || ActualPage(tableData)
-                        : dataFilter || tableData
+                    <RowHeader columns={columns} />
+                    {tableData.length && (rowsPerPage > 0 
+                        ? ActualPage(tableData)
+                        : tableData
                     ).map((persona) => (
-                        <Row data={persona} />
+                        <Row columns={columns} data={persona} />
                     ))}
                     {emptyRows > 0 && (
                         <TableRow style={{ height: 39 * emptyRows }}>
@@ -104,7 +103,7 @@ const CustomTable:FC<Props> = ({tableData, columns}) => {
                             align="right"
                             rowsPerPageOptions={[5, 10, 18,/*  { label: 'All', value: -1 } */]}
                             colSpan={9}
-                            count={dataFilter ? dataFilter.length : tableData.length}
+                            count={dataFilter.length || tableData.length}
                             rowsPerPage={rowsPerPage}
                             page={page}
                             SelectProps={{

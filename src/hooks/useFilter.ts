@@ -1,9 +1,13 @@
 import { ChangeEvent, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 // hook para filtrar los datos de una tabla de una columna en especifico 
 
+import { AppState } from '../Redux/state/AppState'
 
 export const useFilter = <T extends Object[]>(tableData: T) => {
+    const dispatch = useDispatch()
+    const {listPerson} = useSelector((state :AppState) => state.PersonState)
    
     const [dataFilter, setDataFilter] = useState<Object[]>(tableData)
 

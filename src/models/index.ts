@@ -18,5 +18,10 @@ export interface IPersona {
     telefono:string;
     email:string;
     domicilio:string;
+    sexo?:'string';
+    fecha_nac?:Date;
+    cuit?:string;
+    sit_tributaria?:string
+    
 }
 

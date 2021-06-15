@@ -11,7 +11,7 @@ import {
 
 import { IPersona } from '../../models';
 
-export const addPersonAction = (person :IPersona) :AddPersonAction =>{
+export const addPerson = (person :IPersona) :AddPersonAction =>{
     return {
         type: PersonActionTypes.ADD_PERSON,
         person
@@ -45,10 +45,9 @@ export const selectAllPerson = ():SelectAllPersonAction => {
     }
 }
 
-export const deletePerson = (personId: number|string):DeletePeronAction => {
+export const deletePerson = ():DeletePeronAction => {
     return {
         type: PersonActionTypes.DELETE_PERSON,
-        personId,
     }
 }
 

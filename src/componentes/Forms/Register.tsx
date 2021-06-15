@@ -1,106 +1,231 @@
-import React, { FC } from 'react'
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import PropTypes from 'prop-types';
+import { FC, useState, ChangeEvent, FormEvent } from 'react'
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
+import {
+  CssBaseline,
+  Button,
+  Container,
+  Typography,
+  Grid,
+  TextField
+} from '@material-ui/core';
+import { makeStyles, Theme, createStyles, withStyles } from '@material-ui/core/styles';
 
-interface Props { }
+//actions
+import { addPerson } from '../../Redux/actions/personActionCreator'
+
+
+const WhiteTextField = withStyles({
+  root: {
+    margin: '0px 10px',
+    borderRadius: 5,
+    display: 'flex',
+    flex: 1,
+    '& .MuiInputBase-input': {
+      marginLeft: 20,
+      color: '#6E6893', // Text color
+    },
+    '& .MuiInput-underline:before': {
+      borderBottomColor: '#F2F0F9', // color del subrayado del input 
+    },
+    '& .MuiInput-underline:hover:before': {
+      borderBottomColor: '#6E6893', // color del subrayado del input en hover
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: '#6E6893', // color del subrayado del input en focus
+    },
+  },
+})(TextField);
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     paper: {
-      marginTop: theme.spacing(8),
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+
+    },
+    containernInput: {
+      margin: "10px 10px",
+      display: 'flex',
+      justifyContent: 'center',
     },
     form: {
-      width: '100%', // Fix IE 11 issue.
       marginTop: theme.spacing(3),
+      textAlign: 'center'
     },
     submit: {
+      background: "#6E6893",
+      color: "#e3e0ee",
+      '&:hover': {
+        backgroundColor: '#3c356d',
+      },
       margin: theme.spacing(3, 0, 2),
     },
+    container: {
+      boxShadow: '0px 4px 25px rgba(148, 130, 255, 0.51)',
+      background: "#FFF",
+      padding: 20,
+      borderRadius: 10,
+    },
+    title: {
+      color: "#25213B",
+      fontWeight: 400
+    },
+
   }));
 
-const Personas: FC<Props> = (props) => {
+const Register = () => {
+
   const classes = useStyles();
 
+  const [formData, setFormData] = useState({
+    id: (Math.random() * (10000000 - 100) + 100).toFixed(0),
+    nombre: '',
+    n_doc: '',
+    telefono: '',
+    email: '',
+    domicilio: '',
+  })
+
+  const history = useHistory()
+
+  const dispatch = useDispatch()
+
+  const handleChangeForm = ({ target }: ChangeEvent<HTMLInputElement>): void => {
+    setFormData({
+      ...formData,
+      [target.name]: target.value
+    })
+  }
+
+  const handleSubmite = (event: FormEvent<HTMLFormElement>): void => {
+    event.preventDefault()
+    dispatch(addPerson(formData))
+
+    console.log('Data enviada: ', formData)
+  }
+
+  console.log(formData)
   return (
-    <Container component="main" maxWidth="xs">
+    <Container className={classes.container} component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography component="h1" variant="h6">
+        <Typography className={classes.title} variant="h4">
           Registrar Nueva Persona
         </Typography>
-        <form className={classes.form} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-            </Grid>
+        <form
+          className={classes.form}
+          onSubmit={handleSubmite}
+        >
+          <Grid className={classes.containernInput}>
+            <WhiteTextField
+              label="Nombre"
+              onChange={handleChangeForm}
+              name="nombre"
+              required
+              id="firstName"
+              placeholder="Nombre completo"
+            />
+          </Grid>
+          <Grid className={classes.containernInput}>
+            <WhiteTextField
+              label="Email"
+              onChange={handleChangeForm}
+              required
+              id="email"
+              type="email"
+              placeholder="Email"
+              name="email"
+            />
+          </Grid>
+          <Grid className={classes.containernInput}>
+            <WhiteTextField
+              label="Fecha de Nacimiento"
+              onChange={handleChangeForm}
+              required
+              name="fecha_nac"
+              placeholder="Fecha de Nacimiento"
+              type="date"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              id="fecha_nac"
+            />
+            <WhiteTextField
+              label="Sexo"
+              onChange={handleChangeForm}
+              required
+              name="sexo"
+              placeholder="Sexo"
+              type="Sexo"
+              id="sexo"
+            />
+          </Grid>
+          <Grid className={classes.containernInput}>
+            <WhiteTextField
+              label="Nº de Documento"
+              onChange={handleChangeForm}
+              required
+              name="n_doc"
+              placeholder="Nº de Documento"
+              id="n_doc"
+            />
+          </Grid>
+
+          <Grid className={classes.containernInput}>
+            <WhiteTextField
+              label="Telefono"
+              onChange={handleChangeForm}
+              required
+              name="telefono"
+              placeholder="Telefono"
+              id="telefono"
+            />
+          </Grid>
+
+          <Grid className={classes.containernInput}>
+            <WhiteTextField
+              label="Domicilio"
+              onChange={handleChangeForm}
+              required
+              name="domicilio"
+              placeholder="Domicilio"
+              id="domicilio"
+            />
+          </Grid>
+          <Grid className={classes.containernInput}>
+            <WhiteTextField
+              label="Cuit"
+              onChange={handleChangeForm}
+              required
+              name="Cuit"
+              placeholder="Cuit"
+              id="cuit"
+            />
+          </Grid>
+
+          <Grid className={classes.containernInput}>
+            <WhiteTextField
+              label="Situcion tributaria"
+              onChange={handleChangeForm}
+              required
+              name="situacion_tributaria"
+              placeholder="Situcion tributaria"
+              id="sit_tributaria"
+            />
           </Grid>
           <Button
             type="submit"
             fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
+            className={classes.submit}>
             Registrar
           </Button>
-          <Grid container justify="flex-end">
-          </Grid>
         </form>
       </div>
     </Container>
   )
 }
 
-export default Personas
+export default Register

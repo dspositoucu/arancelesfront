@@ -4,10 +4,9 @@ import TableRow from '@material-ui/core/TableRow';
 import { Cell, CellCheckBox, CellAction } from '../Cell'
 import { useDispatch, useSelector } from 'react-redux';
 
-//tipos
+//types
 import { IPersona } from '../../models';
 import { AppState } from '../../Redux/state/AppState';
-
 
 //actions
 import { selectPerson } from '../../Redux/actions/personActionCreator';
@@ -15,7 +14,8 @@ import { selectPerson } from '../../Redux/actions/personActionCreator';
 //icons 
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 interface Props {
-  data: any
+  data?: any,
+  columns: string[]
 }
 
 //creando un nuevo componente StyledTableRow con nuevos estilos de color intercalado 
@@ -27,31 +27,33 @@ const StyledTableRow = withStyles(() => ({
   }
 }))(TableRow);
 
-export const Row: FC<Props> = ({ data }) => {
+export const Row: FC<Props> = ({ data, columns }) => {
   const dispatch = useDispatch();
-  const { selectListPerson } = useSelector( (state:AppState) => state.PersonState )
+  const { selectListPerson } = useSelector((state: AppState) => state.PersonState)
 
+  if (!data) return null;
 
+  //comprobar el listado de columnas enviadas por props 
+  //y las que existen en la tabla de datos
+  // se devuelve un array con las columnas que coinciden 
+  const compareColumn = ():string[] => columns.filter( key => !!data[key])
+   
+  //seleccionar una fila 
+  const handleSelectRow = (data: IPersona) => {
+    dispatch(selectPerson(data))
+  }
 
-  if(!data)return null;
+  // checkear si la fila se encuentra en lista de seleccionado para cambiar el checkbox 
+  const checkListSelect = (id: string) => {
+    return !!selectListPerson.filter((data) => data.id === id)[0]
+  }
 
-      //seleccionar una fila 
-    const handleSelectRow = (data:IPersona) =>{
-        dispatch(selectPerson(data))
-    }
-
-    // checkear si la fila se encuentra en lista de seleccionado para cambiar el checkbox 
-    const checkListSelect = (id:string) =>{
-      return  !!selectListPerson.filter((data)=> data.id===id)[0]
-    }
-
-  const keysData: string[] = Object.keys(data)
   return (
-    <StyledTableRow onClick={()=>handleSelectRow(data)}>
+    <StyledTableRow onClick={() => handleSelectRow(data)}>
       <CellCheckBox check={checkListSelect(data.id)} />
       {
-        keysData.map((key, index) => {
-          return key !== 'selected' && (    
+        compareColumn().map((key, index) => {
+          return (
             <Cell key={index}>
               {data[key]}
             </Cell>
@@ -66,22 +68,21 @@ export const Row: FC<Props> = ({ data }) => {
 }
 
 //Row Header Table
-export const RowHeader: FC<Props> = ({ data }) => {
-  
-  const { selectListPerson } = useSelector( (state:AppState) => state.PersonState )
-  if(!data)return null
-  const keysData: string[] = Object.keys(data)
-  
-  let rowHeader: ReactNode[] = keysData.map(( key, index ) => {
-    return key !== 'selected' && (
-      <Cell variant="head" key={ index }>
-        { key.toUpperCase() }
-      </Cell>
-    )})
-      rowHeader.unshift(<CellCheckBox check={!!selectListPerson.length} checkAll variant="head"/>);
-      rowHeader.push(<Cell variant="head">ACCIONES</Cell>);
+export const RowHeader: FC<Props> = ({ columns }) => {
 
-  return(
+  const { selectListPerson } = useSelector((state: AppState) => state.PersonState)
+
+  let rowHeader: ReactNode[] = columns.map((key, index) => {
+    return(
+      <Cell variant="head" key={index}>
+        {key.toUpperCase()}
+      </Cell>
+    )
+  })
+  rowHeader.unshift(<CellCheckBox check={!!selectListPerson.length} checkAll variant="head" />);
+  rowHeader.push(<Cell variant="head">ACCIONES</Cell>);
+
+  return (
     <StyledTableRow>
       {rowHeader}
     </StyledTableRow>
