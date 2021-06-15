@@ -9,30 +9,30 @@ import {
     PersonActionTypes
 } from './personActionTypes';
 
-import { IPersona } from '../../models';
+import { typesModels } from '../../models';
 
-export const addPerson = (person :IPersona) :AddPersonAction =>{
+export const addPerson = (person :typesModels) :AddPersonAction =>{
     return {
         type: PersonActionTypes.ADD_PERSON,
         person
     }
 }
 
-export const getPersonList = (listPerson :IPersona[]):GetPersonListAction => {
+export const getPersonList = (listPerson :typesModels[]):GetPersonListAction => {
     return {
         type: PersonActionTypes.GET_PERSON_LIST,
         listPerson
     }
 }
 
-export const getPersonDetails = (personDetails :IPersona):GetPersonDetailsAction => {
+export const getPersonDetails = (personDetails :typesModels):GetPersonDetailsAction => {
     return {
         type: PersonActionTypes.GET_PERSON_DETAILS,
         personDetails
     }
 }
 
-export const selectPerson = (selectPerson :IPersona):SelectPersonAction => {
+export const selectPerson = (selectPerson :typesModels):SelectPersonAction => {
     return {
         type: PersonActionTypes.SELECT_PERSON,
         selectPerson
@@ -51,7 +51,7 @@ export const deletePerson = ():DeletePeronAction => {
     }
 }
 
-export const updatePerson = (personId: number|string, person:IPersona, index:number):UpdatePersonAction => {
+export const updatePerson = (personId: number|string, person:typesModels, index:number):UpdatePersonAction => {
     return {
         type: PersonActionTypes.UPDATE_PERSON,
         personId,

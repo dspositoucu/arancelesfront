@@ -1,15 +1,20 @@
-import React, { FC, ReactNode } from 'react'
-import { makeStyles, Theme, createStyles, } from '@material-ui/core/styles';
+import { FC, ReactNode } from 'react';
+import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { makeStyles, createStyles, } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core/';
 
+import Icons from '../Icons';
+
+// actions
 
 interface Props {
-    icon?:ReactNode,
+    iconType?:string,
     label?:string,
-    onClick?:any
+    onClick?: () => any
 }
 
-const useStyles = makeStyles( (theme: Theme) =>
+const useStyles = makeStyles( () =>
     createStyles({
         root:{
             background: "none",
@@ -22,16 +27,16 @@ const useStyles = makeStyles( (theme: Theme) =>
         }
     }))
 
-const ButtonHeader:FC<Props> = ({ onClick, icon, label }) => {
+const ButtonHeader:FC<Props> = ({onClick, iconType="imprimir", label, }) => {
     const classes = useStyles()
 
   return (
     <Button 
         onClick={onClick}
         className={classes.root}
-        startIcon={icon}
+        startIcon={<Icons type={iconType}/>}
     >
-        {label}
+        {label && `${label[0].toUpperCase()+label.slice(1)}`}
     </Button>
    )
  }

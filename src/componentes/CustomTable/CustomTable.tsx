@@ -1,4 +1,4 @@
-import  { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 import Table from '@material-ui/core/Table';
@@ -19,10 +19,11 @@ import { Row, RowHeader } from '../Row';
 import MenuHeaderTable from './MenuHeaderTable';
 import TablePaginationActions from './TablePaginationActions'
 
-
 interface Props {
     tableData: Object[],
     columns: string[],
+    actionsInRow?: string[],
+    actionsInHeader: string[]
 }
 
 // estilos css-in-js
@@ -35,7 +36,8 @@ const useStyles = makeStyles(() =>
             height: "auto"
         },
         tableContainer: {
-            borderRadius: 10
+            borderRadius: 10,
+            boxShadow: '0px 4px 25px rgba(148, 130, 255, 0.51)',
         },
         paginationTable: {
             color: '#6E6893',
@@ -46,46 +48,56 @@ const useStyles = makeStyles(() =>
         }
     }));
 
-const CustomTable:FC<Props> = ({tableData, columns}) => {
+const CustomTable: FC<Props> = ({ tableData, columns, actionsInHeader }) => {
 
     const classes = useStyles();
 
-    
     // custom hooks
-    const { dataFilter, handleFilter } = useFilter(tableData)
+
+    // useFilter recibe la tabla a filtrar y devuelve 
+    //una funcion handleFilter, la lista filtrada y
+    //una const tipo bool. "tableFilterinUse" que corresponde a si la tabla esta en uso. 
+    const { dataFilter, handleFilter, tableFilterinUse } = useFilter(tableData)
+
+    // usePagination devuelve: 
+    // page: devuelve la pagina actual,
+    // rowperPage: devuelve las filas por pagina,
+    // handleChangePage: fun. para cambiar pagina,
+    // handleChangeRowsPerPage: fun. para cambiar el numero de filas por pagina
     const {
-        page, 
-        rowsPerPage, 
-        handleChangePage, 
+        page,
+        rowsPerPage,
+        handleChangePage,
         handleChangeRowsPerPage } = usePagination(18)
-        
-    console.log("Lista de filtrada ",dataFilter)
-    /* 
-    emptyRows se usa para rellenar el espacio faltante 
-    de la tabla para mantener el tamaño correspondiente 
-    a filas por pagina 
-    */
+
+    // emptyRows se usa para rellenar el espacio faltante 
+    // de la tabla para mantener el tamaño correspondiente 
+    // a filas por pagina 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, (dataFilter.length || tableData.length) - page * rowsPerPage);
 
-    // filas correspondientes a la pagina ctual
-    const ActualPage = (listData: Object[]) => {
-        return listData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+    // funcion que corta el array dependiendo las filas por paginas
+    // selecciona la lista correspondiente
+    const ActualPage = (listData: Object[], listDataFilter: Object[] | []) => {
+
+        return (tableFilterinUse
+            ? listDataFilter
+            : listData).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
     }
 
     return (
         <TableContainer className={classes.tableContainer} component={Paper}>
             <MenuHeaderTable
-                label={"Buscar por nombre"}
                 filter={handleFilter}
+                buttonsList={actionsInHeader}
             />
 
             <Table className={classes.table} aria-label="tabla">
                 <TableBody>
 
-                    {/* RowHeader recive "data" como props que es una lista de  */}
                     <RowHeader columns={columns} />
-                    {tableData.length && (rowsPerPage > 0 
-                        ? ActualPage(tableData)
+
+                    {tableData.length && (rowsPerPage > 0
+                        ? ActualPage(tableData, dataFilter)
                         : tableData
                     ).map((persona) => (
                         <Row columns={columns} data={persona} />
@@ -103,7 +115,7 @@ const CustomTable:FC<Props> = ({tableData, columns}) => {
                             align="right"
                             rowsPerPageOptions={[5, 10, 18,/*  { label: 'All', value: -1 } */]}
                             colSpan={9}
-                            count={dataFilter.length || tableData.length}
+                            count={tableFilterinUse ? dataFilter.length : tableData.length}
                             rowsPerPage={rowsPerPage}
                             page={page}
                             SelectProps={{

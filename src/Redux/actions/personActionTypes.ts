@@ -1,4 +1,4 @@
-import { IPersona } from '../../models'
+import { typesModels } from '../../models'
 
 export enum PersonActionTypes {
 
@@ -18,22 +18,22 @@ export enum PersonActionTypes {
 
 export interface AddPersonAction {
   type: PersonActionTypes.ADD_PERSON,
-  person:IPersona
+  person:typesModels
 }
 
 export interface GetPersonListAction {
   type: PersonActionTypes.GET_PERSON_LIST,
-  listPerson:IPersona[]
+  listPerson:typesModels[]
 }
 
 export interface GetPersonDetailsAction {
   type: PersonActionTypes.GET_PERSON_DETAILS,
-  personDetails: IPersona
+  personDetails: typesModels
 }
 
 export interface SelectPersonAction {
   type: PersonActionTypes.SELECT_PERSON,
-  selectPerson: IPersona
+  selectPerson: typesModels
 }
 
 export interface SelectAllPersonAction {
@@ -47,7 +47,7 @@ export interface DeletePeronAction {
 export interface UpdatePersonAction {
   type: PersonActionTypes.UPDATE_PERSON,
   personId: number|string, 
-  person:IPersona,
+  person:typesModels,
   index:number
 }
 

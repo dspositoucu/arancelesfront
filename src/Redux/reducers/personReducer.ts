@@ -30,7 +30,7 @@ const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = Init
         case PersonActionTypes.SELECT_PERSON: {
 
             // se verifica si el dato existe en el array selectList
-            const existe = !!state.selectListPerson.filter(data => data.id === action.selectPerson.id)[0]
+            const existe = !!state.selectListPerson.find(data => data.id === action.selectPerson.id)
             console.log("EXISTE =", existe)
             return {
                 ...state,
@@ -68,10 +68,10 @@ const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = Init
                     }
                 })
             })
-
             return {
                 ...state,
-                listPerson: copyArray 
+                listPerson: copyArray,
+                selectListPerson:[], 
             }                 
         }
         case PersonActionTypes.UPDATE_PERSON: {

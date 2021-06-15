@@ -25,3 +25,5 @@ export interface IPersona {
     
 }
 
+export type typesModels = IPersona
+

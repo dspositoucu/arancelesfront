@@ -5,7 +5,7 @@ import { Cell, CellCheckBox, CellAction } from '../Cell'
 import { useDispatch, useSelector } from 'react-redux';
 
 //types
-import { IPersona } from '../../models';
+import { typesModels } from '../../models';
 import { AppState } from '../../Redux/state/AppState';
 
 //actions
@@ -23,7 +23,7 @@ const StyledTableRow = withStyles(() => ({
   root: {
     "&:nth-of-type(odd)": {
       backgroundColor: "#D9D5EC"
-    }
+    },
   }
 }))(TableRow);
 
@@ -36,20 +36,23 @@ export const Row: FC<Props> = ({ data, columns }) => {
   //comprobar el listado de columnas enviadas por props 
   //y las que existen en la tabla de datos
   // se devuelve un array con las columnas que coinciden 
-  const compareColumn = ():string[] => columns.filter( key => !!data[key])
-   
+  const compareColumn = (): string[] => columns.filter(key => !!data[key])
+
   //seleccionar una fila 
-  const handleSelectRow = (data: IPersona) => {
+  const handleSelectRow = (data: typesModels) => {
     dispatch(selectPerson(data))
   }
 
   // checkear si la fila se encuentra en lista de seleccionado para cambiar el checkbox 
   const checkListSelect = (id: string) => {
-    return !!selectListPerson.filter((data) => data.id === id)[0]
+    return !!selectListPerson.find((data) => data.id === id)
   }
 
   return (
-    <StyledTableRow onClick={() => handleSelectRow(data)}>
+    <StyledTableRow
+      onClick={() => handleSelectRow(data)}
+      style={checkListSelect(data.id) ? { background: '#C3B3E7' } : {}}
+    >
       <CellCheckBox check={checkListSelect(data.id)} />
       {
         compareColumn().map((key, index) => {
@@ -73,7 +76,7 @@ export const RowHeader: FC<Props> = ({ columns }) => {
   const { selectListPerson } = useSelector((state: AppState) => state.PersonState)
 
   let rowHeader: ReactNode[] = columns.map((key, index) => {
-    return(
+    return (
       <Cell variant="head" key={index}>
         {key.toUpperCase()}
       </Cell>

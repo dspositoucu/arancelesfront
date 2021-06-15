@@ -7,36 +7,13 @@ import {
   Container,
   Typography,
   Grid,
-  TextField
 } from '@material-ui/core';
 import { makeStyles, Theme, createStyles, withStyles } from '@material-ui/core/styles';
 
+import InputForm from './InputForm'
+
 //actions
 import { addPerson } from '../../Redux/actions/personActionCreator'
-
-
-const WhiteTextField = withStyles({
-  root: {
-    margin: '0px 10px',
-    borderRadius: 5,
-    display: 'flex',
-    flex: 1,
-    '& .MuiInputBase-input': {
-      marginLeft: 20,
-      color: '#6E6893', // Text color
-    },
-    '& .MuiInput-underline:before': {
-      borderBottomColor: '#F2F0F9', // color del subrayado del input 
-    },
-    '& .MuiInput-underline:hover:before': {
-      borderBottomColor: '#6E6893', // color del subrayado del input en hover
-    },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: '#6E6893', // color del subrayado del input en focus
-    },
-  },
-})(TextField);
-
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,7 +21,6 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-
     },
     containernInput: {
       margin: "10px 10px",
@@ -52,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'center',
     },
     form: {
-      marginTop: theme.spacing(3),
+      marginTop: 10,
       textAlign: 'center'
     },
     submit: {
@@ -61,12 +37,12 @@ const useStyles = makeStyles((theme: Theme) =>
       '&:hover': {
         backgroundColor: '#3c356d',
       },
-      margin: theme.spacing(3, 0, 2),
+      marginTop: 10
     },
     container: {
       boxShadow: '0px 4px 25px rgba(148, 130, 255, 0.51)',
       background: "#FFF",
-      padding: 20,
+      padding: 15,
       borderRadius: 10,
     },
     title: {
@@ -120,7 +96,7 @@ const Register = () => {
           onSubmit={handleSubmite}
         >
           <Grid className={classes.containernInput}>
-            <WhiteTextField
+            <InputForm
               label="Nombre"
               onChange={handleChangeForm}
               name="nombre"
@@ -130,7 +106,7 @@ const Register = () => {
             />
           </Grid>
           <Grid className={classes.containernInput}>
-            <WhiteTextField
+            <InputForm
               label="Email"
               onChange={handleChangeForm}
               required
@@ -141,7 +117,7 @@ const Register = () => {
             />
           </Grid>
           <Grid className={classes.containernInput}>
-            <WhiteTextField
+            <InputForm
               label="Fecha de Nacimiento"
               onChange={handleChangeForm}
               required
@@ -153,7 +129,7 @@ const Register = () => {
               }}
               id="fecha_nac"
             />
-            <WhiteTextField
+            <InputForm
               label="Sexo"
               onChange={handleChangeForm}
               required
@@ -164,7 +140,7 @@ const Register = () => {
             />
           </Grid>
           <Grid className={classes.containernInput}>
-            <WhiteTextField
+            <InputForm
               label="Nº de Documento"
               onChange={handleChangeForm}
               required
@@ -175,7 +151,7 @@ const Register = () => {
           </Grid>
 
           <Grid className={classes.containernInput}>
-            <WhiteTextField
+            <InputForm
               label="Telefono"
               onChange={handleChangeForm}
               required
@@ -186,7 +162,7 @@ const Register = () => {
           </Grid>
 
           <Grid className={classes.containernInput}>
-            <WhiteTextField
+            <InputForm
               label="Domicilio"
               onChange={handleChangeForm}
               required
@@ -196,7 +172,7 @@ const Register = () => {
             />
           </Grid>
           <Grid className={classes.containernInput}>
-            <WhiteTextField
+            <InputForm
               label="Cuit"
               onChange={handleChangeForm}
               required
@@ -207,7 +183,7 @@ const Register = () => {
           </Grid>
 
           <Grid className={classes.containernInput}>
-            <WhiteTextField
+            <InputForm
               label="Situcion tributaria"
               onChange={handleChangeForm}
               required

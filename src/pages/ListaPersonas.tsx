@@ -12,16 +12,14 @@ import { personas } from '../dataTable.json'
 //acciones
 import { getPersonList } from '../Redux/actions/personActionCreator'
 
-
 const ListaPersonas = () => {
 
   const { listPerson } = useSelector((state: AppState) => state.PersonState)
 
   const dispatch = useDispatch()
 
-  
   const cargarDatos = () => {
-    if(listPerson.length<=0){
+    if (listPerson.length <= 0) {
       dispatch(getPersonList(personas))
     }
   }
@@ -29,15 +27,16 @@ const ListaPersonas = () => {
     cargarDatos()
   }, [])
 
-
   // El componente Table recibe dos props 
-  //tableData: correspone a los datos que se quieren renderizar 
-  // columns: corresponde a las columnas de la tabla que se quieren renderizar 
+  // -tableData: correspone a los datos que se quieren renderizar 
+  // -columns: corresponde a las columnas de la tabla que se quieren renderizar
+  // -actions (OPCIONAL): acciones para realizar en la tabla 
 
   return <Table
-          tableData={listPerson}
-          columns={["id", "nombre", "n_doc", "telefono", "email", "domicilio"]}
-    />
+    tableData={listPerson}
+    columns={["id", "nombre", "n_doc", "telefono", "email", "domicilio"]}
+    actionsInHeader={["imprimir", "nuevo", "borrar"]}
+  />
 }
 
 export default ListaPersonas
