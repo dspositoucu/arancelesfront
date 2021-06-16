@@ -1,19 +1,22 @@
 import { Reducer } from 'redux';
-import { PersonActions, PersonActionTypes } from '../actions/personActionTypes'
+import { PersonActions, ActionTypes } from '../actions/ActionTypes'
 import { IPersonInitialState } from '../state/AppState';
+import { typesModels } from '../../models';
 
 const InitialState: IPersonInitialState = {
     listPerson: [],
     selectListPerson: [],
+    filterList: [],
     personDetails: {},
-    allSelect: false
+    allSelect: false,
+    tableFilterinUse: false
 }
 
 const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = InitialState, action: PersonActions) => {
 
     switch (action.type) {
 
-        case PersonActionTypes.ADD_PERSON: {
+        case ActionTypes.ADD_PERSON: {
             let newArray = [action.person, ...state.listPerson]
             return {
                 ...state,
@@ -21,13 +24,13 @@ const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = Init
             }
         }
 
-        case PersonActionTypes.GET_PERSON_LIST: {
+        case ActionTypes.GET_PERSON_LIST: {
             return {
                 ...state,
                 listPerson: action.listPerson
             }
         }
-        case PersonActionTypes.SELECT_PERSON: {
+        case ActionTypes.SELECT_PERSON: {
 
             // se verifica si el dato existe en el array selectList
             const existe = !!state.selectListPerson.find(data => data.id === action.selectPerson.id)
@@ -37,13 +40,14 @@ const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = Init
                 // si existe se quita del listado, sino, se agrega
                 selectListPerson: !existe
                     ? [...state.selectListPerson, action.selectPerson]
-                    : state.selectListPerson.filter(data => data.id !== action.selectPerson.id),
+                    : state.selectListPerson.filter(data => data.id !== action.selectPerson?.id),
+
                 allSelect: state.selectListPerson.length > 0,
                 personDetails: action.selectPerson
             }
         }
 
-        case PersonActionTypes.SELECT_ALL_PERSON: {
+        case ActionTypes.SELECT_ALL_PERSON: {
             const allDatos = state.selectListPerson.length > 0
             return {
                 ...state,
@@ -52,29 +56,53 @@ const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = Init
             }
         }
 
-        case PersonActionTypes.GET_PERSON_DETAILS: {
+        case ActionTypes.SET_FILTER_LIST: {
+            return {
+                ...state,
+                filterList: action.filterList
+            }
+        }
+
+        case ActionTypes.SET_TABLE_FILTER_IN_USE: {
+            return {
+                ...state,
+                tableFilterinUse: action.value
+            }
+        }
+
+        case ActionTypes.GET_PERSON_DETAILS: {
             return {
                 ...state,
                 personDetails: action.personDetails
             }
         }
-        case PersonActionTypes.DELETE_PERSON: {
-            let copyArray = [...state.listPerson]
+        case ActionTypes.DELETE_PERSON: {
+            // comparar listas y eliminar similares
+            // recive dos listas de objetos, eliminara los obj. de 
+            // listA que sean iguales a los de ListB
+            // NO SE MODIFICA LA LISTA ORIGINA 
 
-            state.selectListPerson.forEach(data=>{
-                copyArray.forEach((data2,j)=>{
-                    if(data.id===data2.id){
-                        copyArray.splice(j,1)
-                    }
+            const compareAndDelete = (listA: typesModels[], listB: typesModels[], id = "id") => {
+                let copyListA = [...listA]
+                if (!listB.length) return copyListA
+
+                listB.forEach(data => {
+                    copyListA.forEach((data2, j) => {
+                        data[id as keyof Object] === data2[id as keyof Object] && copyListA.splice(j, 1)
+                    })
                 })
-            })
+                return copyListA
+            }
+
             return {
                 ...state,
-                listPerson: copyArray,
-                selectListPerson:[], 
-            }                 
+                listPerson: compareAndDelete(state.listPerson, state.selectListPerson),
+                filterList: compareAndDelete(state.filterList, state.selectListPerson),
+                selectListPerson: []
+
+            }
         }
-        case PersonActionTypes.UPDATE_PERSON: {
+        case ActionTypes.UPDATE_PERSON: {
             return {
                 ...state,
                 personDetails: state.listPerson.filter(person => person.id === action.personId)

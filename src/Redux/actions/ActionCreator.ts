@@ -6,54 +6,70 @@ import {
     SelectAllPersonAction,
     DeletePeronAction,
     UpdatePersonAction,
-    PersonActionTypes
-} from './personActionTypes';
+    SetFilterList,
+    SetTableFilterinUse,
+    ActionTypes
+} from './ActionTypes';
 
 import { typesModels } from '../../models';
 
+export const setFilterList = ( filterList :typesModels[] ):SetFilterList => {
+    return{
+        type: ActionTypes.SET_FILTER_LIST,
+        filterList
+    }
+}
+
 export const addPerson = (person :typesModels) :AddPersonAction =>{
     return {
-        type: PersonActionTypes.ADD_PERSON,
+        type: ActionTypes.ADD_PERSON,
         person
     }
 }
 
 export const getPersonList = (listPerson :typesModels[]):GetPersonListAction => {
     return {
-        type: PersonActionTypes.GET_PERSON_LIST,
+        type: ActionTypes.GET_PERSON_LIST,
         listPerson
     }
 }
 
 export const getPersonDetails = (personDetails :typesModels):GetPersonDetailsAction => {
     return {
-        type: PersonActionTypes.GET_PERSON_DETAILS,
+        type: ActionTypes.GET_PERSON_DETAILS,
         personDetails
     }
 }
 
 export const selectPerson = (selectPerson :typesModels):SelectPersonAction => {
     return {
-        type: PersonActionTypes.SELECT_PERSON,
+        type: ActionTypes.SELECT_PERSON,
         selectPerson
     }
 }
 
 export const selectAllPerson = ():SelectAllPersonAction => {
     return {
-        type: PersonActionTypes.SELECT_ALL_PERSON,
+        type: ActionTypes.SELECT_ALL_PERSON,
     }
 }
 
 export const deletePerson = ():DeletePeronAction => {
     return {
-        type: PersonActionTypes.DELETE_PERSON,
+        type: ActionTypes.DELETE_PERSON,
+    }
+}
+
+export const setTableFilterinUse = (value: boolean):SetTableFilterinUse => {
+    return {
+        type: ActionTypes.SET_TABLE_FILTER_IN_USE,
+        value
     }
 }
 
 export const updatePerson = (personId: number|string, person:typesModels, index:number):UpdatePersonAction => {
     return {
-        type: PersonActionTypes.UPDATE_PERSON,
+        type: ActionTypes.UPDATE_PERSON,
         personId,
         person,
         index

@@ -1,6 +1,6 @@
 import { typesModels } from '../../models'
 
-export enum PersonActionTypes {
+export enum ActionTypes {
 
   ADD_PERSON = "ADD_PERSON",
 
@@ -13,42 +13,55 @@ export enum PersonActionTypes {
   DELETE_PERSON = 'DELETE_PERSON',
   
   UPDATE_PERSON = 'UPDATE_PERSON',
+
+  SET_FILTER_LIST = 'SET_FILTER_LIST' ,
+  SET_TABLE_FILTER_IN_USE = "SET_TABLE_FILTER_IN_USE"
   
 }
 
+export interface SetFilterList {
+  type: ActionTypes.SET_FILTER_LIST,
+  filterList: typesModels[]
+} 
+
 export interface AddPersonAction {
-  type: PersonActionTypes.ADD_PERSON,
+  type: ActionTypes.ADD_PERSON,
   person:typesModels
 }
 
 export interface GetPersonListAction {
-  type: PersonActionTypes.GET_PERSON_LIST,
+  type: ActionTypes.GET_PERSON_LIST,
   listPerson:typesModels[]
 }
 
 export interface GetPersonDetailsAction {
-  type: PersonActionTypes.GET_PERSON_DETAILS,
+  type: ActionTypes.GET_PERSON_DETAILS,
   personDetails: typesModels
 }
 
 export interface SelectPersonAction {
-  type: PersonActionTypes.SELECT_PERSON,
+  type: ActionTypes.SELECT_PERSON,
   selectPerson: typesModels
 }
 
 export interface SelectAllPersonAction {
-  type: PersonActionTypes.SELECT_ALL_PERSON,
+  type: ActionTypes.SELECT_ALL_PERSON,
 }
 
 export interface DeletePeronAction {
-  type: PersonActionTypes.DELETE_PERSON,
+  type: ActionTypes.DELETE_PERSON,
 }
 
 export interface UpdatePersonAction {
-  type: PersonActionTypes.UPDATE_PERSON,
+  type: ActionTypes.UPDATE_PERSON,
   personId: number|string, 
   person:typesModels,
   index:number
+}
+
+export interface SetTableFilterinUse {
+  type :ActionTypes.SET_TABLE_FILTER_IN_USE,
+  value: boolean
 }
 
 export type PersonActions =
@@ -59,3 +72,5 @@ AddPersonAction
   |SelectAllPersonAction
   |DeletePeronAction
   |UpdatePersonAction
+  |SetFilterList
+  |SetTableFilterinUse

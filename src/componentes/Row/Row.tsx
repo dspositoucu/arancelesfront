@@ -9,7 +9,7 @@ import { typesModels } from '../../models';
 import { AppState } from '../../Redux/state/AppState';
 
 //actions
-import { selectPerson } from '../../Redux/actions/personActionCreator';
+import { selectPerson } from '../../Redux/actions/ActionCreator';
 
 //icons 
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';

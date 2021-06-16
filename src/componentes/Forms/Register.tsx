@@ -13,7 +13,7 @@ import { makeStyles, Theme, createStyles} from '@material-ui/core/styles';
 import InputForm from './InputForm'
 
 //actions
-import { addPerson } from '../../Redux/actions/personActionCreator'
+import { addPerson } from '../../Redux/actions/ActionCreator'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

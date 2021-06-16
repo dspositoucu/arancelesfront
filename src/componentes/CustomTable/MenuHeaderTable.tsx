@@ -5,12 +5,13 @@ import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 
 //actions
-import { deletePerson } from '../../Redux/actions/personActionCreator'
+import { deletePerson, setTableFilterinUse } from '../../Redux/actions/ActionCreator'
 
 
 //component 
-import ButtonHeader from '../Buttons'
-import SearchBarTable from './SearchBarTable'
+import ButtonHeader from '../Buttons';
+import SearchBarTable from './SearchBarTable';
+import FilterMenu from '../CustomTable/FilterMenu';
 
 interface Props {
     filter?: any,
@@ -28,45 +29,51 @@ const useStyles = makeStyles(() =>
         },
         titleTable: {
             color: '#6E6893',
+            cursor: "pointer",
+            "&:hover":{
+                color:'#51488D'
+            }
         }
     }))
 
 
 const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
-
+    const history = useHistory()
+    const dispatch = useDispatch()
 
     const buttons = {
-            imprimir: <ButtonHeader
+        imprimir: <ButtonHeader
             label="Imprimir"
             iconType="imprimir"
         />,
-        
-            nuevo: <ButtonHeader
+
+        nuevo: <ButtonHeader
             label="Nuevo"
             iconType="nuevo"
             onClick={() => history.push("/addPerson")}
         />,
-        
-            borrar: <ButtonHeader
+
+        borrar: <ButtonHeader
             label="Borrar"
             iconType="borrar"
             onClick={() => { dispatch(deletePerson()) }}
         />
     }
 
-
-    const history = useHistory()
-    const dispatch = useDispatch()
-
-
-    console.log(buttonsList)
     const classes = useStyles()
     return (
         <Toolbar className={classes.root}>
-            <Typography className={classes.titleTable} variant="subtitle1">Listado de Personas</Typography>
+            <Typography
+                className={classes.titleTable}
+                variant="subtitle1"
+                onClick={()=>{dispatch(setTableFilterinUse(false))}}
+            >
+                Listado de Personas
+            </Typography>
+            <FilterMenu />
 
             {
-                buttonsList.map(buttonType => { return buttons[buttonType as keyof Object]})
+                buttonsList.map(buttonType => { return buttons[buttonType as keyof Object] })
             }
 
             <SearchBarTable functionFilter={filter} />

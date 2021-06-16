@@ -10,13 +10,13 @@ import { AppState } from '../Redux/state/AppState';
 import { personas } from '../dataTable.json'
 
 //acciones
-import { getPersonList } from '../Redux/actions/personActionCreator'
+import { getPersonList } from '../Redux/actions/ActionCreator'
 
 const ListaPersonas = () => {
 
+  const dispatch = useDispatch()
   const { listPerson } = useSelector((state: AppState) => state.PersonState)
 
-  const dispatch = useDispatch()
 
   const cargarDatos = () => {
     if (listPerson.length <= 0) {

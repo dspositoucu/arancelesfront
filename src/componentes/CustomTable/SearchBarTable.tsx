@@ -1,9 +1,14 @@
-import React, { FC, useState, ChangeEvent } from 'react'
+import { FC, useState, ChangeEvent } from 'react'
 import { IconButton, InputBase, Paper, Divider } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import Select from '@material-ui/core/Select';
 import MenuItem from "@material-ui/core/MenuItem";
+
+// type
+import { AppState } from '../../Redux/state/AppState';
+
+import { useSelector } from 'react-redux'
 
 interface Props {
     functionFilter: any
@@ -35,8 +40,8 @@ const useStyles = makeStyles((theme: Theme) =>
             color: "#6E6893",
             padding: 5,
             fontSize: 12,
-            "& :focus":{
-                background:'#F2F0F9'
+            "& :focus": {
+                background: '#F2F0F9'
             }
         },
         iconButton: {
@@ -53,13 +58,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const SearchBarTable: FC<Props> = ({ functionFilter }) => {
     const classes = useStyles();
-
-    const [filter, setFilter] = useState<any>("nombre")
-
-    const  handleChangeFilter = ({target}:ChangeEvent<{ value: unknown }>) =>{
+    const { tableFilterinUse } = useSelector((state:AppState)=> state.PersonState)
+    const [filter, setFilter] = useState<any>("nombre") 
+    const [ textInput, setTextInput ] = useState('')
+ 
+    const handleChangeFilter = ({ target }: ChangeEvent<{ value: unknown }>) => {
         setFilter(target.value)
     }
-
 
     return (
         <Paper className={classes.root}>
@@ -68,7 +73,7 @@ const SearchBarTable: FC<Props> = ({ functionFilter }) => {
                 className={classes.select}
                 defaultValue={"nombre"}
                 disableUnderline
-                value={filter}
+                value={ filter }
             >
                 <MenuItem value={"nombre"}>Nombre</MenuItem>
                 <MenuItem value={"n_doc"}>N° Doc</MenuItem>
@@ -79,8 +84,11 @@ const SearchBarTable: FC<Props> = ({ functionFilter }) => {
             <Divider className={classes.divider} orientation="vertical" />
             <InputBase
                 className={classes.input}
-                placeholder={`Filtrar por ${filter?.toUpperCase()}`}
-                onChange={(e) => functionFilter(e, filter)}
+                placeholder={`Filtrar por ${filter.toUpperCase()}`}
+                onChange={(e) => {
+                    setTextInput(e.target.value)
+                    functionFilter(e, filter)}}
+                value={ tableFilterinUse ? textInput : ''}
             />
         </Paper>
     )

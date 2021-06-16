@@ -10,6 +10,9 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+//models
+import { typesModels } from '../../models'
+
 //custom hooks
 import { useFilter } from '../../hooks/useFilter';
 import { usePagination } from '../../hooks/usePagination';
@@ -20,7 +23,7 @@ import MenuHeaderTable from './MenuHeaderTable';
 import TablePaginationActions from './TablePaginationActions'
 
 interface Props {
-    tableData: Object[],
+    tableData: typesModels[],
     columns: string[],
     actionsInRow?: string[],
     actionsInHeader: string[]
@@ -57,7 +60,7 @@ const CustomTable: FC<Props> = ({ tableData, columns, actionsInHeader }) => {
     // useFilter recibe la tabla a filtrar y devuelve 
     //una funcion handleFilter, la lista filtrada y
     //una const tipo bool. "tableFilterinUse" que corresponde a si la tabla esta en uso. 
-    const { dataFilter, handleFilter, tableFilterinUse } = useFilter(tableData)
+    const { filterList, handleFilter, tableFilterinUse } = useFilter(tableData)
 
     // usePagination devuelve: 
     // page: devuelve la pagina actual,
@@ -73,10 +76,10 @@ const CustomTable: FC<Props> = ({ tableData, columns, actionsInHeader }) => {
     // emptyRows se usa para rellenar el espacio faltante 
     // de la tabla para mantener el tamaño correspondiente 
     // a filas por pagina 
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, (dataFilter.length || tableData.length) - page * rowsPerPage);
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, (filterList.length || tableData.length) - page * rowsPerPage);
 
     // funcion que corta el array dependiendo las filas por paginas
-    // selecciona la lista correspondiente
+    // y selecciona la lista correspondiente
     const ActualPage = (listData: Object[], listDataFilter: Object[] | []) => {
 
         return (tableFilterinUse
@@ -97,7 +100,7 @@ const CustomTable: FC<Props> = ({ tableData, columns, actionsInHeader }) => {
                     <RowHeader columns={columns} />
 
                     {tableData.length && (rowsPerPage > 0
-                        ? ActualPage(tableData, dataFilter)
+                        ? ActualPage(tableData, filterList)
                         : tableData
                     ).map((persona) => (
                         <Row columns={columns} data={persona} />
@@ -115,7 +118,7 @@ const CustomTable: FC<Props> = ({ tableData, columns, actionsInHeader }) => {
                             align="right"
                             rowsPerPageOptions={[5, 10, 18,/*  { label: 'All', value: -1 } */]}
                             colSpan={9}
-                            count={tableFilterinUse ? dataFilter.length : tableData.length}
+                            count={tableFilterinUse ? filterList.length : tableData.length}
                             rowsPerPage={rowsPerPage}
                             page={page}
                             SelectProps={{

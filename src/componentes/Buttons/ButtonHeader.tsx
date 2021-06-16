@@ -1,6 +1,4 @@
 import { FC, ReactNode } from 'react';
-import { useHistory } from 'react-router';
-import { useDispatch } from 'react-redux';
 import { makeStyles, createStyles, } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core/';
 
@@ -11,7 +9,7 @@ import Icons from '../Icons';
 interface Props {
     iconType?:string,
     label?:string,
-    onClick?: () => any
+    onClick?: (e?:any) => void
 }
 
 const useStyles = makeStyles( () =>

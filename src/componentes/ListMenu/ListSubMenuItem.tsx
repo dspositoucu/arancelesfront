@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { ListItemText } from "@material-ui/core";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 
 interface Props {
@@ -18,6 +18,7 @@ const useStyles = makeStyles( ()=>
     })
 )
 const ListSubMenuItem: FC<Props> = ({subMenuData}) => {
+    const history = useHistory()
     const classes = useStyles()
     return (
         <>
