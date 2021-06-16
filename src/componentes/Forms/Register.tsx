@@ -1,4 +1,4 @@
-import { FC, useState, ChangeEvent, FormEvent } from 'react'
+import { useState, ChangeEvent, FormEvent } from 'react'
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import {
@@ -8,7 +8,7 @@ import {
   Typography,
   Grid,
 } from '@material-ui/core';
-import { makeStyles, Theme, createStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme, createStyles} from '@material-ui/core/styles';
 
 import InputForm from './InputForm'
 
@@ -79,16 +79,15 @@ const Register = () => {
   const handleSubmite = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
     dispatch(addPerson(formData))
-
-    console.log('Data enviada: ', formData)
+    history.push("./table")
   }
 
   console.log(formData)
   return (
-    <Container className={classes.container} component="main" maxWidth="xs">
+    <Container className={classes.container} component="main" maxWidth="sm">
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography className={classes.title} variant="h4">
+        <Typography className={classes.title} variant="h5">
           Registrar Nueva Persona
         </Typography>
         <form
@@ -97,6 +96,7 @@ const Register = () => {
         >
           <Grid className={classes.containernInput}>
             <InputForm
+              size="medium"
               label="Nombre"
               onChange={handleChangeForm}
               name="nombre"
@@ -107,6 +107,7 @@ const Register = () => {
           </Grid>
           <Grid className={classes.containernInput}>
             <InputForm
+              size="medium"
               label="Email"
               onChange={handleChangeForm}
               required
@@ -118,6 +119,17 @@ const Register = () => {
           </Grid>
           <Grid className={classes.containernInput}>
             <InputForm
+              size="medium"
+              label="Sexo"
+              onChange={handleChangeForm}
+              required
+              name="sexo"
+              placeholder="Sexo"
+              type="Sexo"
+              id="sexo"
+            />
+            <InputForm
+              size="medium"
               label="Fecha de Nacimiento"
               onChange={handleChangeForm}
               required
@@ -129,18 +141,10 @@ const Register = () => {
               }}
               id="fecha_nac"
             />
-            <InputForm
-              label="Sexo"
-              onChange={handleChangeForm}
-              required
-              name="sexo"
-              placeholder="Sexo"
-              type="Sexo"
-              id="sexo"
-            />
           </Grid>
           <Grid className={classes.containernInput}>
             <InputForm
+              size="medium"
               label="Nº de Documento"
               onChange={handleChangeForm}
               required
@@ -152,6 +156,7 @@ const Register = () => {
 
           <Grid className={classes.containernInput}>
             <InputForm
+              size="medium"
               label="Telefono"
               onChange={handleChangeForm}
               required
@@ -163,6 +168,7 @@ const Register = () => {
 
           <Grid className={classes.containernInput}>
             <InputForm
+              size="medium"
               label="Domicilio"
               onChange={handleChangeForm}
               required
@@ -173,6 +179,7 @@ const Register = () => {
           </Grid>
           <Grid className={classes.containernInput}>
             <InputForm
+              size="medium"
               label="Cuit"
               onChange={handleChangeForm}
               required
@@ -184,6 +191,7 @@ const Register = () => {
 
           <Grid className={classes.containernInput}>
             <InputForm
+              size="medium"
               label="Situcion tributaria"
               onChange={handleChangeForm}
               required

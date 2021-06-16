@@ -48,7 +48,7 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
         />,
         
             borrar: <ButtonHeader
-            label="Nuevo"
+            label="Borrar"
             iconType="borrar"
             onClick={() => { dispatch(deletePerson()) }}
         />
