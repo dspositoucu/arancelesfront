@@ -6,7 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 //types
 import { AppState } from '../../Redux/state/AppState';
 //actions
-import { deletePerson, setTableFilterinUse } from '../../Redux/actions/ActionCreator'
+import { 
+        deletePerson, 
+        setTableFilterinUse,
+        removeFilterTag 
+    } from '../../Redux/actions/ActionCreator'
 
 //component 
 import ButtonHeader from '../Buttons';
@@ -27,11 +31,17 @@ const useStyles = makeStyles(() =>
             justifyContent: "space-between",
             alignItems: "center"
         },
+        tagsMenu: {
+            height: 'max-content',
+            display: "flex",
+            alignItems: "center",
+            flexWrap: 'wrap'
+        },
         titleTable: {
             color: '#6E6893',
             cursor: "pointer",
-            "&:hover":{
-                color:'#51488D'
+            "&:hover": {
+                color: '#51488D'
             }
         }
     }))
@@ -40,7 +50,18 @@ const useStyles = makeStyles(() =>
 const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
     const history = useHistory()
     const dispatch = useDispatch()
-    //const { filterOptions } = useSelector( (state:AppState) => state.PersonState )
+    const { filterTags } = useSelector((state: AppState) => state.PersonState)
+
+    const showTags = () => {
+        let arrTags = []
+        for (let tag in filterTags) {
+            arrTags.push({
+                key: tag,
+                value: filterTags[tag as keyof Object]
+            })
+        }
+        return arrTags
+    }
 
     const buttons = {
         imprimir: <ButtonHeader
@@ -56,7 +77,7 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
 
         borrar: <ButtonHeader
             label="Borrar"
-            iconType="close"
+            iconType="borrar"
             onClick={() => { dispatch(deletePerson()) }}
         />
     }
@@ -64,74 +85,44 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
     const classes = useStyles()
     return (
         <>
-        <Toolbar className={classes.root}>
-            <Typography
-                className={classes.titleTable}
-                variant="subtitle1"
-                onClick={()=>{dispatch(setTableFilterinUse(false))}}
-            >
-                Listado de Personas
-            </Typography>
-            <FilterMenu />
+            <Toolbar className={classes.root}>
+                <Typography
+                    className={classes.titleTable}
+                    variant="subtitle1"
+                    onClick={() => { dispatch(setTableFilterinUse(false)) }}
+                >
+                    Listado de Personas
+                </Typography>
+                <FilterMenu />
 
-            {
-                buttonsList.map(buttonType => { return buttons[buttonType as keyof Object] })
+                {
+                    buttonsList.map(buttonType => buttons[buttonType as keyof Object])
+                }
+
+                <SearchBarTable functionFilter={filter} />
+            </Toolbar>
+
+            {showTags().filter(tag => tag.value).length
+                ? <>
+                    <Divider orientation="horizontal" />
+                    <Toolbar className={classes.tagsMenu}>
+                        {
+                            showTags().map(tag => {
+                                if (!tag.value) return
+                                return (
+                                    <ButtonHeader
+                                        label={tag.key.split('_').join(' ')}
+                                        iconType="close"
+                                        typeButton="filter"
+                                        onClick={()=>{dispatch(removeFilterTag(tag.key))}}
+                                    />
+                                )
+                            })
+                        }
+                    </Toolbar>
+                </>
+                : null
             }
-
-            <SearchBarTable functionFilter={filter} />
-        </Toolbar>
-        <Divider orientation="horizontal"/>
-        <Toolbar className={classes.root}>
-            <ButtonHeader
-                typeButton="filter"
-            label="Borrar"
-            iconType="close"
-            onClick={() => { dispatch(deletePerson()) }}
-        />
-        <ButtonHeader
-            typeButton="filter"
-            label="Borrar"
-            iconType="close"
-            onClick={() => { dispatch(deletePerson()) }}
-        />
-        <ButtonHeader
-            typeButton="filter"
-            label="Borrar"
-            iconType="close"
-            onClick={() => { dispatch(deletePerson()) }}
-        />
-        <ButtonHeader
-            typeButton="filter"
-            label="Borrar"
-            iconType="close"
-            onClick={() => { dispatch(deletePerson()) }}
-        />
-            <ButtonHeader
-            typeButton="filter"
-            label="Borrar"
-            iconType="close"
-            onClick={() => { dispatch(deletePerson()) }}
-        />
-            <ButtonHeader
-            typeButton="filter"
-            label="Borrar"
-            iconType="close"
-            onClick={() => { dispatch(deletePerson()) }}
-        />
-            <ButtonHeader
-            typeButton="filter"
-            label="Borrar"
-            iconType="close"
-            onClick={() => { dispatch(deletePerson()) }}
-        />
-            <ButtonHeader
-            typeButton="filter"
-            label="Borrar"
-            iconType="close"
-            onClick={() => { dispatch(deletePerson()) }}
-        />
-
-        </Toolbar>
         </>
 
     )

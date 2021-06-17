@@ -25,6 +25,7 @@ const useStyles = makeStyles( () =>
             textTransform: 'capitalize',
         },
         filter:{
+            margin: 3,
             fontSize:12,
             background:'#F2F0F9',
             boxShadow:"none",

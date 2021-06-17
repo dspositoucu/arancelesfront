@@ -36,14 +36,7 @@
         {
             "MenuOption": "Informes",
             "SubMenu": [
-                "Alumnos Becados Activos",
-                "Alumnos Dados de Baja",
-                "Alumnos Activos",
                 "CBU Alumnos",
-                "Alumnos Acreditan Banco",
-                "Alumnos Con Fin De Carrera",
-                "Alumnos Con Año de Gracia",
-                "Alumnos SIN CUENTA",
                 "Ingreso Por Facultad Y Carrera",
                 "Ingreso Facultad - Carrera con detalle Movimiento",
                 "Debito Generados",

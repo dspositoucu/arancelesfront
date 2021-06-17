@@ -3,7 +3,9 @@ import { typesModels } from '../../models'
 export enum ActionTypes {
 
   ADD_PERSON = "ADD_PERSON",
-  ADD_FILTER = "ADD_FILTER", 
+  ADD_FILTER_TAG = "ADD_FILTER_TAG",
+  
+  REMOVE_FILTER_TAG = "REMOVE_FILTER_TAG",
 
   GET_PERSON_LIST = 'GET_PERSON_LIST',
   GET_PERSON_DETAILS = 'GET_PERSON_DETAILS',
@@ -21,8 +23,12 @@ export enum ActionTypes {
   
 }
 
+export interface RemoveFilterTagAction {
+  type: ActionTypes.REMOVE_FILTER_TAG,
+  tag: string
+}
 export interface AddFilterAction {
-  type: ActionTypes.ADD_FILTER,
+  type: ActionTypes.ADD_FILTER_TAG,
   filter: string
 }
 
@@ -82,3 +88,4 @@ AddPersonAction
   |SetFilterListAction
   |SetTableFilterinUse
   |AddFilterAction
+  |RemoveFilterTagAction

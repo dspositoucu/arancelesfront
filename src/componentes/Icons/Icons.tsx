@@ -18,7 +18,7 @@ const Icons: FC<Props> = ({ type }) => {
         borrar: <DeleteIcon />,
         nuevo: <PersonAddIcon />,
         filter: <FilterListIcon />,
-        close: <CloseIcon fontSize="small"/>
+        close: <CloseIcon />
     }
 
     return <> {objIcon[type as keyof Object]} </>

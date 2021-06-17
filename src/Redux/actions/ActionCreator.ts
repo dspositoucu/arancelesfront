@@ -9,14 +9,23 @@ import {
     SetFilterListAction,
     SetTableFilterinUse,
     AddFilterAction,
+    RemoveFilterTagAction,
     ActionTypes
 } from './ActionTypes';
 
 import { typesModels } from '../../models';
 
+
+export const removeFilterTag = (tag :string) :RemoveFilterTagAction =>{
+    return {
+        type: ActionTypes.REMOVE_FILTER_TAG,
+        tag
+    }
+}
+
 export const addFilter = ( filter :string ) :AddFilterAction =>{
     return {
-        type: ActionTypes.ADD_FILTER,
+        type: ActionTypes.ADD_FILTER_TAG,
         filter
     }
 }

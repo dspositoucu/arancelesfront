@@ -8,20 +8,30 @@ const InitialState: IPersonInitialState = {
     selectListPerson: [],
     filterList: [],
     personDetails: {},
+    filterTags: {},
     allSelect: false,
     tableFilterinUse: false,
-    filterButtons: {}
 }
 
 const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = InitialState, action: PersonActions) => {
 
     switch (action.type) {
 
-        case ActionTypes.ADD_FILTER:{
+        case ActionTypes.REMOVE_FILTER_TAG :{
             return {
                 ...state,
-                filterButtons:{ ...state.filterButtons,
-                    [action.filter] : !state.filterButtons[action.filter as keyof Object]
+                filterTags : {
+                    ...state.filterTags,
+                    [action.tag] : false
+                }
+            }
+        }
+
+        case ActionTypes.ADD_FILTER_TAG:{
+            return {
+                ...state,
+                filterTags:{ ...state.filterTags,
+                    [action.filter] : !state.filterTags[action.filter as keyof Object]
                 } 
             }
         }

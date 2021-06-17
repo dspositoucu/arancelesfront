@@ -1,8 +1,15 @@
-import React from 'react'
+import { FC } from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
 import Checkbox from '@material-ui/core/Checkbox';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
+interface  Props{
+    checked:boolean,
+    label:string,
+    item:string
+    onClick: (str:string) => void,
+
+}
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -10,7 +17,8 @@ const useStyles = makeStyles(() =>
             width: '100%',
             display: 'flex',
             justifyContent: 'space-between',
-            color: '#6E6893'
+            color: '#6E6893',
+            textTransform: 'capitalize',
         },
         root: {
             color: '#6E6893',
@@ -18,19 +26,18 @@ const useStyles = makeStyles(() =>
     }))
 
 
-function FilterMenuItems() {
+const FilterMenuItems :FC<Props> = ({ item, checked=false, label, onClick }) => {
     const classes = useStyles();
-
 
     return (
     <MenuItem
         className={classes.menuitemCheck}
-        onClick={() =>{}}
+        onClick={() =>{onClick(item)}}
     >
-        Alumnos dados de baja
+        {label}
         <Checkbox
             className={classes.root}
-            checked={false}
+            checked={checked}
             color="default"
             inputProps={{ 'aria-label': 'primary checkbox' }}
         />

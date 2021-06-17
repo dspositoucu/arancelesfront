@@ -9,7 +9,7 @@ export interface IPersonInitialState{
     personDetails: {} | IPersona
     allSelect : boolean,
     tableFilterinUse: boolean,
-    filterButtons: {}
+    filterTags: {}
 }
 
 //interface del conbine reducer en Store.ts
