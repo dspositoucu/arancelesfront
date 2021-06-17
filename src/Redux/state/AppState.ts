@@ -8,7 +8,8 @@ export interface IPersonInitialState{
     selectListPerson: [] | IPersona[]
     personDetails: {} | IPersona
     allSelect : boolean,
-    tableFilterinUse: boolean
+    tableFilterinUse: boolean,
+    filterButtons: {}
 }
 
 //interface del conbine reducer en Store.ts

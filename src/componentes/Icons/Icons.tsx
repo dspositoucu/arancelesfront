@@ -4,6 +4,7 @@ import PrintIcon from '@material-ui/icons/Print';
 import DeleteIcon from '@material-ui/icons/Delete';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import CloseIcon from '@material-ui/icons/Close';
 
 
 interface Props {
@@ -16,7 +17,8 @@ const Icons: FC<Props> = ({ type }) => {
         imprimir: <PrintIcon />,
         borrar: <DeleteIcon />,
         nuevo: <PersonAddIcon />,
-        filter: <FilterListIcon />
+        filter: <FilterListIcon />,
+        close: <CloseIcon fontSize="small"/>
     }
 
     return <> {objIcon[type as keyof Object]} </>

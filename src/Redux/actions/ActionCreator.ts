@@ -6,14 +6,22 @@ import {
     SelectAllPersonAction,
     DeletePeronAction,
     UpdatePersonAction,
-    SetFilterList,
+    SetFilterListAction,
     SetTableFilterinUse,
+    AddFilterAction,
     ActionTypes
 } from './ActionTypes';
 
 import { typesModels } from '../../models';
 
-export const setFilterList = ( filterList :typesModels[] ):SetFilterList => {
+export const addFilter = ( filter :string ) :AddFilterAction =>{
+    return {
+        type: ActionTypes.ADD_FILTER,
+        filter
+    }
+}
+
+export const setFilterList = ( filterList :typesModels[] ):SetFilterListAction => {
     return{
         type: ActionTypes.SET_FILTER_LIST,
         filterList

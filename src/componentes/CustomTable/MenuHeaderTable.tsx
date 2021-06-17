@@ -1,12 +1,12 @@
-import { FC, ReactNode } from 'react'
+import { FC } from 'react'
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Typography, Toolbar } from '@material-ui/core';
+import { Typography, Toolbar, Divider } from '@material-ui/core';
 import { useHistory } from 'react-router';
-import { useDispatch } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+//types
+import { AppState } from '../../Redux/state/AppState';
 //actions
 import { deletePerson, setTableFilterinUse } from '../../Redux/actions/ActionCreator'
-
 
 //component 
 import ButtonHeader from '../Buttons';
@@ -40,6 +40,7 @@ const useStyles = makeStyles(() =>
 const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
     const history = useHistory()
     const dispatch = useDispatch()
+    //const { filterOptions } = useSelector( (state:AppState) => state.PersonState )
 
     const buttons = {
         imprimir: <ButtonHeader
@@ -55,13 +56,14 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
 
         borrar: <ButtonHeader
             label="Borrar"
-            iconType="borrar"
+            iconType="close"
             onClick={() => { dispatch(deletePerson()) }}
         />
     }
 
     const classes = useStyles()
     return (
+        <>
         <Toolbar className={classes.root}>
             <Typography
                 className={classes.titleTable}
@@ -78,6 +80,60 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
 
             <SearchBarTable functionFilter={filter} />
         </Toolbar>
+        <Divider orientation="horizontal"/>
+        <Toolbar className={classes.root}>
+            <ButtonHeader
+                typeButton="filter"
+            label="Borrar"
+            iconType="close"
+            onClick={() => { dispatch(deletePerson()) }}
+        />
+        <ButtonHeader
+            typeButton="filter"
+            label="Borrar"
+            iconType="close"
+            onClick={() => { dispatch(deletePerson()) }}
+        />
+        <ButtonHeader
+            typeButton="filter"
+            label="Borrar"
+            iconType="close"
+            onClick={() => { dispatch(deletePerson()) }}
+        />
+        <ButtonHeader
+            typeButton="filter"
+            label="Borrar"
+            iconType="close"
+            onClick={() => { dispatch(deletePerson()) }}
+        />
+            <ButtonHeader
+            typeButton="filter"
+            label="Borrar"
+            iconType="close"
+            onClick={() => { dispatch(deletePerson()) }}
+        />
+            <ButtonHeader
+            typeButton="filter"
+            label="Borrar"
+            iconType="close"
+            onClick={() => { dispatch(deletePerson()) }}
+        />
+            <ButtonHeader
+            typeButton="filter"
+            label="Borrar"
+            iconType="close"
+            onClick={() => { dispatch(deletePerson()) }}
+        />
+            <ButtonHeader
+            typeButton="filter"
+            label="Borrar"
+            iconType="close"
+            onClick={() => { dispatch(deletePerson()) }}
+        />
+
+        </Toolbar>
+        </>
+
     )
 }
 export default MenuHeaderTable

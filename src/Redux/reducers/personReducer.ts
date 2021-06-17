@@ -9,12 +9,22 @@ const InitialState: IPersonInitialState = {
     filterList: [],
     personDetails: {},
     allSelect: false,
-    tableFilterinUse: false
+    tableFilterinUse: false,
+    filterButtons: {}
 }
 
 const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = InitialState, action: PersonActions) => {
 
     switch (action.type) {
+
+        case ActionTypes.ADD_FILTER:{
+            return {
+                ...state,
+                filterButtons:{ ...state.filterButtons,
+                    [action.filter] : !state.filterButtons[action.filter as keyof Object]
+                } 
+            }
+        }
 
         case ActionTypes.ADD_PERSON: {
             let newArray = [action.person, ...state.listPerson]
