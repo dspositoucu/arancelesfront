@@ -3,8 +3,10 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Typography, Toolbar, Divider } from '@material-ui/core';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
+
 //types
 import { AppState } from '../../Redux/state/AppState';
+
 //actions
 import { 
         deletePerson, 

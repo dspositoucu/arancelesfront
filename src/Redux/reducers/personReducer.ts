@@ -86,7 +86,7 @@ const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = Init
         case ActionTypes.SET_TABLE_FILTER_IN_USE: {
             return {
                 ...state,
-                tableFilterinUse: action.value
+                tableFilterinUse: action.value,
             }
         }
 

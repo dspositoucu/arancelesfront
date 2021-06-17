@@ -106,7 +106,7 @@ const CustomTable: FC<Props> = ({ tableData, columns, actionsInHeader }) => {
                         <Row columns={columns} data={persona} />
                     ))}
                     {emptyRows > 0 && (
-                        <TableRow style={{ height: 39 * emptyRows }}>
+                        <TableRow style={{ height: 35 * emptyRows }}>
                             <TableCell colSpan={15} />
                         </TableRow>
                     )}

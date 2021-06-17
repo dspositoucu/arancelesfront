@@ -11,9 +11,12 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-agregar funcionalidad menu de filtros con las etiquetas,
-    -- accion "agregar etiqueta desde menu de etiquetas" => (LISTO)
-    -- accion "quitar etiqueta"
-agregar pestañas
+## Caracteristicas y funciones
 
+Menu de filtrado con etiquetas
+ - Agregar y quitar etiquetas desde menu
+ - quitar filtro cerrando la equiqueta  
+
+Cabecera de tabla etiquetas de filtrado
+- Contenedor de las etiquetas de filtrado  
 
