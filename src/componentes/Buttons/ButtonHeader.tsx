@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { makeStyles, createStyles, } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core/';
 
@@ -38,6 +38,7 @@ const useStyles = makeStyles( () =>
     }))
 
 const ButtonHeader:FC<Props> = ({onClick, iconType="imprimir", label, typeButton="default"}) => {
+
     const classes = useStyles()
 
   return (

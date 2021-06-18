@@ -1,18 +1,20 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Typography, Toolbar, Divider } from '@material-ui/core';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
+import RegisterModal from '../Modals/registerModal'
+
 //types
 import { AppState } from '../../Redux/state/AppState';
 
 //actions
-import { 
-        deletePerson, 
-        setTableFilterinUse,
-        removeFilterTag 
-    } from '../../Redux/actions/ActionCreator'
+import {
+    deletePerson,
+    setTableFilterinUse,
+    removeFilterTag
+} from '../../Redux/actions/ActionCreator'
 
 //component 
 import ButtonHeader from '../Buttons';
@@ -50,6 +52,14 @@ const useStyles = makeStyles(() =>
 
 
 const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
+
+
+    const OpenModalRegister = () => {
+        setModalRegister(!modalRegister)
+    }
+
+    const [modalRegister, setModalRegister] = useState(false)
+
     const history = useHistory()
     const dispatch = useDispatch()
     const { filterTags } = useSelector((state: AppState) => state.PersonState)
@@ -65,6 +75,7 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
         return arrTags
     }
 
+
     const buttons = {
         imprimir: <ButtonHeader
             label="Imprimir"
@@ -74,7 +85,7 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
         nuevo: <ButtonHeader
             label="Nuevo"
             iconType="nuevo"
-            onClick={() => history.push("/addPerson")}
+            onClick={() => {OpenModalRegister()}}
         />,
 
         borrar: <ButtonHeader
@@ -86,7 +97,10 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
 
     const classes = useStyles()
     return (
-        <>
+        <>  {/* Modal register */}
+            {modalRegister && <RegisterModal closeModal={OpenModalRegister} active={modalRegister} />}
+
+
             <Toolbar className={classes.root}>
                 <Typography
                     className={classes.titleTable}
@@ -116,7 +130,7 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
                                         label={tag.key.split('_').join(' ')}
                                         iconType="close"
                                         typeButton="filter"
-                                        onClick={()=>{dispatch(removeFilterTag(tag.key))}}
+                                        onClick={() => { dispatch(removeFilterTag(tag.key)) }}
                                     />
                                 )
                             })
