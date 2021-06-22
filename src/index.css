@@ -1,107 +1,99 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
-
-
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     width: 5px;
-    background:#F2F0F9
-  }
-  ::-webkit-scrollbar-thumb{
+    background: #F2F0F9
+}
 
-    background:#6E6893; 
-  }
-  
-  ::-webkit-scrollbar:horizontal{
+::-webkit-scrollbar-thumb {
+    background: #6E6893;
+}
+
+::-webkit-scrollbar:horizontal {
     height: 5px;
-    background:#F2F0F9
-  }
-  ::-webkit-scrollbar-thumb:horizontal{
-    background:#6E6893; 
-  }
-  /* Track */
-  ::-webkit-scrollbar-track{
+    background: #F2F0F9
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+    background: #6E6893;
+}
+
+
+/* Track */
+
+::-webkit-scrollbar-track {
     border-radius: 10px;
-  }
-
-a{
-  text-decoration: none !important;
-  outline: none !important;
-  color:#6E6893;
 }
 
-a:active:link:focus{
-  text-decoration: none;
-  color:currentColor
+a {
+    text-decoration: none !important;
+    outline: none !important;
+    color: #6E6893;
 }
 
-
-.login{
-  background-image: url('./assets/fondoInicio.svg');
-  background-size: auto auto;
-  background-position: center center;
-  background-repeat: no-repeat;
+a:active:link:focus {
+    text-decoration: none;
+    color: currentColor
 }
 
-.openFondo{
-  animation: openFondo .5s cubic-bezier(0.22, 1, 0.36, 1) 0s 1 normal none;
+.login {
+    background-image: url('./assets/fondoInicio.svg');
+    background-size: auto auto;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
- .slideIn{
+
+.openFondo {
+    animation: openFondo .5s cubic-bezier(0.22, 1, 0.36, 1) 0s 1 normal none;
+}
+
+.slideIn {
     animation: slideIn .5s cubic-bezier(0.22, 1, 0.36, 1) 0s 1 normal none;
-  }
-  .CloseModal{
+}
+
+.CloseModal {
     animation: CloseModal .5s cubic-bezier(0.22, 1, 0.36, 1) 0s 1 normal none;
-  }
+}
 
-  .CloseModalFondo{
+.CloseModalFondo {
     animation: CloseModalFondo .5s cubic-bezier(0.22, 1, 0.36, 1) 0s 1 normal none;
-  }
- 
+}
 
-  @keyframes slideIn {
+@keyframes slideIn {
     0% {
-      transform: translateY(-3rem);
-      opacity: 0;
+        transform: translateY(-3rem);
+        opacity: 0;
     }
-  
     100% {
-      transform: translateY(0);
-      opacity: 1;
+        transform: translateY(0);
+        opacity: 1;
     }
-  }
+}
 
-
-  @keyframes CloseModal {
+@keyframes CloseModal {
     100% {
-      transform: translateY(-3rem);
-      opacity: 0;
+        transform: translateY(-3rem);
+        opacity: 0;
     }
-  
     0% {
-      transform: translateY(0);
-      opacity: 1;
+        transform: translateY(0);
+        opacity: 1;
     }
-  }
+}
 
-
-
-  @keyframes openFondo {
+@keyframes openFondo {
     0% {
-      
-      opacity: 0;
+        opacity: 0;
     }
-  
     100% {
-    
-      opacity: 1;
+        opacity: 1;
     }
-  }
+}
 
-
-  @keyframes CloseModalFondo {
+@keyframes CloseModalFondo {
     100% {
-      opacity: 0;
+        opacity: 0;
     }
-  
     0% {
-      opacity: 1;
+        opacity: 1;
     }
-  }
+}

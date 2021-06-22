@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 )
 
-const Menu: FC<Props> = (props) => {
+const ListMenu: FC<Props> = (props) => {
     const classes = useStyles()
     const [open, setOpen] = useState<any>({ open: '' });
 
@@ -79,4 +79,4 @@ const Menu: FC<Props> = (props) => {
         </div>
     )
 }
-export default Menu
+export default ListMenu

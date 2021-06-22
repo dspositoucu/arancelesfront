@@ -5,10 +5,12 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import CloseIcon from '@material-ui/icons/Close';
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 
 interface Props {
-    type?: string
+    type?: string,
 }
 
 const Icons: FC<Props> = ({ type }) => {
@@ -18,7 +20,9 @@ const Icons: FC<Props> = ({ type }) => {
         borrar: <DeleteIcon />,
         nuevo: <PersonAddIcon />,
         filter: <FilterListIcon />,
-        close: <CloseIcon />
+        close: <CloseIcon />,
+        user: <AccountCircleIcon/>,
+        logout: <PowerSettingsNewIcon/>
     }
 
     return <> {objIcon[type as keyof Object]} </>

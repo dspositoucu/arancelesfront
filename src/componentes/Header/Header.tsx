@@ -1,16 +1,19 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { AppState } from '../../Redux/state/AppState';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
     AppBar,
     Toolbar,
     Typography,
 } from '@material-ui/core';
+
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
+//actions
+import { logout } from '../../Redux/actions/userActionCreator'
+
 //Icons
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ExpandMore from "@material-ui/icons/ExpandMore";
+import Icons from '../Icons'
 
 //img UCU_header
 const UCUimg = require('../../assets/ucu_header.png');
@@ -47,13 +50,21 @@ const useStyles = makeStyles((theme: Theme) =>
             width:'200px',
             justifyContent:'space-around',
             alignItems:'center',
+        },
+
+        icon:{
+            display:'grid',
+            placeItems:'center',
+            cursor:'pointer'
         }
+
     })
 );
 
 
 const Header: FC<Props> = ({ title }) => {
     const { usuario } = useSelector((state :AppState)=>state.UsuarioState)
+    const dispatch = useDispatch()
     const classes = useStyles()
     return (
         <AppBar position="fixed" className={classes.appBar}>
@@ -65,11 +76,13 @@ const Header: FC<Props> = ({ title }) => {
                     {title}
                 </Typography>
                 <div className={classes.headerUser}>
-                    <AccountCircleIcon/>
+                    <Icons type="user"/>
                     <Typography variant="subtitle1">
                             {usuario ? usuario.usuario : 'Nombre de usuario'}
                     </Typography>
-                    <ExpandMore/>
+                    <div className={classes.icon} onClick={()=>dispatch(logout())}>
+                        <Icons type="logout"/>
+                    </div>
                 </div>
             </Toolbar>
         </AppBar>
