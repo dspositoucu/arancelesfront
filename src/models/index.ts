@@ -25,5 +25,10 @@ export interface IPersona {
     
 }
 
+export interface IUser {
+    usuario:string,
+    token?:string
+}
+
 export type typesModels = IPersona 
 

@@ -82,8 +82,8 @@ export const RowHeader: FC<Props> = ({ columns }) => {
       </Cell>
     )
   })
-  rowHeader.unshift(<CellCheckBox check={!!selectListPerson.length} checkAll variant="head" />);
-  rowHeader.push(<Cell variant="head">ACCIONES</Cell>);
+  rowHeader.unshift(<CellCheckBox key={'check'} check={!!selectListPerson.length} checkAll variant="head" />);
+  rowHeader.push(<Cell key={'head'} variant="head">ACCIONES</Cell>);
 
   return (
     <StyledTableRow>

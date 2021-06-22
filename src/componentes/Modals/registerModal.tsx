@@ -1,15 +1,18 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, ReactNode } from 'react';
 import ReactDom from 'react-dom';
-import Register from '../Forms/Register'
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 interface Prop {
     active: boolean,
-    closeModal: () => void
+    closeModal: () => void,
+    children: ReactNode
 }
 
 const useStyles = makeStyles(() =>
     createStyles({
+
+    
+
         fondo: {
             display: "flex",
             justifyContent: "center",
@@ -19,43 +22,34 @@ const useStyles = makeStyles(() =>
             right: 0,
             bottom: 0,
             backgroundColor: 'rgba(0, 0, 0, .7)',
-            zIndex: 100,
+            zIndex: 10000,
         },
-        openFondo: {
-            animation: 'openFondo .5s cubic-bezier(0.22, 1, 0.36, 1) 0s 1 normal none'
-        },
-        modalContainer:{
-            top:'50%',
+        modalContainer: {
+            top: '50%',
             left: '50%',
             height: '100%',
             width: 'auto',
-            position: 'absolute',
-            display: 'flex',
-            justifyContent: 'center',
-            aligniItems: 'center',
+            position: 'fixed',
+            display: 'grid',
+            placeItems: 'center',
             transform: 'translate(-50%,-50%)',
-            zIndex: 800
-          },
-          modal: {
-               display: 'flex',
-               alignItems: 'center',
-               justifyContent: 'center',
-               flexDirection: 'column',
-               position: 'fixed',
-               padding: 20,
-               boxShadow: '0px 9px 17px 6px rgba(0,0,0,0.45)',
-               borderRadius: 10,
-               zIndex:  1000 ,
-           },
-        slideIn:{
-            animation: 'slideIn .5s cubic-bezier(0.22, 1, 0.36, 1) 0s 1 normal none',
-          }
+            zIndex: 80000
+        },
+        modal: {
+            width: 'max-content',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            position: 'fixed',
+            zIndex: 10000,
+        },
     }));
 
 const modalRoot = document.getElementById('modal')
 
 
-const RegisterModal: FC<Prop> = ({ active, closeModal }) => {
+const RegisterModal: FC<Prop> = ({ active, closeModal, children }) => {
 
     const classes = useStyles()
 
@@ -76,19 +70,19 @@ const RegisterModal: FC<Prop> = ({ active, closeModal }) => {
         }, 300)
     }
 
-
+    console.log(closeModalBackground,closeModalContent)
 
     return modalRoot
         ? ReactDom.createPortal(
             <>
                 <div
                     onClick={close}
-                    className={`${classes.fondo} ${classes.openFondo} ${closeModalBackground ? closeModalBackground : ""}`}
+                    className={`${classes.fondo} openFondo ${ closeModalBackground ? closeModalBackground : ""}`}
                 >
                 </div>
                 <div className={classes.modalContainer}>
-                    <div className={`${classes.modal} ${classes.slideIn} ${closeModalContent ? closeModalContent : ""}`}>
-                        <Register/>
+                    <div className={`${classes.modal} slideIn ${ closeModalContent ? closeModalContent : ""}`}>
+                        {children}
                     </div>
                 </div>
             </>,

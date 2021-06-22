@@ -1,13 +1,13 @@
-import React, { FC } from 'react'
-import { Typography } from '@material-ui/core';
 
-interface Props {}
+import Login from '../componentes/Forms/Login'
+const fondo = require('../assets/fondoInicio.svg')
 
-const Home:FC<Props> = (props) => {
+
+const Home= () => {
   return (
-    <Typography variant={"h1"}>
-        Home
-    </Typography>
+   <div className="login" style={{display:"grid", placeItems:"center", height:'100vh', width:'100%'}}>
+      <Login/>
+   </div>
    )
  }
 

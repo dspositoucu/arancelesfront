@@ -1,10 +1,7 @@
 import { FC, useState } from 'react'
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Typography, Toolbar, Divider } from '@material-ui/core';
-import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-
-import RegisterModal from '../Modals/registerModal'
 
 //types
 import { AppState } from '../../Redux/state/AppState';
@@ -20,6 +17,8 @@ import {
 import ButtonHeader from '../Buttons';
 import SearchBarTable from './SearchBarTable';
 import FilterMenu from '../CustomTable/FilterMenu';
+import Register from '../Forms/Register'
+import RegisterModal from '../Modals/registerModal'
 
 interface Props {
     filter?: any,
@@ -59,8 +58,6 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
     }
 
     const [modalRegister, setModalRegister] = useState(false)
-
-    const history = useHistory()
     const dispatch = useDispatch()
     const { filterTags } = useSelector((state: AppState) => state.PersonState)
 
@@ -80,25 +77,34 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
         imprimir: <ButtonHeader
             label="Imprimir"
             iconType="imprimir"
+            key={1}
         />,
 
         nuevo: <ButtonHeader
             label="Nuevo"
             iconType="nuevo"
-            onClick={() => {OpenModalRegister()}}
+            onClick={() => { OpenModalRegister() }}
+            key={2}
         />,
 
         borrar: <ButtonHeader
             label="Borrar"
             iconType="borrar"
             onClick={() => { dispatch(deletePerson()) }}
+            key={3}
         />
     }
 
     const classes = useStyles()
     return (
         <>  {/* Modal register */}
-            {modalRegister && <RegisterModal closeModal={OpenModalRegister} active={modalRegister} />}
+            {modalRegister &&
+                <RegisterModal
+                    closeModal={OpenModalRegister}
+                    active={modalRegister}>
+                    <Register />
+                </RegisterModal>
+            }
 
 
             <Toolbar className={classes.root}>
@@ -123,10 +129,11 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
                     <Divider orientation="horizontal" />
                     <Toolbar className={classes.tagsMenu}>
                         {
-                            showTags().map(tag => {
-                                if (!tag.value) return
+                            showTags().map((tag) => {
+                                if (!tag.value) return null
                                 return (
                                     <ButtonHeader
+                                        key={tag.key}
                                         label={tag.key.split('_').join(' ')}
                                         iconType="close"
                                         typeButton="filter"

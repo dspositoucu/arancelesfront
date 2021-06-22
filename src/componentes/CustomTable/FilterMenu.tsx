@@ -57,12 +57,12 @@ const FilterMenu: FC<Props> = (props) => {
                 onClose={handleClose}
             >
                 {
-                    menuFilterData.map((menuItem,key) => {
+                    menuFilterData.map((menuItem,i) => {
                         let item = menuItem.label.split(' ').join('_')
 
                         return (
                             <FilterMenuItems
-                                key={key}
+                                key={i}
                                 checked={!!filterTags[item as keyof Object]}
                                 label={menuItem.label}
                                 item={item}

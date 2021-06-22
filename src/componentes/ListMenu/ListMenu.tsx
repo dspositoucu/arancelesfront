@@ -54,9 +54,9 @@ const Menu: FC<Props> = (props) => {
     return (
         <div className={classes.menuContainer}>
             <List className={classes.menu}>
-                {menuData.map((menuOp) => (
-                    <>
-                        <ListItem onClick={() => handleClick(menuOp.MenuOption)} button key={menuOp.MenuOption}>
+                {menuData.map((menuOp, i) => (
+                    <div key={i}>
+                        <ListItem onClick={() => handleClick(menuOp.MenuOption)} button >
                             <ListItemText classes={{ primary: classes.menuOpt }} primary={menuOp.MenuOption} />
                             {open[menuOp.MenuOption] ? (
                                 <Tooltip title="Collapse" placement="bottom">
@@ -68,12 +68,12 @@ const Menu: FC<Props> = (props) => {
                                 </Tooltip>
                             )}
                         </ListItem>
-                        {menuOp.SubMenu.map(submenu => (
-                            <Collapse in={open[menuOp.MenuOption]} timeout="auto" unmountOnExit key={submenu}>
-                                <ListSubMenuItem subMenuData={submenu}/>
+                        {menuOp.SubMenu.map((submenu, j) => (
+                            <Collapse in={open[menuOp.MenuOption]} timeout="auto" unmountOnExit key={j}>
+                                <ListSubMenuItem subMenuData={submenu} />
                             </Collapse>
                         ))}
-                    </>
+                    </div>
                 ))}
             </List>
         </div>

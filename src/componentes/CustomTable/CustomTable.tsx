@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 import Table from '@material-ui/core/Table';
@@ -93,23 +93,24 @@ const CustomTable: FC<Props> = ({ tableData, columns, actionsInHeader }) => {
                 filter={handleFilter}
                 buttonsList={actionsInHeader}
             />
-
             <Table className={classes.table} aria-label="tabla">
                 <TableBody>
-
                     <RowHeader columns={columns} />
-
-                    {tableData.length && (rowsPerPage > 0
+                    {tableData.length ? (rowsPerPage > 0
                         ? ActualPage(tableData, filterList)
                         : tableData
-                    ).map((persona) => (
-                        <Row columns={columns} data={persona} />
-                    ))}
-                    {emptyRows > 0 && (
+                    ).map((persona, i) => (
+                        <Row
+                            key={i}
+                            columns={columns}
+                            data={persona}
+                        />
+                    )):null}
+                    {emptyRows > 0 ?(
                         <TableRow style={{ height: 35 * emptyRows }}>
                             <TableCell colSpan={15} />
                         </TableRow>
-                    )}
+                    ):null}
                 </TableBody>
                 <TableFooter >
                     <TableRow className={classes.footer}>

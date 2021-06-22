@@ -1,4 +1,4 @@
-import { IPersona } from "../../models";
+import { IPersona,IUser } from "../../models";
 
 
 // interface del initialState en el reducer de person
@@ -12,8 +12,13 @@ export interface IPersonInitialState{
     filterTags: {}
 }
 
+export interface IUserInitialState {
+    usuario:IUser|''
+}
+
 //interface del conbine reducer en Store.ts
 
 export interface AppState {
-    PersonState:IPersonInitialState
+    PersonState:IPersonInitialState,
+    UsuarioState:IUserInitialState
 }

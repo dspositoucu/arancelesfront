@@ -32,3 +32,76 @@ a:active:link:focus{
   text-decoration: none;
   color:currentColor
 }
+
+
+.login{
+  background-image: url('./assets/fondoInicio.svg');
+  background-size: auto auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.openFondo{
+  animation: openFondo .5s cubic-bezier(0.22, 1, 0.36, 1) 0s 1 normal none;
+}
+ .slideIn{
+    animation: slideIn .5s cubic-bezier(0.22, 1, 0.36, 1) 0s 1 normal none;
+  }
+  .CloseModal{
+    animation: CloseModal .5s cubic-bezier(0.22, 1, 0.36, 1) 0s 1 normal none;
+  }
+
+  .CloseModalFondo{
+    animation: CloseModalFondo .5s cubic-bezier(0.22, 1, 0.36, 1) 0s 1 normal none;
+  }
+ 
+
+  @keyframes slideIn {
+    0% {
+      transform: translateY(-3rem);
+      opacity: 0;
+    }
+  
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+
+  @keyframes CloseModal {
+    100% {
+      transform: translateY(-3rem);
+      opacity: 0;
+    }
+  
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+
+
+  @keyframes openFondo {
+    0% {
+      
+      opacity: 0;
+    }
+  
+    100% {
+    
+      opacity: 1;
+    }
+  }
+
+
+  @keyframes CloseModalFondo {
+    100% {
+      opacity: 0;
+    }
+  
+    0% {
+      opacity: 1;
+    }
+  }

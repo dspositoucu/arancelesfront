@@ -1,6 +1,3 @@
-import { useState, ChangeEvent, FormEvent } from 'react'
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
 import {
   CssBaseline,
   Button,
@@ -9,6 +6,9 @@ import {
   Grid,
 } from '@material-ui/core';
 import { makeStyles, Theme, createStyles} from '@material-ui/core/styles';
+
+//Custom hooks 
+import { useForm } from '../../hooks/useForm'
 
 import InputForm from './InputForm'
 
@@ -40,7 +40,6 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: 10
     },
     container: {
-      boxShadow: '0px 4px 25px rgba(148, 130, 255, 0.51)',
       background: "#FFF",
       padding: 15,
       borderRadius: 10,
@@ -56,31 +55,15 @@ const Register = () => {
 
   const classes = useStyles();
 
-  const [formData, setFormData] = useState({
+  const {formData, handleChangeForm, handleSubmit} = useForm({
     id: (Math.random() * (10000000 - 100) + 100).toFixed(0),
     nombre: '',
     n_doc: '',
     telefono: '',
     email: '',
     domicilio: '',
-  })
+  },addPerson)
 
-  const history = useHistory()
-
-  const dispatch = useDispatch()
-
-  const handleChangeForm = ({ target }: ChangeEvent<HTMLInputElement>): void => {
-    setFormData({
-      ...formData,
-      [target.name]: target.value
-    })
-  }
-
-  const handleSubmite = (event: FormEvent<HTMLFormElement>): void => {
-    event.preventDefault()
-    dispatch(addPerson(formData))
-    history.push("./table")
-  }
 
   console.log(formData)
   return (
@@ -92,7 +75,7 @@ const Register = () => {
         </Typography>
         <form
           className={classes.form}
-          onSubmit={handleSubmite}
+          onSubmit={handleSubmit}
         >
           <Grid className={classes.containernInput}>
             <InputForm

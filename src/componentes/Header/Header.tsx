@@ -1,4 +1,6 @@
 import React, { FC } from 'react';
+import { AppState } from '../../Redux/state/AppState';
+import { useSelector } from 'react-redux';
 import {
     AppBar,
     Toolbar,
@@ -51,6 +53,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 const Header: FC<Props> = ({ title }) => {
+    const { usuario } = useSelector((state :AppState)=>state.UsuarioState)
     const classes = useStyles()
     return (
         <AppBar position="fixed" className={classes.appBar}>
@@ -64,7 +67,7 @@ const Header: FC<Props> = ({ title }) => {
                 <div className={classes.headerUser}>
                     <AccountCircleIcon/>
                     <Typography variant="subtitle1">
-                            Nombre Usuario
+                            {usuario ? usuario.usuario : 'Nombre de usuario'}
                     </Typography>
                     <ExpandMore/>
                 </div>
