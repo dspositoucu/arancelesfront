@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { ChangeEvent, useState, FormEvent } from 'react';
 
-export const useForm = <T>(form :T, action :Function) =>{
+export const useForm = <T>(form :T, action:Function) =>{
 
     const [formData, setFormData] = useState(form)
     const dispatch = useDispatch()

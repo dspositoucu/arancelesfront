@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { useDispatch } from 'react-redux'
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,6 +10,9 @@ import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+
+//actions
+import { getAllPersonas } from '../../Redux/actions/ActionCreator';
 
 //models
 import { typesModels } from '../../models'
@@ -52,7 +56,7 @@ const useStyles = makeStyles(() =>
     }));
 
 const CustomTable: FC<Props> = ({ tableData, columns, actionsInHeader }) => {
-
+    const dispatch = useDispatch()
     const classes = useStyles();
 
     // custom hooks
@@ -89,6 +93,7 @@ const CustomTable: FC<Props> = ({ tableData, columns, actionsInHeader }) => {
 
     return (
         <TableContainer className={classes.tableContainer} component={Paper}>
+            {/* <button onClick={()=>{getAllPersonas(); console.log('asdaasdas')}}>TEST RUTA PERSONAS</button> */}
             <MenuHeaderTable
                 filter={handleFilter}
                 buttonsList={actionsInHeader}

@@ -1,3 +1,5 @@
+import { Dispatch } from 'redux';
+import { PersonApi } from '../../api/rest/PersonaApi';
 import {
     AddPersonAction,
     GetPersonListAction,
@@ -92,3 +94,11 @@ export const updatePerson = (personId: number|string, person:typesModels, index:
         index
     }
 }
+
+export const getAllPersonas = ()=>{
+        return new PersonApi()
+            .getAllPersonas()
+            .then(personas=>console.log(personas))
+            .catch(err=>console.log(err))
+}
+

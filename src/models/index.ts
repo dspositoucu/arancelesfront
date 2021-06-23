@@ -13,21 +13,24 @@ export interface IRouteItem {
 
 export interface IPersona {
     id:number|string;
-    nombre:string;
-    n_doc:string;
-    telefono:string;
-    email:string;
-    domicilio:string;
-    sexo?:string;
-    fecha_nac?:Date;
-    cuit?:string;
-    sit_tributaria?:string
-    
+    nombre: string;
+    ndoc: string;
+    telefono: string;
+    email: string;
+    domicilio: string;
+    sexo?: string;
+    fecnac?: Date;
+    cuit?: string;
+    tipodoc?:number;
+    codigo?:string;
+    idperaul?:string
+    beneficio?: number;
+    baja?: boolean
 }
 
 export interface IUser {
     usuario:string,
-    token?:string
+    access_token?:string
 }
 
 export type typesModels = IPersona 

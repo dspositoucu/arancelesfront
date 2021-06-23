@@ -33,10 +33,11 @@ export const Row: FC<Props> = ({ data, columns }) => {
 
   if (!data) return null;
 
-  //comprobar el listado de columnas enviadas por props 
-  //y las que existen en la tabla de datos
+  //comprobar el listado de columnas enviadas por props y las
+  // que existen en la tabla de datos.
   // se devuelve un array con las columnas que coinciden 
   const compareColumn = (): string[] => columns.filter(key => !!data[key])
+  console.log("COMPARACION DE COLUMNAS ",compareColumn())
 
   //seleccionar una fila 
   const handleSelectRow = (data: typesModels) => {
@@ -70,7 +71,12 @@ export const Row: FC<Props> = ({ data, columns }) => {
   )
 }
 
-//Row Header Table
+
+//===============================================
+              //Row Header Table
+//===============================================
+
+
 export const RowHeader: FC<Props> = ({ columns }) => {
 
   const { selectListPerson } = useSelector((state: AppState) => state.PersonState)

@@ -34,7 +34,7 @@ const ListaPersonas = () => {
 
   return <Table
     tableData={listPerson}
-    columns={["id", "nombre", "n_doc", "telefono", "email", "domicilio"]}
+    columns={["id", "nombre", "ndoc", "telefono", "email", "domicilio"]}
     actionsInHeader={["imprimir", "nuevo", "borrar"]}
   />
 }
