@@ -6,6 +6,6 @@ export class UsuarioApi {
     private BaseUrl = 'http://localhost:3000/api/v1/login'
 
     login(user:any): Promise<AxiosResponse> {
-        return axios.post(this.BaseUrl, JSON.stringify(user))
+        return axios.post(this.BaseUrl, user)
     }
 }

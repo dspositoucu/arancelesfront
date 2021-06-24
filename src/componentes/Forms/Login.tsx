@@ -60,7 +60,7 @@ const Login = () => {
   const classes = useStyles();
 
   const { handleChangeForm, handleSubmit } = useForm({
-    usuario:'',
+    username:'',
     password:''
   },loginUser)
 
@@ -79,7 +79,7 @@ const Login = () => {
           <InputForm
             label="Nombre de Usuario"
             onChange={handleChangeForm}
-            name="usuario"
+            name="username"
             required
             placeholder="Nombre de Usuario"
           />
