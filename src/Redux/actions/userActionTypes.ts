@@ -5,7 +5,7 @@ export enum userActionTypes {
     LOGOUT = "LOGOUT", 
   }
 
-  export interface Login {
+  export interface LoginAction {
     type: userActionTypes.LOGIN,
     usuario:IUser
   }
@@ -16,4 +16,4 @@ export enum userActionTypes {
 
 
   export type UserActions =   Logout 
-                            | Login
+                            | LoginAction

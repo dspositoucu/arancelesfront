@@ -1,22 +1,30 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch, Redirect, BrowserRouterProps } from "react-router-dom";
+import history from "./helpers/history";
 
 //Components
 import Layout from './componentes/Layout'
+import AuthRoute from "./componentes/AuthRoute";
 
 //Page
-import Home from './pages/Home'
+import LoginPage from './pages/LoginPage'
 import ListaPersonas from './pages/ListaPersonas';
 
+
 function App() {
+  
   return (
     <>
-      <Router>
-      <Switch>
-        <Route exact path="/" component={Home}/>
-        <Layout>
-          <Route exact path={"/table"} component={ListaPersonas} />
-        </Layout>
-      </Switch>
+      <Router history={history}>
+        <Switch>
+          <Route exact path="/" component={LoginPage}/> 
+
+          <AuthRoute exact path="/table">
+            <Layout>
+              <ListaPersonas />
+            </Layout>
+          </AuthRoute>
+
+        </Switch>
       </Router>
     </>
   );

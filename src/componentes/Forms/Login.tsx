@@ -1,4 +1,3 @@
-import { useDispatch } from 'react-redux';
 import {
   CssBaseline,
   Button,
@@ -6,7 +5,9 @@ import {
   Typography,
   Grid,
 } from '@material-ui/core';
-
+import { makeStyles, Theme, createStyles} from '@material-ui/core/styles';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom'
 //action
 import { loginUser } from '../../Redux/actions/userActionCreator';
 
@@ -14,8 +15,6 @@ import { loginUser } from '../../Redux/actions/userActionCreator';
 import { useForm } from '../../hooks/useForm'
 
 import InputForm from './InputForm'
-
-import { makeStyles, Theme, createStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -56,6 +55,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }));
 
 const Login = () => {
+  const history = useHistory()
   const dispatch = useDispatch()
   const classes = useStyles();
 

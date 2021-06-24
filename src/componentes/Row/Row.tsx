@@ -37,8 +37,7 @@ export const Row: FC<Props> = ({ data, columns }) => {
   // que existen en la tabla de datos.
   // se devuelve un array con las columnas que coinciden 
   const compareColumn = (): string[] => columns.filter(key => !!data[key])
-  console.log("COMPARACION DE COLUMNAS ",compareColumn())
-
+  
   //seleccionar una fila 
   const handleSelectRow = (data: typesModels) => {
     dispatch(selectPerson(data))

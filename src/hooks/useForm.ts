@@ -7,7 +7,6 @@ export const useForm = <T>(form :T, action:Function) =>{
     const dispatch = useDispatch()
 
     const handleChangeForm = ({ target }: ChangeEvent<HTMLInputElement>): void => {
-      console.log(target.name, target.value)
         setFormData({
           ...formData,
           [target.name]: target.value
@@ -16,7 +15,6 @@ export const useForm = <T>(form :T, action:Function) =>{
 
       const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
         event.preventDefault()
-        console.log(formData)
         dispatch(action(formData))
       }
 

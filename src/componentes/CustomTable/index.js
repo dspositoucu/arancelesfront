@@ -1,1 +1,2 @@
-export {default} from './CustomTable'
+export { default }
+from './CustomTable'

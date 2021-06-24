@@ -64,6 +64,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Header: FC<Props> = ({ title }) => {
     const { usuario } = useSelector((state :AppState)=>state.UsuarioState)
+    console.log("HEADER",usuario)
     const dispatch = useDispatch()
     const classes = useStyles()
     return (
@@ -78,7 +79,7 @@ const Header: FC<Props> = ({ title }) => {
                 <div className={classes.headerUser}>
                     <Icons type="user"/>
                     <Typography variant="subtitle1">
-                            {usuario ? usuario.usuario : 'Nombre de usuario'}
+                            {usuario ? usuario.nombre : 'Nombre de usuario'}
                     </Typography>
                     <div className={classes.icon} onClick={()=>dispatch(logout())}>
                         <Icons type="logout"/>

@@ -29,7 +29,7 @@ export interface IPersona {
 }
 
 export interface IUser {
-    usuario:string,
+    nombre:string,
     access_token?:string
 }
 

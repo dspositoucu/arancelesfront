@@ -1,35 +1,39 @@
 import { Dispatch } from 'redux';
-import { userActionTypes, Logout, Login } from "./userActionTypes";
+import { userActionTypes, Logout, LoginAction } from "./userActionTypes";
 import { UsuarioApi } from '../../api/rest/UsuarioApi'
 import { setDataLocalStorage } from '../../helpers/LocalStorage';
-
+import history from '../../helpers/history'
 
 //types
-import { IUser } from "../../models"; 
+import { IUser } from "../../models";
 
-
-export const logout = ():Logout => {
+export const logout = (): Logout => {
+    localStorage.clear()
+    history.push('/')
     return {
-        type:userActionTypes.LOGOUT,
+        type: userActionTypes.LOGOUT,
     }
 }
 
-export const login = ( usuario :IUser ) :Login => {
+const loginAction = (usuario: IUser): LoginAction => {
+    
     return {
         type: userActionTypes.LOGIN,
         usuario
     }
 }
 
-export const loginUser = (usuario:IUser) => {
-    return (dispatch :Dispatch)=>{
+export const loginUser = (usuario: IUser) => {
+    return (dispatch: Dispatch) => {
+
         return new UsuarioApi()
+
             .login(usuario)
-            .then(resp=>{
-                console.log(resp.data)
-                setDataLocalStorage(resp.data,'access_token')
-                dispatch(login(resp.data))
+            .then(resp => {
+                setDataLocalStorage(resp.data, 'access_token')
+                dispatch(loginAction(resp.data))
+                history.push('/table')
             })
-            .catch(err=>console.log(err))
+            .catch(err => console.log(err))
     }
-} 
+}

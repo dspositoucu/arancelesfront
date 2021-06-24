@@ -10,6 +10,7 @@ const usuarioReducer: Reducer<IUserInitialState, UserActions> = (state = Initial
 
     switch (action.type) {
         case userActionTypes.LOGIN :{
+            console.log("REDUX ",action.usuario)
             return {
                 ...state,
                 usuario: action.usuario
