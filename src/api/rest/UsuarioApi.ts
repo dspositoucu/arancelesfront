@@ -1,11 +1,11 @@
-import axios, { AxiosResponse } from 'axios'
-
+import { AxiosResponse } from 'axios'
+import  AxiosIntance  from '../../axios/axiosInstace'
 import IPersona from "../models/IPersona";
 
 export class UsuarioApi {
-    private BaseUrl = 'http://localhost:3000/api/v1/login'
+    private BaseUrl = 'auth/login'
 
     login(user:any): Promise<AxiosResponse> {
-        return axios.post(this.BaseUrl, user)
+        return AxiosIntance.post(this.BaseUrl, user)
     }
 }

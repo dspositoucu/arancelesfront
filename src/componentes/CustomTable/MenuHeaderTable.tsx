@@ -74,6 +74,11 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
 
 
     const buttons = {
+        editar: <ButtonHeader
+            label="Editar"
+            iconType="editar"
+            key={0}
+        />,
         imprimir: <ButtonHeader
             label="Imprimir"
             iconType="imprimir"

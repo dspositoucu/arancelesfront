@@ -16,7 +16,7 @@ export const logout = (): Logout => {
 }
 
 const loginAction = (usuario: IUser): LoginAction => {
-    
+
     return {
         type: userActionTypes.LOGIN,
         usuario

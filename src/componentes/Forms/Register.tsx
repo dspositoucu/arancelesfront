@@ -13,7 +13,7 @@ import { useForm } from '../../hooks/useForm'
 import InputForm from './InputForm'
 
 //actions
-import { addPerson } from '../../Redux/actions/ActionCreator'
+import { addPersona } from '../../Redux/actions/ActionCreator'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -56,13 +56,15 @@ const Register = () => {
   const classes = useStyles();
 
   const {formData, handleChangeForm, handleSubmit} = useForm({
-    id: (Math.random() * (10000000 - 100) + 100).toFixed(0),
     nombre: '',
-    n_doc: '',
+    ndoc: '',
     telefono: '',
     email: '',
     domicilio: '',
-  },addPerson)
+    sexo:'',
+    fecnac:'',
+    cuit: ''
+  },addPersona)
 
 
   console.log(formData)
@@ -116,13 +118,13 @@ const Register = () => {
               label="Fecha de Nacimiento"
               onChange={handleChangeForm}
               required
-              name="fecha_nac"
+              name="fecnac"
               placeholder="Fecha de Nacimiento"
               type="date"
               InputLabelProps={{
                 shrink: true,
               }}
-              id="fecha_nac"
+              id="fecnac"
             />
           </Grid>
           <Grid className={classes.containernInput}>
@@ -131,9 +133,9 @@ const Register = () => {
               label="Nº de Documento"
               onChange={handleChangeForm}
               required
-              name="n_doc"
+              name="ndoc"
               placeholder="Nº de Documento"
-              id="n_doc"
+              id="ndoc"
             />
           </Grid>
 
@@ -175,11 +177,43 @@ const Register = () => {
           <Grid className={classes.containernInput}>
             <InputForm
               size="medium"
-              label="Situcion tributaria"
+              label="Tipo de Doc"
               onChange={handleChangeForm}
               required
-              name="situacion_tributaria"
-              placeholder="Situcion tributaria"
+              name="tipodoc"
+              placeholder="Tipo de doc"
+              id="tipodoc"
+            />
+          </Grid>
+          <Grid className={classes.containernInput}>
+            <InputForm
+              size="medium"
+              label="idperaul"
+              onChange={handleChangeForm}
+              required
+              name="idperaul"
+              placeholder="idperaul"
+              id="idperaul"
+            />
+          </Grid>
+          <Grid className={classes.containernInput}>
+            <InputForm
+              size="medium"
+              label="Codigo"
+              onChange={handleChangeForm}
+              required
+              name="codigo"
+              placeholder="codigo"
+              id="codigo"
+            />
+          </Grid>
+          <Grid className={classes.containernInput}>
+            <InputForm
+              size="medium"
+              label="Baja"
+              onChange={handleChangeForm}
+              name="baja"
+              placeholder="baja"
               id="sit_tributaria"
             />
           </Grid>

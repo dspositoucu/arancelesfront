@@ -6,11 +6,9 @@ import Table from '../componentes/CustomTable'
 
 //modelos
 import { AppState } from '../Redux/state/AppState';
-// datos de ejemplo
-import { personas } from '../dataTable.json'
 
 //acciones
-import { getPersonList } from '../Redux/actions/ActionCreator'
+import { getAllPersonas } from '../Redux/actions/ActionCreator'
 
 const ListaPersonas = () => {
 
@@ -20,7 +18,7 @@ const ListaPersonas = () => {
 
   const cargarDatos = () => {
     if (listPerson.length <= 0) {
-      dispatch(getPersonList(personas))
+      dispatch(getAllPersonas())
     }
   }
   useEffect(() => {
@@ -35,7 +33,7 @@ const ListaPersonas = () => {
   return <Table
     tableData={listPerson}
     columns={["id", "nombre", "ndoc", "telefono", "email", "domicilio"]}
-    actionsInHeader={["imprimir", "nuevo", "borrar"]}
+    actionsInHeader={["imprimir", "nuevo", "borrar", "editar"]}
   />
 }
 

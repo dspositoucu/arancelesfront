@@ -18,9 +18,8 @@ export enum ActionTypes {
   UPDATE_PERSON = 'UPDATE_PERSON',
 
   SET_FILTER_LIST = 'SET_FILTER_LIST' ,
-  SET_TABLE_FILTER_IN_USE = "SET_TABLE_FILTER_IN_USE"
+  SET_TABLE_FILTER_IN_USE = "SET_TABLE_FILTER_IN_USE",
 
-  
 }
 
 export interface RemoveFilterTagAction {

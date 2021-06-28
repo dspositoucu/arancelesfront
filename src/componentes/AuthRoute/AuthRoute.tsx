@@ -13,9 +13,13 @@ const AuthRoute: FC<Props> = ({ children, exact, path }) => {
   
   const checkExiperd = () =>{
     const {exp} = getDecodeTokenLocalStorage()
-
+    console.log(exp)
     return  exp > new Date().getTime()/1000  
   }
+
+  console.log('TOKEN', checkExiperd())
+
+  console.log(checkExiperd(), isLogin)
 
   return (
     <Route

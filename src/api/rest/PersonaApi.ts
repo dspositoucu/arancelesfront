@@ -1,17 +1,22 @@
-import axios, { AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
+import AxiosIntance from '../../axios/axiosInstace';
+import { IPersona } from '../../models';
 
-import IPersona from "../models/IPersona";
 
 export class PersonApi {
-    private BaseUrl = 'http://localhost:3000/api/v1/persona'
-    private token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoibHVjaGkiLCJpYXQiOjE2MjQ0Njc0NTAsImV4cCI6MTYyNDY4MzQ1MH0.mvD2Okab0bAm5Ub1RgN-vnhiXLElIUeOZI7HE5uEEPE'
-    private headerAuth = {
-        headers:{
-            'Authorization': `Bearer ${this.token}`
-        }
-    }
+    private BaseUrl = 'persona'
 
     getAllPersonas(): Promise<AxiosResponse> {
-        return axios.get(this.BaseUrl,this.headerAuth)
+        return AxiosIntance.get(this.BaseUrl)
     }
+
+    addPersona(persona: IPersona): Promise<AxiosResponse> {
+        return AxiosIntance.post(this.BaseUrl, persona)
+    }
+
+ /*    deletePerson(personaList: IPersona[]): Promise<AxiosResponse> {
+        return AxiosIntance.delete(this.BaseUrl, personaList)
+    } */
+
+
 }

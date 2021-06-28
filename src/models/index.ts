@@ -12,14 +12,14 @@ export interface IRouteItem {
 }
 
 export interface IPersona {
-    id:number|string;
+    id?:number|string;
     nombre: string;
     ndoc: string;
     telefono: string;
     email: string;
     domicilio: string;
     sexo?: string;
-    fecnac?: Date;
+    fecnac?: Date|string;
     cuit?: string;
     tipodoc?:number;
     codigo?:string;
@@ -29,7 +29,7 @@ export interface IPersona {
 }
 
 export interface IUser {
-    nombre:string,
+    username:string,
     access_token?:string
 }
 
