@@ -5,6 +5,7 @@ import {
 
 const InputForm = withStyles({
     root: {
+      width:'100%',
       margin: '0px 10px',
       borderRadius: 5,
       display: 'flex',

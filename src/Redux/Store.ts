@@ -8,10 +8,12 @@ import { AppState } from './state/AppState'
 // Reducers
 import personReducer from './reducers/personReducer'
 import usuarioReducer from './reducers/userReducer';
+import modalReducer from './reducers/modalReducer';
 
 const rootReducers = combineReducers<AppState>({
     PersonState:personReducer,
-    UsuarioState:usuarioReducer
+    UsuarioState:usuarioReducer,
+    ModalState:modalReducer
 })
 
 const store :Store<AppState, AnyAction> = createStore(

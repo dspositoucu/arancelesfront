@@ -16,9 +16,16 @@ export interface IUserInitialState {
     usuario:IUser|''
 }
 
-//interface del conbine reducer en Store.ts
+export interface IModalInitialState {
+    modalRegister?: boolean,
+    modalError?:boolean,
+    modalSuccess?:boolean,
+    modalLoading?:boolean
+}
 
+//interface del conbine reducer en Store.ts
 export interface AppState {
     PersonState:IPersonInitialState,
-    UsuarioState:IUserInitialState
+    UsuarioState:IUserInitialState,
+    ModalState: IModalInitialState
 }

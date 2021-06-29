@@ -1,6 +1,6 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -11,15 +11,25 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+//modals 
+import RegisterModal from '../Modals/registerModal'
+
+//interface
+import IFormRegister from './interface/IFormRegister'
+
 //actions
-import { getAllPersonas } from '../../Redux/actions/ActionCreator';
+import { openModalRegister } from '../../Redux/actions/ActionCreatorModals';
 
 //models
 import { typesModels } from '../../models'
+import { AppState } from '../../Redux/state/AppState';
 
 //custom hooks
 import { useFilter } from '../../hooks/useFilter';
 import { usePagination } from '../../hooks/usePagination';
+
+//forms
+import Register from '../Forms/Register'
 
 //component
 import { Row, RowHeader } from '../Row';
@@ -30,6 +40,7 @@ interface Props {
     tableData: typesModels[],
     columns: string[],
     actionsInRow?: string[],
+    formRegister?: IFormRegister,
     actionsInHeader: string[]
 }
 
@@ -55,15 +66,18 @@ const useStyles = makeStyles(() =>
         }
     }));
 
-const CustomTable: FC<Props> = ({ tableData, columns, actionsInHeader }) => {
+const CustomTable: FC<Props> = ({ tableData, columns, actionsInHeader, formRegister }) => {
     const dispatch = useDispatch()
     const classes = useStyles();
 
-    // custom hooks
+    //  estados de modales 
+   const { modalRegister } = useSelector((state:AppState)=>state.ModalState)
+   const { personDetails } = useSelector((state:AppState)=>state.PersonState)
+
 
     // useFilter recibe la tabla a filtrar y devuelve 
-    //una funcion handleFilter, la lista filtrada y
-    //una const tipo bool. "tableFilterinUse" que corresponde a si la tabla esta en uso. 
+    // una funcion handleFilter, la lista filtrada y
+    // una const tipo bool. "tableFilterinUse" que corresponde a si la tabla esta en uso. 
     const { filterList, handleFilter, tableFilterinUse } = useFilter(tableData)
 
     // usePagination devuelve: 
@@ -93,7 +107,18 @@ const CustomTable: FC<Props> = ({ tableData, columns, actionsInHeader }) => {
 
     return (
         <TableContainer className={classes.tableContainer} component={Paper}>
-            {/* <button onClick={()=>{getAllPersonas(); console.log('asdaasdas')}}>TEST RUTA PERSONAS</button> */}
+            {/* ================= MODALES =================*/}
+            {modalRegister &&
+                <RegisterModal
+                    closeModal={()=>dispatch(openModalRegister())}
+                    active={modalRegister}>
+                    <Register
+                        configForm={formRegister}
+                        dataFields={personDetails}
+                        
+                    />
+                </RegisterModal>
+            }
             <MenuHeaderTable
                 filter={handleFilter}
                 buttonsList={actionsInHeader}
@@ -110,12 +135,12 @@ const CustomTable: FC<Props> = ({ tableData, columns, actionsInHeader }) => {
                             columns={columns}
                             data={persona}
                         />
-                    )):null}
-                    {emptyRows > 0 ?(
+                    )) : null}
+                    {emptyRows > 0 ? (
                         <TableRow style={{ height: 35 * emptyRows }}>
                             <TableCell colSpan={15} />
                         </TableRow>
-                    ):null}
+                    ) : null}
                 </TableBody>
                 <TableFooter >
                     <TableRow className={classes.footer}>

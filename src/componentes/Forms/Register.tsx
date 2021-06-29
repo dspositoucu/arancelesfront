@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import {
   CssBaseline,
   Button,
@@ -10,10 +11,15 @@ import { makeStyles, Theme, createStyles} from '@material-ui/core/styles';
 //Custom hooks 
 import { useForm } from '../../hooks/useForm'
 
+//components
 import InputForm from './InputForm'
 
 //actions
 import { addPersona } from '../../Redux/actions/ActionCreator'
+
+//interface 
+import IFormRegister from '../CustomTable/interface/IFormRegister';
+import IPersona from '../../api/models/IPersona';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,6 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+      width:400
     },
     containernInput: {
       margin: "10px 10px",
@@ -28,8 +35,9 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'center',
     },
     form: {
+      width:'100%',
       marginTop: 10,
-      textAlign: 'center'
+      textAlign: 'center',
     },
     submit: {
       background: "#6E6893",
@@ -51,7 +59,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
   }));
 
-const Register = () => {
+interface Props {
+  configForm?:IFormRegister,
+  dataFields?:IPersona | {}
+
+}
+
+const Register:FC<Props> = ({ configForm, dataFields={} }) => {
 
   const classes = useStyles();
 
@@ -69,159 +83,42 @@ const Register = () => {
 
   console.log(formData)
   return (
-    <Container className={classes.container} component="main" maxWidth="sm">
+    <Container className={classes.container} component="main" maxWidth="lg">
       <CssBaseline />
       <div className={classes.paper}>
         <Typography className={classes.title} variant="h5">
-          Registrar Nueva Persona
+          {configForm && configForm.titleForm}
         </Typography>
         <form
           className={classes.form}
           onSubmit={handleSubmit}
         >
-          <Grid className={classes.containernInput}>
+          {
+         configForm && configForm.fields.map((fieldsData, index) => 
+          <Grid
+            key={index} 
+            className={classes.containernInput}>
+              
             <InputForm
               size="medium"
-              label="Nombre"
-              onChange={handleChangeForm}
-              name="nombre"
+              name={fieldsData.name}
+              label={fieldsData.label}
+              placeholder={fieldsData.label}
+              type={fieldsData.type || ''}
               required
-              id="firstName"
-              placeholder="Nombre completo"
-            />
-          </Grid>
-          <Grid className={classes.containernInput}>
-            <InputForm
-              size="medium"
-              label="Email"
+              value={ dataFields[fieldsData.name as keyof Object] === null ?  '': dataFields[fieldsData.name as keyof Object]}
               onChange={handleChangeForm}
-              required
-              id="email"
-              type="email"
-              placeholder="Email"
-              name="email"
-            />
-          </Grid>
-          <Grid className={classes.containernInput}>
-            <InputForm
-              size="medium"
-              label="Sexo"
-              onChange={handleChangeForm}
-              required
-              name="sexo"
-              placeholder="Sexo"
-              type="Sexo"
-              id="sexo"
-            />
-            <InputForm
-              size="medium"
-              label="Fecha de Nacimiento"
-              onChange={handleChangeForm}
-              required
-              name="fecnac"
-              placeholder="Fecha de Nacimiento"
-              type="date"
-              InputLabelProps={{
+              InputLabelProps={ fieldsData.name === 'fecnac' ?{
                 shrink: true,
-              }}
-              id="fecnac"
+              }: {}}
             />
-          </Grid>
-          <Grid className={classes.containernInput}>
-            <InputForm
-              size="medium"
-              label="Nº de Documento"
-              onChange={handleChangeForm}
-              required
-              name="ndoc"
-              placeholder="Nº de Documento"
-              id="ndoc"
-            />
-          </Grid>
-
-          <Grid className={classes.containernInput}>
-            <InputForm
-              size="medium"
-              label="Telefono"
-              onChange={handleChangeForm}
-              required
-              name="telefono"
-              placeholder="Telefono"
-              id="telefono"
-            />
-          </Grid>
-
-          <Grid className={classes.containernInput}>
-            <InputForm
-              size="medium"
-              label="Domicilio"
-              onChange={handleChangeForm}
-              required
-              name="domicilio"
-              placeholder="Domicilio"
-              id="domicilio"
-            />
-          </Grid>
-          <Grid className={classes.containernInput}>
-            <InputForm
-              size="medium"
-              label="Cuit"
-              onChange={handleChangeForm}
-              required
-              name="Cuit"
-              placeholder="Cuit"
-              id="cuit"
-            />
-          </Grid>
-
-          <Grid className={classes.containernInput}>
-            <InputForm
-              size="medium"
-              label="Tipo de Doc"
-              onChange={handleChangeForm}
-              required
-              name="tipodoc"
-              placeholder="Tipo de doc"
-              id="tipodoc"
-            />
-          </Grid>
-          <Grid className={classes.containernInput}>
-            <InputForm
-              size="medium"
-              label="idperaul"
-              onChange={handleChangeForm}
-              required
-              name="idperaul"
-              placeholder="idperaul"
-              id="idperaul"
-            />
-          </Grid>
-          <Grid className={classes.containernInput}>
-            <InputForm
-              size="medium"
-              label="Codigo"
-              onChange={handleChangeForm}
-              required
-              name="codigo"
-              placeholder="codigo"
-              id="codigo"
-            />
-          </Grid>
-          <Grid className={classes.containernInput}>
-            <InputForm
-              size="medium"
-              label="Baja"
-              onChange={handleChangeForm}
-              name="baja"
-              placeholder="baja"
-              id="sit_tributaria"
-            />
-          </Grid>
+            </Grid>)
+            }
           <Button
             type="submit"
             fullWidth
             className={classes.submit}>
-            Registrar
+            {configForm && configForm.buttonSubmitLabel}
           </Button>
         </form>
       </div>

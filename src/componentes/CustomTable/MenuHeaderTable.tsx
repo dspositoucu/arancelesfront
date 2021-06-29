@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Typography, Toolbar, Divider } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,7 +8,6 @@ import { AppState } from '../../Redux/state/AppState';
 
 //actions
 import {
-    deletePerson,
     setTableFilterinUse,
     removeFilterTag
 } from '../../Redux/actions/ActionCreator'
@@ -17,8 +16,9 @@ import {
 import ButtonHeader from '../Buttons';
 import SearchBarTable from './SearchBarTable';
 import FilterMenu from '../CustomTable/FilterMenu';
-import Register from '../Forms/Register'
-import RegisterModal from '../Modals/registerModal'
+
+// list button
+import Buttons from '../Buttons/ButtonList'
 
 interface Props {
     filter?: any,
@@ -52,12 +52,6 @@ const useStyles = makeStyles(() =>
 
 const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
 
-
-    const OpenModalRegister = () => {
-        setModalRegister(!modalRegister)
-    }
-
-    const [modalRegister, setModalRegister] = useState(false)
     const dispatch = useDispatch()
     const { filterTags } = useSelector((state: AppState) => state.PersonState)
 
@@ -72,45 +66,9 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
         return arrTags
     }
 
-
-    const buttons = {
-        editar: <ButtonHeader
-            label="Editar"
-            iconType="editar"
-            key={0}
-        />,
-        imprimir: <ButtonHeader
-            label="Imprimir"
-            iconType="imprimir"
-            key={1}
-        />,
-
-        nuevo: <ButtonHeader
-            label="Nuevo"
-            iconType="nuevo"
-            onClick={() => { OpenModalRegister() }}
-            key={2}
-        />,
-
-        borrar: <ButtonHeader
-            label="Borrar"
-            iconType="borrar"
-            onClick={() => { dispatch(deletePerson()) }}
-            key={3}
-        />
-    }
-
     const classes = useStyles()
     return (
         <>  {/* Modal register */}
-            {modalRegister &&
-                <RegisterModal
-                    closeModal={OpenModalRegister}
-                    active={modalRegister}>
-                    <Register />
-                </RegisterModal>
-            }
-
 
             <Toolbar className={classes.root}>
                 <Typography
@@ -123,7 +81,7 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
                 <FilterMenu />
 
                 {
-                    buttonsList.map(buttonType => buttons[buttonType as keyof Object])
+                    buttonsList.map(buttonType => <Buttons key={buttonType} type={buttonType} />)
                 }
 
                 <SearchBarTable functionFilter={filter} />

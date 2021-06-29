@@ -34,6 +34,63 @@ const ListaPersonas = () => {
     tableData={listPerson}
     columns={["id", "nombre", "ndoc", "telefono", "email", "domicilio"]}
     actionsInHeader={["imprimir", "nuevo", "borrar", "editar"]}
+    formRegister={{
+      titleForm: 'Registrar Nueva Persona',
+      buttonSubmitLabel: 'Registrar',
+      fields: [
+        {
+          name: "nombre",
+          label: "Nombre Completo"
+        },
+        {
+          name: "email",
+          label: "Email",
+          type: "email"
+        },
+        {
+          name: "sexo",
+          label: "Sexo",
+        },
+        {
+          name: "fecnac",
+          label: "Fecha de Nacimiento",
+          type: "date"
+        },
+        {
+          name: "ndoc",
+          label: "Nº de Documento",
+        },
+        {
+          name: "telefono",
+          label: "Telefono",
+        },
+        {
+          name: "domicilio",
+          label: "Domicilio",
+        },
+        {
+          name: "Cuit",
+          label: "cuit",
+        },
+        {
+          name: "tipodoc",
+          label: "Tipo de doc",
+        },
+        {
+          name: "idperaul",
+          label: "idperaul",
+        },
+        {
+          name: "codigo",
+          label: "Codigo",
+        },
+        {
+          name: "baja",
+          label: "Baja",
+        },
+      ]
+    }
+    }
   />
 }
 
