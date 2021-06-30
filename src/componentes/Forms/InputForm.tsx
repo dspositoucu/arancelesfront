@@ -10,6 +10,9 @@ const InputForm = withStyles({
       borderRadius: 5,
       display: 'flex',
       flex: 1,
+      '& input:disabled': {
+        color: '#8a8a8a',
+      },
       '& .MuiInputBase-input': {
         marginLeft: 20,
         color: '#6E6893', // Text color

@@ -1,4 +1,4 @@
-import ButtonHeader from './ButtonHeader'
+import ButtonHeader from './ButtonIcon'
 import { useDispatch } from 'react-redux'
 
 //actions modals

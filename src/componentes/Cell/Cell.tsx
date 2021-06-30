@@ -36,11 +36,12 @@ const StyledTableCell = withStyles(() => ({
         backgroundColor: "#F2F0F9",
         color: "#6E6893",
         padding: 5,
+        paddingLeft:'15px',
     },
     body: {
         fontSize: 13,
         color: '#6E6893',
-        padding: 5,
+        padding: '5px 15px',
         alignItems: 'center'
     },
 }))(TableCell);

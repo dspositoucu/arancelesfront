@@ -6,7 +6,8 @@ import {
   Typography,
   Grid,
 } from '@material-ui/core';
-import { makeStyles, Theme, createStyles} from '@material-ui/core/styles';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+
 
 //Custom hooks 
 import { useForm } from '../../hooks/useForm'
@@ -18,6 +19,7 @@ import InputForm from './InputForm'
 import { addPersona } from '../../Redux/actions/ActionCreator'
 
 //interface 
+import { AppState } from '../../Redux/state/AppState';
 import IFormRegister from '../CustomTable/interface/IFormRegister';
 import IPersona from '../../api/models/IPersona';
 
@@ -27,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      width:400
+      width: 400
     },
     containernInput: {
       margin: "10px 10px",
@@ -35,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'center',
     },
     form: {
-      width:'100%',
+      width: '100%',
       marginTop: 10,
       textAlign: 'center',
     },
@@ -60,28 +62,31 @@ const useStyles = makeStyles((theme: Theme) =>
   }));
 
 interface Props {
-  configForm?:IFormRegister,
-  dataFields?:IPersona | {}
+  configForm?: IFormRegister,
+  dataFields?: IPersona | {}
 
 }
 
-const Register:FC<Props> = ({ configForm, dataFields={} }) => {
-
+const Register: FC<Props> = ({ configForm, dataFields = {} }) => {
   const classes = useStyles();
 
-  const {formData, handleChangeForm, handleSubmit} = useForm({
-    nombre: '',
-    ndoc: '',
-    telefono: '',
-    email: '',
-    domicilio: '',
-    sexo:'',
-    fecnac:'',
-    cuit: ''
-  },addPersona)
+  const { formData, handleChangeForm, handleSubmit } = useForm({
+    nombre:     dataFields["nombre" as keyof Object]    || '',
+    ndoc:       dataFields["ndoc" as keyof Object]      || '',
+    telefono:   dataFields["telefono" as keyof Object]  || '',
+    email:      dataFields["email" as keyof Object]     || '',
+    domicilio:  dataFields["domicilio" as keyof Object] || '',
+    sexo:       dataFields["sexo" as keyof Object]      || '',
+    fecnac:     dataFields["fecnac" as keyof Object]    || '',
+    cuit:       dataFields["cuit" as keyof Object]      || '',
+    tipodoc:    dataFields["tipodoc" as keyof Object]   || '',
+    idperaul:   dataFields["idperaul" as keyof Object]  || '',
+    codigo:     dataFields["codigo" as keyof Object]    || '',
+    baja:       dataFields["baja" as keyof Object]      || '',
+  }, addPersona)
 
+  let transformDate = dataFields["fecnac" as keyof Object] ? dataFields["fecnac" as keyof Object].toString() : ''
 
-  console.log(formData)
   return (
     <Container className={classes.container} component="main" maxWidth="lg">
       <CssBaseline />
@@ -94,26 +99,29 @@ const Register:FC<Props> = ({ configForm, dataFields={} }) => {
           onSubmit={handleSubmit}
         >
           {
-         configForm && configForm.fields.map((fieldsData, index) => 
-          <Grid
-            key={index} 
-            className={classes.containernInput}>
-              
-            <InputForm
-              size="medium"
-              name={fieldsData.name}
-              label={fieldsData.label}
-              placeholder={fieldsData.label}
-              type={fieldsData.type || ''}
-              required
-              value={ dataFields[fieldsData.name as keyof Object] === null ?  '': dataFields[fieldsData.name as keyof Object]}
-              onChange={handleChangeForm}
-              InputLabelProps={ fieldsData.name === 'fecnac' ?{
-                shrink: true,
-              }: {}}
-            />
-            </Grid>)
-            }
+            configForm && configForm.fields.map((fields, index) =>
+              <Grid
+                key={index}
+                className={classes.containernInput}>
+
+                <InputForm
+                  size="medium"
+                  name={fields.name}
+                  label={fields.label}
+                  placeholder={fields.label}
+                  type={fields.type || ''}
+                  disabled={!fields.isEdit}
+                  required
+                  onChange={handleChangeForm}
+                  InputLabelProps={fields.name === 'fecnac' ? { shrink: true } : {}}
+                  defaultValue={fields.name === 'fecnac' 
+                    ? transformDate && new Date(transformDate).toISOString().slice(0, 10) 
+                    : dataFields[fields.name as keyof Object] === null
+                    ? ''
+                    : dataFields[fields.name as keyof Object]}
+                />
+              </Grid>)
+          }
           <Button
             type="submit"
             fullWidth

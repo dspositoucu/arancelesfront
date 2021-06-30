@@ -9,6 +9,7 @@ import Icons from '../Icons';
 interface Props {
     iconType?:string,
     label?:string,
+    hover?:boolean,
     onClick?: (e?:any) => void,
     typeButton?: ("filter" | "default")
 }
@@ -19,10 +20,12 @@ const useStyles = makeStyles( () =>
             background: "none",
             boxShadow:"none",
             color:"#6E6893",
+            textTransform: 'capitalize',
+        },
+        hover:{
             '&:hover':{
                 background:'#d9d5e8'
             },
-            textTransform: 'capitalize',
         },
         filter:{
             margin: 3,
@@ -30,21 +33,18 @@ const useStyles = makeStyles( () =>
             background:'#F2F0F9',
             boxShadow:"none",
             color:"#6E6893",
-            '&:hover':{
-                background:'#d9d5e8'
-            },
             textTransform: 'capitalize',
         }
     }))
 
-const ButtonHeader:FC<Props> = ({onClick, iconType="imprimir", label, typeButton="default"}) => {
+const ButtonIcon:FC<Props> = ({onClick, iconType="imprimir", label, typeButton="default", hover=true }) => {
 
     const classes = useStyles()
 
   return (
     <Button 
         onClick={onClick}
-        className={classes[typeButton]}
+        className={`${ hover && classes.hover} ${classes[typeButton]}`}
         endIcon={<Icons type={iconType}/>}
     >
         {label && `${label[0].toUpperCase()+label.slice(1)}`}
@@ -52,4 +52,4 @@ const ButtonHeader:FC<Props> = ({onClick, iconType="imprimir", label, typeButton
    )
  }
 
-export default ButtonHeader
+export default ButtonIcon

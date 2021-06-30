@@ -33,59 +33,73 @@ const ListaPersonas = () => {
   return <Table
     tableData={listPerson}
     columns={["id", "nombre", "ndoc", "telefono", "email", "domicilio"]}
-    actionsInHeader={["imprimir", "nuevo", "borrar", "editar"]}
+    actionsInHeader={["imprimir", "nuevo", "borrar"]}
+    actionInRow={['editar']}
+    rowChek={false}
     formRegister={{
       titleForm: 'Registrar Nueva Persona',
       buttonSubmitLabel: 'Registrar',
       fields: [
         {
           name: "nombre",
+          isEdit:false,
           label: "Nombre Completo"
         },
         {
           name: "email",
+          isEdit:true,
           label: "Email",
           type: "email"
         },
         {
           name: "sexo",
+          isEdit:false,
           label: "Sexo",
         },
         {
           name: "fecnac",
+          isEdit:false,
           label: "Fecha de Nacimiento",
           type: "date"
         },
         {
           name: "ndoc",
+          isEdit:false,
           label: "Nº de Documento",
         },
         {
           name: "telefono",
+          isEdit:true,
           label: "Telefono",
         },
         {
           name: "domicilio",
+          isEdit:true,
           label: "Domicilio",
         },
         {
-          name: "Cuit",
-          label: "cuit",
+          name: "cuit",
+          isEdit:false,
+          label: "Cuit",
         },
         {
           name: "tipodoc",
+          isEdit:false,
           label: "Tipo de doc",
         },
         {
           name: "idperaul",
+          isEdit:false,
           label: "idperaul",
         },
         {
           name: "codigo",
+          isEdit:false,
           label: "Codigo",
         },
         {
           name: "baja",
+          isEdit:true,
           label: "Baja",
         },
       ]

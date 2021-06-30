@@ -1,1 +1,2 @@
-export { default } from './ButtonHeader'
+export { default }
+from './ButtonIcon'

@@ -3,6 +3,9 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Typography, Toolbar, Divider } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 
+//example pdf
+import BuilPDF from '../../helpers/buildTablePdf'
+
 //types
 import { AppState } from '../../Redux/state/AppState';
 
@@ -18,7 +21,7 @@ import SearchBarTable from './SearchBarTable';
 import FilterMenu from '../CustomTable/FilterMenu';
 
 // list button
-import Buttons from '../Buttons/ButtonList'
+import Buttons from '../Buttons/ButtonListHeaderTable'
 
 interface Props {
     filter?: any,
@@ -49,7 +52,6 @@ const useStyles = makeStyles(() =>
         }
     }))
 
-
 const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
 
     const dispatch = useDispatch()
@@ -68,9 +70,9 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
 
     const classes = useStyles()
     return (
-        <>  {/* Modal register */}
-
+        <> 
             <Toolbar className={classes.root}>
+                { <BuilPDF/> }
                 <Typography
                     className={classes.titleTable}
                     variant="subtitle1"

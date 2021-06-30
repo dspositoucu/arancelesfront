@@ -4,18 +4,22 @@ import TableRow from '@material-ui/core/TableRow';
 import { Cell, CellCheckBox, CellAction } from '../Cell'
 import { useDispatch, useSelector } from 'react-redux';
 
+//components
+import ButtonIcon from '../Buttons/ButtonIcon';
+
+
 //types
 import { typesModels } from '../../models';
 import { AppState } from '../../Redux/state/AppState';
 
 //actions
 import { selectPerson } from '../../Redux/actions/ActionCreator';
+import { openModalRegister } from '../../Redux/actions/ActionCreatorModals';
 
-//icons 
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 interface Props {
   data?: any,
   columns: string[]
+  rowChek?:boolean
 }
 
 //creando un nuevo componente StyledTableRow con nuevos estilos de color intercalado 
@@ -27,7 +31,7 @@ const StyledTableRow = withStyles(() => ({
   }
 }))(TableRow);
 
-export const Row: FC<Props> = ({ data, columns }) => {
+export const Row: FC<Props> = ({ data, columns, rowChek }) => {
   const dispatch = useDispatch();
   const { selectListPerson } = useSelector((state: AppState) => state.PersonState)
 
@@ -51,9 +55,9 @@ export const Row: FC<Props> = ({ data, columns }) => {
   return (
     <StyledTableRow
       onClick={() => handleSelectRow(data)}
-      style={checkListSelect(data.id) ? { background: '#C3B3E7' } : {}}
+      style={rowChek && checkListSelect(data.id) ? { background: '#C3B3E7' } : {}}
     >
-      <CellCheckBox check={checkListSelect(data.id)} />
+      { rowChek && <CellCheckBox check={checkListSelect(data.id)} />}
       {
         compareColumn().map((key, index) => {
           return (
@@ -64,19 +68,22 @@ export const Row: FC<Props> = ({ data, columns }) => {
         })
       }
       <CellAction>
-        <AddCircleOutlineIcon />
+        <ButtonIcon 
+          iconType="editar" 
+          hover={false}
+          onClick={()=>dispatch(openModalRegister())}
+          />
       </CellAction>
     </StyledTableRow>
   )
 }
-
 
 //===============================================
               //Row Header Table
 //===============================================
 
 
-export const RowHeader: FC<Props> = ({ columns }) => {
+export const RowHeader: FC<Props> = ({ columns, rowChek }) => {
 
   const { selectListPerson } = useSelector((state: AppState) => state.PersonState)
 
@@ -87,7 +94,7 @@ export const RowHeader: FC<Props> = ({ columns }) => {
       </Cell>
     )
   })
-  rowHeader.unshift(<CellCheckBox key={'check'} check={!!selectListPerson.length} checkAll variant="head" />);
+  rowChek && rowHeader.unshift(<CellCheckBox key={'check'} check={!!selectListPerson.length} checkAll variant="head" />);
   rowHeader.push(<Cell key={'head'} variant="head">ACCIONES</Cell>);
 
   return (

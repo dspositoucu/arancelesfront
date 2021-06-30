@@ -15,6 +15,7 @@ export const useForm = <T>(form :T, action:Function) =>{
 
       const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
         event.preventDefault()
+        console.log('Esta es la fecha' ,formData)
         dispatch(action(formData))
       }
 

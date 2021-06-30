@@ -42,6 +42,8 @@ interface Props {
     actionsInRow?: string[],
     formRegister?: IFormRegister,
     actionsInHeader: string[]
+    actionInRow:string[]
+    rowChek:boolean
 }
 
 // estilos css-in-js
@@ -66,7 +68,7 @@ const useStyles = makeStyles(() =>
         }
     }));
 
-const CustomTable: FC<Props> = ({ tableData, columns, actionsInHeader, formRegister }) => {
+const CustomTable: FC<Props> = ({ tableData, columns, actionsInHeader, formRegister, rowChek }) => {
     const dispatch = useDispatch()
     const classes = useStyles();
 
@@ -114,8 +116,7 @@ const CustomTable: FC<Props> = ({ tableData, columns, actionsInHeader, formRegis
                     active={modalRegister}>
                     <Register
                         configForm={formRegister}
-                        dataFields={personDetails}
-                        
+                        dataFields={personDetails} 
                     />
                 </RegisterModal>
             }
@@ -125,12 +126,15 @@ const CustomTable: FC<Props> = ({ tableData, columns, actionsInHeader, formRegis
             />
             <Table className={classes.table} aria-label="tabla">
                 <TableBody>
-                    <RowHeader columns={columns} />
+                    <RowHeader 
+                        rowChek={rowChek}
+                        columns={columns} />
                     {tableData.length ? (rowsPerPage > 0
                         ? ActualPage(tableData, filterList)
                         : tableData
                     ).map((persona, i) => (
                         <Row
+                            rowChek={rowChek}
                             key={i}
                             columns={columns}
                             data={persona}

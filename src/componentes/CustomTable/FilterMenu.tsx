@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import Menu from '@material-ui/core/Menu';
-import ButtonHeader from '../Buttons/ButtonHeader'
+import ButtonHeader from '../Buttons/ButtonIcon'
 import { useDispatch,useSelector } from 'react-redux'
 
 //config

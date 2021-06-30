@@ -21,7 +21,7 @@ export interface IPersona {
     sexo?: string;
     fecnac?: Date|string;
     cuit?: string;
-    tipodoc?:number;
+    tipodoc?:string;
     codigo?:string;
     idperaul?:string
     beneficio?: number;

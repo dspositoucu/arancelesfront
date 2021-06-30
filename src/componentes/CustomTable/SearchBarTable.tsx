@@ -76,7 +76,7 @@ const SearchBarTable: FC<Props> = ({ functionFilter }) => {
                 value={ filter }
             >
                 <MenuItem value={"nombre"}>Nombre</MenuItem>
-                <MenuItem value={"n_doc"}>N° Doc</MenuItem>
+                <MenuItem value={"ndoc"}>N° Doc</MenuItem>
             </Select>
             <IconButton className={classes.iconButton} aria-label="search">
                 <SearchIcon />

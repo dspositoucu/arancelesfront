@@ -17,22 +17,23 @@ const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = Init
 
     switch (action.type) {
 
-        case ActionTypes.REMOVE_FILTER_TAG :{
+        case ActionTypes.REMOVE_FILTER_TAG: {
             return {
                 ...state,
-                filterTags : {
+                filterTags: {
                     ...state.filterTags,
-                    [action.tag] : false
+                    [action.tag]: false
                 }
             }
         }
 
-        case ActionTypes.ADD_FILTER_TAG:{
+        case ActionTypes.ADD_FILTER_TAG: {
             return {
                 ...state,
-                filterTags:{ ...state.filterTags,
-                    [action.filter] : !state.filterTags[action.filter as keyof Object]
-                } 
+                filterTags: {
+                    ...state.filterTags,
+                    [action.filter]: !state.filterTags[action.filter as keyof Object]
+                }
             }
         }
 
