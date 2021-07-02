@@ -39,6 +39,8 @@ const StyledTableCell = withStyles(() => ({
         paddingLeft:'15px',
     },
     body: {
+        minWidth:50,
+        maxWidth:200,
         fontSize: 13,
         color: '#6E6893',
         padding: '5px 15px',
@@ -48,7 +50,7 @@ const StyledTableCell = withStyles(() => ({
 
 export const Cell: FC<Props> = ({ children, variant = "body" }) => {
     return (
-        <StyledTableCell variant={variant}>
+        <StyledTableCell  variant={variant}>
             {children}
         </StyledTableCell>
     )

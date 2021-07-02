@@ -73,7 +73,7 @@ const CustomTable: FC<Props> = ({ tableData, columns, actionsInHeader, formRegis
     const classes = useStyles();
 
     //  estados de modales 
-   const { modalRegister } = useSelector((state:AppState)=>state.ModalState)
+   const { modalRegister, modalEdit } = useSelector((state:AppState)=>state.ModalState)
    const { personDetails } = useSelector((state:AppState)=>state.PersonState)
 
 
@@ -113,10 +113,12 @@ const CustomTable: FC<Props> = ({ tableData, columns, actionsInHeader, formRegis
             {modalRegister &&
                 <RegisterModal
                     closeModal={()=>dispatch(openModalRegister())}
-                    active={modalRegister}>
+                    active={modalRegister}
+                    >
                     <Register
+                        edit={modalEdit}
                         configForm={formRegister}
-                        dataFields={personDetails} 
+                        dataFields={ modalEdit && personDetails} 
                     />
                 </RegisterModal>
             }

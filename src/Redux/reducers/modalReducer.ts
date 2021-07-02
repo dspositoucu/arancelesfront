@@ -3,7 +3,8 @@ import { IModalInitialState } from "../state/AppState";
 import { ActionTypes, ModalAction } from "../actions/ActionTypeModal";
 
 const InitialState :IModalInitialState = {
-    modalRegister:false
+    modalRegister:false,
+    modalEdit:false
 }
 
 const modalReducer :Reducer<IModalInitialState, ModalAction> = ( state = InitialState, action:ModalAction)=>{
@@ -13,6 +14,15 @@ const modalReducer :Reducer<IModalInitialState, ModalAction> = ( state = Initial
         case ActionTypes.MODAL_FORM_REGISTER :{
             return {
                 ...state,
+                modalRegister: !state.modalRegister,
+                modalEdit:false
+            }
+        }
+
+        case ActionTypes.MODAL_FORM_EDIT :{
+            return {
+                ...state,
+                modalEdit: !state.modalEdit,
                 modalRegister: !state.modalRegister
             }
         }

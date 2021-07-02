@@ -64,7 +64,8 @@ const useStyles = makeStyles((theme: Theme) =>
 interface Props {
   configForm?: IFormRegister,
   dataFields?: IPersona | {}
-
+  edit?:boolean
+  
 }
 
 const Register: FC<Props> = ({ configForm, dataFields = {} }) => {

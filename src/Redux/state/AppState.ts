@@ -18,6 +18,7 @@ export interface IUserInitialState {
 
 export interface IModalInitialState {
     modalRegister?: boolean,
+    modalEdit?: boolean,
     modalError?:boolean,
     modalSuccess?:boolean,
     modalLoading?:boolean

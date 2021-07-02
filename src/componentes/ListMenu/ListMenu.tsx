@@ -18,6 +18,8 @@ import { menuData } from '../../dataMenuList.json';
 //Components
 import ListSubMenuItem from './ListSubMenuItem';
 
+import history from '../../helpers/history'
+
 interface Props { }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -54,6 +56,9 @@ const ListMenu: FC<Props> = (props) => {
     return (
         <div className={classes.menuContainer}>
             <List className={classes.menu}>
+            <ListItem onClick={() => history.push('/informes')} button >
+                            <ListItemText classes={{ primary: classes.menuOpt }} primary={'Informes'} />
+            </ListItem>
                 {menuData.map((menuOp, i) => (
                     <div key={i}>
                         <ListItem onClick={() => handleClick(menuOp.MenuOption)} button >

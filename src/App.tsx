@@ -8,21 +8,25 @@ import AuthRoute from "./componentes/AuthRoute";
 //Page
 import LoginPage from './pages/LoginPage'
 import ListaPersonas from './pages/ListaPersonas';
-
+import Informes from './pages/Informes';
 
 function App() {
-  
+
   return (
     <>
       <Router history={history}>
         <Switch>
-          <Route exact path="/" component={LoginPage}/> 
+          <Route exact path="/" component={LoginPage} />
 
-          <AuthRoute exact path="/table">
-            <Layout>
+          <Layout>
+            <AuthRoute exact path="/table">
               <ListaPersonas />
-            </Layout>
-          </AuthRoute>
+            </AuthRoute>
+            <AuthRoute exact path="/informes">
+              <ListaPersonas />
+            </AuthRoute>
+          </Layout>
+
 
         </Switch>
       </Router>

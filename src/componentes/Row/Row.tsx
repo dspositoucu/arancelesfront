@@ -7,14 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 //components
 import ButtonIcon from '../Buttons/ButtonIcon';
 
-
 //types
 import { typesModels } from '../../models';
 import { AppState } from '../../Redux/state/AppState';
 
 //actions
 import { selectPerson } from '../../Redux/actions/ActionCreator';
-import { openModalRegister } from '../../Redux/actions/ActionCreatorModals';
+import { openModalEdit } from '../../Redux/actions/ActionCreatorModals';
 
 interface Props {
   data?: any,
@@ -51,7 +50,7 @@ export const Row: FC<Props> = ({ data, columns, rowChek }) => {
   const checkListSelect = (id: string) => {
     return !!selectListPerson.find((data) => data.id === id)
   }
-
+  console.log('Datos de fila',compareColumn())
   return (
     <StyledTableRow
       onClick={() => handleSelectRow(data)}
@@ -59,7 +58,7 @@ export const Row: FC<Props> = ({ data, columns, rowChek }) => {
     >
       { rowChek && <CellCheckBox check={checkListSelect(data.id)} />}
       {
-        compareColumn().map((key, index) => {
+        columns.map((key, index) => {
           return (
             <Cell key={index}>
               {data[key]}
@@ -71,7 +70,7 @@ export const Row: FC<Props> = ({ data, columns, rowChek }) => {
         <ButtonIcon 
           iconType="editar" 
           hover={false}
-          onClick={()=>dispatch(openModalRegister())}
+          onClick={()=>dispatch(openModalEdit())}
           />
       </CellAction>
     </StyledTableRow>
