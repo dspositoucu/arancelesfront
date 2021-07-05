@@ -8,7 +8,7 @@ import Table from '../componentes/CustomTable'
 import { AppState } from '../Redux/state/AppState';
 
 //acciones
-import { getAllPersonas } from '../Redux/actions/ActionCreator'
+import { getAllPersonas } from '../Redux/actions/personas/ActionCreator'
 
 const ListaPersonas = () => {
 
@@ -32,6 +32,17 @@ const ListaPersonas = () => {
 
   return <Table
     tableData={listPerson}
+    filterSearchBar={[
+      {
+        key: "nombre",
+        label: "Nombre"
+      },
+      {
+        key: "ndoc",
+        label: "N° Doc"
+      }
+    ]}
+    filterMenu={false}
     columns={["id", "nombre", "ndoc", "telefono", "email", "domicilio"]}
     actionsInHeader={["imprimir", "nuevo", "borrar"]}
     actionInRow={['editar']}
@@ -42,64 +53,64 @@ const ListaPersonas = () => {
       fields: [
         {
           name: "nombre",
-          isEdit:false,
+          isEdit: false,
           label: "Nombre Completo"
         },
         {
           name: "email",
-          isEdit:true,
+          isEdit: true,
           label: "Email",
           type: "email"
         },
         {
           name: "sexo",
-          isEdit:false,
+          isEdit: false,
           label: "Sexo",
         },
         {
           name: "fecnac",
-          isEdit:false,
+          isEdit: false,
           label: "Fecha de Nacimiento",
           type: "date"
         },
         {
           name: "ndoc",
-          isEdit:false,
+          isEdit: false,
           label: "Nº de Documento",
         },
         {
           name: "telefono",
-          isEdit:true,
+          isEdit: true,
           label: "Telefono",
         },
         {
           name: "domicilio",
-          isEdit:true,
+          isEdit: true,
           label: "Domicilio",
         },
         {
           name: "cuit",
-          isEdit:false,
+          isEdit: false,
           label: "Cuit",
         },
         {
           name: "tipodoc",
-          isEdit:false,
+          isEdit: false,
           label: "Tipo de doc",
         },
         {
           name: "idperaul",
-          isEdit:false,
+          isEdit: false,
           label: "idperaul",
         },
         {
           name: "codigo",
-          isEdit:false,
+          isEdit: false,
           label: "Codigo",
         },
         {
           name: "baja",
-          isEdit:true,
+          isEdit: true,
           label: "Baja",
         },
       ]

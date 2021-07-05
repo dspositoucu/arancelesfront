@@ -1,6 +1,6 @@
 import { Reducer } from "redux";
 import { IModalInitialState } from "../state/AppState";
-import { ActionTypes, ModalAction } from "../actions/ActionTypeModal";
+import { ActionTypes, ModalAction } from "../actions/modales/ActionTypeModal";
 
 const InitialState :IModalInitialState = {
     modalRegister:false,

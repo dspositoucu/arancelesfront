@@ -2,10 +2,10 @@ import ButtonHeader from './ButtonIcon'
 import { useDispatch } from 'react-redux'
 
 //actions modals
-import { openModalRegister } from '../../Redux/actions/ActionCreatorModals'
+import { openModalRegister } from '../../Redux/actions/modales/ActionCreatorModals'
 
 //actions persona
-import { deletePerson } from '../../Redux/actions/ActionCreator'
+import { deletePerson } from '../../Redux/actions/personas/ActionCreator'
 import { FC } from 'react'
 
 interface Props {

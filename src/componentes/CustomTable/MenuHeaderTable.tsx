@@ -10,10 +10,11 @@ import BuilPDF from '../../helpers/buildTablePdf'
 import { AppState } from '../../Redux/state/AppState';
 
 //actions
-import {
-    setTableFilterinUse,
-    removeFilterTag
-} from '../../Redux/actions/ActionCreator'
+import { removeFilterTag } from '../../Redux/actions/informes/ActionCreatorInformes'
+import { setTableFilterinUse } from '../../Redux/actions/personas/ActionCreator';
+
+//interface
+import IFilterSearchBar from '../CustomTable/interface/IFilterSearchBar'
 
 //component 
 import ButtonHeader from '../Buttons';
@@ -25,7 +26,9 @@ import Buttons from '../Buttons/ButtonListHeaderTable'
 
 interface Props {
     filter?: any,
-    buttonsList: string[]
+    buttonsList: string[],
+    filterSearchBar?: IFilterSearchBar[]
+    filterMenu: boolean
 }
 
 const useStyles = makeStyles(() =>
@@ -52,10 +55,10 @@ const useStyles = makeStyles(() =>
         }
     }))
 
-const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
+const MenuHeaderTable: FC<Props> = ({ filter, buttonsList, filterSearchBar, filterMenu }) => {
 
     const dispatch = useDispatch()
-    const { filterTags } = useSelector((state: AppState) => state.PersonState)
+    const { filterTags } = useSelector((state: AppState) => state.InformesState)
 
     const showTags = () => {
         let arrTags = []
@@ -70,9 +73,9 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
 
     const classes = useStyles()
     return (
-        <> 
+        <>
             <Toolbar className={classes.root}>
-                { <BuilPDF/> }
+                {<BuilPDF />}
                 <Typography
                     className={classes.titleTable}
                     variant="subtitle1"
@@ -80,13 +83,17 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList }) => {
                 >
                     Listado de Personas
                 </Typography>
-                <FilterMenu />
+                {filterMenu && <FilterMenu />}
 
                 {
                     buttonsList.map(buttonType => <Buttons key={buttonType} type={buttonType} />)
                 }
 
-                <SearchBarTable functionFilter={filter} />
+                <SearchBarTable
+                    functionFilter={filter}
+                    filterSearchBar={filterSearchBar}
+                />
+
             </Toolbar>
 
             {showTags().filter(tag => tag.value).length

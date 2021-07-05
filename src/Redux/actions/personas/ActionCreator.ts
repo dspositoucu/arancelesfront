@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { PersonApi } from '../../api/rest/PersonaApi';
+import { PersonApi } from '../../../api/rest/PersonaApi';
 import {
     AddPersonAction,
     GetPersonListAction,
@@ -10,27 +10,11 @@ import {
     UpdatePersonAction,
     SetFilterListAction,
     SetTableFilterinUse,
-    AddFilterAction,
-    RemoveFilterTagAction,
     ActionTypes
 } from './ActionTypes';
 
-import { IPersona, typesModels } from '../../models';
+import { IPersona, typesModels } from '../../../models';
 
-
-export const removeFilterTag = (tag: string): RemoveFilterTagAction => {
-    return {
-        type: ActionTypes.REMOVE_FILTER_TAG,
-        tag
-    }
-}
-
-export const addFilter = (filter: string): AddFilterAction => {
-    return {
-        type: ActionTypes.ADD_FILTER_TAG,
-        filter
-    }
-}
 
 export const setFilterList = (filterList: typesModels[]): SetFilterListAction => {
     return {
@@ -103,8 +87,6 @@ export const getAllPersonas = () => {
             .getAllPersonas()
             .then(resp => {
                 dispatch(getPersonList(resp.data))
-                console.log(resp.data)
-
             })
             .catch(err => console.log(err))
     }

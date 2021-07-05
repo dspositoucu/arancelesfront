@@ -1,14 +1,13 @@
 import { Reducer } from 'redux';
-import { PersonActions, ActionTypes } from '../actions/ActionTypes'
+import { PersonActions, ActionTypes } from '../actions/personas/ActionTypes'
 import { IPersonInitialState } from '../state/AppState';
-import { typesModels } from '../../models';
+import { typesModels, IPersona } from '../../models';
 
 const InitialState: IPersonInitialState = {
     listPerson: [],
     selectListPerson: [],
     filterList: [],
     personDetails: {},
-    filterTags: {},
     allSelect: false,
     tableFilterinUse: false,
 }
@@ -17,25 +16,6 @@ const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = Init
 
     switch (action.type) {
 
-        case ActionTypes.REMOVE_FILTER_TAG: {
-            return {
-                ...state,
-                filterTags: {
-                    ...state.filterTags,
-                    [action.tag]: false
-                }
-            }
-        }
-
-        case ActionTypes.ADD_FILTER_TAG: {
-            return {
-                ...state,
-                filterTags: {
-                    ...state.filterTags,
-                    [action.filter]: !state.filterTags[action.filter as keyof Object]
-                }
-            }
-        }
 
         case ActionTypes.ADD_PERSON: {
             let newArray = [action.person, ...state.listPerson]
@@ -103,7 +83,7 @@ const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = Init
             // listA que sean iguales a los de ListB
             // NO SE MODIFICA LA LISTA ORIGINA 
 
-            const compareAndDelete = (listA: typesModels[], listB: typesModels[], id = "id") => {
+            const compareAndDelete = (listA: IPersona[] |typesModels[], listB: IPersona[] | typesModels[], id = "id") => {
                 let copyListA = [...listA]
                 if (!listB.length) return copyListA
 

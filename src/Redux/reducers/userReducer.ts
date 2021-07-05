@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { UserActions, userActionTypes } from '../actions/userActionTypes'
+import { UserActions, userActionTypes } from '../actions/users/userActionTypes'
 import { IUserInitialState } from '../state/AppState';
 
 const InitialState: IUserInitialState = {
@@ -10,7 +10,7 @@ const usuarioReducer: Reducer<IUserInitialState, UserActions> = (state = Initial
 
     switch (action.type) {
         case userActionTypes.LOGIN :{
-            console.log("REDUX ",action.usuario)
+           // console.log("REDUX ",action.usuario)
             return {
                 ...state,
                 usuario: action.usuario

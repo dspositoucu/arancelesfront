@@ -9,7 +9,7 @@ import { makeStyles, Theme, createStyles} from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 //action
-import { loginUser } from '../../Redux/actions/userActionCreator';
+import { loginUser } from '../../Redux/actions/users/userActionCreator';
 
 //custom hooks
 import { useForm } from '../../hooks/useForm'

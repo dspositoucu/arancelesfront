@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { ChangeEvent, useState } from 'react';
-import { typesModels } from '../models'
+import { typesModels, IInformes, IPersona } from '../models'
 
 //actions
-import { setFilterList, setTableFilterinUse } from '../Redux/actions/ActionCreator'
+import { setFilterList, setTableFilterinUse } from '../Redux/actions/personas/ActionCreator'
 
 import { AppState } from '../Redux/state/AppState';
 // hook para filtrar los datos de una tabla de una columna en especifico 
 
-export const useFilter = <T extends typesModels[]>(tableData: T) => {
+export const useFilter = <T extends typesModels[] & IInformes[] & IPersona[] >(tableData: T) => {
     const dispatch = useDispatch()
     const { filterList, tableFilterinUse } = useSelector((state :AppState)=> state.PersonState )
 

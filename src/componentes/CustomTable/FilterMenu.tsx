@@ -13,13 +13,13 @@ import { AppState } from '../../Redux/state/AppState';
 import FilterMenuItems from './FilterMenuItems';
 
 //actions
-import { addFilter } from '../../Redux/actions/ActionCreator'
+import { addFilter } from '../../Redux/actions/informes/ActionCreatorInformes'
 
 interface Props { }
 
 const FilterMenu: FC<Props> = (props) => {
     const dispatch = useDispatch()
-    const { filterTags } =  useSelector((state:AppState) => state.PersonState)
+    const { filterTags } =  useSelector((state:AppState) => state.InformesState)
 
     const [checked, setChecked] = useState<any>({ checked: '' });
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

@@ -8,7 +8,7 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { useDispatch } from 'react-redux'
 
 //actions
-import { selectAllPerson } from '../../Redux/actions/ActionCreator'
+import { selectAllPerson } from '../../Redux/actions/personas/ActionCreator'
 
 interface Props {
     children?: ReactNode | any,

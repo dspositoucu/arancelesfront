@@ -16,12 +16,13 @@ import RegisterModal from '../Modals/registerModal'
 
 //interface
 import IFormRegister from './interface/IFormRegister'
+import IFilterSearchBar from './interface/IFilterSearchBar';
 
 //actions
-import { openModalRegister } from '../../Redux/actions/ActionCreatorModals';
+import { openModalRegister } from '../../Redux/actions/modales/ActionCreatorModals';
 
 //models
-import { typesModels } from '../../models'
+import { typesModels,IPersona, IInformes } from '../../models'
 import { AppState } from '../../Redux/state/AppState';
 
 //custom hooks
@@ -37,13 +38,15 @@ import MenuHeaderTable from './MenuHeaderTable';
 import TablePaginationActions from './TablePaginationActions'
 
 interface Props {
-    tableData: typesModels[],
+    tableData: any[]
     columns: string[],
     actionsInRow?: string[],
     formRegister?: IFormRegister,
-    actionsInHeader: string[]
-    actionInRow:string[]
-    rowChek:boolean
+    filterSearchBar?:IFilterSearchBar[],
+    actionsInHeader: string[],
+    actionInRow:string[],
+    rowChek:boolean,
+    filterMenu:boolean
 }
 
 // estilos css-in-js
@@ -68,7 +71,7 @@ const useStyles = makeStyles(() =>
         }
     }));
 
-const CustomTable: FC<Props> = ({ tableData, columns, actionsInHeader, formRegister, rowChek }) => {
+const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsInHeader, formRegister, rowChek, filterMenu }) => {
     const dispatch = useDispatch()
     const classes = useStyles();
 
@@ -123,8 +126,10 @@ const CustomTable: FC<Props> = ({ tableData, columns, actionsInHeader, formRegis
                 </RegisterModal>
             }
             <MenuHeaderTable
+                filterMenu={filterMenu}
                 filter={handleFilter}
                 buttonsList={actionsInHeader}
+                filterSearchBar={filterSearchBar}
             />
             <Table className={classes.table} aria-label="tabla">
                 <TableBody>

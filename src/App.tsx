@@ -23,7 +23,7 @@ function App() {
               <ListaPersonas />
             </AuthRoute>
             <AuthRoute exact path="/informes">
-              <ListaPersonas />
+              <Informes />
             </AuthRoute>
           </Layout>
 

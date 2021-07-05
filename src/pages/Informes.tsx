@@ -7,19 +7,18 @@ import Table from '../componentes/CustomTable'
 //modelos
 import { AppState } from '../Redux/state/AppState';
 
-//acciones
-import { getAllPersonas } from '../Redux/actions/ActionCreator'
+//Actions
+import { getAllDataInformes } from '../Redux/actions/informes/ActionCreatorInformes'
 
 const Informes = () => {
 
-  const dispatch = useDispatch()
-  const { listPerson } = useSelector((state: AppState) => state.PersonState)
+  const { AllDataInformes } = useSelector((state: AppState) => state.InformesState)
 
+
+  const dispatch = useDispatch()
 
   const cargarDatos = () => {
-    if (listPerson.length <= 0) {
-      dispatch(getAllPersonas())
-    }
+    dispatch(getAllDataInformes())
   }
   useEffect(() => {
     cargarDatos()
@@ -31,80 +30,18 @@ const Informes = () => {
   // -actions (OPCIONAL): acciones para realizar en la tabla 
 
   return <Table
-    tableData={listPerson}
-    columns={["idpersonas", "nombrepersona", "codcar", "idcuenta", "nombrecuenta"]}
-    actionsInHeader={["imprimir", "nuevo", "borrar"]}
+    filterSearchBar={[
+      {
+        key: "nombre",
+        label: "Nombre"
+      },
+    ]}
+    filterMenu={true}
+    tableData={AllDataInformes}
+    columns={["IDPERSONA", "CODALU", "NOMBRE", "CODCAR", "IDCUENTA", "DESCRIPCION", "IDBENEFICIO", "CBU"]}
+    actionsInHeader={["imprimir"]}
     actionInRow={['editar']}
     rowChek={false}
-    formRegister={{
-      titleForm: 'Registrar Nueva Persona',
-      buttonSubmitLabel: 'Registrar',
-      fields: [
-        {
-          name: "nombre",
-          isEdit:false,
-          label: "Nombre Completo"
-        },
-        {
-          name: "email",
-          isEdit:true,
-          label: "Email",
-          type: "email"
-        },
-        {
-          name: "sexo",
-          isEdit:false,
-          label: "Sexo",
-        },
-        {
-          name: "fecnac",
-          isEdit:false,
-          label: "Fecha de Nacimiento",
-          type: "date"
-        },
-        {
-          name: "ndoc",
-          isEdit:false,
-          label: "Nº de Documento",
-        },
-        {
-          name: "telefono",
-          isEdit:true,
-          label: "Telefono",
-        },
-        {
-          name: "domicilio",
-          isEdit:true,
-          label: "Domicilio",
-        },
-        {
-          name: "cuit",
-          isEdit:false,
-          label: "Cuit",
-        },
-        {
-          name: "tipodoc",
-          isEdit:false,
-          label: "Tipo de doc",
-        },
-        {
-          name: "idperaul",
-          isEdit:false,
-          label: "idperaul",
-        },
-        {
-          name: "codigo",
-          isEdit:false,
-          label: "Codigo",
-        },
-        {
-          name: "baja",
-          isEdit:true,
-          label: "Baja",
-        },
-      ]
-    }
-    }
   />
 }
 

@@ -1,11 +1,11 @@
 import { Dispatch } from 'redux';
 import { userActionTypes, Logout, LoginAction } from "./userActionTypes";
-import { UsuarioApi } from '../../api/rest/UsuarioApi'
-import { setDataLocalStorage } from '../../helpers/LocalStorage';
-import history from '../../helpers/history'
+import { UsuarioApi } from '../../../api/rest/UsuarioApi'
+import { setDataLocalStorage } from '../../../helpers/LocalStorage';
+import history from '../../../helpers/history'
 
 //types
-import { IUser } from "../../models";
+import { IUser } from "../../../models";
 
 export const logout = (): Logout => {
     localStorage.clear()

@@ -10,8 +10,8 @@ import {
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
 //actions
-import { logout } from '../../Redux/actions/userActionCreator'
-import { addPersona } from '../../Redux/actions/ActionCreator'
+import { logout } from '../../Redux/actions/users/userActionCreator'
+import { addPersona } from '../../Redux/actions/personas/ActionCreator'
 
 //Icons
 import Icons from '../Icons'

@@ -10,8 +10,12 @@ import { AppState } from '../../Redux/state/AppState';
 
 import { useSelector } from 'react-redux'
 
+//interface
+import IFilterSearchBar from '../CustomTable/interface/IFilterSearchBar'
+
 interface Props {
-    functionFilter: any
+    functionFilter: any,
+    filterSearchBar?:IFilterSearchBar[],
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -56,11 +60,13 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const SearchBarTable: FC<Props> = ({ functionFilter }) => {
+const SearchBarTable: FC<Props> = ({ functionFilter, filterSearchBar }) => {
     const classes = useStyles();
     const { tableFilterinUse } = useSelector((state:AppState)=> state.PersonState)
     const [filter, setFilter] = useState<any>("nombre") 
     const [ textInput, setTextInput ] = useState('')
+
+    console.log(" Filter Search Bar " ,filterSearchBar)
  
     const handleChangeFilter = ({ target }: ChangeEvent<{ value: unknown }>) => {
         setFilter(target.value)
@@ -75,8 +81,13 @@ const SearchBarTable: FC<Props> = ({ functionFilter }) => {
                 disableUnderline
                 value={ filter }
             >
-                <MenuItem value={"nombre"}>Nombre</MenuItem>
-                <MenuItem value={"ndoc"}>N° Doc</MenuItem>
+                {
+                    filterSearchBar && filterSearchBar.map((data,index)=>{
+                        return(
+                            <MenuItem key={index} value={data.key}>{data.label}</MenuItem>
+                        )
+                    })
+                }
             </Select>
             <IconButton className={classes.iconButton} aria-label="search">
                 <SearchIcon />

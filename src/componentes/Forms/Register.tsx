@@ -16,7 +16,7 @@ import { useForm } from '../../hooks/useForm'
 import InputForm from './InputForm'
 
 //actions
-import { addPersona } from '../../Redux/actions/ActionCreator'
+import { addPersona } from '../../Redux/actions/personas/ActionCreator'
 
 //interface 
 import { AppState } from '../../Redux/state/AppState';

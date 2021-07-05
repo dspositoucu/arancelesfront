@@ -1,5 +1,9 @@
-import { IPersona,IUser } from "../../models";
+import { IPersona,IUser, IInformes, typesModels } from "../../models";
 
+interface filterTags {
+    tag:string,
+    value: boolean
+}
 
 // interface del initialState en el reducer de person
 export interface IPersonInitialState{
@@ -9,11 +13,15 @@ export interface IPersonInitialState{
     personDetails: {} | IPersona
     allSelect : boolean,
     tableFilterinUse: boolean,
-    filterTags: {}
 }
 
 export interface IUserInitialState {
     usuario:IUser|''
+}
+
+export interface IInformesInitialState {
+    AllDataInformes:IInformes[],
+    filterTags: {}
 }
 
 export interface IModalInitialState {
@@ -28,5 +36,6 @@ export interface IModalInitialState {
 export interface AppState {
     PersonState:IPersonInitialState,
     UsuarioState:IUserInitialState,
-    ModalState: IModalInitialState
+    ModalState: IModalInitialState,
+    InformesState: IInformesInitialState
 }
