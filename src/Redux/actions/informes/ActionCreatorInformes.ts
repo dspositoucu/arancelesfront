@@ -16,6 +16,9 @@ import {
 import { InformesApi } from "../../../api/rest/InformesApi";
 import { Dispatch } from "redux";
 
+// models
+import { IInformes } from "../../../models";
+
 
 
 export const removeFilterTag = (tag: string): RemoveFilterTagAction => {
@@ -32,64 +35,73 @@ export const addFilter = (filter: string): AddFilterAction => {
     }
 }
 
-const getAllData = (data: []): GetAllData => {
+const getAllData = (data: IInformes[]): GetAllData => {
     return {
         type: ActionTypes.GET_ALL_DATA,
         data
     }
 }
 
-export const becadosActivos = ():BecadosActivos =>{
+export const becadosActivos = (state:boolean):BecadosActivos =>{
     return {
-        type: ActionTypes.BECADOS_ACTIVOS
+        type: ActionTypes.ALUMNOS_BECADOS_ACTIVOS,
+        state
     }
 }
 
-export const alumnosActivos = ():AlumnosActivos =>{
+export const alumnosActivos = (state:boolean):AlumnosActivos =>{
     return {
-        type: ActionTypes.ALUMNOS_ACTIVOS
+        type: ActionTypes.ALUMNOS_ACTIVOS,
+        state
     }
 }
 
-export const alumnosDadosDeBaja = ():AlumnosDadosDeBaja =>{
+export const alumnosDadosDeBaja = (state:boolean):AlumnosDadosDeBaja =>{
     return {
-        type: ActionTypes.ALUMNOS_DADOS_DE_BAJA
+        type: ActionTypes.ALUMNOS_DADOS_DE_BAJA,
+        state
     }
 }
 
-export const alumnosConCBU = ():AlumnosConCBU => {
+export const alumnosConCBU = (state:boolean):AlumnosConCBU => {
     return {
-        type: ActionTypes.ALUMNOS_CON_CBU
+        type: ActionTypes.ALUMNOS_CON_CBU,
+        state
     }
 }
 
-export const alumnosSinCBU = ():AlumnosSinCBU => {
+export const alumnosSinCBU = (state:boolean):AlumnosSinCBU => {
     return {
-        type: ActionTypes.ALUMNOS_SIN_CBU
+        type: ActionTypes.ALUMNOS_SIN_CBU,
+        state
     }
 }
 
-export const alumnosConFinDeCarrera = ():AlumnosConFinDeCarrera => {
+export const alumnosConFinDeCarrera = (state:boolean):AlumnosConFinDeCarrera => {
     return {
-        type: ActionTypes.ALUMNOS_CON_FIN_DE_CARRERA
+        type: ActionTypes.ALUMNOS_CON_FIN_DE_CARRERA,
+        state
     }
 }
 
-export const alumnosConAñoDeGracia = ():AlumnosConAñoDeGracia => {
+export const alumnosConAñoDeGracia = (state:boolean):AlumnosConAñoDeGracia => {
     return {
-        type: ActionTypes.ALUMNOS_CON_AÑO_DE_GRACIA
+        type: ActionTypes.ALUMNOS_CON_AÑO_DE_GRACIA,
+        state
     }
 }
 
-export const alumnosAcreditanEnBanco = ():AlumnosAcreditanEnBanco => {
+export const alumnosAcreditanEnBanco = (state:boolean):AlumnosAcreditanEnBanco => {
     return {
-        type: ActionTypes.ALUMNOS_ACREDITAN_EN_BANCO
+        type: ActionTypes.ALUMNOS_ACREDITAN_EN_BANCO,
+        state
     }
 }
 
-export const alumnosSinCuenta = ():AlumnosSinCuenta => {
+export const alumnosSinCuenta = (state:boolean):AlumnosSinCuenta => {
     return {
-        type: ActionTypes.ALUMNOS_SIN_CUENTAS
+        type: ActionTypes.ALUMNOS_SIN_CUENTAS,
+        state
     }
 }
 

@@ -62,8 +62,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const SearchBarTable: FC<Props> = ({ functionFilter, filterSearchBar }) => {
     const classes = useStyles();
-    const { tableFilterinUse } = useSelector((state:AppState)=> state.PersonState)
-    const [filter, setFilter] = useState<any>("nombre") 
+    const { tableFilterinUse } = useSelector((state:AppState)=> state.GlobalState)
+    const [filter, setFilter] = useState<any>(filterSearchBar[0].key) 
     const [ textInput, setTextInput ] = useState('')
 
     console.log(" Filter Search Bar " ,filterSearchBar)
@@ -77,7 +77,7 @@ const SearchBarTable: FC<Props> = ({ functionFilter, filterSearchBar }) => {
             <Select
                 onChange={handleChangeFilter}
                 className={classes.select}
-                defaultValue={"nombre"}
+                defaultValue={filterSearchBar[0].key}
                 disableUnderline
                 value={ filter }
             >

@@ -11,7 +11,7 @@ import { AppState } from '../../Redux/state/AppState';
 
 //actions
 import { removeFilterTag } from '../../Redux/actions/informes/ActionCreatorInformes'
-import { setTableFilterinUse } from '../../Redux/actions/personas/ActionCreator';
+import { globalSetTableFilterinUse } from '../../Redux/actions/globalActions/ActionCreatorGlobal';
 
 //interface
 import IFilterSearchBar from '../CustomTable/interface/IFilterSearchBar'
@@ -23,6 +23,16 @@ import FilterMenu from '../CustomTable/FilterMenu';
 
 // list button
 import Buttons from '../Buttons/ButtonListHeaderTable'
+
+import {
+    becadosActivos,
+    alumnosActivos,
+    alumnosDadosDeBaja,
+    alumnosConFinDeCarrera,
+    alumnosConAñoDeGracia,
+    alumnosAcreditanEnBanco,
+    alumnosSinCuenta
+} from '../../Redux/actions/informes/ActionCreatorInformes'
 
 interface Props {
     filter?: any,
@@ -57,6 +67,23 @@ const useStyles = makeStyles(() =>
 
 const MenuHeaderTable: FC<Props> = ({ filter, buttonsList, filterSearchBar, filterMenu }) => {
 
+    const menuFilterData = {
+        Alumnos_dados_de_baja: (value: boolean) => dispatch(alumnosDadosDeBaja(value)),
+
+        Alumnos_becados_activos: (value: boolean) => dispatch(becadosActivos(value)),
+
+        Alumnos_activos: (value: boolean) => dispatch(alumnosActivos(value)),
+
+        Alumnos_acreditan_banco: (value: boolean) => dispatch(alumnosAcreditanEnBanco(value)),
+
+        Alumnos_con_fin_de_carrera: (value: boolean) => dispatch(alumnosConFinDeCarrera(value)),
+
+        Alumnos_con_año_de_gracia: (value: boolean) => dispatch(alumnosConAñoDeGracia(value)),
+
+        Alumnos_sin_cuenta: (value: boolean) => dispatch(alumnosSinCuenta(value)),
+    }
+
+
     const dispatch = useDispatch()
     const { filterTags } = useSelector((state: AppState) => state.InformesState)
 
@@ -79,7 +106,7 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList, filterSearchBar, filt
                 <Typography
                     className={classes.titleTable}
                     variant="subtitle1"
-                    onClick={() => { dispatch(setTableFilterinUse(false)) }}
+                    onClick={() => { dispatch(globalSetTableFilterinUse(false)) }}
                 >
                     Listado de Personas
                 </Typography>
@@ -103,13 +130,17 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList, filterSearchBar, filt
                         {
                             showTags().map((tag) => {
                                 if (!tag.value) return null
+                                console.log(tag.key)
                                 return (
                                     <ButtonHeader
                                         key={tag.key}
                                         label={tag.key.split('_').join(' ')}
                                         iconType="close"
                                         typeButton="filter"
-                                        onClick={() => { dispatch(removeFilterTag(tag.key)) }}
+                                        onClick={() => {
+                                            dispatch(removeFilterTag(tag.key));
+                                            dispatch(menuFilterData[tag.key](!filterTags[tag.key]))
+                                        }}
                                     />
                                 )
                             })

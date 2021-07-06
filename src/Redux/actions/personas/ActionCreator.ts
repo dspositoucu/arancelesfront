@@ -8,20 +8,13 @@ import {
     SelectAllPersonAction,
     DeletePeronAction,
     UpdatePersonAction,
-    SetFilterListAction,
-    SetTableFilterinUse,
     ActionTypes
 } from './ActionTypes';
 
 import { IPersona, typesModels } from '../../../models';
 
 
-export const setFilterList = (filterList: typesModels[]): SetFilterListAction => {
-    return {
-        type: ActionTypes.SET_FILTER_LIST,
-        filterList
-    }
-}
+
 
 const addPersonAction = (person: typesModels): AddPersonAction => {
     return {
@@ -63,12 +56,6 @@ export const deletePerson = (): DeletePeronAction => {
     }
 }
 
-export const setTableFilterinUse = (value: boolean): SetTableFilterinUse => {
-    return {
-        type: ActionTypes.SET_TABLE_FILTER_IN_USE,
-        value
-    }
-}
 
 export const updatePerson = (personId: number | string, person: typesModels, index: number): UpdatePersonAction => {
     return {

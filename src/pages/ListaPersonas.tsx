@@ -32,6 +32,11 @@ const ListaPersonas = () => {
 
   return <Table
     tableData={listPerson}
+    filterMenu={false}
+    columns={["id", "nombre", "ndoc", "telefono", "email", "domicilio"]}
+    actionsInHeader={["imprimir", "nuevo", "borrar"]}
+    actionInRow={['editar']}
+    rowChek={false}
     filterSearchBar={[
       {
         key: "nombre",
@@ -42,11 +47,6 @@ const ListaPersonas = () => {
         label: "N° Doc"
       }
     ]}
-    filterMenu={false}
-    columns={["id", "nombre", "ndoc", "telefono", "email", "domicilio"]}
-    actionsInHeader={["imprimir", "nuevo", "borrar"]}
-    actionInRow={['editar']}
-    rowChek={false}
     formRegister={{
       titleForm: 'Registrar Nueva Persona',
       buttonSubmitLabel: 'Registrar',

@@ -14,16 +14,7 @@ export enum ActionTypes {
   
   UPDATE_PERSON = 'UPDATE_PERSON',
 
-  SET_FILTER_LIST = 'SET_FILTER_LIST' ,
-  SET_TABLE_FILTER_IN_USE = "SET_TABLE_FILTER_IN_USE",
-
 }
-
-
-export interface SetFilterListAction {
-  type: ActionTypes.SET_FILTER_LIST,
-  filterList: typesModels[]
-} 
 
 export interface AddPersonAction {
   type: ActionTypes.ADD_PERSON,
@@ -60,11 +51,6 @@ export interface UpdatePersonAction {
   index:number
 }
 
-export interface SetTableFilterinUse {
-  type :ActionTypes.SET_TABLE_FILTER_IN_USE,
-  value: boolean
-}
-
 export type PersonActions =
 AddPersonAction  
   |GetPersonListAction
@@ -73,5 +59,3 @@ AddPersonAction
   |SelectAllPersonAction
   |DeletePeronAction
   |UpdatePersonAction
-  |SetFilterListAction
-  |SetTableFilterinUse

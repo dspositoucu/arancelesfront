@@ -4,7 +4,7 @@ import ButtonHeader from '../Buttons/ButtonIcon'
 import { useDispatch,useSelector } from 'react-redux'
 
 //config
-import menuFilterData from '../../config/filterMenu.config'
+//import menuFilterData from '../../config/filterMenu.config'
 
 //types
 import { AppState } from '../../Redux/state/AppState';
@@ -14,11 +14,52 @@ import FilterMenuItems from './FilterMenuItems';
 
 //actions
 import { addFilter } from '../../Redux/actions/informes/ActionCreatorInformes'
+import {
+    becadosActivos,
+    alumnosActivos,
+    alumnosDadosDeBaja,
+    alumnosConFinDeCarrera,
+    alumnosConAñoDeGracia,
+    alumnosAcreditanEnBanco,
+    alumnosSinCuenta
+} from '../../Redux/actions/informes/ActionCreatorInformes'
 
 interface Props { }
 
 const FilterMenu: FC<Props> = (props) => {
     const dispatch = useDispatch()
+
+    const menuFilterData = [
+        {
+            label: "Alumnos becados activos",
+            action: (value:boolean) => dispatch(becadosActivos(value))
+        },
+        {
+            label: "Alumnos dados de baja",
+            action: (value:boolean) => dispatch(alumnosDadosDeBaja(value))
+        },
+        {
+            label: "Alumnos activos",
+            action: (value:boolean) => dispatch(alumnosActivos(value))
+        },
+        {
+            label: "Alumnos acreditan banco",
+            action: (value:boolean) => dispatch(alumnosAcreditanEnBanco(value))
+        },
+        {
+            label: "Alumnos con fin de carrera",
+            action: (value:boolean) => dispatch(alumnosConFinDeCarrera(value))
+        },
+        {
+            label: "Alumnos con año de gracia",
+            action: (value:boolean) => dispatch(alumnosConAñoDeGracia(value))
+        },
+        {
+            label: "Alumnos sin cuenta",
+            action: (value:boolean) => dispatch(alumnosSinCuenta(value))
+        },
+    ]
+
     const { filterTags } =  useSelector((state:AppState) => state.InformesState)
 
     const [checked, setChecked] = useState<any>({ checked: '' });
@@ -66,7 +107,10 @@ const FilterMenu: FC<Props> = (props) => {
                                 checked={!!filterTags[item as keyof Object]}
                                 label={menuItem.label}
                                 item={item}
-                                onClick={() => handleChange(item)}
+                                onClick={() => {
+                                    handleChange(item);
+                                    menuItem.action(!filterTags[item as keyof Object])
+                                }}
                             />
                         )
                     })

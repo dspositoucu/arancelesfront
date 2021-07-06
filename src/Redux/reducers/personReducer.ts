@@ -6,10 +6,8 @@ import { typesModels, IPersona } from '../../models';
 const InitialState: IPersonInitialState = {
     listPerson: [],
     selectListPerson: [],
-    filterList: [],
     personDetails: {},
     allSelect: false,
-    tableFilterinUse: false,
 }
 
 const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = InitialState, action: PersonActions) => {
@@ -57,20 +55,6 @@ const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = Init
             }
         }
 
-        case ActionTypes.SET_FILTER_LIST: {
-            return {
-                ...state,
-                filterList: action.filterList
-            }
-        }
-
-        case ActionTypes.SET_TABLE_FILTER_IN_USE: {
-            return {
-                ...state,
-                tableFilterinUse: action.value,
-            }
-        }
-
         case ActionTypes.GET_PERSON_DETAILS: {
             return {
                 ...state,
@@ -98,7 +82,7 @@ const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = Init
             return {
                 ...state,
                 listPerson: compareAndDelete(state.listPerson, state.selectListPerson),
-                filterList: compareAndDelete(state.filterList, state.selectListPerson),
+                //filterList: compareAndDelete(state.filterList, state.selectListPerson),
                 selectListPerson: []
 
             }

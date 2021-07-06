@@ -43,9 +43,9 @@ export const Row: FC<Props> = ({ data, columns, rowChek }) => {
   
   //seleccionar una fila 
   const handleSelectRow = (data: typesModels) => {
+    console.log(data)
     dispatch(selectPerson(data))
   }
-  console.log('DATA en columna', data)
 
   // checkear si la fila se encuentra en lista de seleccionado para cambiar el checkbox 
   const checkListSelect = (id: string) => {

@@ -1,3 +1,17 @@
+//actions
+import {
+    becadosActivos,
+    alumnosActivos,
+    alumnosDadosDeBaja,
+    alumnosConCBU,
+    alumnosSinCBU,
+    alumnosConFinDeCarrera,
+    alumnosConAñoDeGracia,
+    alumnosAcreditanEnBanco,
+    alumnosSinCuenta
+} from '../Redux/actions/informes/ActionCreatorInformes'
+
+import { useDispatch } from 'react-redux'
 const menuFilterData = [
     {
         label: "Alumnos becados activos",

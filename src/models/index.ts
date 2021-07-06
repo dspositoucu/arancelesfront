@@ -64,5 +64,5 @@ export interface IInformes {
     SALDO: string | null
 }
 
-export type typesModels = IPersona & IInformes &  IPersona[] & IInformes[] & []
+export type typesModels = IPersona & IInformes 
 

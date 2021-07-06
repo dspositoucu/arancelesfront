@@ -83,7 +83,7 @@ const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsIn
     // useFilter recibe la tabla a filtrar y devuelve 
     // una funcion handleFilter, la lista filtrada y
     // una const tipo bool. "tableFilterinUse" que corresponde a si la tabla esta en uso. 
-    const { filterList, handleFilter, tableFilterinUse } = useFilter(tableData)
+    const {filterList, handleFilter, tableFilterinUse } = useFilter(tableData)
 
     // usePagination devuelve: 
     // page: devuelve la pagina actual,

@@ -12,7 +12,7 @@ import { getAllDataInformes } from '../Redux/actions/informes/ActionCreatorInfor
 
 const Informes = () => {
 
-  const { AllData } = useSelector((state: AppState) => state.InformesState)
+  const { AllDataInformes } = useSelector((state: AppState) => state.InformesState)
 
 
   const dispatch = useDispatch()
@@ -37,7 +37,7 @@ const Informes = () => {
       },
     ]}
     filterMenu={true}
-    tableData={AllData}
+    tableData={AllDataInformes}
     columns={["IDPERSONA", "CODALU", "NOMBRE", "CODCAR", "IDCUENTA", "DESCRIPCION", "IDBENEFICIO", "CBU"]}
     actionsInHeader={["imprimir"]}
     actionInRow={['editar']}
