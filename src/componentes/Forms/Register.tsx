@@ -69,6 +69,9 @@ interface Props {
 }
 
 const Register: FC<Props> = ({ configForm, dataFields = {} }) => {
+
+  console.log("Campos del formulario",configForm)
+
   const classes = useStyles();
 
   const { formData, handleChangeForm, handleSubmit } = useForm({

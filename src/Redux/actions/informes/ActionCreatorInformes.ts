@@ -10,6 +10,7 @@ import {
     AlumnosConAñoDeGracia,
     AlumnosAcreditanEnBanco,
     AlumnosSinCuenta,
+    Unfiltered,
     AddFilterAction,
     RemoveFilterTagAction,
 } from "./ActionTypeInformes";
@@ -19,7 +20,11 @@ import { Dispatch } from "redux";
 // models
 import { IInformes } from "../../../models";
 
-
+export const unfiltered = (): Unfiltered =>{
+    return {
+        type:ActionTypes.UNFILTERED
+    }
+}
 
 export const removeFilterTag = (tag: string): RemoveFilterTagAction => {
     return {

@@ -11,8 +11,10 @@ import usuarioReducer from './reducers/userReducer';
 import modalReducer from './reducers/modalReducer';
 import InformesReducer from './reducers/informesReducer'
 import globalReducer from './reducers/globalReducer'
+import cuentasReducer from './reducers/cuentasReducer';
 
 const rootReducers = combineReducers<AppState>({
+    CuentasState:cuentasReducer,
     PersonState:personReducer,
     UsuarioState:usuarioReducer,
     ModalState:modalReducer,

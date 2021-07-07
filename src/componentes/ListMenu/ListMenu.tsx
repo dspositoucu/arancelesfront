@@ -59,7 +59,13 @@ const ListMenu: FC<Props> = (props) => {
             <ListItem onClick={() => history.push('/informes')} button >
                             <ListItemText classes={{ primary: classes.menuOpt }} primary={'Informes'} />
             </ListItem>
-                {menuData.map((menuOp, i) => (
+            <ListItem onClick={() => history.push('/cuentas')} button >
+                            <ListItemText classes={{ primary: classes.menuOpt }} primary={'Cuentas'} />
+            </ListItem>
+            <ListItem onClick={() => history.push('/personas')} button >
+                            <ListItemText classes={{ primary: classes.menuOpt }} primary={'personas'} />
+            </ListItem>
+               {/*  {menuData.map((menuOp, i) => (
                     <div key={i}>
                         <ListItem onClick={() => handleClick(menuOp.MenuOption)} button >
                             <ListItemText classes={{ primary: classes.menuOpt }} primary={menuOp.MenuOption} />
@@ -79,7 +85,7 @@ const ListMenu: FC<Props> = (props) => {
                             </Collapse>
                         ))}
                     </div>
-                ))}
+                ))} */}
             </List>
         </div>
     )

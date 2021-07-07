@@ -9,6 +9,8 @@ import AuthRoute from "./componentes/AuthRoute";
 import LoginPage from './pages/LoginPage'
 import ListaPersonas from './pages/ListaPersonas';
 import Informes from './pages/Informes';
+import Cuentas from './pages/Cuentas';
+
 
 function App() {
 
@@ -19,14 +21,18 @@ function App() {
           <Route exact path="/" component={LoginPage} />
 
           <Layout>
-            <AuthRoute exact path="/table">
+            <AuthRoute exact path="/personas">
               <ListaPersonas />
             </AuthRoute>
+
             <AuthRoute exact path="/informes">
               <Informes />
             </AuthRoute>
-          </Layout>
 
+            <AuthRoute exact path="/cuentas">
+              <Cuentas />
+            </AuthRoute>
+          </Layout>
 
         </Switch>
       </Router>

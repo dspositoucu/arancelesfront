@@ -13,9 +13,13 @@ export enum ActionTypes {
   ALUMNOS_SIN_CUENTAS = "ALUMNOS_SIN_CUENTAS",
 
   ADD_FILTER_TAG = "ADD_FILTER_TAG",
+  UNFILTERED = "UNFILTERED",
   REMOVE_FILTER_TAG = "REMOVE_FILTER_TAG",
 }
 
+export interface Unfiltered {
+  type: ActionTypes.UNFILTERED
+}
 export interface RemoveFilterTagAction {
   type: ActionTypes.REMOVE_FILTER_TAG,
   tag: string
@@ -76,6 +80,7 @@ export interface AlumnosSinCuenta {
 
 export type InformesAction =
   GetAllData
+  | Unfiltered
   | BecadosActivos
   | AlumnosActivos
   | AlumnosDadosDeBaja

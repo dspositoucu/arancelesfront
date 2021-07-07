@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState, useEffect } from 'react'
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Typography, Toolbar, Divider } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
@@ -31,7 +31,8 @@ import {
     alumnosConFinDeCarrera,
     alumnosConAñoDeGracia,
     alumnosAcreditanEnBanco,
-    alumnosSinCuenta
+    alumnosSinCuenta,
+    unfiltered
 } from '../../Redux/actions/informes/ActionCreatorInformes'
 
 interface Props {
@@ -67,33 +68,53 @@ const useStyles = makeStyles(() =>
 
 const MenuHeaderTable: FC<Props> = ({ filter, buttonsList, filterSearchBar, filterMenu }) => {
 
-    const menuFilterData = {
-        Alumnos_dados_de_baja: (value: boolean) => dispatch(alumnosDadosDeBaja(value)),
+    const menuFilterData = [
+        {
+            Alumnos_dados_de_baja: () => dispatch(alumnosDadosDeBaja(false)),
+            filter: "Alumnos_dados_de_baja",
+        },
 
-        Alumnos_becados_activos: (value: boolean) => dispatch(becadosActivos(value)),
+        {
+            Alumnos_becados_activos: () => dispatch(becadosActivos(false)),
+            filter: "Alumnos_becados_activos"
+        },
 
-        Alumnos_activos: (value: boolean) => dispatch(alumnosActivos(value)),
+        {
+            Alumnos_activos: () => dispatch(alumnosActivos(false)),
+            filter: "Alumnos_activos"
+        },
 
-        Alumnos_acreditan_banco: (value: boolean) => dispatch(alumnosAcreditanEnBanco(value)),
+        {
+            Alumnos_acreditan_banco: () => dispatch(alumnosAcreditanEnBanco(false)),
+            filter: "Alumnos_acreditan_banco"
+        },
 
-        Alumnos_con_fin_de_carrera: (value: boolean) => dispatch(alumnosConFinDeCarrera(value)),
+        {
+            Alumnos_con_fin_de_carrera: () => dispatch(alumnosConFinDeCarrera(false)),
+            filter: "Alumnos_con_fin_de_carrera"
+        },
 
-        Alumnos_con_año_de_gracia: (value: boolean) => dispatch(alumnosConAñoDeGracia(value)),
+        {
+            Alumnos_con_año_de_gracia: () => dispatch(alumnosConAñoDeGracia(false)),
+            filter: "Alumnos_con_año_de_gracia"
+        },
 
-        Alumnos_sin_cuenta: (value: boolean) => dispatch(alumnosSinCuenta(value)),
-    }
+        {
+            Alumnos_sin_cuenta: () => dispatch(alumnosSinCuenta(false)),
+            filter: "Alumnos_sin_cuenta"
+        },
+    ]
 
 
     const dispatch = useDispatch()
     const { filterTags } = useSelector((state: AppState) => state.InformesState)
-
+    
     const showTags = () => {
         let arrTags = []
         for (let tag in filterTags) {
-            arrTags.push({
-                key: tag,
-                value: filterTags[tag as keyof Object]
-            })
+            if (filterTags[tag as keyof Object]) {
+                arrTags.push(tag)
+            }
         }
         return arrTags
     }
@@ -123,23 +144,25 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList, filterSearchBar, filt
 
             </Toolbar>
 
-            {showTags().filter(tag => tag.value).length
+            {showTags().length
                 ? <>
                     <Divider orientation="horizontal" />
                     <Toolbar className={classes.tagsMenu}>
                         {
                             showTags().map((tag) => {
-                                if (!tag.value) return null
-                                console.log(tag.key)
                                 return (
                                     <ButtonHeader
-                                        key={tag.key}
-                                        label={tag.key.split('_').join(' ')}
+                                        key={tag}
+                                        label={tag.split('_').join(' ')}
                                         iconType="close"
                                         typeButton="filter"
                                         onClick={() => {
-                                            dispatch(removeFilterTag(tag.key));
-                                            dispatch(menuFilterData[tag.key](!filterTags[tag.key]))
+                                            dispatch(removeFilterTag(tag));
+                                         /*    menuFilterData.forEach(action => {
+                                                if (action.filter === tag) {
+                                                   action[tag]()
+                                                }
+                                            }) */
                                         }}
                                     />
                                 )

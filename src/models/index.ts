@@ -64,5 +64,18 @@ export interface IInformes {
     SALDO: string | null
 }
 
-export type typesModels = IPersona & IInformes 
+export interface ICuentas {
+    "ID": number,
+    "CODFAC": string,
+    "CODCAR": string,
+    "DESCRIPCION": string,
+    "AREA": string,
+    "IDCARRERA": number,
+    "IDGRUPOBARRIDA":number,
+    "CANTCUOTAS":number,
+    "IDSEDE":number,
+    "GRUPO BARRIDA": string
+}
+
+export type typesModels = IPersona & IInformes & ICuentas
 

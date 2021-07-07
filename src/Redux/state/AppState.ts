@@ -1,4 +1,4 @@
-import { IPersona,IUser, IInformes, typesModels } from "../../models";
+import { IPersona,IUser, IInformes, typesModels, ICuentas } from "../../models";
 
 interface filterTags {
     Alumnos_dados_de_baja:boolean
@@ -51,6 +51,10 @@ export interface IInformesInitialState {
     },
 }
 
+export interface ICuentasInitialState {
+    listCuentas: ICuentas[] | [] | any[]
+}
+
 export interface IModalInitialState {
     modalRegister?: boolean,
     modalEdit?: boolean,
@@ -61,6 +65,7 @@ export interface IModalInitialState {
 
 //interface del conbine reducer en Store.ts
 export interface AppState {
+    CuentasState: ICuentasInitialState,
     PersonState:IPersonInitialState,
     UsuarioState:IUserInitialState,
     ModalState: IModalInitialState,

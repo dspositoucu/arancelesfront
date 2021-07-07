@@ -21,7 +21,8 @@ import {
     alumnosConFinDeCarrera,
     alumnosConAñoDeGracia,
     alumnosAcreditanEnBanco,
-    alumnosSinCuenta
+    alumnosSinCuenta,
+    unfiltered
 } from '../../Redux/actions/informes/ActionCreatorInformes'
 
 interface Props { }
@@ -75,6 +76,43 @@ const FilterMenu: FC<Props> = (props) => {
 
     };
 
+    const menuFilterDataActions = [
+        {
+            Alumnos_dados_de_baja: () => dispatch(alumnosDadosDeBaja(false)),
+            filter: "Alumnos_dados_de_baja"
+        },
+
+        {
+            Alumnos_becados_activos: () => dispatch(becadosActivos(false)),
+            filter: "Alumnos_becados_activos"
+        },
+
+        {
+            Alumnos_activos: () => dispatch(alumnosActivos(false)),
+            filter: "Alumnos_activos"
+        },
+
+        {
+            Alumnos_acreditan_banco: () => dispatch(alumnosAcreditanEnBanco(false)),
+            filter: "Alumnos_acreditan_banco"
+        },
+
+        {
+            Alumnos_con_fin_de_carrera: () => dispatch(alumnosConFinDeCarrera(false)),
+            filter: "Alumnos_con_fin_de_carrera"
+        },
+
+        {
+            Alumnos_con_año_de_gracia: () => dispatch(alumnosConAñoDeGracia(false)),
+            filter: "Alumnos_con_año_de_gracia"
+        },
+
+        {
+            Alumnos_sin_cuenta: () => dispatch(alumnosSinCuenta(false)),
+            filter: "Alumnos_sin_cuenta"
+        },
+    ]
+
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     };
@@ -82,6 +120,16 @@ const FilterMenu: FC<Props> = (props) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const showTags = () => {
+        let arrTags = []
+        for (let tag in filterTags) {
+            if (filterTags[tag as keyof Object]) {
+                arrTags.push(tag)
+            }
+        }
+        return arrTags
+    }
 
     return (
         <>
@@ -108,8 +156,14 @@ const FilterMenu: FC<Props> = (props) => {
                                 label={menuItem.label}
                                 item={item}
                                 onClick={() => {
+
                                     handleChange(item);
                                     menuItem.action(!filterTags[item as keyof Object])
+                                   /*  menuFilterDataActions.forEach(action => {
+                                        if (action.filter === menuItem.label) {
+                                           action[menuItem.label]()
+                                        }
+                                    }) */
                                 }}
                             />
                         )
