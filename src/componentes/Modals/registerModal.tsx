@@ -27,8 +27,6 @@ const useStyles = makeStyles(() =>
         modalContainer: {
             top: '50%',
             left: '50%',
-            height: '100%',
-            width: 'auto',
             position: 'fixed',
             display: 'grid',
             placeItems: 'center',
@@ -37,12 +35,13 @@ const useStyles = makeStyles(() =>
         },
         modal: {
             width: 'max-content',
+            height:'max-content',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             flexDirection: 'column',
             position: 'fixed',
-            zIndex: 10000,
+            zIndex: 80000,
         },
     }));
 

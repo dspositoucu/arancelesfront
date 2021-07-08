@@ -1,10 +1,9 @@
 import { FC } from 'react'
 import {
-  CssBaseline,
+  Box,
   Button,
-  Container,
-  Typography,
   Grid,
+  Typography,
 } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
@@ -25,12 +24,6 @@ import IPersona from '../../api/models/IPersona';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    paper: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      width: 400
-    },
     containernInput: {
       margin: "10px 10px",
       display: 'flex',
@@ -40,6 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
       width: '100%',
       marginTop: 10,
       textAlign: 'center',
+      flexWrap: 'wrap'
     },
     submit: {
       background: "#6E6893",
@@ -50,6 +44,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: 10
     },
     container: {
+      width: '80vw',
       background: "#FFF",
       padding: 15,
       borderRadius: 10,
@@ -64,50 +59,53 @@ const useStyles = makeStyles((theme: Theme) =>
 interface Props {
   configForm?: IFormRegister,
   dataFields?: IPersona | {}
-  edit?:boolean
-  
+  edit?: boolean
+
 }
 
 const Register: FC<Props> = ({ configForm, dataFields = {} }) => {
 
-  console.log("Campos del formulario",configForm)
+  console.log("Campos del formulario", configForm)
 
   const classes = useStyles();
 
   const { formData, handleChangeForm, handleSubmit } = useForm({
-    nombre:     dataFields["nombre" as keyof Object]    || '',
-    ndoc:       dataFields["ndoc" as keyof Object]      || '',
-    telefono:   dataFields["telefono" as keyof Object]  || '',
-    email:      dataFields["email" as keyof Object]     || '',
-    domicilio:  dataFields["domicilio" as keyof Object] || '',
-    sexo:       dataFields["sexo" as keyof Object]      || '',
-    fecnac:     dataFields["fecnac" as keyof Object]    || '',
-    cuit:       dataFields["cuit" as keyof Object]      || '',
-    tipodoc:    dataFields["tipodoc" as keyof Object]   || '',
-    idperaul:   dataFields["idperaul" as keyof Object]  || '',
-    codigo:     dataFields["codigo" as keyof Object]    || '',
-    baja:       dataFields["baja" as keyof Object]      || '',
+    nombre: dataFields["nombre" as keyof Object] || '',
+    ndoc: dataFields["ndoc" as keyof Object] || '',
+    telefono: dataFields["telefono" as keyof Object] || '',
+    email: dataFields["email" as keyof Object] || '',
+    domicilio: dataFields["domicilio" as keyof Object] || '',
+    sexo: dataFields["sexo" as keyof Object] || '',
+    fecnac: dataFields["fecnac" as keyof Object] || '',
+    cuit: dataFields["cuit" as keyof Object] || '',
+    tipodoc: dataFields["tipodoc" as keyof Object] || '',
+    idperaul: dataFields["idperaul" as keyof Object] || '',
+    codigo: dataFields["codigo" as keyof Object] || '',
+    baja: dataFields["baja" as keyof Object] || '',
   }, addPersona)
 
   let transformDate = dataFields["fecnac" as keyof Object] ? dataFields["fecnac" as keyof Object].toString() : ''
 
   return (
-    <Container className={classes.container} component="main" maxWidth="lg">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Typography className={classes.title} variant="h5">
-          {configForm && configForm.titleForm}
-        </Typography>
-        <form
-          className={classes.form}
-          onSubmit={handleSubmit}
-        >
+    <Box className={classes.container} height="80%">
+      <Typography className={classes.title} variant="h5">
+        {configForm && configForm.titleForm}
+      </Typography>
+      <form
+        className={classes.form}
+        onSubmit={handleSubmit}
+      >
+        <Grid container>
           {
             configForm && configForm.fields.map((fields, index) =>
               <Grid
                 key={index}
-                className={classes.containernInput}>
+                className={classes.containernInput}
+                item
+                xs={12}
+                sm={5}
 
+              >
                 <InputForm
                   size="medium"
                   name={fields.name}
@@ -118,11 +116,11 @@ const Register: FC<Props> = ({ configForm, dataFields = {} }) => {
                   required
                   onChange={handleChangeForm}
                   InputLabelProps={fields.name === 'fecnac' ? { shrink: true } : {}}
-                  defaultValue={fields.name === 'fecnac' 
-                    ? transformDate && new Date(transformDate).toISOString().slice(0, 10) 
+                  defaultValue={fields.name === 'fecnac'
+                    ? transformDate && new Date(transformDate).toISOString().slice(0, 10)
                     : dataFields[fields.name as keyof Object] === null
-                    ? ''
-                    : dataFields[fields.name as keyof Object]}
+                      ? ''
+                      : dataFields[fields.name as keyof Object]}
                 />
               </Grid>)
           }
@@ -132,9 +130,9 @@ const Register: FC<Props> = ({ configForm, dataFields = {} }) => {
             className={classes.submit}>
             {configForm && configForm.buttonSubmitLabel}
           </Button>
-        </form>
-      </div>
-    </Container>
+        </Grid>
+      </form>
+    </Box>
   )
 }
 
