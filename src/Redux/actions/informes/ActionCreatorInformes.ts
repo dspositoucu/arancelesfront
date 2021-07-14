@@ -110,6 +110,10 @@ export const alumnosSinCuenta = (state:boolean):AlumnosSinCuenta => {
     }
 }
 
+export const cargarListaInformesFalsas = (data) =>{
+    return getAllData(data)
+}
+
 export const getAllDataInformes = () => {
     return (dispatch: Dispatch) => {
         return new InformesApi()

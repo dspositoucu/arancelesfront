@@ -9,7 +9,7 @@ import AuthRoute from "./componentes/AuthRoute";
 import LoginPage from './pages/LoginPage'
 import ListaPersonas from './pages/ListaPersonas';
 import Informes from './pages/Informes';
-import Cuentas from './pages/Cuentas';
+import Cuentas from './pages/cuentas';
 
 
 function App() {

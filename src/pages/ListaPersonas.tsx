@@ -7,8 +7,11 @@ import Table from '../componentes/CustomTable'
 //modelos
 import { AppState } from '../Redux/state/AppState';
 
+//lista de personas falsas 
+import ListaFalsa from '../fakeData/personas.json'
+
 //acciones
-import { getAllPersonas } from '../Redux/actions/personas/ActionCreator'
+import { getAllPersonas, cargarListaPersonasFalsas } from '../Redux/actions/personas/ActionCreator'
 
 const ListaPersonas = () => {
 
@@ -17,9 +20,9 @@ const ListaPersonas = () => {
 
 
   const cargarDatos = () => {
-    if (listPerson.length <= 0) {
-      dispatch(getAllPersonas())
-    }
+    //if (ListaFalsa.length <= 0) {
+      dispatch(cargarListaPersonasFalsas(ListaFalsa))
+    //}
   }
   useEffect(() => {
     cargarDatos()

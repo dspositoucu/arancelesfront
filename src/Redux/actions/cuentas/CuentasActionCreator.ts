@@ -53,6 +53,9 @@ export const updateCuentas = (CuentasId: number | string, Cuentas: typesModels, 
     }
 }
  
+export const cargarListaCuentasFalsas = (cuentas) =>{
+    return getCuentasList(cuentas)
+}
 
 export const getAllCuentas = () => {
     return (dispatch: Dispatch) => {

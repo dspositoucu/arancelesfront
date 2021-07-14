@@ -15,7 +15,6 @@ import { IPersona, typesModels } from '../../../models';
 
 
 
-
 const addPersonAction = (person: typesModels): AddPersonAction => {
     return {
         type: ActionTypes.ADD_PERSON,
@@ -66,6 +65,12 @@ export const updatePerson = (personId: number | string, person: typesModels, ind
     }
 }
  
+
+// cargar lista de personas falsas 
+export const cargarListaPersonasFalsas = (persona) =>{
+ return getPersonList(persona)
+}
+
 
 export const getAllPersonas = () => {
     return (dispatch: Dispatch) => {

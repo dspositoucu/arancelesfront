@@ -7,8 +7,11 @@ import Table from '../componentes/CustomTable'
 //modelos
 import { AppState } from '../Redux/state/AppState';
 
+// data fake 
+import informesFake from '../fakeData/informes.json'
+
 //Actions
-import { getAllDataInformes } from '../Redux/actions/informes/ActionCreatorInformes'
+import { getAllDataInformes, cargarListaInformesFalsas } from '../Redux/actions/informes/ActionCreatorInformes'
 
 const Informes = () => {
 
@@ -18,7 +21,7 @@ const Informes = () => {
   const dispatch = useDispatch()
 
   const cargarDatos = () => {
-    dispatch(getAllDataInformes())
+    dispatch(cargarListaInformesFalsas(informesFake))
   }
   useEffect(() => {
     cargarDatos()

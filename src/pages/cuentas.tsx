@@ -4,11 +4,14 @@ import { useDispatch, useSelector } from 'react-redux'
 // components
 import Table from '../componentes/CustomTable'
 
+
+//lista cuentas falsas
+import listaCuentas from '../fakeData/cuentas.json' 
 //modelos
 import { AppState } from '../Redux/state/AppState';
 
 //Actions
-import { getAllCuentas } from '../Redux/actions/cuentas/CuentasActionCreator'
+import { getAllCuentas, cargarListaCuentasFalsas } from '../Redux/actions/cuentas/CuentasActionCreator'
 
 const Cuentas = () => {
 
@@ -18,7 +21,7 @@ const Cuentas = () => {
   const dispatch = useDispatch()
 
   const cargarDatos = () => {
-    dispatch(getAllCuentas())
+    dispatch(cargarListaCuentasFalsas(listaCuentas))
   }
   useEffect(() => {
     cargarDatos()

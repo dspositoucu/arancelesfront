@@ -9,12 +9,13 @@ interface Props {
 }
 
 const AuthRoute: FC<Props> = ({ children, exact, path }) => {
-  const isLogin = !!getDataLocalStorage('access_token')
+  const isLogin = true //!!getDataLocalStorage('access_token')
   
   const checkExiperd = () =>{
-    const {exp} = getDecodeTokenLocalStorage()
-    console.log(exp)
-    return  exp > new Date().getTime()/1000  
+    //const {exp} = getDecodeTokenLocalStorage()
+    //console.log(exp)
+    //return  exp > new Date().getTime()/1000  
+    return true
   }
 
   console.log('TOKEN', checkExiperd())
