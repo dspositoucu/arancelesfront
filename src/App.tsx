@@ -10,6 +10,8 @@ import LoginPage from './pages/LoginPage'
 import ListaPersonas from './pages/ListaPersonas';
 import Informes from './pages/Informes';
 import Cuentas from './pages/cuentas';
+import Aranceles from './pages/Aranceles';
+import Barridas from './pages/Barridas'
 
 
 function App() {
@@ -31,6 +33,14 @@ function App() {
 
             <AuthRoute exact path="/cuentas">
               <Cuentas />
+            </AuthRoute>
+
+            <AuthRoute exact path="/aranceles">
+              <Aranceles />
+            </AuthRoute>
+
+            <AuthRoute exact path="/barridas">
+              <Barridas />
             </AuthRoute>
           </Layout>
 

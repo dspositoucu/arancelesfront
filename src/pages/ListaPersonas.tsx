@@ -21,7 +21,7 @@ const ListaPersonas = () => {
 
   const cargarDatos = () => {
     //if (ListaFalsa.length <= 0) {
-      dispatch(cargarListaPersonasFalsas(ListaFalsa))
+      dispatch(getAllPersonas())
     //}
   }
   useEffect(() => {

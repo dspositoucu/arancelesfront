@@ -55,6 +55,14 @@ export interface ICuentasInitialState {
     listCuentas: ICuentas[] | [] | any[]
 }
 
+export interface IArancelesInitialState {
+    listAranceles : [] | any[]
+}
+
+export interface IBarridasInitialState {
+    listBarridas: [] | any[]
+}
+
 export interface IModalInitialState {
     modalRegister?: boolean,
     modalEdit?: boolean,
@@ -69,6 +77,8 @@ export interface AppState {
     PersonState:IPersonInitialState,
     UsuarioState:IUserInitialState,
     ModalState: IModalInitialState,
-    InformesState: IInformesInitialState
-    GlobalState: IGlobalInitialState
+    InformesState: IInformesInitialState,
+    GlobalState: IGlobalInitialState,
+    ArancelesState: IArancelesInitialState,
+    BarridasState:IBarridasInitialState
 }

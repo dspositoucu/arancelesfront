@@ -21,7 +21,7 @@ const Cuentas = () => {
   const dispatch = useDispatch()
 
   const cargarDatos = () => {
-    dispatch(cargarListaCuentasFalsas(listaCuentas))
+    dispatch(getAllCuentas())
   }
   useEffect(() => {
     cargarDatos()

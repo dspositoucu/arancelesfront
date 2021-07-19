@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const SearchBarTable: FC<Props> = ({ functionFilter, filterSearchBar }) => {
+const SearchBarTable: FC<Props> = ({ functionFilter, filterSearchBar=[] }) => {
     const classes = useStyles();
     const { tableFilterinUse } = useSelector((state:AppState)=> state.GlobalState)
     const [filter, setFilter] = useState<any>(filterSearchBar[0].key) 

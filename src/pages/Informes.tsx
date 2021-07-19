@@ -21,7 +21,7 @@ const Informes = () => {
   const dispatch = useDispatch()
 
   const cargarDatos = () => {
-    dispatch(cargarListaInformesFalsas(informesFake))
+    dispatch(getAllDataInformes())
   }
   useEffect(() => {
     cargarDatos()

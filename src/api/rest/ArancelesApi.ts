@@ -2,15 +2,16 @@ import { AxiosResponse } from 'axios'
 import AxiosIntance from '../../axios/axiosInstace';
 
 
-export class CuentasApi {
-    private BaseUrl = 'cuentas'
+export class ArancelesApi {
+    private BaseUrl = 'aranceles'
 
-    getAllCuentas(): Promise<AxiosResponse> {
+    getAllAranceles(): Promise<AxiosResponse> {
         return AxiosIntance.get(this.BaseUrl)
     }
 
-    addCuentas(cuenta):Promise<AxiosResponse> {
+    addAranceles(cuenta):Promise<AxiosResponse> {
         return AxiosIntance.post(this.BaseUrl,cuenta)
     }
+
 
 }

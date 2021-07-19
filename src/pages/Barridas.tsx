@@ -4,27 +4,28 @@ import { useDispatch, useSelector } from 'react-redux'
 // components
 import Table from '../componentes/CustomTable'
 
+
+//lista cuentas falsas
+import listaCuentas from '../fakeData/cuentas.json' 
 //modelos
 import { AppState } from '../Redux/state/AppState';
 
 //Actions
-import { getAllAranceles } from '../Redux/actions/aranceles/ArancelesActionCreator'
+import { getAllBarridas, cargarListaCuentasFalsas } from '../Redux/actions/barridas/BarridasActionCreator'
 
-const Aranceles = () => {
+const Cuentas = () => {
 
-  const { listAranceles } = useSelector((state: AppState) => state.ArancelesState)
+  const { listCuentas } = useSelector((state: AppState) => state.CuentasState)
 
 
   const dispatch = useDispatch()
 
   const cargarDatos = () => {
-    dispatch(getAllAranceles())
+    dispatch(getAllBarridas())
   }
   useEffect(() => {
     cargarDatos()
   }, [])
-
-  console.log("ESTOS SON LOS ARANCELES >>>>> ",listAranceles )
 
   // El componente Table recibe dos props 
   // -tableData: correspone a los datos que se quieren renderizar 
@@ -34,13 +35,13 @@ const Aranceles = () => {
   return <Table
     filterSearchBar={[
       {
-        key: "NOMBRE DE CUENTA",
-        label: "Nombre de Cuenta"
+        key: "DESCRIPCION",
+        label: "Descripcion"
       },
     ]}
     filterMenu={false}
-    tableData={listAranceles}
-    columns={["CODFAC", "CODCAR", "IDCUENTA", "NOMBRE DE CUENTA", "DESCRIPCION", "MES", "ANIO", "MONTO", "BONIFICACION", "RECARGO", "BIBLIOTECA", "DEBITA"]}
+    tableData={listCuentas}
+    columns={["ID", "CODFAC", "CODCAR", "DESCRIPCION", "CANTCUOTAS", "IDSEDE", "GRUPO BARRIDA"]}
     actionsInHeader={["imprimir","nuevo"]}
     actionInRow={['editar']}
     rowChek={false}
@@ -95,4 +96,4 @@ const Aranceles = () => {
   />
 }
 
-export default Aranceles
+export default Cuentas

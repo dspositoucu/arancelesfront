@@ -110,7 +110,7 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList, filterSearchBar, filt
     const { filterTags } = useSelector((state: AppState) => state.InformesState)
     
     const showTags = () => {
-        let arrTags = []
+        let arrTags:string[] = []
         for (let tag in filterTags) {
             if (filterTags[tag as keyof Object]) {
                 arrTags.push(tag)

@@ -121,15 +121,15 @@ const FilterMenu: FC<Props> = (props) => {
         setAnchorEl(null);
     };
 
-    const showTags = () => {
-        let arrTags = []
+   /*  const showTags = () => {
+        let arrTags:string[] = []
         for (let tag in filterTags) {
             if (filterTags[tag as keyof Object]) {
                 arrTags.push(tag)
             }
         }
         return arrTags
-    }
+    } */
 
     return (
         <>
