@@ -21,7 +21,7 @@ const InformesReducer: Reducer<IInformesInitialState, InformesAction> = (state =
     switch (action.type) {
 
         case ActionTypes.GET_ALL_DATA: {
-            let data = action.data.sort(data => { if (parseInt(data.CBU) > 0) return -1 })
+            let data = action.data.sort((datA, datB) => ((parseInt(datA.CBU) > (parseInt(datB.CBU)) ? 1 : -1 )))
             return {
                 ...state,
                 AllDataInformes: data,
