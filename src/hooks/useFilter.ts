@@ -8,26 +8,28 @@ import { globalSetFilterList, globalSetTableFilterinUse } from '../Redux/actions
 import { AppState } from '../Redux/state/AppState';
 // hook para filtrar los datos de una tabla de una columna en especifico 
 
-export const useFilter = <T extends typesModels[] & IInformes[] & IPersona[] >(tableData: T) => {
+export const useFilter = <T extends typesModels[] & IInformes[] & IPersona[]>(tableData: T) => {
     const dispatch = useDispatch()
-    const { filterList, tableFilterinUse } = useSelector((state :AppState)=> state.GlobalState )
+    const { filterList, tableFilterinUse } = useSelector((state: AppState) => state.GlobalState)
 
     // funcion filtradora que recive el evento y la culumna a filtrar, setea el estado con la nueva lista
-    console.log("Valor de la tabla",tableData)
     const handleFilter = ({ target }: ChangeEvent<HTMLInputElement>, filterColumn: string): void => {
         console.log("filterColumn", filterColumn)
         if (!tableData.length) return
+        console.log("valor de la talba", tableData)
         let dataSearch = target.value;
         let resultFilter = tableData.filter(data => {
-            let per = data[filterColumn as keyof Object].toString().toLowerCase()
+            let per = ((data[filterColumn.toLowerCase() as keyof Object])
+                ? (data[filterColumn.toLowerCase() as keyof Object])
+                : (data[filterColumn.toUpperCase() as keyof Object])).toString().toLowerCase()
             return per.includes(dataSearch.toLowerCase())
         });
-        
+
         dispatch(globalSetFilterList(resultFilter))
-    
-        target.value.length ? dispatch(globalSetTableFilterinUse(true)) : dispatch(globalSetTableFilterinUse(false))  
+
+        target.value.length ? dispatch(globalSetTableFilterinUse(true)) : dispatch(globalSetTableFilterinUse(false))
     }
 
-    return { filterList, handleFilter, tableFilterinUse}
+    return { filterList, handleFilter, tableFilterinUse }
 
 }

@@ -63,10 +63,8 @@ const useStyles = makeStyles((theme: Theme) =>
 const SearchBarTable: FC<Props> = ({ functionFilter, filterSearchBar=[] }) => {
     const classes = useStyles();
     const { tableFilterinUse } = useSelector((state:AppState)=> state.GlobalState)
-    const [filter, setFilter] = useState<any>(filterSearchBar[0].key) 
     const [ textInput, setTextInput ] = useState('')
-
-    console.log(" Filter Search Bar " ,filterSearchBar)
+    const [filter, setFilter] = useState<any>(filterSearchBar[0].key) 
  
     const handleChangeFilter = ({ target }: ChangeEvent<{ value: unknown }>) => {
         setFilter(target.value)

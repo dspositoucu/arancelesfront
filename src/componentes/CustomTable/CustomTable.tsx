@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useState,ReactNode } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -15,7 +15,6 @@ import Paper from '@material-ui/core/Paper';
 import RegisterModal from '../Modals/registerModal'
 
 //interface
-import IFormRegister from './interface/IFormRegister'
 import IFilterSearchBar from './interface/IFilterSearchBar';
 
 //actions
@@ -36,12 +35,13 @@ import Register from '../Forms/Register'
 import { Row, RowHeader } from '../Row';
 import MenuHeaderTable from './MenuHeaderTable';
 import TablePaginationActions from './TablePaginationActions'
+import FormAranceles from '../../pages/Aranceles/FormAranceles'
 
 interface Props {
     tableData: any[]
     columns: string[],
     actionsInRow?: string[],
-    formRegister?: IFormRegister,
+    FormRegister?: ReactNode,
     filterSearchBar?:IFilterSearchBar[],
     actionsInHeader: string[],
     actionInRow:string[],
@@ -71,7 +71,7 @@ const useStyles = makeStyles(() =>
         }
     }));
 
-const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsInHeader, formRegister, rowChek, filterMenu }) => {
+const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsInHeader, FormRegister, rowChek, filterMenu }) => {
     const dispatch = useDispatch()
     const classes = useStyles();
 
@@ -118,11 +118,7 @@ const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsIn
                     closeModal={()=>dispatch(openModalRegister())}
                     active={modalRegister}
                     >
-                    <Register
-                        edit={modalEdit}
-                        configForm={formRegister}
-                        dataFields={ modalEdit && personDetails} 
-                    />
+                        {FormRegister}
                 </RegisterModal>
             }
             <MenuHeaderTable

@@ -2,16 +2,16 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 // components
-import Table from '../componentes/CustomTable'
+import Table from '../../componentes/CustomTable'
 
 //modelos
-import { AppState } from '../Redux/state/AppState';
+import { AppState } from '../../Redux/state/AppState';
 
 // data fake 
-import informesFake from '../fakeData/informes.json'
+import informesFake from '../../fakeData/informes.json'
 
 //Actions
-import { getAllDataInformes, cargarListaInformesFalsas } from '../Redux/actions/informes/ActionCreatorInformes'
+import { getAllDataInformes, cargarListaInformesFalsas } from '../../Redux/actions/informes/ActionCreatorInformes'
 
 const Informes = () => {
 

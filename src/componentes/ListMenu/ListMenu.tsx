@@ -68,6 +68,9 @@ const ListMenu: FC<Props> = (props) => {
             <ListItem onClick={() => history.push('/aranceles')} button >
                             <ListItemText classes={{ primary: classes.menuOpt }} primary={'Aranceles'} />
             </ListItem>
+            <ListItem onClick={() => history.push('/barridas')} button >
+                            <ListItemText classes={{ primary: classes.menuOpt }} primary={'Barridas'} />
+            </ListItem>
                {/*  {menuData.map((menuOp, i) => (
                     <div key={i}>
                         <ListItem onClick={() => handleClick(menuOp.MenuOption)} button >

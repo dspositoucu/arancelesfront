@@ -6,12 +6,12 @@ import Layout from './componentes/Layout'
 import AuthRoute from "./componentes/AuthRoute";
 
 //Page
-import LoginPage from './pages/LoginPage'
-import ListaPersonas from './pages/ListaPersonas';
-import Informes from './pages/Informes';
-import Cuentas from './pages/cuentas';
-import Aranceles from './pages/Aranceles';
-import Barridas from './pages/Barridas'
+import LoginPage from './pages/LoginPage/LoginPage'
+import ListaPersonas from './pages/ListaPersonas/ListaPersonas';
+import Informes from './pages/Informes/Informes';
+import Cuentas from './pages/Cuentas/cuentas';
+import Aranceles from './pages/Aranceles/Aranceles';
+import Barridas from './pages/Barrida/Barridas'
 
 
 function App() {

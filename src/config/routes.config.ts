@@ -1,10 +1,10 @@
 
 
 // components
-import Cuentas from '../pages/cuentas'
-import ListaPersonas from '../pages/ListaPersonas'
-import Informes from '../pages/Informes'
-import LoginPage from '../pages/LoginPage';
+import Cuentas from '../pages/Cuentas/cuentas'
+import ListaPersonas from '../pages/ListaPersonas/ListaPersonas'
+import Informes from '../pages/Informes/Informes'
+import LoginPage from '../pages/LoginPage/LoginPage';
 
 import RouteItem from '../models/RouteItem.model';
 
