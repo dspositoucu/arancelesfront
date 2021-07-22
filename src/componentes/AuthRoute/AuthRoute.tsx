@@ -9,8 +9,9 @@ interface Props {
 }
 
 const AuthRoute: FC<Props> = ({ children, exact, path }) => {
+
   const isLogin = getDataLocalStorage('access_token')
-  
+  if(!isLogin) return <Redirect to="/"/>
   const checkExiperd = () =>{
     const {exp} = getDecodeTokenLocalStorage()
     console.log(exp)
