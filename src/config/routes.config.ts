@@ -1,7 +1,7 @@
 
 
 // components
-import Cuentas from '../pages/Cuentas/cuentas'
+import Cuentas from '../pages/Cuentas/Cuentas'
 import ListaPersonas from '../pages/ListaPersonas/ListaPersonas'
 import Informes from '../pages/Informes/Informes'
 import LoginPage from '../pages/LoginPage/LoginPage';

@@ -12,7 +12,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 //modals 
-import RegisterModal from '../Modals/registerModal'
+import Modal from '../Modals/Modal'
 
 //interface
 import IFilterSearchBar from './interface/IFilterSearchBar';
@@ -29,7 +29,7 @@ import { useFilter } from '../../hooks/useFilter';
 import { usePagination } from '../../hooks/usePagination';
 
 //forms
-import Register from '../Forms/Register'
+//import Register from '../Forms/Register'
 
 //component
 import { Row, RowHeader } from '../Row';
@@ -114,12 +114,12 @@ const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsIn
         <TableContainer className={classes.tableContainer} component={Paper}>
             {/* ================= MODALES =================*/}
             {modalRegister &&
-                <RegisterModal
+                <Modal
                     closeModal={()=>dispatch(openModalRegister())}
                     active={modalRegister}
                     >
                         {FormRegister}
-                </RegisterModal>
+                </Modal>
             }
             <MenuHeaderTable
                 filterMenu={filterMenu}

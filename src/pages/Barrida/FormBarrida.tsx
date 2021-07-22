@@ -1,112 +1,139 @@
-import { FC } from 'react'
-import {
-  Box,
-  Button,
-  Grid,
-  Typography,
-} from '@material-ui/core';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import React, { useState, useEffect } from 'react'
+import { Grid, } from '@material-ui/core';
 
+// Import Componentes
+import Controls from '../../componentes/Forms/Controls'
 
-//Custom hooks 
-import { useForm } from '../../hooks/useForm'
+// Custom hooks
+import { useForm, Form } from '../../hooks/useForm'
+import useSubmit from '../../hooks/useSubmit';
 
-//components
-import InputForm from '../../componentes/Forms/InputForm'
+//Actions
+import { addPersona } from '../../Redux/actions/personas/ActionCreator';
 
-//actions
-import { addPersona } from '../../Redux/actions/personas/ActionCreator'
-
-//interface 
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    containernInput: {
-      margin: "10px 10px",
-      display: 'flex',
-      justifyContent: 'center',
-    },
-    form: {
-      width: '100%',
-      marginTop: 10,
-      textAlign: 'center',
-      flexWrap: 'wrap'
-    },
-    submit: {
-      background: "#6E6893",
-      color: "#e3e0ee",
-      '&:hover': {
-        backgroundColor: '#3c356d',
-      },
-      marginTop: 10
-    },
-    container: {
-      width: '80vw',
-      background: "#FFF",
-      padding: 15,
-      borderRadius: 10,
-    },
-    title: {
-      color: "#25213B",
-      fontWeight: 400
-    },
-
-  }));
-
-const FormRegister = () => {
-
-  const classes = useStyles();
-
-  const { formData, handleChangeForm, handleSubmit } = useForm({
-    nombre:  '',
-    ndoc:  '',
-    telefono: '',
-    email:  '',
-    domicilio:  '',
-    sexo:  '',
-    fecnac:  '',
-    cuit:  '',
-    tipodoc:  '',
-    idperaul:  '',
-    codigo:  '',
-    baja:  '',
-  }, addPersona)
-
-  return (
-    <Box className={classes.container} height="80%">
-      <Typography className={classes.title} variant="h5">
-        Formulario Generico
-      </Typography>
-      <form
-        className={classes.form}
-        onSubmit={()=>{}}
-      >
-        <Grid container>
-              <Grid
-                className={classes.containernInput}
-                item
-                xs={12}
-                sm={5}
-              >
-                <InputForm
-                  size="medium"
-                  name="Cuota"
-                  label="Cuota"
-                  placeholder="Cuota"
-                  required
-                  type="text"
-                />
-              </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            className={classes.submit}>
-            Enviar Formulario
-          </Button>
-        </Grid>
-      </form>
-    </Box>
-  )
+const initialFValues = {
+  descripcion: '',
+  generado: '',
+  enviado: '',
+  recibido: '',
+  barrida: '',
+  idgrupobarrida:'',
+  fbarrida:'',
+  recibos:'',
+  acreditacion:'',
+  entregado:''
 }
 
-export default FormRegister
+const FormBarrida = () => {
+  const {
+    values,
+    setValues,
+    handleChangeForm,
+    resetForm,
+  } = useForm(initialFValues, true);
+
+  const { formSubmit } = useSubmit(addPersona, values)
+
+  return (
+    <Form
+      title="Generar Barrida"
+      onSubmit={formSubmit}>
+      <Grid container>
+        <Grid item xs={6}>
+          <Controls.Input
+            name="descripcion"
+            label="Descripcion"
+            value={values.descripcion}
+            onChange={handleChangeForm}
+          />
+          <Controls.Input
+            label="Generado"
+            name="generado"
+            value={values.generado}
+            onChange={handleChangeForm}
+          />
+          <Controls.Input
+            label="Enviado"
+            name="enviado"
+            value={values.enviado}
+            onChange={handleChangeForm}
+          />
+          <Controls.Input
+            label="Recibido"
+            name="recibido"
+            value={values.recibido}
+            onChange={handleChangeForm}
+          />
+          <Controls.Input
+            label="Barrida"
+            name="barrida"
+            value={values.barrida}
+            onChange={handleChangeForm}
+          />
+          <Controls.Input
+            label="ID Grupo Barrida"
+            name="idgrupobarrida"
+            value={values.barrida}
+            onChange={handleChangeForm}
+          />
+
+        </Grid>
+        <Grid item xs={6}>
+          <Controls.Input
+            label="Entregado"
+            name="entregado"
+            type="date"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={values.fecnac}
+            onChange={handleChangeForm}
+          />
+          <Controls.Input
+            label="Fecha Barrida"
+            name="fbarrida"
+            type="date"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={values.fecnac}
+            onChange={handleChangeForm}
+          />
+          <Controls.Input
+            label="Acreditacion"
+            name="acreditacion"
+            type="date"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={values.fecnac}
+            onChange={handleChangeForm}
+          />
+          <Controls.Input
+            label="Recibos"
+            name="fecnac"
+            type="date"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={values.fecnac}
+            onChange={handleChangeForm}
+          />
+          <div>
+            <Controls.Button
+              text="Limpiar Formulario"
+              variant="secondary"
+              onClick={resetForm} />
+
+            <Controls.Button
+              type="submit"
+              variant="primary"
+              text="Generar Nueva Barrida" />
+          </div>
+
+        </Grid>
+      </Grid>
+    </Form>
+  )
+}
+export default FormBarrida

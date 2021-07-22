@@ -31,16 +31,19 @@ const useStyles = makeStyles(() =>
             display: 'grid',
             placeItems: 'center',
             transform: 'translate(-50%,-50%)',
-            zIndex: 80000
+            zIndex: 80000,
         },
         modal: {
-            width: 'max-content',
+            width: '80vw',
             height:'max-content',
+            borderRadius:10,
+            padding:30,
+            background:'#FFF',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             flexDirection: 'column',
-            position: 'fixed',
+            //position: 'fixed',
             zIndex: 80000,
         },
     }));
@@ -48,7 +51,7 @@ const useStyles = makeStyles(() =>
 const modalRoot = document.getElementById('modal')
 
 
-const RegisterModal: FC<Prop> = ({ active, closeModal, children }) => {
+const Modal: FC<Prop> = ({ active, closeModal, children }) => {
 
     const classes = useStyles()
 
@@ -89,4 +92,4 @@ const RegisterModal: FC<Prop> = ({ active, closeModal, children }) => {
         )
         : null
 }
-export default RegisterModal
+export default Modal

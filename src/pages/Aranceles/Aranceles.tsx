@@ -34,8 +34,6 @@ const Aranceles = () => {
   // -actions (OPCIONAL): acciones para realizar en la tabla 
 
   let listaSelect = listAranceles.map(arancels=>arancels["NOMBRE DE CUENTA"])
-    listaSelect.unshift("SIN CUENTA-00")
-  console.log("listado de cuentas",listaSelect)
 
   return <Table
     filterSearchBar={[

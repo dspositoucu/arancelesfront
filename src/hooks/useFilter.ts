@@ -14,13 +14,13 @@ export const useFilter = <T extends typesModels[] & IInformes[] & IPersona[]>(ta
 
     // funcion filtradora que recive el evento y la culumna a filtrar, setea el estado con la nueva lista
     const handleFilter = ({ target }: ChangeEvent<HTMLInputElement>, filterColumn: string): void => {
-        console.log("filterColumn", filterColumn)
+        
         if (!tableData.length) return
-        console.log("valor de la talba", tableData)
+
         let dataSearch = target.value;
         let resultFilter = tableData.filter(data => {
-            let per = ((data[filterColumn.toLowerCase() as keyof Object])
-                ? (data[filterColumn.toLowerCase() as keyof Object])
+            let per = ((data[filterColumn.toLowerCase() as keyof Object]) // SE COMPRUEBA SI LOS NOMBRES DE LAS COLUMNAS ESTAN EN MAYUSCULAS O MINUSCULAS
+                ? (data[filterColumn.toLowerCase() as keyof Object])                  
                 : (data[filterColumn.toUpperCase() as keyof Object])).toString().toLowerCase()
             return per.includes(dataSearch.toLowerCase())
         });

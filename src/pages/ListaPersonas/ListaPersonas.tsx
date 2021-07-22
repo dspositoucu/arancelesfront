@@ -10,6 +10,9 @@ import { AppState } from '../../Redux/state/AppState';
 //lista de personas falsas 
 import ListaFalsa from '../../fakeData/personas.json'
 
+//formulario
+import FormPersonas from './FormPersonas'
+
 //acciones
 import { getAllPersonas, cargarListaPersonasFalsas } from '../../Redux/actions/personas/ActionCreator'
 
@@ -40,6 +43,7 @@ const ListaPersonas = () => {
     actionsInHeader={["imprimir", "nuevo", "borrar"]}
     actionInRow={['editar']}
     rowChek={false}
+    FormRegister={<FormPersonas/>}
     filterSearchBar={[
       {
         key: "NOMBRE",

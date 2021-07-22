@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // components
 import Table from '../../componentes/CustomTable'
-
+import FormCuentas from './FormCuentas'
 
 //lista cuentas falsas
 import listaCuentas from '../../fakeData/cuentas.json' 
+
 //modelos
 import { AppState } from '../../Redux/state/AppState';
 
@@ -45,6 +46,7 @@ const Cuentas = () => {
     actionsInHeader={["imprimir","nuevo"]}
     actionInRow={['editar']}
     rowChek={false}
+    FormRegister={<FormCuentas/>}
   />
 }
 

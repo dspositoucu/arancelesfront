@@ -9,7 +9,7 @@ import AuthRoute from "./componentes/AuthRoute";
 import LoginPage from './pages/LoginPage/LoginPage'
 import ListaPersonas from './pages/ListaPersonas/ListaPersonas';
 import Informes from './pages/Informes/Informes';
-import Cuentas from './pages/Cuentas/cuentas';
+import Cuentas from './pages/Cuentas/Cuentas';
 import Aranceles from './pages/Aranceles/Aranceles';
 import Barridas from './pages/Barrida/Barridas'
 

@@ -1,3 +1,4 @@
+import { ChangeEvent, useState, FormEvent } from 'react';
 import {
   CssBaseline,
   Button,
@@ -6,13 +7,12 @@ import {
   Grid,
 } from '@material-ui/core';
 import { makeStyles, Theme, createStyles} from '@material-ui/core/styles';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom'
 //action
 import { loginUser } from '../../Redux/actions/users/userActionCreator';
 
 //custom hooks
 import { useForm } from '../../hooks/useForm'
+import useSubmit from '../../hooks/useSubmit'
 
 import InputForm from './InputForm'
 
@@ -55,15 +55,15 @@ const useStyles = makeStyles((theme: Theme) =>
   }));
 
 const Login = () => {
-  const history = useHistory()
-  const dispatch = useDispatch()
   const classes = useStyles();
-
-  const { handleChangeForm, handleSubmit } = useForm({
+  
+  const { values,handleChangeForm} = useForm({
     username:'',
     password:''
-  },loginUser)
-
+  })
+  
+  const { formSubmit } = useSubmit(loginUser,values)
+ 
   return (
     <Container className={classes.container} component="main" maxWidth="xs">
     <CssBaseline />
@@ -73,7 +73,7 @@ const Login = () => {
       </Typography>
       <form
         className={classes.form}
-        onSubmit={handleSubmit}
+        onSubmit={formSubmit}
       >
         <Grid className={classes.containernInput}>
           <InputForm
