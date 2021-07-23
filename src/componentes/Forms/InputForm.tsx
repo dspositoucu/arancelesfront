@@ -14,7 +14,6 @@ const InputForm = withStyles({
         color: '#8a8a8a',
       },
       '& .MuiInputBase-input': {
-        marginLeft: 20,
         color: '#6E6893', // Text color
       },
       '& .MuiInput-underline:before': {

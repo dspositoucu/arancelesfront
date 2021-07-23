@@ -1,14 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { Grid, Typography, Divider  } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import Controls from '../../componentes/Forms/Controls'
 import { useForm, Form } from '../../hooks/useForm'
-import { makeStyles, createStyles, Theme, } from "@material-ui/core";
-
-const genderItems = [
-    { id: 'male', title: 'Male' },
-    { id: 'female', title: 'Female' },
-    { id: 'other', title: 'Other' },
-]
 
 const initialFValues = {
     idcuenta: 'SIN CUENTA-00',
@@ -17,17 +9,13 @@ const initialFValues = {
     bonificacion: '0',
     recargo: '0',
     biblioteca: '0',
-    mes:'',
-    anio:'',
-    descripcion:''
+    mes: '',
+    anio: '',
+    descripcion: '',
+    actual: '',
+    debitado: '',
+    debita: ''
 }
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    buttonGroup:{
-        margin:theme.spacing(1)
-    }
-  }))
 
 const FormAranceles = ({ selectList }) => {
     const {
@@ -36,48 +24,12 @@ const FormAranceles = ({ selectList }) => {
         handleChangeForm,
         resetForm,
     } = useForm(initialFValues, true);
-
-    const classes = useStyles()
-
     return (
-        <Form 
-        title="Formulario de Aranceles"
-        onSubmit={() => { }}>
+        <Form
+            title="Formulario de Aranceles"
+            onSubmit={() => { }}>
             <Grid container>
                 <Grid item xs={6}>
-                    <Controls.Input
-                        name="fullName"
-                        label="Full Name"
-                        value={values.fullName}
-                        onChange={handleChangeForm}
-                    />
-                    <Controls.Input
-                        label="Email"
-                        name="email"
-                        value={values.email}
-                        onChange={handleChangeForm}
-                    />
-                    <Controls.Input
-                        label="Mobile"
-                        name="mobile"
-                        value={values.mobile}
-                        onChange={handleChangeForm}
-                    />
-                    <Controls.Input
-                        label="City"
-                        name="city"
-                        value={values.city}
-                        onChange={handleChangeForm}
-                    />
-                </Grid>
-                <Grid item xs={6}>
-                    <Controls.RadioGroup
-                        name="gender"
-                        label="Gender"
-                        value={values.gender}
-                        onChange={handleChangeForm}
-                        items={genderItems}
-                    />
                     <Controls.Select
                         name="idcuenta"
                         label="Cuenta"
@@ -85,6 +37,94 @@ const FormAranceles = ({ selectList }) => {
                         onChange={handleChangeForm}
                         options={selectList}
                     />
+                    <Controls.Input
+                        name="Cuota"
+                        label="Cuota"
+                        value={values.Cuota}
+                        onChange={handleChangeForm}
+                    />
+                    <Controls.Input
+                        label="Monto"
+                        name="monto"
+                        value={values.monto}
+                        onChange={handleChangeForm}
+                    />
+                    <Controls.Input
+                        label="Recargo"
+                        name="recargo"
+                        value={values.recargo}
+                        onChange={handleChangeForm}
+                    />
+                    <Controls.Input
+                        label="Biblioteca"
+                        name="biblioteca"
+                        value={values.biblioteca}
+                        onChange={handleChangeForm}
+                    />
+                    <Controls.Input
+                        label="Bonificacion"
+                        name="bonificacion"
+                        value={values.bonificacion}
+                        onChange={handleChangeForm}
+                    />
+
+                </Grid>
+                <Grid item xs={6}>
+                    <Controls.Input
+                        label="Descripcion"
+                        name="descripcion"
+                        value={values.descripcion}
+                        onChange={handleChangeForm}
+                    />
+                    <Controls.Input
+                        label="Mes"
+                        name="mes"
+                        value={values.mes}
+                        onChange={handleChangeForm}
+                    />
+                    <Controls.Input
+                        label="Año"
+                        name="anio"
+                        value={values.anio}
+                        onChange={handleChangeForm}
+                    />
+                    <Controls.Checkbox
+                        name="actual"
+                        label="Actual"
+                        value={values.actual}
+                        onChange={handleChangeForm}
+                    />
+                    <Controls.Checkbox
+                        name="debitado"
+                        label="Debitado"
+                        value={values.debitado}
+                        onChange={handleChangeForm}
+                    />
+                    <Controls.Checkbox
+                        name="debita"
+                        label="Debita"
+                        value={values.debita}
+                        onChange={handleChangeForm}
+                    />
+
+                </Grid>
+                <Grid container xs={12}>
+                    <Grid xs={6}>
+                        <Controls.Button
+                            onClick={() => { }}
+                            variant="primary"
+                            text="Cancelar" />
+                    </Grid>
+                    <Grid container justify="flex-end" xs={6}>
+                        <Controls.Button
+                            text="Limpiar Formulario"
+                            variant="secondary"
+                            onClick={resetForm} />
+                        <Controls.Button
+                            type="submit"
+                            variant="primary"
+                            text="Nuevo Arancel" />
+                    </Grid>
                 </Grid>
             </Grid>
         </Form>

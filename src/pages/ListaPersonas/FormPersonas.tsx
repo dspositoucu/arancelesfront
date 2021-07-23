@@ -9,7 +9,7 @@ import { useForm, Form } from '../../hooks/useForm'
 import useSubmit from '../../hooks/useSubmit';
 
 //Actions
-import { addPersona } from '../../Redux/actions/personas/ActionCreator';  
+import { addPersona } from '../../Redux/actions/personas/ActionCreator';
 
 const genderItems = [
     { id: 'male', title: 'Masculino' },
@@ -40,7 +40,7 @@ const FormPersonas = () => {
         resetForm,
     } = useForm(initialFValues, true);
 
-    const { formSubmit } = useSubmit(addPersona,values)
+    const { formSubmit } = useSubmit(addPersona, values)
 
     return (
         <Form
@@ -63,6 +63,7 @@ const FormPersonas = () => {
                     <Controls.Input
                         label="Email"
                         name="email"
+                        type="email"
                         value={values.email}
                         onChange={handleChangeForm}
                     />
@@ -121,19 +122,26 @@ const FormPersonas = () => {
                         value={values.situaciontributaria}
                         onChange={handleChangeForm}
                     />
-                    <div>
-                        <Controls.Button
-                            text="Limpiar Formulario"
-                            variant="secondary"
-                            onClick={resetForm} />
-                            
-                        <Controls.Button
-                            type="submit"
-                            variant="primary"
-                            text="Registrar Nueva Persona" />
-                    </div>
 
                 </Grid>
+                    <Grid container xs={12}>
+                        <Grid xs={6}>
+                            <Controls.Button
+                                onClick={() => { }}
+                                variant="primary"
+                                text="Cancelar" />
+                        </Grid>
+                        <Grid container justify="flex-end" xs={6}>
+                            <Controls.Button
+                                text="Limpiar Formulario"
+                                variant="secondary"
+                                onClick={resetForm} />
+                            <Controls.Button
+                                type="submit"
+                                variant="primary"
+                                text="Registrar Persona" />
+                        </Grid>
+                    </Grid>
             </Grid>
         </Form>
     )

@@ -20,8 +20,9 @@ export const useFilter = <T extends typesModels[] & IInformes[] & IPersona[]>(ta
         let dataSearch = target.value;
         let resultFilter = tableData.filter(data => {
             let per = ((data[filterColumn.toLowerCase() as keyof Object]) // SE COMPRUEBA SI LOS NOMBRES DE LAS COLUMNAS ESTAN EN MAYUSCULAS O MINUSCULAS
-                ? (data[filterColumn.toLowerCase() as keyof Object])                  
-                : (data[filterColumn.toUpperCase() as keyof Object])).toString().toLowerCase()
+                ? (!!(data[filterColumn.toLowerCase() as keyof Object]) && (data[filterColumn.toLowerCase() as keyof Object]))                   
+                : (!!(data[filterColumn.toUpperCase() as keyof Object]) && (data[filterColumn.toUpperCase() as keyof Object]))
+                ).toString().toLowerCase()
             return per.includes(dataSearch.toLowerCase())
         });
 

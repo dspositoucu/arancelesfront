@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         buttonGroup: {
             margin: theme.spacing(1, 0.5),
-            display:"flex"
+            display: "flex"
         }
     }))
 
@@ -104,20 +104,25 @@ const FormCuentas = () => {
                         options={["Sede Central", "Santa Fe", "Sede Rosario"]}
                     />
                 </Grid>
-                    <Grid alignItems="flex-end" item xs={6}>
-                        <div className={classes.buttonGroup}>
-                            <Controls.Button
-                                text="Limpiar Formulario"
-                                variant="secondary"
-                                onClick={resetForm} />
-
-                            <Controls.Button
-                                type="submit"
-                                variant="primary"
-                                text="Registrar Nueva Persona" />
-                        </div>
+                <Grid container xs={12}>
+                    <Grid xs={6}>
+                        <Controls.Button
+                            onClick={() => { }}
+                            variant="primary"
+                            text="Cancelar" />
+                    </Grid>
+                    <Grid container justify="flex-end" xs={6}>
+                        <Controls.Button
+                            text="Limpiar Formulario"
+                            variant="secondary"
+                            onClick={resetForm} />
+                        <Controls.Button
+                            type="submit"
+                            variant="primary"
+                            text="Nueva Cuenta" />
                     </Grid>
                 </Grid>
+            </Grid>
         </Form>
     )
 }

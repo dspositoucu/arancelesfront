@@ -12,7 +12,7 @@ interface Props {
     children: ReactNode
 }
 
-const drawerWidth = 170;
+const drawerWidth = 140;
 
 
 const theme = createMuiTheme({
@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
         drawer: {
             width: drawerWidth,
+            height:'100vh'
         },
         drawerPaper: {
             width: drawerWidth,
@@ -59,7 +60,6 @@ const Layout: FC<Props> = ({ children }) => {
         <MuiThemeProvider theme={theme}>
         <div className={classes.root}>
             <CssBaseline />
-            <Header title="Sistema de Arancelamiento" />
             <Drawer
                 className={classes.drawer}
                 variant="permanent"
@@ -67,11 +67,10 @@ const Layout: FC<Props> = ({ children }) => {
                     paper: classes.drawerPaper,
                 }}
             >
-                <Toolbar />
+                {/* <Header title="Sistema de Arancelamiento" /> */}
                 <ListMenu />
             </Drawer>
             <main className={classes.content}>
-                <Toolbar />
                 {children}
             </main>
         </div>

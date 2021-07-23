@@ -45,7 +45,6 @@ interface Props {
 const useStyles = makeStyles(() =>
     createStyles({
         root: {
-            height: 50,
             display: "flex",
             flex: 1,
             justifyContent: "space-between",

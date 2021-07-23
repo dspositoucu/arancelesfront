@@ -17,11 +17,11 @@ const initialFValues = {
   enviado: '',
   recibido: '',
   barrida: '',
-  idgrupobarrida:'',
-  fbarrida:'',
-  recibos:'',
-  acreditacion:'',
-  entregado:''
+  idgrupobarrida: '',
+  fbarrida: '',
+  recibos: '',
+  acreditacion: '',
+  entregado: ''
 }
 
 const FormBarrida = () => {
@@ -70,15 +70,15 @@ const FormBarrida = () => {
             value={values.barrida}
             onChange={handleChangeForm}
           />
+
+        </Grid>
+        <Grid item xs={6}>
           <Controls.Input
             label="ID Grupo Barrida"
             name="idgrupobarrida"
             value={values.barrida}
             onChange={handleChangeForm}
           />
-
-        </Grid>
-        <Grid item xs={6}>
           <Controls.Input
             label="Entregado"
             name="entregado"
@@ -86,7 +86,7 @@ const FormBarrida = () => {
             InputLabelProps={{
               shrink: true,
             }}
-            value={values.fecnac}
+            value={values.entregado}
             onChange={handleChangeForm}
           />
           <Controls.Input
@@ -96,7 +96,7 @@ const FormBarrida = () => {
             InputLabelProps={{
               shrink: true,
             }}
-            value={values.fecnac}
+            value={values.fbarrida}
             onChange={handleChangeForm}
           />
           <Controls.Input
@@ -106,32 +106,39 @@ const FormBarrida = () => {
             InputLabelProps={{
               shrink: true,
             }}
-            value={values.fecnac}
+            value={values.acreditacion}
             onChange={handleChangeForm}
           />
           <Controls.Input
             label="Recibos"
-            name="fecnac"
+            name="recibos"
             type="date"
             InputLabelProps={{
               shrink: true,
             }}
-            value={values.fecnac}
+            value={values.recibos}
             onChange={handleChangeForm}
           />
-          <div>
-            <Controls.Button
-              text="Limpiar Formulario"
-              variant="secondary"
-              onClick={resetForm} />
-
-            <Controls.Button
-              type="submit"
-              variant="primary"
-              text="Generar Nueva Barrida" />
-          </div>
 
         </Grid>
+          <Grid container xs={12}>
+            <Grid xs={6}>
+              <Controls.Button
+                onClick={() => { }}
+                variant="primary"
+                text="Cancelar" />
+            </Grid>
+            <Grid container justify="flex-end" xs={6}>
+              <Controls.Button
+                text="Limpiar Formulario"
+                variant="secondary"
+                onClick={resetForm} />
+              <Controls.Button
+                type="submit"
+                variant="primary"
+                text="Generar Barrida" />
+            </Grid>
+          </Grid>
       </Grid>
     </Form>
   )

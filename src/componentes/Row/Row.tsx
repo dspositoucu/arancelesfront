@@ -25,7 +25,7 @@ interface Props {
 const StyledTableRow = withStyles(() => ({
   root: {
     "&:nth-of-type(odd)": {
-      backgroundColor: "#D9D5EC"
+      backgroundColor: "#D9D6EC"
     },
   }
 }))(TableRow);

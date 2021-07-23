@@ -59,12 +59,12 @@ const useStyles = makeStyles(() =>
             height: "auto"
         },
         tableContainer: {
-            borderRadius: 10,
+            borderRadius: 5,
             boxShadow: '0px 4px 25px rgba(148, 130, 255, 0.51)',
         },
         paginationTable: {
             color: '#6E6893',
-            height: 35
+            height: 35,
         },
         footer: {
             height: 35
@@ -149,13 +149,12 @@ const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsIn
                         </TableRow>
                     ) : null}
                 </TableBody>
-                <TableFooter >
-                    <TableRow className={classes.footer}>
+                <TableFooter className={classes.footer} >
+                    <TableRow>
                         <TablePagination
                             className={classes.paginationTable}
                             align="right"
                             rowsPerPageOptions={[5, 10, 18,/*  { label: 'All', value: -1 } */]}
-                            colSpan={9}
                             count={tableFilterinUse ? filterList.length : tableData.length}
                             rowsPerPage={rowsPerPage}
                             page={page}

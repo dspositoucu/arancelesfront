@@ -26,8 +26,6 @@ const Aranceles = () => {
     cargarDatos()
   }, [])
 
-  console.log("ESTOS SON LOS ARANCELES >>>>> ",listAranceles.map(arancels=>arancels["NOMBRE DE CUENTA"]) )
-
   // El componente Table recibe dos props 
   // -tableData: correspone a los datos que se quieren renderizar 
   // -columns: corresponde a las columnas de la tabla que se quieren renderizar

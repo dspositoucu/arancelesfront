@@ -1,4 +1,5 @@
 import { AxiosResponse } from 'axios'
+import { isJSDocReturnTag } from 'typescript';
 import AxiosIntance from '../../axios/axiosInstace';
 
 
@@ -11,6 +12,10 @@ export class BarridasApi {
 
     addBarridas(cuenta):Promise<AxiosResponse> {
         return AxiosIntance.post(this.BaseUrl,cuenta)
+    }
+
+    getAllGruposBarridas(): Promise<AxiosResponse> {
+        return AxiosIntance.get(`${this.BaseUrl}`)
     }
 
 }
