@@ -58,8 +58,8 @@ const Login = () => {
   const classes = useStyles();
   
   const { values,handleChangeForm} = useForm({
-    username:'',
-    password:''
+    usuario:'',
+    clave:''
   })
   
   const { formSubmit } = useSubmit(loginUser,values)
@@ -79,7 +79,7 @@ const Login = () => {
           <InputForm
             label="Nombre de Usuario"
             onChange={handleChangeForm}
-            name="username"
+            name="usuario"
             required
             placeholder="Nombre de Usuario"
           />
@@ -91,7 +91,7 @@ const Login = () => {
             required
             type="password"
             placeholder="Contraseña"
-            name="password"
+            name="clave"
           />
         </Grid>
         <Button
