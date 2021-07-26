@@ -3,9 +3,16 @@ import TableRow from '@material-ui/core/TableRow';
 import { TableHead } from '@material-ui/core';
 import { Cell, CellCheckBox } from '../Cell'
 import { useSelector } from 'react-redux';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 //types
 import { AppState } from '../../Redux/state/AppState';
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        rowHeader:{
+            height:50,
+        }
+    }))
 
 
 interface Props {
@@ -14,7 +21,8 @@ interface Props {
     rowChek?: boolean
 }
 
- const RowHeader: FC<Props> = ({ columns, rowChek }) => {
+const RowHeader: FC<Props> = ({ columns, rowChek }) => {
+    const classes = useStyles()
 
     const { selectListPerson } = useSelector((state: AppState) => state.PersonState)
 
@@ -29,7 +37,7 @@ interface Props {
     rowHeader.push(<Cell key={'head'} variant="head">Acciones</Cell>);
 
     return (
-        <TableHead>
+        <TableHead className={classes.rowHeader}>
             <TableRow>
                 {rowHeader}
             </TableRow>

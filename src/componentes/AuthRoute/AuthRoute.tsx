@@ -12,12 +12,12 @@ const AuthRoute: FC<Props> = (props) => {
 
   const { children, exact, path} = props
 
-  const isLogin = true //getDataLocalStorage('access_token')
-  /* if(!isLogin) return <Redirect to="/login"/> */
+  const isLogin = getDataLocalStorage('access_token')
+   if(!isLogin) return <Redirect to="/login"/> 
   const checkExiperd = () =>{
-   // const {exp} = getDecodeTokenLocalStorage()
-    //console.log(exp)
-    return  true //exp > new Date().getTime()/1000  
+    const {exp} = getDecodeTokenLocalStorage()
+    console.log(exp)
+    return  exp > new Date().getTime()/1000  
 
   }
 
@@ -29,7 +29,7 @@ const AuthRoute: FC<Props> = (props) => {
     <Route
       exact={exact}
       path={path}>
-         { (checkExiperd() && isLogin) ? [children] : <Redirect to="/"/> }
+         { (checkExiperd() && isLogin) ? [children] : <Redirect to="/login"/> }
     </Route>
   )
 }

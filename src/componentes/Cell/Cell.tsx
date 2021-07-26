@@ -33,10 +33,9 @@ const useStyles = makeStyles(() =>
 //styled and build new cell component
 const StyledTableCell = withStyles(() => ({
     head: {
-        backgroundColor: "#f3f4fb",
-        color: "#909090",
+        color: "#6c74fa",
         fontWeight: 600,
-        padding: 5,
+        padding: 4,
         paddingLeft:'15px',
         border:'none',
         textTransform: 'none',
@@ -44,11 +43,14 @@ const StyledTableCell = withStyles(() => ({
 
     },
     body: {
+        fontWeight:400,
         minWidth:50,
         maxWidth:200,
-        fontSize: 13,
-        color: '#5f6063',
-        padding: '5px 15px',
+        fontSize: 12,
+        color: '#395596',
+        border:'none',
+        borderBottom: 'solid 1px #f5f9fc',
+        padding: '8px 15px',
         alignItems: 'center'
     },
 }))(TableCell);

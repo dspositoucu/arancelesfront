@@ -14,6 +14,7 @@ import globalReducer from './reducers/globalReducer'
 import cuentasReducer from './reducers/cuentasReducer';
 import arancelesReducer from './reducers/arancelesReducer';
 import barridasReducer from './reducers/barridasReducer';
+import cajaReducer from './reducers/cajaReducer';
 
 const rootReducers = combineReducers<AppState>({
     CuentasState:cuentasReducer,
@@ -23,7 +24,8 @@ const rootReducers = combineReducers<AppState>({
     InformesState:InformesReducer,
     GlobalState: globalReducer,
     ArancelesState:arancelesReducer,
-    BarridasState:barridasReducer
+    BarridasState:barridasReducer,
+    CajaState:cajaReducer
 })
 
 const store :Store<AppState, AnyAction> = createStore(

@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
         childContainer: {
             flexGrow: 1,
             padding: theme.spacing(3),
-            background:'#f3f4fb',
+            background:'#f1f8ff',
         },
         child: {
             borderRadius: 5

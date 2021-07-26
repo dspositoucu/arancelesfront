@@ -24,9 +24,6 @@ interface Props {
 //creando un nuevo componente StyledTableRow con nuevos estilos de color intercalado 
 const StyledTableRow = withStyles(() => ({
   root: {
-    "&:nth-of-type(odd)": {
-      backgroundColor: "#D9D6EC"
-    },
     border:'none',
     boxShadow:'none'
   }
@@ -63,7 +60,7 @@ export const Row: FC<Props> = ({ data, columns, rowChek }) => {
         columns.map((key, index) => {
           return (
             <Cell key={index}>
-              {data[key]}
+              {data[key.toLowerCase()]}
             </Cell>
           )
         })

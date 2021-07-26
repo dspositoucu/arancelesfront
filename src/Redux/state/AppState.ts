@@ -18,6 +18,10 @@ export interface IPersonInitialState{
     allSelect : boolean,
 }
 
+export interface ICajaInitialState{
+    movimientos: [] | any[]
+}
+
 export interface IUserInitialState {
     usuario:IUser|''
 }
@@ -80,5 +84,6 @@ export interface AppState {
     InformesState: IInformesInitialState,
     GlobalState: IGlobalInitialState,
     ArancelesState: IArancelesInitialState,
-    BarridasState:IBarridasInitialState
+    BarridasState:IBarridasInitialState,
+    CajaState:ICajaInitialState
 }

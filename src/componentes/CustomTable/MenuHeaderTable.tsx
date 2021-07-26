@@ -61,13 +61,15 @@ const useStyles = makeStyles((theme) =>
         },
         chip: {
             margin: theme.spacing(0.5),
-            background: 'none',
+            borderRadius:5,
+            color:'#6c74fa',
+            background: '#dee2fe',
             border: 'solid 1px #f3f4fb',
             '& .MuiChip-deleteIcon':{
-                color:'#6e6893'
+                color:'#6c74fa'
             },
             '&:focus':{
-                background:'none'
+                background:'#dee2fe'
             }
         },
     }))

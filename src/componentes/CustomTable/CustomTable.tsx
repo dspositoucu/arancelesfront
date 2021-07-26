@@ -56,21 +56,13 @@ const useStyles = makeStyles(() =>
     createStyles({
         table: {
             minWidth: 600,
-            border: "none !important",
             width: "100% !important",
-            borderRadius: 5,
-            overflow: 'hidden'
-        },
-        tableSpace: {
-            padding: 10
-        },
-        styleRow: {
-            height: "auto"
+            overflow: 'hidden',
+            boxSizing: 'content-box'
         },
         tableContainer: {
             borderRadius: '0px 5px 5px 5px',
             boxShadow: 'none'
-
         },
         paginationTable: {
             color: '#6E6893',
@@ -137,7 +129,6 @@ const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsIn
                 buttonsList={actionsInHeader}
                 filterSearchBar={filterSearchBar}
             />
-            <div className={classes.tableSpace}>
                 <Table className={classes.table} aria-label="tabla">
                         <RowHeader
                             rowChek={rowChek}
@@ -181,7 +172,6 @@ const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsIn
                         </TableRow>
                     </TableFooter>
                 </Table>
-            </div>
         </TableContainer>
     );
 }

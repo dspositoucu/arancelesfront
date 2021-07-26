@@ -16,6 +16,7 @@ import Informes from './pages/Informes/Informes';
 import Cuentas from './pages/Cuentas/Cuentas';
 import Aranceles from './pages/Aranceles/Aranceles';
 import Barridas from './pages/Barrida/Barridas'
+import Caja from './pages/Caja/Caja'
 
 
 const tabsName = [
@@ -24,44 +25,49 @@ const tabsName = [
   { label: "Aranceles", value: "/aranceles" },
   { label: "Barridas", value: "/barridas" },
   { label: "Informes", value: "/informes" },
+  { label: "Caja", value: "/caja" },
 ]
 
 
-const useStyles = makeStyles(theme => ({
-  tabSelect: {
-    textTransform: 'none',
-    minHeight: 35,
-    borderRadius: '5px 5px 0px 0px',
-    clipPath: 'polygon(0 0, 90% 0, 100% 100%, 0% 100%)',
-    padding: 0,
-    minWidth:'120px',
-    fontSize:'12px',
-    fontWeight: 700,
-    background: '#FFF',
-  },
-  tab: {
-    textTransform: 'none',
-    minHeight: 35,
-    borderRadius: '5px 5px 0px 0px',
-    clipPath: 'polygon(0 0, 90% 0, 100% 100%, 0% 100%)',
-    padding: 0,
-    fontWeight: 400,
-    border: 'solid 1px transparent',
-    minWidth:'120px',
-    fontSize:'12px',
-    background: '#f9fafe',
-  },
-  tabs: {
-    minHeight: 35,
-  },
-  indicator: {
-    background:"#fff",
-    borderRadius: '5px 5px 0px 0px',
-    clipPath: 'polygon(0 0, 90% 0, 100% 100%, 0% 100%)',
-    opacity:0.5,
-    height:35
-  }
-}))
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    tabSelect: {
+      color: '#6c74fa',
+      textTransform: 'none',
+      minHeight: 40,
+      borderRadius: '5px 5px 0px 0px',
+      clipPath: 'polygon(0 0, 90% 0, 100% 100%, 0% 100%)',
+      padding: 0,
+      minWidth: '120px',
+      fontSize: '16px',
+      fontWeight: 400,
+      background: '#FFF',
+    },
+    tab: {
+      color: '#90a5c0',
+      textTransform: 'none',
+      minHeight: 35,
+      borderRadius: '5px 5px 0px 0px',
+      clipPath: 'polygon(0 0, 90% 0, 100% 100%, 0% 100%)',
+      padding: 0,
+      fontWeight: 400,
+      border: 'solid 1px transparent',
+      minWidth: '120px',
+      fontSize: '16px',
+      background: '#f9fafe',
+    },
+    tabs: {
+      minHeight: 40,
+    },
+    indicator: {
+      /* background:"#fff",
+      borderRadius: '5px 5px 0px 0px',
+      clipPath: 'polygon(0 0, 90% 0, 100% 100%, 0% 100%)',
+      opacity:0.5,
+      height:40 */
+      display: 'none'
+    }
+  }))
 
 function App() {
   const classes = useStyles()
@@ -70,10 +76,8 @@ function App() {
       <Router history={history}>
         <Route exact path="/login" component={LoginPage} />
         <Switch>
-          <Redirect exact from="/" to="/cuentas" />
+          {/* <Redirect exact from="/" to="/cuentas" /> */}
           <Layout>
-            {/* <Redirect exact from="/home" to="/home/cuentas" /> */}
-
             <Route path="/" render={({ location }) => (
               <>
                 <Tabs
@@ -93,6 +97,7 @@ function App() {
                   })}
                 </Tabs>
                 <Switch>
+
                   <AuthRoute exact path="/personas">
                     <ListaPersonas />
                   </AuthRoute>
@@ -111,6 +116,10 @@ function App() {
 
                   <AuthRoute exact path="/barridas">
                     <Barridas />
+                  </AuthRoute>
+
+                  <AuthRoute exact path="/caja">
+                    <Caja />
                   </AuthRoute>
                 </Switch>
               </>
