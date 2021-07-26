@@ -27,6 +27,8 @@ const StyledTableRow = withStyles(() => ({
     "&:nth-of-type(odd)": {
       backgroundColor: "#D9D6EC"
     },
+    border:'none',
+    boxShadow:'none'
   }
 }))(TableRow);
 
@@ -77,30 +79,5 @@ export const Row: FC<Props> = ({ data, columns, rowChek }) => {
   )
 }
 
-//===============================================
-              //Row Header Table
-//===============================================
-
-
-export const RowHeader: FC<Props> = ({ columns, rowChek }) => {
-
-  const { selectListPerson } = useSelector((state: AppState) => state.PersonState)
-
-  let rowHeader: ReactNode[] = columns.map((key, index) => {
-    return (
-      <Cell variant="head" key={index}>
-        {key.toUpperCase()}
-      </Cell>
-    )
-  })
-  rowChek && rowHeader.unshift(<CellCheckBox key={'check'} check={!!selectListPerson.length} checkAll variant="head" />);
-  rowHeader.push(<Cell key={'head'} variant="head">ACCIONES</Cell>);
-
-  return (
-    <StyledTableRow>
-      {rowHeader}
-    </StyledTableRow>
-  )
-}
 
 

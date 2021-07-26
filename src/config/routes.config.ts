@@ -11,8 +11,8 @@ import RouteItem from '../models/RouteItem.model';
 // define app routes
 export const routes: Array<RouteItem> = [
     {
-        key: "router-home",
-        title: "Home",
+        key: "router-cuentas",
+        title: "cuentas",
         tooltip: "Home",
         path: "/cuentas",
         enabled: true,
@@ -20,8 +20,8 @@ export const routes: Array<RouteItem> = [
         appendDivider: true
     },
     {
-        key: "router-dashboard",
-        title: "Dashboard",
+        key: "router-personas",
+        title: "personas",
         tooltip: "Dashboard",
         path: "/personas",
         enabled: true,
@@ -29,8 +29,8 @@ export const routes: Array<RouteItem> = [
         
     },
     {
-        key: "router-settings",
-        title: "Settings",
+        key: "router-informes",
+        title: "informes",
         tooltip: "Settings",
         path: "/informes",
         enabled: true,

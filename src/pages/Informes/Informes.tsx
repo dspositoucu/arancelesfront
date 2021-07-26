@@ -41,7 +41,7 @@ const Informes = () => {
     ]}
     filterMenu={true}
     tableData={AllData}
-    columns={["IDPERSONA", "CODALU", "NOMBRE", "CODCAR", "IDCUENTA", "DESCRIPCION", "IDBENEFICIO", "CBU"]}
+    columns={["idPersona", "Codalu", "Nombre", "CodCar", "IDCuenta", "Descripcion", "IDBeneficio", "Cbu"]}
     actionsInHeader={["imprimir"]}
     actionInRow={['editar']}
     rowChek={false}

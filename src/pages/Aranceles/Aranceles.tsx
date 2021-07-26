@@ -42,7 +42,7 @@ const Aranceles = () => {
     ]}
     filterMenu={false}
     tableData={listAranceles}
-    columns={["CODFAC", "CODCAR", "IDCUENTA", "NOMBRE DE CUENTA", "DESCRIPCION", "MES", "ANIO", "MONTO", "BONIFICACION", "RECARGO", "BIBLIOTECA", "DEBITA"]}
+    columns={["CodFac", "CodCar", "IDCuenta", "Nombre de Cuenta", "Descripcion", "Mes", "Anio", "Monto", "Bonificacion", "Recargo", "Biblioteca", "Debita"]}
     actionsInHeader={["imprimir","nuevo"]}
     actionInRow={['editar']}
     rowChek={false}

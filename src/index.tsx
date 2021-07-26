@@ -1,4 +1,5 @@
 import React from 'react';
+import CssBaseline from "@material-ui/core/CssBaseline";
 import ReactDOM from 'react-dom';
 import './index.css'
 import App from './App';
@@ -9,6 +10,7 @@ import store from './Redux/Store'
 
 ReactDOM.render(
     <Provider store={store}>
+      <CssBaseline/>
       <App />
     </Provider>,
   document.getElementById('root')

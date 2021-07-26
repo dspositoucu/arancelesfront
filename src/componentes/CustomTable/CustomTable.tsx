@@ -1,8 +1,9 @@
-import { FC, useState,ReactNode } from 'react';
+import { FC, useState, ReactNode } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux'
 
 import Table from '@material-ui/core/Table';
+import { TableHead } from '@material-ui/core';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -21,7 +22,7 @@ import IFilterSearchBar from './interface/IFilterSearchBar';
 import { openModalRegister } from '../../Redux/actions/modales/ActionCreatorModals';
 
 //models
-import { typesModels,IPersona, IInformes } from '../../models'
+import { typesModels, IPersona, IInformes } from '../../models'
 import { AppState } from '../../Redux/state/AppState';
 
 //custom hooks
@@ -32,7 +33,8 @@ import { usePagination } from '../../hooks/usePagination';
 //import Register from '../Forms/Register'
 
 //component
-import { Row, RowHeader } from '../Row';
+import RowHeader from './RowHeader';
+import { Row } from '../Row';
 import MenuHeaderTable from './MenuHeaderTable';
 import TablePaginationActions from './TablePaginationActions'
 import FormAranceles from '../../pages/Aranceles/FormAranceles'
@@ -42,11 +44,11 @@ interface Props {
     columns: string[],
     actionsInRow?: string[],
     FormRegister?: ReactNode,
-    filterSearchBar?:IFilterSearchBar[],
+    filterSearchBar?: IFilterSearchBar[],
     actionsInHeader: string[],
-    actionInRow:string[],
-    rowChek:boolean,
-    filterMenu:boolean
+    actionInRow: string[],
+    rowChek: boolean,
+    filterMenu: boolean
 }
 
 // estilos css-in-js
@@ -54,13 +56,21 @@ const useStyles = makeStyles(() =>
     createStyles({
         table: {
             minWidth: 600,
+            border: "none !important",
+            width: "100% !important",
+            borderRadius: 5,
+            overflow: 'hidden'
+        },
+        tableSpace: {
+            padding: 10
         },
         styleRow: {
             height: "auto"
         },
         tableContainer: {
-            borderRadius: 5,
-            boxShadow: '0px 4px 25px rgba(148, 130, 255, 0.51)',
+            borderRadius: '0px 5px 5px 5px',
+            boxShadow: 'none'
+
         },
         paginationTable: {
             color: '#6E6893',
@@ -76,14 +86,14 @@ const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsIn
     const classes = useStyles();
 
     //  estados de modales 
-   const { modalRegister, modalEdit } = useSelector((state:AppState)=>state.ModalState)
-   const { personDetails } = useSelector((state:AppState)=>state.PersonState)
+    const { modalRegister, modalEdit } = useSelector((state: AppState) => state.ModalState)
+    const { personDetails } = useSelector((state: AppState) => state.PersonState)
 
 
     // useFilter recibe la tabla a filtrar y devuelve 
     // una funcion handleFilter, la lista filtrada y
     // una const tipo bool. "tableFilterinUse" que corresponde a si la tabla esta en uso. 
-    const {filterList, handleFilter, tableFilterinUse } = useFilter(tableData)
+    const { filterList, handleFilter, tableFilterinUse } = useFilter(tableData)
 
     // usePagination devuelve: 
     // page: devuelve la pagina actual,
@@ -115,10 +125,10 @@ const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsIn
             {/* ================= MODALES =================*/}
             {modalRegister &&
                 <Modal
-                    closeModal={()=>dispatch(openModalRegister())}
+                    closeModal={() => dispatch(openModalRegister())}
                     active={modalRegister}
-                    >
-                        {FormRegister}
+                >
+                    {FormRegister}
                 </Modal>
             }
             <MenuHeaderTable
@@ -127,48 +137,51 @@ const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsIn
                 buttonsList={actionsInHeader}
                 filterSearchBar={filterSearchBar}
             />
-            <Table className={classes.table} aria-label="tabla">
-                <TableBody>
-                    <RowHeader 
-                        rowChek={rowChek}
-                        columns={columns} />
-                    {tableData.length ? (rowsPerPage > 0
-                        ? ActualPage(tableData, filterList)
-                        : tableData
-                    ).map((persona, i) => (
-                        <Row
+            <div className={classes.tableSpace}>
+                <Table className={classes.table} aria-label="tabla">
+                        <RowHeader
                             rowChek={rowChek}
-                            key={i}
                             columns={columns}
-                            data={persona}
                         />
-                    )) : null}
-                    {emptyRows > 0 ? (
-                        <TableRow style={{ height: 35 * emptyRows }}>
-                            <TableCell colSpan={15} />
+                    <TableBody>
+                        {tableData.length ? (rowsPerPage > 0
+                            ? ActualPage(tableData, filterList)
+                            : tableData
+                        ).map((persona, i) => (
+                            <Row
+                                rowChek={rowChek}
+                                key={i}
+                                columns={columns}
+                                data={persona}
+                            />
+                        )) : null}
+                        {emptyRows > 0 ? (
+                            <TableRow style={{ height: 35 * emptyRows }}>
+                                <TableCell colSpan={15} />
+                            </TableRow>
+                        ) : null}
+                    </TableBody>
+                    <TableFooter className={classes.footer} >
+                        <TableRow>
+                            <TablePagination
+                                className={classes.paginationTable}
+                                align="right"
+                                rowsPerPageOptions={[5, 10, 18,/*  { label: 'All', value: -1 } */]}
+                                count={tableFilterinUse ? filterList.length : tableData.length}
+                                rowsPerPage={rowsPerPage}
+                                page={page}
+                                SelectProps={{
+                                    inputProps: { 'aria-label': 'rows per page' },
+                                    native: true,
+                                }}
+                                onChangePage={handleChangePage}
+                                onChangeRowsPerPage={handleChangeRowsPerPage}
+                                ActionsComponent={TablePaginationActions}
+                            />
                         </TableRow>
-                    ) : null}
-                </TableBody>
-                <TableFooter className={classes.footer} >
-                    <TableRow>
-                        <TablePagination
-                            className={classes.paginationTable}
-                            align="right"
-                            rowsPerPageOptions={[5, 10, 18,/*  { label: 'All', value: -1 } */]}
-                            count={tableFilterinUse ? filterList.length : tableData.length}
-                            rowsPerPage={rowsPerPage}
-                            page={page}
-                            SelectProps={{
-                                inputProps: { 'aria-label': 'rows per page' },
-                                native: true,
-                            }}
-                            onChangePage={handleChangePage}
-                            onChangeRowsPerPage={handleChangeRowsPerPage}
-                            ActionsComponent={TablePaginationActions}
-                        />
-                    </TableRow>
-                </TableFooter>
-            </Table>
+                    </TableFooter>
+                </Table>
+            </div>
         </TableContainer>
     );
 }

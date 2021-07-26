@@ -39,7 +39,7 @@ const ListaPersonas = () => {
   return <Table
     tableData={listPerson}
     filterMenu={false}
-    columns={["id", "nombre", "ndoc", "telefono", "email", "domicilio"]}
+    columns={["ID", "Nombre", "Ndoc", "Telefono", "Email", "Domicilio"]}
     actionsInHeader={["imprimir", "nuevo", "borrar"]}
     actionInRow={['editar']}
     rowChek={false}

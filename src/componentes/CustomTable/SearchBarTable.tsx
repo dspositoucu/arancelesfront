@@ -24,12 +24,12 @@ const useStyles = makeStyles((theme: Theme) =>
             padding: '2px 4px',
             display: 'flex',
             alignItems: 'center',
-            background: "#F2F0F9",
-            borderRadius: 8,
+            background: "#f3f4fb",
+            borderRadius: 5,
             boxShadow: "none",
             maxWidth: "25%",
-            minWidth: 250,
-            height: 34
+            minWidth: 400,
+            height: 35
         },
         input: {
             color: "#6E6893",
@@ -93,7 +93,7 @@ const SearchBarTable: FC<Props> = ({ functionFilter, filterSearchBar=[] }) => {
             <Divider className={classes.divider} orientation="vertical" />
             <InputBase
                 className={classes.input}
-                placeholder={`Filtrar por ${filter.toUpperCase()}`}
+                placeholder={`Buscar por ${filter.toUpperCase()}`}
                 onChange={(e) => {
                     setTextInput(e.target.value)
                     functionFilter(e, filter)}}

@@ -3,23 +3,25 @@ import React, { FC,ReactNode } from 'react'
 import { getDataLocalStorage, getDecodeTokenLocalStorage } from '../../helpers/LocalStorage'
 
 interface Props {
-  children:ReactNode 
-  path: string;
+  children?:ReactNode 
+  path?: string;
   exact?: boolean;
 }
 
-const AuthRoute: FC<Props> = ({ children, exact, path }) => {
+const AuthRoute: FC<Props> = (props) => {
 
-  const isLogin = getDataLocalStorage('access_token')
-  if(!isLogin) return <Redirect to="/"/>
+  const { children, exact, path} = props
+
+  const isLogin = true //getDataLocalStorage('access_token')
+  /* if(!isLogin) return <Redirect to="/login"/> */
   const checkExiperd = () =>{
-    const {exp} = getDecodeTokenLocalStorage()
-    console.log(exp)
-    return  exp > new Date().getTime()/1000  
+   // const {exp} = getDecodeTokenLocalStorage()
+    //console.log(exp)
+    return  true //exp > new Date().getTime()/1000  
 
   }
 
-  console.log('TOKEN', checkExiperd())
+ /*  console.log('TOKEN', checkExiperd()) */
 
   console.log(checkExiperd(), isLogin)
 

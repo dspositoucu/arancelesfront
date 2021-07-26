@@ -32,7 +32,7 @@ export const loginUser = (usuario: IUser) => {
             .then(resp => {
                 setDataLocalStorage(resp.data, 'access_token')
                 dispatch(loginAction(resp.data))
-                history.push('/personas')
+                history.push('/home')
             })
             .catch(err => console.log(err))
     }

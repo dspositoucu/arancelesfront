@@ -25,11 +25,12 @@ interface Props {
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         appBar: {
-            zIndex: theme.zIndex.drawer + 1,
+            height:50,
+            padding:" 0px 8px",
             background: '#FFF',
             color: '#25213B',
-            boxShadow: '0px 4px 25px rgba(148, 130, 255, 0.51)',
-            flexGrow: 1
+            display:"flex",
+            alignItems:"center"
         },
         headerTitle: {
             flex: 1,
@@ -70,9 +71,7 @@ const Header: FC<Props> = ({ title }) => {
     const classes = useStyles()
 
     return (
-        <AppBar position="fixed" className={classes.appBar}>
-            <Toolbar>
-    
+        <div className={classes.appBar}>
                 <div className={classes.containerImg}>
                     <img className={classes.img} src={UCUimg.default} />
                 </div>
@@ -88,8 +87,7 @@ const Header: FC<Props> = ({ title }) => {
                         <Icons type="logout" />
                     </div>
                 </div>
-            </Toolbar>
-        </AppBar>
+        </div>
     )
 }
 

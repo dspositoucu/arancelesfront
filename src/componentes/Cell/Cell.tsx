@@ -33,16 +33,21 @@ const useStyles = makeStyles(() =>
 //styled and build new cell component
 const StyledTableCell = withStyles(() => ({
     head: {
-        backgroundColor: "#F2F0F9",
-        color: "#6E6893",
+        backgroundColor: "#f3f4fb",
+        color: "#909090",
+        fontWeight: 600,
         padding: 5,
         paddingLeft:'15px',
+        border:'none',
+        textTransform: 'none',
+        fontSize:'12px',
+
     },
     body: {
         minWidth:50,
         maxWidth:200,
         fontSize: 13,
-        color: '#6E6893',
+        color: '#5f6063',
         padding: '5px 15px',
         alignItems: 'center'
     },

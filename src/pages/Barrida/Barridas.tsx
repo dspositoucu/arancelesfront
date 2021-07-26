@@ -7,14 +7,14 @@ import FormBarrida from './FormBarrida'
 
 
 //lista cuentas falsas
-import listaCuentas from '../../fakeData/cuentas.json' 
+import listaCuentas from '../../fakeData/cuentas.json'
 //modelos
 import { AppState } from '../../Redux/state/AppState';
 
 //Actions
 import { getAllBarridas, cargarListaCuentasFalsas } from '../../Redux/actions/barridas/BarridasActionCreator'
 
-const Cuentas = () => {
+const Barridas = () => {
 
   const { listBarridas } = useSelector((state: AppState) => state.BarridasState)
 
@@ -42,12 +42,12 @@ const Cuentas = () => {
     ]}
     filterMenu={false}
     tableData={listBarridas}
-    columns={["ID", "DESCRIPCION", "BARRIDA", "GRUPO", "GENERADO", "ENVIADO", "RECIBIDO", "ENTREGADO", "FBARRIDA", "ACREDITACION", "RECIBOS"]}
-    actionsInHeader={["imprimir","nuevo"]}
+    columns={["ID", "Descripcion", "Barrida", "Grupo", "Generado", "Enviado", "Recibido", "Entregado", "FBarrida", "Acreditacion", "Recibos"]}
+    actionsInHeader={["imprimir", "nuevo"]}
     actionInRow={['editar']}
     rowChek={false}
-    FormRegister={<FormBarrida/>}
+    FormRegister={<FormBarrida />}
   />
 }
 
-export default Cuentas
+export default Barridas

@@ -42,7 +42,7 @@ const Cuentas = () => {
     ]}
     filterMenu={false}
     tableData={listCuentas}
-    columns={["ID", "CODFAC", "CODCAR", "DESCRIPCION", "CANTCUOTAS", "IDSEDE", "GRUPO BARRIDA"]}
+    columns={["ID", "CodFac", "CodCar", "Descripcion", "CantCuotas", "IDSede", "Grupo Barrida"]}
     actionsInHeader={["imprimir","nuevo"]}
     actionInRow={['editar']}
     rowChek={false}
