@@ -1,9 +1,8 @@
-import { FC, useState, ReactNode } from 'react';
+import { FC, useState, useEffect, ReactNode } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux'
 
 import Table from '@material-ui/core/Table';
-import { TableHead } from '@material-ui/core';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -37,7 +36,8 @@ import RowHeader from './RowHeader';
 import { Row } from '../Row';
 import MenuHeaderTable from './MenuHeaderTable';
 import TablePaginationActions from './TablePaginationActions'
-import FormAranceles from '../../pages/Aranceles/FormAranceles'
+import { Cell } from '../Cell'
+import CollapseRow from './CollapseRow'
 
 interface Props {
     tableData: any[]
@@ -48,7 +48,9 @@ interface Props {
     actionsInHeader: string[],
     actionInRow: string[],
     rowChek: boolean,
-    filterMenu: boolean
+    filterMenu: boolean,
+    collapseRow?: Function,
+    secondaryColumn?: String[]
 }
 
 // estilos css-in-js
@@ -73,14 +75,13 @@ const useStyles = makeStyles(() =>
         }
     }));
 
-const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsInHeader, FormRegister, rowChek, filterMenu }) => {
+const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsInHeader, FormRegister, rowChek, filterMenu, collapseRow, secondaryColumn }) => {
     const dispatch = useDispatch()
     const classes = useStyles();
+    const [secondaryTable, setSecondaryTable] = useState([])
 
     //  estados de modales 
     const { modalRegister, modalEdit } = useSelector((state: AppState) => state.ModalState)
-    const { personDetails } = useSelector((state: AppState) => state.PersonState)
-
 
     // useFilter recibe la tabla a filtrar y devuelve 
     // una funcion handleFilter, la lista filtrada y
@@ -105,13 +106,13 @@ const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsIn
 
     // funcion que corta el array dependiendo las filas por paginas
     // y selecciona la lista correspondiente
+
     const ActualPage = (listData: Object[], listDataFilter: Object[] | []) => {
 
         return (tableFilterinUse
             ? listDataFilter
             : listData).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
     }
-
     return (
         <TableContainer className={classes.tableContainer} component={Paper}>
             {/* ================= MODALES =================*/}
@@ -129,49 +130,84 @@ const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsIn
                 buttonsList={actionsInHeader}
                 filterSearchBar={filterSearchBar}
             />
-                <Table className={classes.table} aria-label="tabla">
-                        <RowHeader
-                            rowChek={rowChek}
-                            columns={columns}
-                        />
-                    <TableBody>
-                        {tableData.length ? (rowsPerPage > 0
-                            ? ActualPage(tableData, filterList)
-                            : tableData
-                        ).map((persona, i) => (
-                            <Row
+            <Table className={classes.table} aria-label="tabla">
+                <RowHeader
+                    rowChek={rowChek}
+                    columns={columns}
+                >
+                    {
+                        columns.map((col, i) => <Cell variant="head" key={i}>{col}</Cell>)
+                    }
+                </RowHeader>
+                <TableBody>
+                    {tableData.length ? (rowsPerPage > 0
+                        ? ActualPage(tableData, filterList)
+                        : tableData
+                    ).map((data, i) => {
+                        console.log('ESTE ES EL ID', data.id.toString())
+                        return !collapseRow
+                            ? <Row
                                 rowChek={rowChek}
                                 key={i}
                                 columns={columns}
-                                data={persona}
-                            />
-                        )) : null}
-                        {emptyRows > 0 ? (
-                            <TableRow style={{ height: 35 * emptyRows }}>
-                                <TableCell colSpan={15} />
-                            </TableRow>
-                        ) : null}
-                    </TableBody>
-                    <TableFooter className={classes.footer} >
-                        <TableRow>
-                            <TablePagination
-                                className={classes.paginationTable}
-                                align="right"
-                                rowsPerPageOptions={[5, 10, 18,/*  { label: 'All', value: -1 } */]}
-                                count={tableFilterinUse ? filterList.length : tableData.length}
-                                rowsPerPage={rowsPerPage}
-                                page={page}
-                                SelectProps={{
-                                    inputProps: { 'aria-label': 'rows per page' },
-                                    native: true,
-                                }}
-                                onChangePage={handleChangePage}
-                                onChangeRowsPerPage={handleChangeRowsPerPage}
-                                ActionsComponent={TablePaginationActions}
-                            />
+                                data={data}
+                            >
+                                {
+                                    columns.map((key, i) => {
+                                        return (
+                                            <Cell key={i}>
+                                                {data[key.toLowerCase()]}
+                                            </Cell>
+                                        )
+                                    })
+                                }
+                            </Row>
+                            : <CollapseRow
+                                cargarDatos={async () => await collapseRow(data.id)}
+
+                                key={i}
+                                tableColapseName={"Cuentas"}
+                                tableColapseHead={secondaryColumn}>
+                                {
+                                    columns.map((key, j) => {
+                                        return (
+                                            <Cell
+                                                key={j}
+                                                variant="body">
+                                                {data[key.toLowerCase()]}
+                                            </Cell>
+                                        )
+                                    })
+                                }
+                            </CollapseRow>
+
+                    }) : null}
+                    {emptyRows > 0 ? (
+                        <TableRow style={{ height: 35 * emptyRows }}>
+                            <TableCell colSpan={15} />
                         </TableRow>
-                    </TableFooter>
-                </Table>
+                    ) : null}
+                </TableBody>
+                <TableFooter className={classes.footer} >
+                    <TableRow>
+                        <TablePagination
+                            className={classes.paginationTable}
+                            align="right"
+                            rowsPerPageOptions={[5, 10, 18]}
+                            count={tableFilterinUse ? filterList.length : tableData.length}
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            SelectProps={{
+                                inputProps: { 'aria-label': 'rows per page' },
+                                native: true,
+                            }}
+                            onChangePage={handleChangePage}
+                            onChangeRowsPerPage={handleChangeRowsPerPage}
+                            ActionsComponent={TablePaginationActions}
+                        />
+                    </TableRow>
+                </TableFooter>
+            </Table>
         </TableContainer>
     );
 }

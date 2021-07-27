@@ -75,10 +75,9 @@ function App() {
     <>
       <Router history={history}>
         <Route exact path="/login" component={LoginPage} />
-        <Switch>
           {/* <Redirect exact from="/" to="/cuentas" /> */}
-          <Layout>
             <Route path="/" render={({ location }) => (
+          <Layout>
               <>
                 <Tabs
                   value={location.pathname}
@@ -123,9 +122,8 @@ function App() {
                   </AuthRoute>
                 </Switch>
               </>
-            )} />
           </Layout>
-        </Switch>
+            )} />
 
       </Router>
     </>

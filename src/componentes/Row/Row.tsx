@@ -17,19 +17,20 @@ import { openModalEdit } from '../../Redux/actions/modales/ActionCreatorModals';
 
 interface Props {
   data?: any,
-  columns: string[]
-  rowChek?:boolean
+  columns?: string[],
+  rowChek?: boolean,
+  children?: ReactNode | any
 }
 
 //creando un nuevo componente StyledTableRow con nuevos estilos de color intercalado 
 const StyledTableRow = withStyles(() => ({
   root: {
-    border:'none',
-    boxShadow:'none'
+    border: 'none',
+    boxShadow: 'none',
   }
 }))(TableRow);
 
-export const Row: FC<Props> = ({ data, columns, rowChek }) => {
+export const Row: FC<Props> = ({ data, columns, rowChek, children }) => {
   const dispatch = useDispatch();
   const { selectListPerson } = useSelector((state: AppState) => state.PersonState)
 
@@ -39,10 +40,9 @@ export const Row: FC<Props> = ({ data, columns, rowChek }) => {
   // que existen en la tabla de datos.
   // se devuelve un array con las columnas que coinciden 
   //const compareColumn = (): string[] => columns.filter(key => !!data[key])
-  
+
   //seleccionar una fila 
   const handleSelectRow = (data: typesModels) => {
-    console.log(data)
     dispatch(selectPerson(data))
   }
 
@@ -55,22 +55,14 @@ export const Row: FC<Props> = ({ data, columns, rowChek }) => {
       onClick={() => handleSelectRow(data)}
       style={rowChek && checkListSelect(data.id) ? { background: '#C3B3E7' } : {}}
     >
-      { rowChek && <CellCheckBox check={checkListSelect(data.id)} />}
-      {
-        columns.map((key, index) => {
-          return (
-            <Cell key={index}>
-              {data[key.toLowerCase()]}
-            </Cell>
-          )
-        })
-      }
+      {rowChek && <CellCheckBox check={checkListSelect(data.id)} />}
+        {children}
       <CellAction>
-        <ButtonIcon 
-          iconType="editar" 
+        <ButtonIcon
+          iconType="editar"
           hover={false}
-          onClick={()=>dispatch(openModalEdit())}
-          />
+          onClick={() => dispatch(openModalEdit())}
+        />
       </CellAction>
     </StyledTableRow>
   )

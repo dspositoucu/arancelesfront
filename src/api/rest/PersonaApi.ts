@@ -14,6 +14,10 @@ export class PersonApi {
         return AxiosIntance.post(this.BaseUrl, persona)
     }
 
+    getCuentasByPersonaId(personaId): Promise<AxiosResponse> {
+        return AxiosIntance.get(`${this.BaseUrl}/cuentas/${personaId.toString()}`)
+    }
+
  /*    deletePerson(personaList: IPersona[]): Promise<AxiosResponse> {
         return AxiosIntance.delete(this.BaseUrl, personaList)
     } */

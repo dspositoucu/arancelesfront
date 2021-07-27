@@ -16,11 +16,13 @@ import FormPersonas from './FormPersonas'
 //acciones
 import { getAllPersonas, cargarListaPersonasFalsas } from '../../Redux/actions/personas/ActionCreator'
 
+//consultas api /personas
+import { PersonApi } from '../../api/rest/PersonaApi';
+
 const ListaPersonas = () => {
 
   const dispatch = useDispatch()
   const { listPerson } = useSelector((state: AppState) => state.PersonState)
-
 
   const cargarDatos = () => {
     //if (ListaFalsa.length <= 0) {
@@ -54,6 +56,14 @@ const ListaPersonas = () => {
         label:"Nro Documneto"
       }
     ]}
+    collapseRow={
+      async (personaId)=>{
+        return new PersonApi()
+        .getCuentasByPersonaId(personaId)
+        .then(resp=>resp.data)
+      }
+    }
+    secondaryColumn={["Nombre de cuenta", "CodCar", "CodAlu", "Saldo", "Activo", "Fin", "Fin Hasta", "Autorizado", "Baja", "Nota"]}
   />
 }
 
