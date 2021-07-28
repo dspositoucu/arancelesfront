@@ -23,8 +23,6 @@ const useStyles = makeStyles(() =>
         IconCell: {
             display: 'flex',
             alignItems: 'center',
-            width: 30,
-            marginLeft: 20,
             cursor: "pointer"
         },
     })
@@ -33,13 +31,13 @@ const useStyles = makeStyles(() =>
 //styled and build new cell component
 const StyledTableCell = withStyles(() => ({
     head: {
-        color: "#6c74fa",
+        color: "#8cbaff",
         fontWeight: 600,
         padding: 4,
         paddingLeft:'15px',
         border:'none',
         textTransform: 'none',
-        fontSize:'12px',
+        fontSize:'14px',
 
     },
     body: {
@@ -96,7 +94,8 @@ export const CellAction: FC<Props> = ({ children }) => {
     const classes = useStyles()
 
     return (
-        <StyledTableCell variant="body" style={{ width: 100 }}>
+        <StyledTableCell 
+            variant="body">
             <div className={classes.IconCell}>
                 {children}
             </div>

@@ -10,9 +10,6 @@ interface Prop {
 
 const useStyles = makeStyles(() =>
     createStyles({
-
-    
-
         fondo: {
             display: "flex",
             justifyContent: "center",

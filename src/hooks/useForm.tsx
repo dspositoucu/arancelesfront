@@ -26,8 +26,8 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       '& .MuiFormControl-root': {
-        width: '80%',
-        margin: theme.spacing(1),
+        width: '100%',
+        //margin: theme.spacing(1),
       },
       background: "#FFF",
       width: '100%'

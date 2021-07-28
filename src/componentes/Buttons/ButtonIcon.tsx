@@ -11,7 +11,7 @@ interface Props {
     label?:string,
     hover?:boolean,
     onClick?: (e?:any) => void,
-    typeButton?: ("filter" | "default")
+    typeButton?: ("filter" | "default" | "borrar" | "nuevo")
 }
 
 const useStyles = makeStyles( () =>
@@ -21,20 +21,13 @@ const useStyles = makeStyles( () =>
             boxShadow:"none",
             color:"#6E6893",
             textTransform: 'capitalize',
+            minWidth:'max-content'
         },
         hover:{
             '&:hover':{
                 background:'#d9d5e8'
             },
         },
-        filter:{
-            margin: 3,
-            fontSize:12,
-            background:'#F2F0F9',
-            boxShadow:"none",
-            color:"#6E6893",
-            textTransform: 'capitalize',
-        }
     }))
 
 const ButtonIcon:FC<Props> = ({onClick, iconType="imprimir", label, typeButton="default", hover=true }) => {

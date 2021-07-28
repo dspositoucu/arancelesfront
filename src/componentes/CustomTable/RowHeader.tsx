@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         rowHeader: {
             height: 50,
+            boxShadow: '0px 1px 15px 0px rgba(0,0,0,0.1)'
         }
     }))
 

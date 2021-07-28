@@ -25,7 +25,10 @@ const useStyles = makeStyles((theme: Theme) =>
             background:'#f1f8ff',
         },
         child: {
-            borderRadius: 5
+            borderRadius: 5,
+            padding:theme.spacing(2),
+            overflow:'hidden',
+            background: '#FFF'
         },
     }),
 );

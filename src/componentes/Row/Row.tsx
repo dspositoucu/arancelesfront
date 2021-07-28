@@ -30,11 +30,10 @@ const StyledTableRow = withStyles(() => ({
   }
 }))(TableRow);
 
-export const Row: FC<Props> = ({ data, columns, rowChek, children }) => {
+export const Row = (props) => {
+  const { data, columns, rowChek, children } = props
   const dispatch = useDispatch();
   const { selectListPerson } = useSelector((state: AppState) => state.PersonState)
-
-  if (!data) return null;
 
   //comprobar el listado de columnas enviadas por props y las
   // que existen en la tabla de datos.
@@ -46,16 +45,12 @@ export const Row: FC<Props> = ({ data, columns, rowChek, children }) => {
     dispatch(selectPerson(data))
   }
 
-  // checkear si la fila se encuentra en lista de seleccionado para cambiar el checkbox 
-  const checkListSelect = (id: string) => {
-    return !!selectListPerson.find((data) => data.id === id)
-  }
+
   return (
     <StyledTableRow
-      onClick={() => handleSelectRow(data)}
-      style={rowChek && checkListSelect(data.id) ? { background: '#C3B3E7' } : {}}
+      {...props}
     >
-      {rowChek && <CellCheckBox check={checkListSelect(data.id)} />}
+      {rowChek && <CellCheckBox />}
         {children}
       <CellAction>
         <ButtonIcon

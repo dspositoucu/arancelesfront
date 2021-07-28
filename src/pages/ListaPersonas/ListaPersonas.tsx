@@ -12,6 +12,8 @@ import ListaFalsa from '../../fakeData/personas.json'
 
 //formulario
 import FormPersonas from './FormPersonas'
+import ReciboX from '../../componentes/Recibos/ReciboX';
+import ReciboGeneral from '../../componentes/Recibos/ReciboGeneral';
 
 //acciones
 import { getAllPersonas, cargarListaPersonasFalsas } from '../../Redux/actions/personas/ActionCreator'
@@ -41,7 +43,7 @@ const ListaPersonas = () => {
   return <Table
     tableData={listPerson}
     filterMenu={false}
-    columns={["ID", "Nombre", "Ndoc", "Telefono", "Email", "Domicilio"]}
+    columns={[" ", "ID", "Nombre", "Ndoc", "Telefono", "Email", "Domicilio"]}
     actionsInHeader={["imprimir", "nuevo", "borrar"]}
     actionInRow={['editar']}
     rowChek={false}
@@ -63,6 +65,9 @@ const ListaPersonas = () => {
         .then(resp=>resp.data)
       }
     }
+
+    // props para la tabla secundaria
+    secondaryForms={[<ReciboX/>,<ReciboGeneral/>]}
     secondaryColumn={["Nombre de cuenta", "CodCar", "CodAlu", "Saldo", "Activo", "Fin", "Fin Hasta", "Autorizado", "Baja", "Nota"]}
   />
 }

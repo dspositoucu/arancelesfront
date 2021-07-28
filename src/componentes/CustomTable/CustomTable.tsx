@@ -50,7 +50,8 @@ interface Props {
     rowChek: boolean,
     filterMenu: boolean,
     collapseRow?: Function,
-    secondaryColumn?: String[]
+    secondaryColumn?: String[],
+    secondaryForms?: ReactNode[]
 }
 
 // estilos css-in-js
@@ -75,7 +76,7 @@ const useStyles = makeStyles(() =>
         }
     }));
 
-const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsInHeader, FormRegister, rowChek, filterMenu, collapseRow, secondaryColumn }) => {
+const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsInHeader, FormRegister, rowChek, filterMenu, collapseRow, secondaryColumn, secondaryForms }) => {
     const dispatch = useDispatch()
     const classes = useStyles();
     const [secondaryTable, setSecondaryTable] = useState([])
@@ -144,7 +145,6 @@ const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsIn
                         ? ActualPage(tableData, filterList)
                         : tableData
                     ).map((data, i) => {
-                        console.log('ESTE ES EL ID', data.id.toString())
                         return !collapseRow
                             ? <Row
                                 rowChek={rowChek}
@@ -164,19 +164,17 @@ const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsIn
                             </Row>
                             : <CollapseRow
                                 cargarDatos={async () => await collapseRow(data.id)}
-
+                                forms={secondaryForms}
                                 key={i}
                                 tableColapseName={"Cuentas"}
                                 tableColapseHead={secondaryColumn}>
                                 {
                                     columns.map((key, j) => {
-                                        return (
-                                            <Cell
-                                                key={j}
-                                                variant="body">
-                                                {data[key.toLowerCase()]}
-                                            </Cell>
-                                        )
+                                        return key === " " ? null : <Cell
+                                            key={j}>
+                                            {data[key.toLowerCase()]}
+                                        </Cell>
+    
                                     })
                                 }
                             </CollapseRow>
