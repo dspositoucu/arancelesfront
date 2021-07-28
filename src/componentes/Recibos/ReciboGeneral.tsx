@@ -36,7 +36,7 @@ const initialFValues = {
     dia: '',
     otropago: '',
     cantdias: '',
-    total:'0'
+    total: '0'
 
 }
 
@@ -322,15 +322,14 @@ const ReciboGeneral = () => {
                 </Grid>
                 <Grid item xs={12}  >
                     <Grid container justify="flex-end">
-
-                    <Grid item xs={3}>
-                        <Controls.Input
-                            label="Total"
-                            name="total"
-                            value={values.total}
-                            onChange={handleChangeForm}
-                        />
-                    </Grid>
+                        <Grid item xs={3}>
+                            <Controls.Input
+                                label="Total"
+                                name="total"
+                                value={values.total}
+                                onChange={handleChangeForm}
+                            />
+                        </Grid>
                     </Grid>
                 </Grid>
 
