@@ -1,10 +1,8 @@
 import { Router, Route, Switch, Redirect, BrowserRouterProps, Link } from "react-router-dom";
 import history from "./helpers/history";
-import { Tabs, Tab, AppBar } from "@material-ui/core";
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-
-
-
+import { Tabs, Tab, AppBar, Typography } from "@material-ui/core";
+import { makeStyles, createStyles, Theme, ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 //Components
 import Layout from './Layout'
 import AuthRoute from "./componentes/AuthRoute";
@@ -19,6 +17,7 @@ import Barridas from './pages/Barrida/Barridas'
 import Caja from './pages/Caja/Caja'
 
 
+
 const tabsName = [
   { label: "Cuentas", value: "/cuentas" },
   { label: "Personas", value: "/personas" },
@@ -31,38 +30,46 @@ const tabsName = [
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    rootTab: {
+      textTransform: 'none',
+      minWidth: '100px',
+      minHeight: 35,
+      padding: 0,
+      fontSize: '0.9rem',
+      '@media (min-width:600px)': {
+        fontSize: '0.9rem',
+      },
+      [theme.breakpoints.up('md')]: {
+        fontSize: '1rem',
+      },
+    },
+
     tabSelect: {
       color: '#8cbaff',
-      textTransform: 'none',
-      minHeight: 40,
-      padding: 0,
-      minWidth: '120px',
-      fontSize: '16px',
       fontWeight: 600,
     },
     tab: {
       color: '#90a5c0',
-      textTransform: 'none',
-      minHeight: 35,
-      padding: 0,
       fontWeight: 400,
       border: 'solid 1px transparent',
-      minWidth: '120px',
-      fontSize: '16px',
     },
     tabs: {
       minHeight: 40,
       background: '#FFF'
     },
     indicator: {
-      background:'#8cbaff'
+      background: '#8cbaff'
     }
   }))
 
 function App() {
   const classes = useStyles()
+  let theme = createMuiTheme();
+  theme = responsiveFontSizes(theme)
+
+
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Router history={history}>
         <Route exact path="/login" component={LoginPage} />
         {/* <Redirect exact from="/" to="/cuentas" /> */}
@@ -79,9 +86,9 @@ function App() {
                   return <Tab
                     disableFocusRipple={true}
                     disableRipple={true}
-                    className={` ${location.pathname === tab.value ? classes.tabSelect : classes.tab}`}
-                    label={tab.label}
+                    className={`${classes.rootTab} ${location.pathname === tab.value ? classes.tabSelect : classes.tab}`}
                     value={tab.value}
+                    label={tab.label}
                     component={Link}
                     to={tab.value}
                   />
@@ -118,7 +125,7 @@ function App() {
         )} />
 
       </Router>
-    </>
+    </ThemeProvider>
   );
 }
 

@@ -109,12 +109,12 @@ const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDat
                                                             }
                                                             <CellAction>
                                                                 <ButtonIcon
-                                                                    iconType="editar"
+                                                                    endIcon="editar"
                                                                     hover={false}
                                                                     onClick={()=>handleOpenModal("form1")}
                                                                 />
                                                                    <ButtonIcon
-                                                                    iconType="nuevo"
+                                                                    endIcon="nuevo"
                                                                     hover={false}
                                                                     onClick={()=>handleOpenModal("form2")}
                                                                 />

@@ -134,7 +134,7 @@ const FilterMenu: FC<Props> = (props) => {
     return (
         <>
             <ButtonHeader
-                iconType="filter"
+                endIcon="filter"
                 onClick={handleClick}
                 label="Filtros Alumnos"
             />

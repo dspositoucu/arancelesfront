@@ -17,22 +17,22 @@ const Buttons: FC<Props> = ({ type }) => {
     const buttonList = {
         editar: <ButtonHeader
             label="Editar"
-            iconType="editar"
+            endIcon="editar"
         />,
         imprimir: <ButtonHeader
             label="Imprimir"
-            iconType="imprimir"
+            endIcon="imprimir"
         />,
 
         nuevo: <ButtonHeader
             label="Nuevo"
-            iconType="nuevo"
+            endIcon="nuevo"
             onClick={() => { dispatch(openModalRegister()) }}
         />,
 
         borrar: <ButtonHeader
             label="Borrar"
-            iconType="borrar"
+            endIcon="borrar"
             onClick={() => { dispatch(deletePerson()) }}
         />
     }

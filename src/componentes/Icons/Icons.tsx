@@ -8,6 +8,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import EditIcon from '@material-ui/icons/Edit';
+import AddIcon from '@material-ui/icons/Add';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 
 interface Props {
@@ -17,6 +19,8 @@ interface Props {
 const Icons: FC<Props> = ({ type }) => {
 
     const objIcon: ReactNode = {
+        null:<></>,
+        quitar:<HighlightOffIcon/>,
         imprimir: <PrintIcon />,
         borrar: <DeleteIcon />,
         nuevo: <PersonAddIcon />,
@@ -24,7 +28,8 @@ const Icons: FC<Props> = ({ type }) => {
         close: <CloseIcon />,
         user: <AccountCircleIcon/>,
         logout: <PowerSettingsNewIcon/>,
-        editar: <EditIcon/>
+        editar: <EditIcon/>,
+        agregar:<AddIcon/>
     }
 
     return <> {objIcon[type as keyof Object]} </>

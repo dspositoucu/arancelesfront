@@ -54,7 +54,7 @@ export const Row = (props) => {
         {children}
       <CellAction>
         <ButtonIcon
-          iconType="editar"
+          endIcon="editar"
           hover={false}
           onClick={() => dispatch(openModalEdit())}
         />
