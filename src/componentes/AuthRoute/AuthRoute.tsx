@@ -16,6 +16,7 @@ const AuthRoute: FC<Props> = (props) => {
    if(!isLogin) return <Redirect to="/login"/> 
   const checkExiperd = () =>{
     const {exp} = getDecodeTokenLocalStorage()
+    console.log('DECODIFICACION DE TOKEN',getDecodeTokenLocalStorage())
     console.log(exp)
     return  exp > new Date().getTime()/1000  
 

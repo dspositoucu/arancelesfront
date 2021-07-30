@@ -2,6 +2,14 @@ import { Grid } from '@material-ui/core';
 import Controls from '../../componentes/Forms/Controls'
 import { useForm, Form } from '../../hooks/useForm'
 
+
+//hooks
+import useSelect from '../../hooks/useSelect';
+
+
+//acciones
+import { getListCuentas } from '../../Redux/actions/cuentas/CuentasActionCreator';
+
 const initialFValues = {
     idcuenta: 'SIN CUENTA-00',
     cuota: '',
@@ -17,7 +25,9 @@ const initialFValues = {
     debita: ''
 }
 
-const FormAranceles = ({ selectList }) => {
+const FormAranceles = () => {
+    const { opciones } = useSelect(getListCuentas())
+
     const {
         values,
         setValues,
@@ -29,13 +39,16 @@ const FormAranceles = ({ selectList }) => {
             title="Formulario de Aranceles"
             onSubmit={() => { }}>
             <Grid container>
+                
                 <Grid item xs={6}>
-                    <Controls.Select
+                    <Controls.AutocompleteSelect
                         name="idcuenta"
                         label="Cuenta"
                         value={values.idcuenta}
                         onChange={handleChangeForm}
-                        options={selectList}
+                        disablePortal
+                        options={opciones}
+                        field="descripcion"
                     />
                     <Controls.Input
                         name="Cuota"

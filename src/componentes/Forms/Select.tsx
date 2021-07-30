@@ -2,21 +2,23 @@ import React from 'react'
 import { FormControl, InputLabel, Select as MuiSelect, MenuItem, FormHelperText } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
-export default function Select({ name, label, value,error=null, onChange, options }) {
-    const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        selectProps:{
-            height:200
-        }
+const useStyles = makeStyles((theme: Theme) =>
+createStyles({
+    selectProps:{
+        height:200
+    }
 
-    }));
+}));
+
+ const Select = (props) => {
+    const { name, label, value,error=null, onChange, options, firstValue="default" } = props
     const classes = useStyles();
     return (
-        
         <FormControl variant="outlined"
         {...(error && {error:true})}>
             <InputLabel>{label}</InputLabel>
             <MuiSelect
+                {...props}
                 label={label}
                 name={name}
                 value={value}
@@ -26,8 +28,7 @@ export default function Select({ name, label, value,error=null, onChange, option
                     classes:{paper:classes.selectProps}
                 }}
                 onChange={onChange}>
-                    
-                <MenuItem value="">SIN CUENTA-00</MenuItem>
+                    <MenuItem value="">{firstValue}</MenuItem>
                 {
                     options.map(
                         item => (<MenuItem key={item} value={item}>{item}</MenuItem>)
@@ -38,3 +39,5 @@ export default function Select({ name, label, value,error=null, onChange, option
         </FormControl>
     )
 }
+
+export default Select

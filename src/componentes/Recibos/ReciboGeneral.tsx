@@ -8,6 +8,7 @@ import ButtonIcon from '../Buttons/ButtonIcon';
 // Custom hooks
 import { useForm, Form } from '../../hooks/useForm'
 import useSubmit from '../../hooks/useSubmit';
+import useDescripciones from '../../hooks/useDescripciones';
 //Actions
 
 const initialFValues = {
@@ -46,55 +47,20 @@ const ReciboGeneral = () => {
         resetForm,
     } = useForm(initialFValues, true);
 
-    const [descripcion, setDescripcion] = useState([
-        { id: '1', descripcion: "Arancel", monto: "0.00" },
-        { id: '2', descripcion: "Bonificacion", monto: "0.00" },
-        { id: '3', descripcion: "Intereses", monto: "0.00" },
-        { id: '4', descripcion: "Biblioteca", monto: "0.00" },
-        { id: '5', descripcion: "Moratoria", monto: "0.00" },
-    ])
-
-    const [nuevaDescripcion, setNuevaDescripcion] = useState({
-        descripcion: "",
-        monto: "0.00",
-    })
-    const agregarDescripcion = () => {
-        setDescripcion([
-            ...descripcion,
-            {
-                id: (descripcion.length + 1).toString(),
-                descripcion: nuevaDescripcion.descripcion,
-                monto: nuevaDescripcion.monto
-            }])
-    }
-
-    const quitarDescripcion = (idDesc) => {
-        setDescripcion(
-            descripcion.filter(desc => desc.id !== idDesc)
-        )
-    }
-
-    const sumarMontos = () => {
-        let monto = 0 
-        descripcion.forEach(desc=>{
-            monto += parseFloat(desc.monto)     
-        })
-        return monto
-    }
-
-    const handleChangeDesc = (event: ChangeEvent<HTMLInputElement>): void => {
-        const { name, value } = event.target
-
-        setNuevaDescripcion({
-            ...nuevaDescripcion,
-            [name]: value,
-        })
-
-    }
+    const {
+        listaDescripciones,
+        nuevaDescripcion,
+        handleChangeDesc,
+        handleChangeNuevaDesc,
+        agregarDescripcion,
+        quitarDescripcion,
+        monto
+    } = useDescripciones()
 
 
     return (
         <Form
+
             title="Recibo General">
             <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -343,15 +309,7 @@ const ReciboGeneral = () => {
                             name="descripcion"
                             label="Descripcion"
                             value={nuevaDescripcion.descripcion}
-                            onChange={handleChangeDesc}
-                        />
-                    </Grid>
-                    <Grid direction="row" style={{display:"flex", alignItems:'baseline'}} item xs={1} >
-                        <Typography>$</Typography>
-                        <Controls.Input
-                            name="monto"
-                            value={nuevaDescripcion.monto}
-                            onChange={handleChangeDesc}
+                            onChange={handleChangeNuevaDesc}
                         />
                     </Grid>
                     <Grid item xs={2}>
@@ -368,7 +326,7 @@ const ReciboGeneral = () => {
                 {/* =========================================================== ITEM DESCRIPCIONES =========================================================== */}
                 <Grid container spacing={1} xs={12}>
                     {
-                        descripcion.map((desc, i) => {
+                        listaDescripciones.map((desc, i) => {
                             return (
                                 <Grid spacing={1} xs={4} alignItems="center" container key={i} item>
                                     <Grid item xs={2}>
@@ -379,15 +337,18 @@ const ReciboGeneral = () => {
                                     <Grid item xs={3}>
                                         <Divider orientation="horizontal" light={true} />
                                     </Grid>
-                                    <Grid item xs={2}>
-                                        <Typography variant={"subtitle2"}>
-                                            {desc.monto}
-                                        </Typography>
+                                    <Grid item xs={3} style={{ display: "flex", alignItems: 'baseline' }}>
+                                        <Typography>$</Typography>
+                                        <Controls.Input
+                                            name={desc.descripcion}
+                                            value={desc.monto}
+                                            onChange={handleChangeDesc}
+                                        />
                                     </Grid>
                                     <Grid item xs={1}>
                                         <ButtonIcon
                                             startIcon="quitar"
-                                            onClick={() => quitarDescripcion(desc.id)}
+                                            onClick={() => quitarDescripcion(desc.descripcion)}
                                         />
                                     </Grid>
 
@@ -405,7 +366,7 @@ const ReciboGeneral = () => {
                         <Typography>Total</Typography>
                     </Grid>
                     <Grid item style={{ textAlign: 'end' }} xs={2}>
-                        <Typography>${sumarMontos()}</Typography>
+                        <Typography>${monto}</Typography>
                     </Grid>
                 </Grid>
                 {/* =========================================================== BOTONES =========================================================== */}

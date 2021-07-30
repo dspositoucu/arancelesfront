@@ -12,12 +12,14 @@ import listaCuentas from '../../fakeData/cuentas.json'
 import { AppState } from '../../Redux/state/AppState';
 
 //Actions
-import { getAllCuentas, cargarListaCuentasFalsas } from '../../Redux/actions/cuentas/CuentasActionCreator'
+import { getAllCuentas, cargarListaCuentasFalsas, getListCuentas } from '../../Redux/actions/cuentas/CuentasActionCreator'
 
 const Cuentas = () => {
 
   const { listCuentas } = useSelector((state: AppState) => state.CuentasState)
 
+
+  console.log('LISTA DE CUENTAS ', getListCuentas())
 
   const dispatch = useDispatch()
 

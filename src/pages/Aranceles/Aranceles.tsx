@@ -31,7 +31,7 @@ const Aranceles = () => {
   // -columns: corresponde a las columnas de la tabla que se quieren renderizar
   // -actions (OPCIONAL): acciones para realizar en la tabla 
 
-  let listaSelect = listAranceles.map(arancels=>arancels["NOMBRE DE CUENTA"])
+  let listaSelect = listAranceles.map(arancels=>arancels["nombre de cuenta"])
 
   return <Table
     filterSearchBar={[
@@ -46,7 +46,7 @@ const Aranceles = () => {
     actionsInHeader={["imprimir","nuevo"]}
     actionInRow={['editar']}
     rowChek={false}
-    FormRegister={<FormAranceles selectList={listaSelect}/>}
+    FormRegister={<FormAranceles/>}
   />
 }
 

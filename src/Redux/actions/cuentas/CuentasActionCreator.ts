@@ -52,8 +52,8 @@ export const updateCuentas = (CuentasId: number | string, Cuentas: typesModels, 
         index
     }
 }
- 
-export const cargarListaCuentasFalsas = (cuentas) =>{
+
+export const cargarListaCuentasFalsas = (cuentas) => {
     return getCuentasList(cuentas)
 }
 
@@ -82,4 +82,11 @@ export const addCuentas = (cuenta: ICuentas) => {
 
     }
 
+}
+
+export const getListCuentas = async () => {
+   return new CuentasApi()
+        .getListCuentas()
+        .then(resp=> resp.data)
+        .catch(err => console.log("ERROR getListCuentas ",err))
 }

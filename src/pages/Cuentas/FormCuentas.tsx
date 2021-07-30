@@ -12,6 +12,9 @@ import useSubmit from '../../hooks/useSubmit';
 //Actions
 import { addPersona } from '../../Redux/actions/personas/ActionCreator';
 
+//hooks
+import useSelect from '../../hooks/useSelect';
+
 
 const initialFValues = {
     codfac: '',
@@ -87,6 +90,7 @@ const FormCuentas = () => {
                         name="departmentId"
                         label="ID Grupo Barrida"
                         value={values.departmentId}
+                        fistValue={'SIN CUENTA-00'}
                         onChange={handleChangeForm}
                         options={["Sin Barrida", "Sede Central", "Santa Fe", "Sede Rosario"]}
                     />
