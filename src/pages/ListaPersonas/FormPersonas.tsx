@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, } from '@material-ui/core';
+import { Grid, Divider } from '@material-ui/core';
 
 // Import Componentes
 import Controls from '../../componentes/Forms/Controls'
@@ -47,101 +47,97 @@ const FormPersonas = () => {
             title="Nueva Persona"
             onSubmit={formSubmit}>
             <Grid container>
-                <Grid item xs={6}>
-                    <Controls.Input
-                        name="codigo"
-                        label="Codigo"
-                        value={values.codigo}
-                        onChange={handleChangeForm}
-                    />
-                    <Controls.Input
-                        label="Nombre"
-                        name="nombre"
-                        value={values.nombre}
-                        onChange={handleChangeForm}
-                    />
-                    <Controls.Input
-                        label="Email"
-                        name="email"
-                        type="email"
-                        value={values.email}
-                        onChange={handleChangeForm}
-                    />
-                    <Controls.Input
-                        label="Fecha de Nacimiento"
-                        name="fecnac"
-                        type="date"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        value={values.fecnac}
-                        onChange={handleChangeForm}
-                    />
-                    <Controls.Input
-                        label="Telefono"
-                        name="telefono"
-                        value={values.telefono}
-                        onChange={handleChangeForm}
-                    />
-                    <Controls.Input
-                        label="Domicilio"
-                        name="domicilio"
-                        value={values.domicilio}
-                        onChange={handleChangeForm}
-                    />
+                <Controls.Input
+                    name="codigo"
+                    label="Codigo"
+                    value={values.codigo}
+                    onChange={handleChangeForm}
+                />
+                <Controls.Input
+                    label="Nombre"
+                    name="nombre"
+                    value={values.nombre}
+                    onChange={handleChangeForm}
+                />
+                <Controls.Input
+                    label="Email"
+                    name="email"
+                    type="email"
+                    value={values.email}
+                    onChange={handleChangeForm}
+                />
+                <Controls.Input
+                    label="Fecha de Nacimiento"
+                    name="fecnac"
+                    type="date"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    value={values.fecnac}
+                    onChange={handleChangeForm}
+                />
+                <Controls.Input
+                    label="Telefono"
+                    name="telefono"
+                    value={values.telefono}
+                    onChange={handleChangeForm}
+                />
+                <Controls.Input
+                    label="Domicilio"
+                    name="domicilio"
+                    value={values.domicilio}
+                    onChange={handleChangeForm}
+                />
+                <Controls.RadioGroup
+                    name="gender"
+                    label="Sexo"
+                    value={values.gender}
+                    onChange={handleChangeForm}
+                    items={genderItems}
+                />
+                <Controls.Input
+                    label="Tipo Documento"
+                    name="tdoc"
+                    value={values.tdoc}
+                    onChange={handleChangeForm}
+                />
+                <Controls.Input
+                    label="Nro Doc"
+                    name="ndoc"
+                    value={values.ndoc}
+                    onChange={handleChangeForm}
+                />
+                <Controls.Input
+                    label="Cuit"
+                    name="cuit"
+                    value={values.cuit}
+                    onChange={handleChangeForm}
+                />
+                <Controls.Input
+                    label="Situacion Tributaria"
+                    name="situaciontributaria"
+                    value={values.situaciontributaria}
+                    onChange={handleChangeForm}
+                />
+                <Grid item xs={12}>
+                    <Divider orientation="horizontal" light={true} />
                 </Grid>
-                <Grid item xs={6}>
-                    <Controls.RadioGroup
-                        name="gender"
-                        label="Sexo"
-                        value={values.gender}
-                        onChange={handleChangeForm}
-                        items={genderItems}
-                    />
-                    <Controls.Input
-                        label="Tipo Documento"
-                        name="tdoc"
-                        value={values.tdoc}
-                        onChange={handleChangeForm}
-                    />
-                    <Controls.Input
-                        label="Nro Doc"
-                        name="ndoc"
-                        value={values.ndoc}
-                        onChange={handleChangeForm}
-                    />
-                    <Controls.Input
-                        label="Cuit"
-                        name="cuit"
-                        value={values.cuit}
-                        onChange={handleChangeForm}
-                    />
-                    <Controls.Input
-                        label="Situacion Tributaria"
-                        name="situaciontributaria"
-                        value={values.situaciontributaria}
-                        onChange={handleChangeForm}
-                    />
-
+                <Grid xs={6}>
+                    <Controls.Button
+                        onClick={() => { }}
+                        variant="primary"
+                        text="Cancelar" />
                 </Grid>
-                    <Grid container xs={12}>
-                        <Grid xs={6}>
-                            <Controls.Button
-                                onClick={() => { }}
-                                variant="primary"
-                                text="Cancelar" />
-                        </Grid>
-                        <Grid container justify="flex-end" xs={6}>
-                            <Controls.Button
-                                text="Limpiar Formulario"
-                                variant="secondary"
-                                onClick={resetForm} />
-                            <Controls.Button
-                                type="submit"
-                                variant="primary"
-                                text="Registrar Persona" />
-                        </Grid>
-                    </Grid>
+                <Grid container justify="flex-end" xs={6}>
+                    <Controls.Button
+                        text="Limpiar Formulario"
+                        variant="secondary"
+                        onClick={resetForm} />
+                    <Controls.Button
+                        type="submit"
+                        variant="primary"
+                        text="Crear Cuenta Nueva" />
+                </Grid>
             </Grid>
         </Form>
     )

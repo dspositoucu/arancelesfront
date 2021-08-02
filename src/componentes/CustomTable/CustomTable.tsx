@@ -41,7 +41,7 @@ import CollapseRow from './CollapseRow'
 
 interface Props {
     tableData: any[]
-    columns: string[],
+    columns: any[],
     actionsInRow?: string[],
     FormRegister?: ReactNode,
     filterSearchBar?: IFilterSearchBar[],
@@ -51,7 +51,9 @@ interface Props {
     filterMenu: boolean,
     collapseRow?: Function,
     secondaryColumn?: String[],
-    secondaryForms?: ReactNode[]
+    secondaryForms?: ReactNode[],
+    widthModal?:string,
+    heightModal?:string
 }
 
 // estilos css-in-js
@@ -76,7 +78,19 @@ const useStyles = makeStyles(() =>
         }
     }));
 
-const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsInHeader, FormRegister, rowChek, filterMenu, collapseRow, secondaryColumn, secondaryForms }) => {
+const CustomTable: FC<Props> = ({ 
+    filterSearchBar, 
+    tableData, 
+    columns, 
+    actionsInHeader, 
+    FormRegister, 
+    rowChek, 
+    filterMenu, 
+    collapseRow, 
+    secondaryColumn, 
+    secondaryForms,
+    widthModal,
+    heightModal }) => {
     const dispatch = useDispatch()
     const classes = useStyles();
     const [secondaryTable, setSecondaryTable] = useState([])
@@ -119,8 +133,11 @@ const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsIn
             {/* ================= MODALES =================*/}
             {modalRegister &&
                 <Modal
+                    width={widthModal}
+                    height={heightModal}
                     closeModal={() => dispatch(openModalRegister())}
                     active={modalRegister}
+                    
                 >
                     {FormRegister}
                 </Modal>
@@ -137,7 +154,7 @@ const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsIn
                     columns={columns}
                 >
                     {
-                        columns.map((col, i) => <Cell variant="head" key={i}>{col}</Cell>)
+                        columns.map((col, i) => <Cell variant="head" key={i}>{col.title}</Cell>)
                     }
                 </RowHeader>
                 <TableBody>
@@ -155,8 +172,8 @@ const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsIn
                                 {
                                     columns.map((key, i) => {
                                         return (
-                                            <Cell key={i}>
-                                                {data[key.toLowerCase()]}
+                                            <Cell width={key.width} key={i}>
+                                                {data[key.title.toLowerCase()]}
                                             </Cell>
                                         )
                                     })
@@ -170,9 +187,11 @@ const CustomTable: FC<Props> = ({ filterSearchBar, tableData, columns, actionsIn
                                 tableColapseHead={secondaryColumn}>
                                 {
                                     columns.map((key, j) => {
-                                        return key === " " ? null : <Cell
+                                        return key.title === " " ? null : 
+                                        <Cell
+                                            width={key.width}
                                             key={j}>
-                                            {data[key.toLowerCase()]}
+                                            {data[key.title.toLowerCase()]}
                                         </Cell>
     
                                     })

@@ -3,7 +3,7 @@ import { TextField } from '@material-ui/core';
 
 export default function Input(props) {
 
-    const { name, label, value,error=null, onChange, type, InputLabelProps } = props;
+    const { name, label, value, error = null, onChange, type, InputLabelProps } = props;
     return (
         <TextField
             InputLabelProps={InputLabelProps}
@@ -15,7 +15,7 @@ export default function Input(props) {
             onChange={onChange}
             size="small"
             {...props}
-            {...(error && {error:true,helperText:error})}
+            {...(error && { error: true, helperText: error })}
         />
     )
 }

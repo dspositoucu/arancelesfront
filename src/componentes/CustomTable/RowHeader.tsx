@@ -19,7 +19,7 @@ interface Props {
     children?: ReactNode | any[]
 }
 
-const RowHeader: FC<Props> = ({ columns, rowChek, children }) => {
+const RowHeader: FC<Props> = ({ rowChek, children }) => {
     const classes = useStyles()
 
     //rowChek && rowHeader.unshift(<CellCheckBox key={'check'} check={!!selectListPerson.length} checkAll variant="head" />);
@@ -28,7 +28,6 @@ const RowHeader: FC<Props> = ({ columns, rowChek, children }) => {
         <TableHead className={classes.rowHeader}>
             <TableRow>
                 {children}
-                <Cell key={'head'} variant="head">Acciones</Cell>
             </TableRow>
         </TableHead>
     )

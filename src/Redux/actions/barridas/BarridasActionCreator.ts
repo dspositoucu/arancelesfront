@@ -74,3 +74,10 @@ export const addCuentas = (cuenta: ICuentas) => {
     }
 
 }
+
+export const getListaGruposBarrida = () =>{
+    return new BarridasApi()
+        .getListaGruposBarrida()
+        .then(resp=>resp.data)
+        .catch(err=>console.log(err))
+}

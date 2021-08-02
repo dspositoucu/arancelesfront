@@ -28,9 +28,23 @@ const ListaPersonas = () => {
 
   const cargarDatos = () => {
     //if (ListaFalsa.length <= 0) {
-      dispatch(getAllPersonas())
+    dispatch(getAllPersonas())
     //}
   }
+
+  const columns = [
+    {
+      title: " ",
+      width: 25
+    },
+    { title: "ID" },
+    { title: "Nombre" },
+    { title: "Ndoc" },
+    { title: "Telefono" },
+    { title: "Email" },
+    { title: "Domicilio" }
+  ]
+
   useEffect(() => {
     cargarDatos()
   }, [])
@@ -43,31 +57,31 @@ const ListaPersonas = () => {
   return <Table
     tableData={listPerson}
     filterMenu={false}
-    columns={[" ", "ID", "Nombre", "Ndoc", "Telefono", "Email", "Domicilio"]}
+    columns={columns}
     actionsInHeader={["imprimir", "nuevo", "borrar"]}
     actionInRow={['editar']}
     rowChek={false}
-    FormRegister={<FormPersonas/>}
+    FormRegister={<FormPersonas />}
     filterSearchBar={[
       {
         key: "NOMBRE",
         label: "Nombre"
       },
       {
-        key:"NDOC",
-        label:"Nro Documneto"
+        key: "NDOC",
+        label: "Nro Documneto"
       }
     ]}
     collapseRow={
-      async (personaId)=>{
+      async (personaId) => {
         return new PersonApi()
-        .getCuentasByPersonaId(personaId)
-        .then(resp=>resp.data)
+          .getCuentasByPersonaId(personaId)
+          .then(resp => resp.data)
       }
     }
 
     // props para la tabla secundaria
-    secondaryForms={[<ReciboX/>,<ReciboGeneral/>]}
+    secondaryForms={[<ReciboX />, <ReciboGeneral />]}
     secondaryColumn={["Nombre de cuenta", "CodCar", "CodAlu", "Saldo", "Activo", "Fin", "Fin Hasta", "Autorizado", "Baja", "Nota"]}
   />
 }

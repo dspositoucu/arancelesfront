@@ -5,50 +5,50 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 interface Prop {
     active: boolean,
     closeModal: () => void,
-    children: ReactNode
+    children: ReactNode,
+    width?:string,
+    height?:string
 }
-
-const useStyles = makeStyles(() =>
-    createStyles({
-        fondo: {
-            display: "flex",
-            justifyContent: "center",
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, .7)',
-            zIndex: 10000,
-        },
-        modalContainer: {
-            top: '50%',
-            left: '50%',
-            position: 'fixed',
-            display: 'grid',
-            placeItems: 'center',
-            transform: 'translate(-50%,-50%)',
-            zIndex: 80000,
-        },
-        modal: {
-            width: '80vw',
-            height:'max-content',
-            borderRadius:10,
-            padding:30,
-            background:'#FFF',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'column',
-            //position: 'fixed',
-            zIndex: 80000,
-        },
-    }));
 
 const modalRoot = document.getElementById('modal')
 
-
-const Modal: FC<Prop> = ({ active, closeModal, children }) => {
+const Modal: FC<Prop> = ({ active, closeModal, children, width='80vw', height='max-content' }) => {
+    const useStyles = makeStyles(() =>
+        createStyles({
+            fondo: {
+                display: "flex",
+                justifyContent: "center",
+                position: "fixed",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: 'rgba(0, 0, 0, .7)',
+                zIndex: 10000,
+            },
+            modalContainer: {
+                top: '50%',
+                left: '50%',
+                position: 'fixed',
+                display: 'grid',
+                placeItems: 'center',
+                transform: 'translate(-50%,-50%)',
+                zIndex: 80000,
+            },
+            modal: {
+                width: width,
+                height:height,
+                borderRadius:10,
+                padding:25,
+                background:'#FFF',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'column',
+                //position: 'fixed',
+                zIndex: 80000,
+            },
+        }));
 
     const classes = useStyles()
 

@@ -7,8 +7,8 @@ import ButtonIcon from '../Buttons/ButtonIcon';
 
 // Custom hooks
 import { useForm, Form } from '../../hooks/useForm'
+import useDescripcion from '../../hooks/useDescripcion'; 
 import useSubmit from '../../hooks/useSubmit';
-import useDescripciones from '../../hooks/useDescripciones';
 //Actions
 
 const initialFValues = {
@@ -48,19 +48,16 @@ const ReciboGeneral = () => {
     } = useForm(initialFValues, true);
 
     const {
-        listaDescripciones,
-        nuevaDescripcion,
-        handleChangeDesc,
-        handleChangeNuevaDesc,
+        descripciones,
         agregarDescripcion,
         quitarDescripcion,
-        monto
-    } = useDescripciones()
+        sumarMontos,
+        handleChangeDesc,
+        nuevaDescripcion} = useDescripcion()
 
 
     return (
         <Form
-
             title="Recibo General">
             <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -270,7 +267,7 @@ const ReciboGeneral = () => {
                 {/*============================================== fila ============================================== */}
 
 
-                <Grid item xs={4}>
+                <Grid item xs={3}>
                     <Controls.Checkbox
                         name="matriculacompleta"
                         label="Matricula Completa"
@@ -278,7 +275,7 @@ const ReciboGeneral = () => {
                         onChange={handleChangeForm}
                     />
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={3}>
                     <Controls.Checkbox
                         name="derechoexamen"
                         label="Derecho de examen"
@@ -294,22 +291,28 @@ const ReciboGeneral = () => {
                     <Divider orientation="horizontal" light={true} />
                 </Grid>
                 <Grid item xs={12}>
-                    <Typography variant={'h4'}>
+                    <Typography variant={'h5'}>
                         Detalle de Factura / Recibo
                     </Typography>
                 </Grid>
                 <Grid item container direction="row" spacing={1} xs={12}>
-                    <Grid item xs={3}>
-                        <Typography variant={'h6'}>
-                            Descripciones
-                        </Typography>
-                    </Grid>
                     <Grid item xs={2}>
                         <Controls.Input
                             name="descripcion"
                             label="Descripcion"
                             value={nuevaDescripcion.descripcion}
-                            onChange={handleChangeNuevaDesc}
+                            onChange={handleChangeDesc}
+                        />
+                    </Grid>
+                    <Grid direction="row" style={{display:"flex", alignItems:'baseline'}} item xs={2} >
+                        <Typography>$</Typography>
+                        <Controls.Input
+                            inputProps={{
+                                style: { textAlign: "right" }
+                              }}
+                            name="monto"
+                            value={nuevaDescripcion.monto}
+                            onChange={handleChangeDesc}
                         />
                     </Grid>
                     <Grid item xs={2}>
@@ -326,7 +329,7 @@ const ReciboGeneral = () => {
                 {/* =========================================================== ITEM DESCRIPCIONES =========================================================== */}
                 <Grid container spacing={1} xs={12}>
                     {
-                        listaDescripciones.map((desc, i) => {
+                        descripciones.map((desc, i) => {
                             return (
                                 <Grid spacing={1} xs={4} alignItems="center" container key={i} item>
                                     <Grid item xs={2}>
@@ -337,18 +340,15 @@ const ReciboGeneral = () => {
                                     <Grid item xs={3}>
                                         <Divider orientation="horizontal" light={true} />
                                     </Grid>
-                                    <Grid item xs={3} style={{ display: "flex", alignItems: 'baseline' }}>
-                                        <Typography>$</Typography>
-                                        <Controls.Input
-                                            name={desc.descripcion}
-                                            value={desc.monto}
-                                            onChange={handleChangeDesc}
-                                        />
+                                    <Grid item xs={2}>
+                                        <Typography variant={"subtitle2"}>
+                                            {desc.monto}
+                                        </Typography>
                                     </Grid>
                                     <Grid item xs={1}>
                                         <ButtonIcon
                                             startIcon="quitar"
-                                            onClick={() => quitarDescripcion(desc.descripcion)}
+                                            onClick={() => quitarDescripcion(desc.id)}
                                         />
                                     </Grid>
 
@@ -366,7 +366,7 @@ const ReciboGeneral = () => {
                         <Typography>Total</Typography>
                     </Grid>
                     <Grid item style={{ textAlign: 'end' }} xs={2}>
-                        <Typography>${monto}</Typography>
+                        <Typography>${sumarMontos()}</Typography>
                     </Grid>
                 </Grid>
                 {/* =========================================================== BOTONES =========================================================== */}

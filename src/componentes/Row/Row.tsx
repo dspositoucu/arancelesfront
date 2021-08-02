@@ -31,7 +31,7 @@ const StyledTableRow = withStyles(() => ({
 }))(TableRow);
 
 export const Row = (props) => {
-  const { data, columns, rowChek, children } = props
+  const { data, rowChek, children } = props
   const dispatch = useDispatch();
   const { selectListPerson } = useSelector((state: AppState) => state.PersonState)
 

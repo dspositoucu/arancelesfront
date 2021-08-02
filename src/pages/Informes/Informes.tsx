@@ -17,6 +17,15 @@ const Informes = () => {
 
   const { AllData } = useSelector((state: AppState) => state.InformesState)
 
+  const columns = [
+  {title:"idPersona"}, 
+  {title:"Codalu"}, 
+  {title:"Nombre"}, 
+  {title:"CodCar"}, 
+  {title:"IDCuenta"}, 
+  {title:"Descripcion"}, 
+  {title:"IDBeneficio"}, 
+  {title:"Cbu"}]
 
   const dispatch = useDispatch()
 
@@ -41,7 +50,7 @@ const Informes = () => {
     ]}
     filterMenu={true}
     tableData={AllData}
-    columns={["idPersona", "Codalu", "Nombre", "CodCar", "IDCuenta", "Descripcion", "IDBeneficio", "Cbu"]}
+    columns={columns}
     actionsInHeader={["imprimir"]}
     actionInRow={['editar']}
     rowChek={false}

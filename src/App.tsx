@@ -1,8 +1,8 @@
 import { Router, Route, Switch, Redirect, BrowserRouterProps, Link } from "react-router-dom";
 import history from "./helpers/history";
-import { Tabs, Tab, AppBar, Typography } from "@material-ui/core";
-import { makeStyles, createStyles, Theme, ThemeProvider } from '@material-ui/core/styles';
-import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import { Tabs, Tab, AppBar, Typography, useMediaQuery } from "@material-ui/core";
+import { makeStyles, createStyles, Theme, ThemeProvider, createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+
 //Components
 import Layout from './Layout'
 import AuthRoute from "./componentes/AuthRoute";
@@ -64,12 +64,32 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function App() {
   const classes = useStyles()
-  let theme = createMuiTheme();
-  theme = responsiveFontSizes(theme)
+
+
+  const minsm = useMediaQuery('(min-width:600px)')
+  const minmd = useMediaQuery('(min-width:960px)')
+  const minlg = useMediaQuery('(min-width:1280px)')
+  const minxl = useMediaQuery('(min-width:1920px)')
+
+  const sm = (minsm && !minmd)
+  const md = (minmd && !minlg)
+  const lg = (minlg && !minxl)
+  const xl = minxl
+
+
+  console.log("MEDIDAS MQ >>>>> ", sm, md, lg, xl)
+
+  const outerTheme = createMuiTheme({
+    spacing: sm ? 2.5 : md ? 3 : lg ? 4 : 8,
+    typography:{
+      fontSize: sm ? 12 : md ? 13 : lg ? 14 : 14,
+      
+    }
+  })
 
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={outerTheme}>
       <Router history={history}>
         <Route exact path="/login" component={LoginPage} />
         {/* <Redirect exact from="/" to="/cuentas" /> */}

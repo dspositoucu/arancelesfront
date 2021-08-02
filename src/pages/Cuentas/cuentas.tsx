@@ -12,14 +12,12 @@ import listaCuentas from '../../fakeData/cuentas.json'
 import { AppState } from '../../Redux/state/AppState';
 
 //Actions
-import { getAllCuentas, cargarListaCuentasFalsas, getListCuentas } from '../../Redux/actions/cuentas/CuentasActionCreator'
+import { getAllCuentas, cargarListaCuentasFalsas } from '../../Redux/actions/cuentas/CuentasActionCreator'
 
 const Cuentas = () => {
 
   const { listCuentas } = useSelector((state: AppState) => state.CuentasState)
 
-
-  console.log('LISTA DE CUENTAS ', getListCuentas())
 
   const dispatch = useDispatch()
 
@@ -35,6 +33,15 @@ const Cuentas = () => {
   // -columns: corresponde a las columnas de la tabla que se quieren renderizar
   // -actions (OPCIONAL): acciones para realizar en la tabla 
 
+const columnas = [
+  {title:"ID"},
+  {title:"CodFac"},
+  {title:"CodCar"},
+  {title:"Descripcion"},
+  {title:"CantCuotas"},
+  {title:"IDSede"},
+  {title:"Grupo Barrida"},
+]
   return <Table
     filterSearchBar={[
       {
@@ -44,11 +51,12 @@ const Cuentas = () => {
     ]}
     filterMenu={false}
     tableData={listCuentas}
-    columns={["ID", "CodFac", "CodCar", "Descripcion", "CantCuotas", "IDSede", "Grupo Barrida"]}
+    columns={columnas}
     actionsInHeader={["imprimir","nuevo"]}
     actionInRow={['editar']}
     rowChek={false}
-    FormRegister={<FormCuentas/>}
+    widthModal={'60vw'}
+    FormRegister={<FormCuentas width='100%' />}
   />
 }
 

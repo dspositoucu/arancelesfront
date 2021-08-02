@@ -13,8 +13,11 @@ export class CuentasApi {
         return AxiosIntance.post(this.BaseUrl,cuenta)
     }
 
-    getListCuentas() :Promise<AxiosResponse> {
+    getCuentasList() :Promise<AxiosResponse> {
         return AxiosIntance.get(`${this.BaseUrl}/list`)
     }
 
+    getSedesList() :Promise<AxiosResponse> {
+        return AxiosIntance.get(`${this.BaseUrl}/sedes`)
+    }
 }

@@ -16,6 +16,27 @@ const Aranceles = () => {
 
   const { listAranceles } = useSelector((state: AppState) => state.ArancelesState)
 
+  const columns = [
+    { title: 'CodFac' },
+    { title: 'CodCar' },
+    { title: 'IDCuenta' },
+    { title: 'Nombre de Cuenta', },
+    { title: 'Descripcion' },
+    { title: 'Mes' },
+    { title: 'Anio' },
+    {
+      title: 'Monto',
+      align: 'right'
+    },
+    { title: 'Bonificacion' },
+    { title: 'Recargo' },
+    { title: 'Biblioteca' },
+    {
+      title: 'Debita',
+      type: Boolean
+    }
+  ]
+
 
   const dispatch = useDispatch()
 
@@ -31,7 +52,7 @@ const Aranceles = () => {
   // -columns: corresponde a las columnas de la tabla que se quieren renderizar
   // -actions (OPCIONAL): acciones para realizar en la tabla 
 
-  let listaSelect = listAranceles.map(arancels=>arancels["nombre de cuenta"])
+  let listaSelect = listAranceles.map(arancels => arancels["NOMBRE DE CUENTA"])
 
   return <Table
     filterSearchBar={[
@@ -42,11 +63,11 @@ const Aranceles = () => {
     ]}
     filterMenu={false}
     tableData={listAranceles}
-    columns={["CodFac", "CodCar", "IDCuenta", "Nombre de Cuenta", "Descripcion", "Mes", "Anio", "Monto", "Bonificacion", "Recargo", "Biblioteca", "Debita"]}
-    actionsInHeader={["imprimir","nuevo"]}
+    columns={columns}
+    actionsInHeader={["imprimir", "nuevo"]}
     actionInRow={['editar']}
     rowChek={false}
-    FormRegister={<FormAranceles/>}
+    FormRegister={<FormAranceles selectList={listaSelect} />}
   />
 }
 

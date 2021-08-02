@@ -78,7 +78,7 @@ const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDat
             {fomulario2}
         </Modal>
             <TableRow className={classes.root}>
-                <Cell>
+                <Cell width={'25'}>
                     <IconButton aria-label="expand row" size="small" onClick={
                         () => {
                             setOpen(!open)

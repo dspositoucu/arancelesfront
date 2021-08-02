@@ -22,23 +22,23 @@ export const useForm = (initialFValues, validateOnChange = false) => {
   }
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      '& .MuiFormControl-root': {
-        width: '100%',
-        //margin: theme.spacing(1),
-      },
-      background: "#FFF",
-      width: '100%'
-    },
-    headerForm: {
-      padding: theme.spacing(1),
-      borderBottom: "solid 1px light"
-    },
-  }))
 
-export const Form = ({ children, title, ...other }) => {
+export const Form = ({ width='100%', children, title, ...other }) => {
+  const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+      root: {
+        width: width,
+        background: "#FFF",
+        
+        '& .MuiFormControl-root': {
+          width: '100%',
+          height: '100%'
+        },
+      },
+      headerForm: {
+        borderBottom: "solid 1px light"
+      },
+    }))
   const classes = useStyles();
   return (
     <form className={classes.root} autoComplete="off" {...other}>

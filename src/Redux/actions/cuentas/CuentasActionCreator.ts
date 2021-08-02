@@ -11,9 +11,6 @@ import {
 
 import { typesModels, ICuentas } from '../../../models';
 
-
-
-
 const addCuentaAction = (cuenta: typesModels): AddCuentasAction => {
     return {
         type: ActionTypes.ADD_CUENTAS,
@@ -41,8 +38,6 @@ export const selectCuentas = (selectCuentas: typesModels): SelectCuentasAction =
         selectCuentas
     }
 }
-
-
 
 export const updateCuentas = (CuentasId: number | string, Cuentas: typesModels, index: number): UpdateCuentasAction => {
     return {
@@ -84,9 +79,16 @@ export const addCuentas = (cuenta: ICuentas) => {
 
 }
 
-export const getListCuentas = async () => {
-   return new CuentasApi()
-        .getListCuentas()
-        .then(resp=> resp.data)
-        .catch(err => console.log("ERROR getListCuentas ",err))
+export const getCuentasListSelect = () => {
+    return new CuentasApi()
+        .getCuentasList()
+        .then(resp => resp.data)
+        .catch(err => console.log(err))
+}
+
+export const getSedesListSelect = () => {
+    return new CuentasApi()
+        .getSedesList()
+        .then(resp => resp.data)
+        .catch(err => console.log(err))
 }

@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react'
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import { withStyles } from "@material-ui/core/styles";
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
@@ -9,12 +9,14 @@ import { useDispatch } from 'react-redux'
 
 //actions
 import { selectAllPerson } from '../../Redux/actions/personas/ActionCreator'
+import { Typography } from '@material-ui/core';
 
 interface Props {
     children?: ReactNode | any,
     check?: boolean,
     variant?: "body" | "head" | "footer" | undefined
     checkAll?: boolean
+    width?:string
 }
 
 //Style align center checkbox
@@ -29,22 +31,18 @@ const useStyles = makeStyles(() =>
 )
 
 //styled and build new cell component
-const StyledTableCell = withStyles(() => ({
+const StyledTableCell = withStyles((theme:Theme) => ({
     head: {
         color: "#8cbaff",
         fontWeight: 600,
         padding: 4,
-        paddingLeft:'15px',
+        paddingLeft:theme.spacing(2),
         border:'none',
         textTransform: 'none',
-        fontSize:'14px',
 
     },
     body: {
         fontWeight:400,
-        minWidth:50,
-        maxWidth:200,
-        fontSize: 12,
         color: '#395596',
         border:'none',
         borderBottom: 'solid 1px #f5f9fc',
@@ -53,9 +51,12 @@ const StyledTableCell = withStyles(() => ({
     },
 }))(TableCell);
 
-export const Cell: FC<Props> = ({ children, variant = "body" }) => {
+export const Cell: FC<Props> = (props) => {
+    const { width='max-content' ,children, variant = "body" } = props
     return (
-        <StyledTableCell  variant={variant}>
+        <StyledTableCell 
+        width={width}
+        {...props}>
             {children}
         </StyledTableCell>
     )
@@ -97,7 +98,7 @@ export const CellAction: FC<Props> = ({ children }) => {
         <StyledTableCell 
             variant="body">
             <div className={classes.IconCell}>
-                {children}
+               <Typography>{children}</Typography> 
             </div>
         </StyledTableCell>
     )

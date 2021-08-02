@@ -19,6 +19,7 @@ const Barridas = () => {
   const { listBarridas } = useSelector((state: AppState) => state.BarridasState)
 
 
+
   const dispatch = useDispatch()
 
   const cargarDatos = () => {
@@ -27,6 +28,20 @@ const Barridas = () => {
   useEffect(() => {
     cargarDatos()
   }, [])
+
+  const columns = [
+    { title: "ID" },
+    { title: "Descripcion" },
+    { title: "Barrida" },
+    { title: "Grupo" },
+    { title: "Generado" },
+    { title: "Enviado" },
+    { title: "Recibido" },
+    { title: "Entregado" },
+    { title: "FBarrida" },
+    { title: "Acreditacion" },
+    { title: "Recibos" }
+  ]
 
   // El componente Table recibe dos props 
   // -tableData: correspone a los datos que se quieren renderizar 
@@ -42,7 +57,7 @@ const Barridas = () => {
     ]}
     filterMenu={false}
     tableData={listBarridas}
-    columns={["ID", "Descripcion", "Barrida", "Grupo", "Generado", "Enviado", "Recibido", "Entregado", "FBarrida", "Acreditacion", "Recibos"]}
+    columns={columns}
     actionsInHeader={["imprimir", "nuevo"]}
     actionInRow={['editar']}
     rowChek={false}

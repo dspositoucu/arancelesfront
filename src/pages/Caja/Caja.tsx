@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import Table from '../../componentes/CustomTable'
 
 //lista cuentas falsas
-import listaCuentas from '../../fakeData/cuentas.json' 
+import listaCuentas from '../../fakeData/cuentas.json'
 
 //modelos
 import { AppState } from '../../Redux/state/AppState';
 
 //Actions
-import { getAllMovimientos } from '../../Redux/actions/caja/CajasActionCreator'; 
+import { getAllMovimientos } from '../../Redux/actions/caja/CajasActionCreator';
 
 const Caja = () => {
 
@@ -27,6 +27,34 @@ const Caja = () => {
     cargarDatos()
   }, [])
 
+  const columns = [
+    { title: "fechaMov" },
+    { title: "Descripcion" },
+    {
+      title: "Monto",
+      width: 50
+    },
+    { title: "Recibo" },
+    { title: "Descripcion Cuenta" },
+    {
+      title: "codAlu",
+      width: 50
+    },
+    { title: "Nombre de persona" },
+    { title: "Modos de pago" },
+    { title: "Nro Comprobante" },
+    { title: "Sobre" },
+    { 
+      title: "Anulado",
+      width:30,
+      type: Boolean
+    },
+    { 
+      title: "Transferido", 
+      width:30,
+      type: Boolean
+    }]
+
   // El componente Table recibe dos props 
   // -tableData: correspone a los datos que se quieren renderizar 
   // -columns: corresponde a las columnas de la tabla que se quieren renderizar
@@ -41,20 +69,8 @@ const Caja = () => {
     ]}
     filterMenu={false}
     tableData={movimientos}
-    columns={[
-      "fechaMov", 
-      "Descripcion", 
-      "Monto", 
-      "Recibo", 
-      "Descripcion Cuenta", 
-      "codAlu", 
-      "Nombre de persona", 
-      "Modos de pago", 
-      "NroComprobante", 
-      "Sobre", 
-      "Anulado", 
-      "Transferido"]}
-    actionsInHeader={["imprimir","nuevo"]}
+    columns={columns}
+    actionsInHeader={["imprimir", "nuevo"]}
     actionInRow={['editar']}
     rowChek={false}
   />

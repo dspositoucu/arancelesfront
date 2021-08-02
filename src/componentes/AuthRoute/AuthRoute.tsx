@@ -1,28 +1,22 @@
-import {  Route, Redirect } from 'react-router-dom'
-import React, { FC,ReactNode } from 'react'
+import { Route, Redirect } from 'react-router-dom'
+import React, { FC, ReactNode } from 'react'
 import { getDataLocalStorage, getDecodeTokenLocalStorage } from '../../helpers/LocalStorage'
 
 interface Props {
-  children?:ReactNode 
+  children?: ReactNode
   path?: string;
   exact?: boolean;
 }
-
 const AuthRoute: FC<Props> = (props) => {
 
-  const { children, exact, path} = props
+  const { children, exact, path } = props
 
   const isLogin = getDataLocalStorage('access_token')
-   if(!isLogin) return <Redirect to="/login"/> 
-  const checkExiperd = () =>{
-    const {exp} = getDecodeTokenLocalStorage()
-    console.log('DECODIFICACION DE TOKEN',getDecodeTokenLocalStorage())
-    console.log(exp)
-    return  exp > new Date().getTime()/1000  
-
+  if (!isLogin) return <Redirect to="/login" />
+  const checkExiperd = () => {
+    const { exp } = getDecodeTokenLocalStorage()
+    return exp > new Date().getTime() / 1000
   }
-
- /*  console.log('TOKEN', checkExiperd()) */
 
   console.log(checkExiperd(), isLogin)
 
@@ -30,7 +24,7 @@ const AuthRoute: FC<Props> = (props) => {
     <Route
       exact={exact}
       path={path}>
-         { (checkExiperd() && isLogin) ? [children] : <Redirect to="/login"/> }
+      {(checkExiperd() && isLogin) ? [children] : <Redirect to="/login" />}
     </Route>
   )
 }
