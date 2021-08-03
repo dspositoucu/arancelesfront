@@ -3,7 +3,6 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Input from './Input';
 
-
 //import hook
 import useSelect from '../../hooks/useSelect';
 
@@ -16,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const AutocompleteSelect = (props) => {
 
-    const { filtro, promSelectList } = props
+    const { filtro, promSelectList, onChange, name } = props
     
     const { opciones } = useSelect(promSelectList)
 
@@ -26,6 +25,7 @@ const AutocompleteSelect = (props) => {
         <>
             <Autocomplete
                 {...props}
+                onChange={(event,value:any)=>{return value ? onChange({target:{name,value:value.id}}): null }}
                 MenuProps={{
                     disableScrollLock: false,
                     classes: { paper: classes.selectProps }

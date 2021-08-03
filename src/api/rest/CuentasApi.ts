@@ -9,8 +9,8 @@ export class CuentasApi {
         return AxiosIntance.get(this.BaseUrl)
     }
 
-    addCuentas(cuenta):Promise<AxiosResponse> {
-        return AxiosIntance.post(this.BaseUrl,cuenta)
+    addCuentas(newCuenta):Promise<AxiosResponse> {
+        return AxiosIntance.post(this.BaseUrl,newCuenta)
     }
 
     getCuentasList() :Promise<AxiosResponse> {

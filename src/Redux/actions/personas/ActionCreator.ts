@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { PersonApi } from '../../../api/rest/PersonaApi';
+import { PersonaApi } from '../../../api/rest/PersonaApi';
 import {
     AddPersonAction,
     GetPersonListAction,
@@ -64,18 +64,18 @@ export const updatePerson = (personId: number | string, person: typesModels, ind
         index
     }
 }
- 
+
 
 // cargar lista de personas falsas 
-export const cargarListaPersonasFalsas = (persona) =>{
- return getPersonList(persona)
+export const cargarListaPersonasFalsas = (persona) => {
+    return getPersonList(persona)
 }
 
 
 export const getAllPersonas = () => {
     return (dispatch: Dispatch) => {
 
-        return new PersonApi()
+        return new PersonaApi()
             .getAllPersonas()
             .then(resp => {
                 dispatch(getPersonList(resp.data))
@@ -88,7 +88,7 @@ export const getAllPersonas = () => {
 export const addPersona = (persona: IPersona) => {
     return (dispatch: Dispatch) => {
 
-        return new PersonApi()
+        return new PersonaApi()
             .addPersona(persona)
             .then(resp => {
                 dispatch(addPersonAction(resp.data))
@@ -97,4 +97,11 @@ export const addPersona = (persona: IPersona) => {
 
     }
 
+}
+
+export const getAllGeneros = () => {
+    return new PersonaApi()
+        .getAllGeneros()
+        .then(resp => resp.data)
+        .catch(err => console.log(err))
 }

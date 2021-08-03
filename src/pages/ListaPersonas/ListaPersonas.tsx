@@ -19,10 +19,9 @@ import ReciboGeneral from '../../componentes/Recibos/ReciboGeneral';
 import { getAllPersonas, cargarListaPersonasFalsas } from '../../Redux/actions/personas/ActionCreator'
 
 //consultas api /personas
-import { PersonApi } from '../../api/rest/PersonaApi';
+import { PersonaApi } from '../../api/rest/PersonaApi';
 
 const ListaPersonas = () => {
-
   const dispatch = useDispatch()
   const { listPerson } = useSelector((state: AppState) => state.PersonState)
 
@@ -62,6 +61,7 @@ const ListaPersonas = () => {
     actionInRow={['editar']}
     rowChek={false}
     FormRegister={<FormPersonas />}
+    widthModal={'50vw'}
     filterSearchBar={[
       {
         key: "NOMBRE",
@@ -74,7 +74,7 @@ const ListaPersonas = () => {
     ]}
     collapseRow={
       async (personaId) => {
-        return new PersonApi()
+        return new PersonaApi()
           .getCuentasByPersonaId(personaId)
           .then(resp => resp.data)
       }
@@ -82,7 +82,7 @@ const ListaPersonas = () => {
 
     // props para la tabla secundaria
     secondaryForms={[<ReciboX />, <ReciboGeneral />]}
-    secondaryColumn={["Nombre de cuenta", "CodCar", "CodAlu", "Saldo", "Activo", "Fin", "Fin Hasta", "Autorizado", "Baja", "Nota"]}
+    secondaryColumn={["Nombre de cuenta", "CodCar", "Saldo", "Activo", "Autorizado", "Baja", "Nota"]}
   />
 }
 

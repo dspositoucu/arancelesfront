@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, ReactNode } from 'react';
+import { FC, useState, ReactNode } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -162,6 +162,7 @@ const CustomTable: FC<Props> = ({
                         ? ActualPage(tableData, filterList)
                         : tableData
                     ).map((data, i) => {
+                        console.log('Data id ',data.id)
                         return !collapseRow
                             ? <Row
                                 rowChek={rowChek}
@@ -180,7 +181,8 @@ const CustomTable: FC<Props> = ({
                                 }
                             </Row>
                             : <CollapseRow
-                                cargarDatos={async () => await collapseRow(data.id)}
+                                cargarDatos={async (id) => await collapseRow(id)}
+                                id={data.id}
                                 forms={secondaryForms}
                                 key={i}
                                 tableColapseName={"Cuentas"}

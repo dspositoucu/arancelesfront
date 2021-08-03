@@ -3,7 +3,7 @@ import AxiosIntance from '../../axios/axiosInstace';
 import { IPersona } from '../../models';
 
 
-export class PersonApi {
+export class PersonaApi {
     private BaseUrl = 'persona'
 
     getAllPersonas(): Promise<AxiosResponse> {
@@ -16,6 +16,10 @@ export class PersonApi {
 
     getCuentasByPersonaId(personaId): Promise<AxiosResponse> {
         return AxiosIntance.get(`${this.BaseUrl}/cuentas/${personaId.toString()}`)
+    }
+
+    getAllGeneros(): Promise<AxiosResponse> {
+        return AxiosIntance.get(`${this.BaseUrl}/generos/all`)
     }
 
  /*    deletePerson(personaList: IPersona[]): Promise<AxiosResponse> {

@@ -64,7 +64,6 @@ export const getAllCuentas = () => {
     }
 }
 
-
 export const addCuentas = (cuenta: ICuentas) => {
     return (dispatch: Dispatch) => {
 
@@ -74,9 +73,7 @@ export const addCuentas = (cuenta: ICuentas) => {
                 dispatch(addCuentaAction(resp.data))
             })
             .catch(err => console.log(err))
-
     }
-
 }
 
 export const getCuentasListSelect = () => {

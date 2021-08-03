@@ -12,6 +12,7 @@ import useSubmit from '../../hooks/useSubmit';
 //Actions
 import { getCuentasListSelect, getSedesListSelect } from '../../Redux/actions/cuentas/CuentasActionCreator';
 import { getListaGruposBarrida } from '../../Redux/actions/barridas/BarridasActionCreator';
+import { addCuentas } from '../../Redux/actions/cuentas/CuentasActionCreator'
 
 const initialFValues = {
     codfac: '',
@@ -41,12 +42,14 @@ const FormCuentas = ({ width = "max-content" }) => {
         resetForm,
     } = useForm(initialFValues, true);
 
+    const { formSubmit } = useSubmit(addCuentas, values)
+    console.log("VALORES DE FORMULARIO ", values)
     return (
         <Form
             width={width}
             title="Nueva Cuenta"
             ButtonSubmit="Registrar Nueva Persona"
-            onSubmit={() => { }}>
+            onSubmit={formSubmit}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <Divider orientation="horizontal" light={true} />
@@ -55,7 +58,7 @@ const FormCuentas = ({ width = "max-content" }) => {
                 <Grid container item xs={12} spacing={1}>
                     <Grid item xs={6}>
                         <Controls.Input
-                            name="cofac"
+                            name="codfac"
                             label="Codigo Facultad"
                             value={values.cofac}
                             onChange={handleChangeForm} />
@@ -103,10 +106,9 @@ const FormCuentas = ({ width = "max-content" }) => {
                     <Grid item xs={12}>
                         <Controls.AutocompleteSelect
                             promSelectList={getListaGruposBarrida()}
-                            name="departmentId"
+                            name="idgrupobarrida"
                             label="ID Grupo Barrida"
                             filtro={'descripcion'}
-                            value={values.departmentId}
                             onChange={handleChangeForm}
                         />
                     </Grid>
@@ -116,31 +118,34 @@ const FormCuentas = ({ width = "max-content" }) => {
                         <Controls.AutocompleteSelect
                             promSelectList={getSedesListSelect()}
                             filtro={'descripcion'}
-                            name="departmentId"
+                            name="idsede"
                             label="ID Sede"
-                            value={values.departmentId}
                             onChange={handleChangeForm}
                         />
                     </Grid>
                 </Grid>
+
                 <Grid item xs={12}>
                     <Divider orientation="horizontal" light={true} />
                 </Grid>
-                <Grid xs={6}>
-                    <Controls.Button
-                        onClick={() => { }}
-                        variant="primary"
-                        text="Cancelar" />
-                </Grid>
-                <Grid container justify="flex-end" xs={6}>
-                    <Controls.Button
-                        text="Limpiar Formulario"
-                        variant="secondary"
-                        onClick={resetForm} />
-                    <Controls.Button
-                        type="submit"
-                        variant="primary"
-                        text="Crear Cuenta Nueva" />
+
+                <Grid spacing={1} container xs={12} item>
+                    <Grid item xs={3}>
+                        <Controls.Button
+                            onClick={() => { }}
+                            variant="primary"
+                            text="Cancelar" />
+                    </Grid>
+                    <Grid item container justify="flex-end" direction='row' xs={9}>
+                        <Controls.Button
+                            text="Limpiar Formulario"
+                            variant="secondary"
+                            onClick={resetForm} />
+                        <Controls.Button
+                            type="submit"
+                            variant="primary"
+                            text="Crear Cuenta Nueva" />
+                    </Grid>
                 </Grid>
             </Grid>
         </Form>

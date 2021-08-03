@@ -37,7 +37,7 @@ const useRowStyles = makeStyles({
 
 });
 
-const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDatos, forms }) => {
+const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDatos, forms,id }) => {
 
     const [open, setOpen] = useState(false);
     const [secondaryTable, setSecondaryTable] = useState([])
@@ -49,11 +49,11 @@ const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDat
      const [formulario1, fomulario2] = forms
 
     const cargarTabla = async () => {
-        setSecondaryTable(await cargarDatos())
+        setSecondaryTable(await cargarDatos(id))
     }
     useEffect(() => {
         cargarTabla()
-    }, [])
+    }, [id])
 
     const handleOpenModal = (form) =>{
        // console.log("Event",event.target)

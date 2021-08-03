@@ -17,13 +17,13 @@ const Aranceles = () => {
   const { listAranceles } = useSelector((state: AppState) => state.ArancelesState)
 
   const columns = [
-    { title: 'CodFac' },
-    { title: 'CodCar' },
-    { title: 'IDCuenta' },
+    { title: 'CodFac', width: '5%' },
+    { title: 'CodCar', width: '5%' },
+    { title: 'IDCuenta', width: '5%' },
     { title: 'Nombre de Cuenta', },
     { title: 'Descripcion' },
-    { title: 'Mes' },
-    { title: 'Anio' },
+    { title: 'Mes', width: '5%' },
+    { title: 'Anio', width: '5%' },
     {
       title: 'Monto',
       align: 'right'

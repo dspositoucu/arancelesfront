@@ -6,7 +6,7 @@ import Table from '../../componentes/CustomTable'
 import FormCuentas from './FormCuentas'
 
 //lista cuentas falsas
-import listaCuentas from '../../fakeData/cuentas.json' 
+import listaCuentas from '../../fakeData/cuentas.json'
 
 //modelos
 import { AppState } from '../../Redux/state/AppState';
@@ -33,15 +33,15 @@ const Cuentas = () => {
   // -columns: corresponde a las columnas de la tabla que se quieren renderizar
   // -actions (OPCIONAL): acciones para realizar en la tabla 
 
-const columnas = [
-  {title:"ID"},
-  {title:"CodFac"},
-  {title:"CodCar"},
-  {title:"Descripcion"},
-  {title:"CantCuotas"},
-  {title:"IDSede"},
-  {title:"Grupo Barrida"},
-]
+  const columnas = [
+    { title: "ID", width: '5%' },
+    { title: "CodFac", width: '5%' },
+    { title: "CodCar", width: '5%' },
+    { title: "Descripcion" },
+    { title: "CantCuotas", width:'10%' },
+    { title: "IDSede" , width:'10%'},
+    { title: "Grupo Barrida" , width:'10%'},
+  ]
   return <Table
     filterSearchBar={[
       {
@@ -52,7 +52,7 @@ const columnas = [
     filterMenu={false}
     tableData={listCuentas}
     columns={columnas}
-    actionsInHeader={["imprimir","nuevo"]}
+    actionsInHeader={["imprimir", "nuevo"]}
     actionInRow={['editar']}
     rowChek={false}
     widthModal={'60vw'}

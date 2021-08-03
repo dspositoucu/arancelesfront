@@ -22,7 +22,6 @@ export const useForm = (initialFValues, validateOnChange = false) => {
   }
 }
 
-
 export const Form = ({ width='100%', children, title, ...other }) => {
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
