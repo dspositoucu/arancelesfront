@@ -11,6 +11,9 @@ import {
     AlumnosConAñoDeGracia,
     AlumnosAcreditanEnBanco,
     AlumnosSinCuenta,
+    SelectDataActionType,
+    OpenModalRegister,
+    OpenModalEdit
 } from "./ActionTypeGlobal";
 import { typesModels } from "../../../models";
 
@@ -82,5 +85,24 @@ export const alumnosAcreditanEnBanco = ():AlumnosAcreditanEnBanco => {
 export const alumnosSinCuenta = ():AlumnosSinCuenta => {
     return {
         type: ActionTypes.ALUMNOS_SIN_CUENTAS
+    }
+}
+
+export const selectDataAction = (selectData:any) :SelectDataActionType => {
+    return {
+        type: ActionTypes.SELECT_DATA,
+        selectData
+    }
+}
+
+export const openModalRegister = () :OpenModalRegister => {
+    return {
+        type: ActionTypes.MODAL_FORM_REGISTER,
+    }
+}
+
+export const openModalEdit = () :OpenModalEdit => {
+    return {
+        type: ActionTypes.MODAL_FORM_EDIT,
     }
 }

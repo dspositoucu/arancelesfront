@@ -4,7 +4,7 @@ import {
     AddCuentasAction,
     GetCuentasListAction,
     GetCuentasDetailsAction,
-    SelectCuentasAction,
+    SelectCuentaAction,
     UpdateCuentasAction,
     ActionTypes
 } from './CuentasActionTypes';
@@ -32,19 +32,18 @@ export const getCuentasDetails = (cuentaDetails: typesModels): GetCuentasDetails
     }
 }
 
-export const selectCuentas = (selectCuentas: typesModels): SelectCuentasAction => {
+export const selectCuenta = (selectCuenta: typesModels): SelectCuentaAction => {
     return {
-        type: ActionTypes.SELECT_CUENTAS,
-        selectCuentas
+        type: ActionTypes.SELECT_CUENTA,
+        selectCuenta
     }
 }
 
-export const updateCuentas = (CuentasId: number | string, Cuentas: typesModels, index: number): UpdateCuentasAction => {
+export const updateCuentaAction = (idCuenta: number | string, newCuenta: typesModels): UpdateCuentasAction => {
     return {
         type: ActionTypes.UPDATE_CUENTAS,
-        CuentasId,
-        Cuentas,
-        index
+        idCuenta,
+        newCuenta,
     }
 }
 
@@ -52,26 +51,29 @@ export const cargarListaCuentasFalsas = (cuentas) => {
     return getCuentasList(cuentas)
 }
 
+export const updateCuenta = (idCuenta, newCuenta) => {
+    return (dispatch: Dispatch) => {
+        return new CuentasApi()
+            .updateCuenta(idCuenta, newCuenta)
+            .then(resp => dispatch(updateCuentaAction(idCuenta, resp.data)))
+            .catch(err => console.log("ERROR UPDATE CUENTA ", err))
+    }
+}
+
 export const getAllCuentas = () => {
     return (dispatch: Dispatch) => {
-
         return new CuentasApi()
             .getAllCuentas()
-            .then(resp => {
-                dispatch(getCuentasList(resp.data))
-            })
+            .then(resp => dispatch(getCuentasList(resp.data)))
             .catch(err => console.log(err))
     }
 }
 
 export const addCuentas = (cuenta: ICuentas) => {
     return (dispatch: Dispatch) => {
-
         return new CuentasApi()
             .addCuentas(cuenta)
-            .then(resp => {
-                dispatch(addCuentaAction(resp.data))
-            })
+            .then(resp => dispatch(addCuentaAction(resp.data)))
             .catch(err => console.log(err))
     }
 }

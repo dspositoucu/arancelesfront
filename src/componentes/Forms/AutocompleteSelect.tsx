@@ -25,7 +25,6 @@ const AutocompleteSelect = (props) => {
         <>
             <Autocomplete
                 {...props}
-                onChange={(event,value:any)=>{return value ? onChange({target:{name,value:value.id}}): null }}
                 MenuProps={{
                     disableScrollLock: false,
                     classes: { paper: classes.selectProps }
@@ -34,7 +33,7 @@ const AutocompleteSelect = (props) => {
                 id="combo-box-demo"
                 options={opciones}
                 getOptionLabel={(option: any) => option[filtro]}
-                renderInput={(params) => <Input {...params} {...props} />}
+                renderInput={(params) => <Input name={name} {...params} />}
             />
         </>
     )

@@ -8,7 +8,7 @@ export enum ActionTypes {
 
   GET_CUENTAS_DETAIL = 'GET_CUENTAS_DETAIL',
   
-  SELECT_CUENTAS = 'SELECT_CUENTAS',
+  SELECT_CUENTA = 'SELECT_CUENTA',
 
   UPDATE_CUENTAS = 'UPDATE_CUENTAS',
 
@@ -29,21 +29,20 @@ export interface GetCuentasDetailsAction {
   cuentaDetails: typesModels
 }
 
-export interface SelectCuentasAction {
-  type: ActionTypes.SELECT_CUENTAS,
-  selectCuentas: typesModels
+export interface SelectCuentaAction {
+  type: ActionTypes.SELECT_CUENTA,
+  selectCuenta: typesModels
 }
 
 export interface UpdateCuentasAction {
   type: ActionTypes.UPDATE_CUENTAS,
-  CuentasId: number|string, 
-  Cuentas:typesModels,
-  index:number
+  idCuenta: number|string, 
+  newCuenta:typesModels
 }
 
 export type CuentasActions =
 AddCuentasAction  
   |GetCuentasListAction
   |GetCuentasDetailsAction
-  |SelectCuentasAction
+  |SelectCuentaAction
   |UpdateCuentasAction

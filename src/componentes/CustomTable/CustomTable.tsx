@@ -162,7 +162,6 @@ const CustomTable: FC<Props> = ({
                         ? ActualPage(tableData, filterList)
                         : tableData
                     ).map((data, i) => {
-                        console.log('Data id ',data.id)
                         return !collapseRow
                             ? <Row
                                 rowChek={rowChek}

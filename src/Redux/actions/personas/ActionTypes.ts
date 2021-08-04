@@ -46,8 +46,8 @@ export interface DeletePeronAction {
 
 export interface UpdatePersonAction {
   type: ActionTypes.UPDATE_PERSON,
-  personId: number|string, 
-  person:typesModels,
+  idPersona: number|string, 
+  newPersona:typesModels,
   index:number
 }
 

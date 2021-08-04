@@ -4,6 +4,9 @@ import { ActionTypes, GlobalAction } from "../actions/globalActions/ActionTypeGl
 
 const InitialState :IGlobalInitialState = {
     tableData:[],
+    detallesData:{},
+    modalRegister:false,
+    modalEdit:false,
     tableFilterinUse:false,
     filterList:[],
     filterTags :{
@@ -52,6 +55,30 @@ const globalReducer :Reducer<IGlobalInitialState, GlobalAction> = ( state = Init
                     ...state.filterTags,
                     [action.filter]: !state.filterTags[action.filter as keyof Object]
                 }
+            }
+        }
+
+        case ActionTypes.SELECT_DATA :{
+            return {
+                ...state,
+                detallesData: action.selectData,
+            }   
+        }
+
+        case ActionTypes.MODAL_FORM_REGISTER :{
+            return {
+                ...state,
+                modalRegister: !state.modalRegister,
+                modalEdit:false,
+                detallesData:{}
+            }
+        }
+
+        case ActionTypes.MODAL_FORM_EDIT :{
+            return {
+                ...state,
+                modalEdit: !state.modalEdit,
+                modalRegister: !state.modalRegister,
             }
         }
 

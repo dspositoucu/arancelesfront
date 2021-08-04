@@ -14,6 +14,7 @@ import { AppState } from '../../Redux/state/AppState';
 //actions
 import { selectPerson } from '../../Redux/actions/personas/ActionCreator';
 import { openModalEdit } from '../../Redux/actions/modales/ActionCreatorModals';
+import { selectDataAction } from '../../Redux/actions/globalActions/ActionCreatorGlobal'
 
 interface Props {
   data?: any,
@@ -33,12 +34,6 @@ const StyledTableRow = withStyles(() => ({
 export const Row = (props) => {
   const { data, rowChek, children } = props
   const dispatch = useDispatch();
-  const { selectListPerson } = useSelector((state: AppState) => state.PersonState)
-
-  //comprobar el listado de columnas enviadas por props y las
-  // que existen en la tabla de datos.
-  // se devuelve un array con las columnas que coinciden 
-  //const compareColumn = (): string[] => columns.filter(key => !!data[key])
 
   //seleccionar una fila 
   const handleSelectRow = (data: typesModels) => {
@@ -56,7 +51,10 @@ export const Row = (props) => {
         <ButtonIcon
           endIcon="editar"
           hover={false}
-          onClick={() => dispatch(openModalEdit())}
+          onClick={() => {
+            dispatch(openModalEdit());
+            dispatch(selectDataAction(data))
+          }}
         />
       </CellAction>
     </StyledTableRow>

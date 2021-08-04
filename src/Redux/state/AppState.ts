@@ -1,66 +1,70 @@
-import { IPersona,IUser, IInformes, typesModels, ICuentas } from "../../models";
+import { IPersona, IUser, IInformes, typesModels, ICuentas } from "../../models";
 
 interface filterTags {
-    Alumnos_dados_de_baja:boolean
-    Alumnos_becados_activos:boolean
-    Alumnos_activos:boolean
-    Alumnos_acreditan_banco:boolean
-    Alumnos_con_fin_de_carrera:boolean
-    Alumnos_con_año_de_gracia:boolean
-    Alumnos_sin_cuenta:boolean
+    Alumnos_dados_de_baja: boolean
+    Alumnos_becados_activos: boolean
+    Alumnos_activos: boolean
+    Alumnos_acreditan_banco: boolean
+    Alumnos_con_fin_de_carrera: boolean
+    Alumnos_con_año_de_gracia: boolean
+    Alumnos_sin_cuenta: boolean
 }
 
 // interface del initialState en el reducer de person
-export interface IPersonInitialState{
+export interface IPersonInitialState {
     listPerson: [] | IPersona[] | any[]
     selectListPerson: [] | IPersona[] | any[]
-    personDetails: {} | IPersona 
-    allSelect : boolean,
+    personDetails: {} | IPersona
+    allSelect: boolean,
 }
 
-export interface ICajaInitialState{
+export interface ICajaInitialState {
     movimientos: [] | any[]
 }
 
 export interface IUserInitialState {
-    usuario:IUser|''
+    usuario: IUser | ''
 }
 
 export interface IGlobalInitialState {
     tableData: typesModels[] | []
+    detallesData:any | {}
     tableFilterinUse: boolean,
-    filterList: typesModels[] | []
-    filterTags :{
-        Alumnos_dados_de_baja:boolean
-        Alumnos_becados_activos:boolean
-        Alumnos_activos:boolean
-        Alumnos_acreditan_banco:boolean
-        Alumnos_con_fin_de_carrera:boolean
-        Alumnos_con_año_de_gracia:boolean
-        Alumnos_sin_cuenta:boolean
+    filterList: typesModels[] | [],
+    modalRegister:boolean,
+    modalEdit:boolean,
+    filterTags: {
+        Alumnos_dados_de_baja: boolean
+        Alumnos_becados_activos: boolean
+        Alumnos_activos: boolean
+        Alumnos_acreditan_banco: boolean
+        Alumnos_con_fin_de_carrera: boolean
+        Alumnos_con_año_de_gracia: boolean
+        Alumnos_sin_cuenta: boolean
     },
 }
 
 export interface IInformesInitialState {
-    AllDataInformes:IInformes[] | [] | any[],
+    AllDataInformes: IInformes[] | [] | any[],
     AllData: IInformes[] | [] | any[],
-    filterTags :{
-        Alumnos_dados_de_baja:boolean
-        Alumnos_becados_activos:boolean
-        Alumnos_activos:boolean
-        Alumnos_acreditan_banco:boolean
-        Alumnos_con_fin_de_carrera:boolean
-        Alumnos_con_año_de_gracia:boolean
-        Alumnos_sin_cuenta:boolean
+    filterTags: {
+        Alumnos_dados_de_baja: boolean
+        Alumnos_becados_activos: boolean
+        Alumnos_activos: boolean
+        Alumnos_acreditan_banco: boolean
+        Alumnos_con_fin_de_carrera: boolean
+        Alumnos_con_año_de_gracia: boolean
+        Alumnos_sin_cuenta: boolean
     },
 }
 
 export interface ICuentasInitialState {
-    listCuentas: ICuentas[] | [] | any[]
+    listCuentas: ICuentas[] | [] | any[],
+    detallesCuenta: ICuentas | any
 }
 
 export interface IArancelesInitialState {
-    listAranceles : [] | any[]
+    listAranceles: [] | any[]
 }
 
 export interface IBarridasInitialState {
@@ -70,20 +74,20 @@ export interface IBarridasInitialState {
 export interface IModalInitialState {
     modalRegister?: boolean,
     modalEdit?: boolean,
-    modalError?:boolean,
-    modalSuccess?:boolean,
-    modalLoading?:boolean
+    modalError?: boolean,
+    modalSuccess?: boolean,
+    modalLoading?: boolean
 }
 
 //interface del conbine reducer en Store.ts
 export interface AppState {
     CuentasState: ICuentasInitialState,
-    PersonState:IPersonInitialState,
-    UsuarioState:IUserInitialState,
+    PersonState: IPersonInitialState,
+    UsuarioState: IUserInitialState,
     ModalState: IModalInitialState,
     InformesState: IInformesInitialState,
     GlobalState: IGlobalInitialState,
     ArancelesState: IArancelesInitialState,
-    BarridasState:IBarridasInitialState,
-    CajaState:ICajaInitialState
+    BarridasState: IBarridasInitialState,
+    CajaState: ICajaInitialState
 }

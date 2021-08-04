@@ -13,8 +13,6 @@ const InitialState: IPersonInitialState = {
 const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = InitialState, action: PersonActions) => {
 
     switch (action.type) {
-
-
         case ActionTypes.ADD_PERSON: {
             let newArray = [action.person, ...state.listPerson]
             return {
@@ -84,13 +82,15 @@ const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = Init
                 listPerson: compareAndDelete(state.listPerson, state.selectListPerson),
                 //filterList: compareAndDelete(state.filterList, state.selectListPerson),
                 selectListPerson: []
-
             }
         }
         case ActionTypes.UPDATE_PERSON: {
             return {
                 ...state,
-                personDetails: state.listPerson.filter(person => person.id === action.personId)
+                listPerson: state.listPerson.map(persona => {
+                    if(persona.id === action.idPersona) persona=action.newPersona
+                    return persona
+                })
             }
         }
 

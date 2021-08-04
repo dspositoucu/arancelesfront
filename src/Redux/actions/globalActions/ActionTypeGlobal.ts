@@ -13,6 +13,10 @@ export enum ActionTypes{
     ALUMNOS_CON_FIN_DE_CARRERA = "ALUMNOS_CON_FIN_DE_CARRERA",
     ALUMNOS_ACREDITAN_EN_BANCO = "ALUMNOS_ACREDITAN_EN_BANCO",
     ALUMNOS_SIN_CUENTAS = "ALUMNOS_SIN_CUENTAS",
+    SELECT_DATA = "SELECT_DATA",
+    MODAL_FORM_REGISTER = "MODAL_FORM_REGISTER",
+    MODAL_FORM_EDIT = "MODAL_FORM_EDIT",
+    
 }
 
 export interface RemoveFilterTagAction {
@@ -63,6 +67,17 @@ export interface GlobalSetFilterList {
     type: ActionTypes.ALUMNOS_SIN_CUENTAS
   }
 
+  export interface SelectDataActionType {
+    type: ActionTypes.SELECT_DATA
+    selectData:any
+  }
+  export interface OpenModalRegister {
+    type: ActionTypes.MODAL_FORM_REGISTER,
+  }
+  export interface OpenModalEdit {
+    type: ActionTypes.MODAL_FORM_EDIT,
+  }
+
 export type GlobalAction = 
       GlobalSetTableInUse
     | GlobalSetFilterList
@@ -75,3 +90,6 @@ export type GlobalAction =
     | AlumnosConAñoDeGracia
     | AlumnosAcreditanEnBanco
     | AlumnosSinCuenta
+    | SelectDataActionType
+    | OpenModalRegister
+    | OpenModalEdit

@@ -56,11 +56,11 @@ export const deletePerson = (): DeletePeronAction => {
 }
 
 
-export const updatePerson = (personId: number | string, person: typesModels, index: number): UpdatePersonAction => {
+export const updatePerson = (idPersona: number | string, newPersona: typesModels, index: number): UpdatePersonAction => {
     return {
         type: ActionTypes.UPDATE_PERSON,
-        personId,
-        person,
+        idPersona,
+        newPersona,
         index
     }
 }

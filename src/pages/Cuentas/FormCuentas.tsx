@@ -1,6 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import { useSelector } from 'react-redux';
 import { makeStyles, createStyles, Theme, Divider } from "@material-ui/core";
 import { Grid, } from '@material-ui/core';
+
+//Model
+import { AppState } from '../../Redux/state/AppState';
 
 // Import Componentes
 import Controls from '../../componentes/Forms/Controls'
@@ -24,17 +28,8 @@ const initialFValues = {
     idsede: ''
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        buttonGroup: {
-            margin: theme.spacing(1, 0.5),
-            display: "flex"
-        }
-    }))
-
 const FormCuentas = ({ width = "max-content" }) => {
-
-    const classes = useStyles()
+const autoCompleteRef = useRef()
     const {
         values,
         setValues,
@@ -60,7 +55,7 @@ const FormCuentas = ({ width = "max-content" }) => {
                         <Controls.Input
                             name="codfac"
                             label="Codigo Facultad"
-                            value={values.cofac}
+                            value={values.codfac}
                             onChange={handleChangeForm} />
                     </Grid>
                     <Grid item xs={6}>
@@ -109,18 +104,21 @@ const FormCuentas = ({ width = "max-content" }) => {
                             name="idgrupobarrida"
                             label="ID Grupo Barrida"
                             filtro={'descripcion'}
-                            onChange={handleChangeForm}
+                            value={values.idgrupobarrida}
+                            onSelect={handleChangeForm}
                         />
                     </Grid>
                 </Grid>
                 <Grid container item xs={12} spacing={1}>
                     <Grid item xs={12}>
                         <Controls.AutocompleteSelect
+                            ref={autoCompleteRef}
                             promSelectList={getSedesListSelect()}
+                            value={values.idsede}
                             filtro={'descripcion'}
                             name="idsede"
                             label="ID Sede"
-                            onChange={handleChangeForm}
+                            onChange={(event,value,ref) => console.log("EVENTO ",event, "VALOR ",value, "REF ", autoCompleteRef.current)}
                         />
                     </Grid>
                 </Grid>

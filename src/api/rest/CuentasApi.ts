@@ -13,6 +13,10 @@ export class CuentasApi {
         return AxiosIntance.post(this.BaseUrl,newCuenta)
     }
 
+    updateCuenta(idCuenta,newCuenta):Promise<AxiosResponse> {
+        return AxiosIntance.put(`${this.BaseUrl}/update/${idCuenta}`,newCuenta)
+    }
+
     getCuentasList() :Promise<AxiosResponse> {
         return AxiosIntance.get(`${this.BaseUrl}/list`)
     }

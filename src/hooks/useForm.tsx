@@ -1,19 +1,43 @@
-import { useDispatch } from 'react-redux';
-import { ChangeEvent, useState, FormEvent, FC, ReactNode } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { ChangeEvent, useState, FormEvent, FC, ReactNode, useEffect } from 'react';
 import { makeStyles, createStyles, Theme, Typography, Divider } from "@material-ui/core";
-export const useForm = (initialFValues, validateOnChange = false) => {
 
+
+//acciones
+import { selectDataAction } from '../Redux/actions/globalActions/ActionCreatorGlobal';
+//model
+import { AppState } from '../Redux/state/AppState';
+
+export const useForm = (initialFValues, validateOnChange = false) => {
+  
   const [values, setValues] = useState(initialFValues);
-  const handleChangeForm = ({ target }: ChangeEvent<HTMLInputElement>): void => {
+
+  const { detallesData } = useSelector((state: AppState) => state.GlobalState)
+
+  const cargarDatosEdit = () => {
+    setValues({
+      ...values,
+      ...detallesData
+    })
+   }
+ 
+  const handleChangeForm = ({ target }: any | ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = target
     setValues({
       ...values,
       [name]: value
     })
   }
+
+  useEffect(()=>{
+    if(Object.entries(detallesData).length) cargarDatosEdit()
+  },[])
+
   const resetForm = () => {
     setValues(initialFValues);
   }
+
+
   return {
     values,
     setValues,
@@ -22,13 +46,13 @@ export const useForm = (initialFValues, validateOnChange = false) => {
   }
 }
 
-export const Form = ({ width='100%', children, title, ...other }) => {
+export const Form = ({ width = '100%', children, title, ...other }) => {
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       root: {
         width: width,
         background: "#FFF",
-        
+
         '& .MuiFormControl-root': {
           width: '100%',
           height: '100%'
