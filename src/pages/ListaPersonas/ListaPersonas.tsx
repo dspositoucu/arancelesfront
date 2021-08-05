@@ -72,7 +72,7 @@ const ListaPersonas = () => {
         label: "Nro Documneto"
       }
     ]}
-    collapseRow={
+    getDataTableSecondary={
       async (personaId) => {
         return new PersonaApi()
           .getCuentasByPersonaId(personaId)

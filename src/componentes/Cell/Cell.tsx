@@ -4,47 +4,49 @@ import TableCell from '@material-ui/core/TableCell';
 import { withStyles } from "@material-ui/core/styles";
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import { Typography } from '@material-ui/core';
 
 import { useDispatch } from 'react-redux'
 
 //actions
-import { selectAllPerson } from '../../Redux/actions/personas/ActionCreator'
-import { Typography } from '@material-ui/core';
+
 
 interface Props {
     children?: ReactNode | any,
     check?: boolean,
     variant?: "body" | "head" | "footer" | undefined
     checkAll?: boolean
-    width?:string
+    width?: string
 }
 
 //Style align center checkbox
 const useStyles = makeStyles(() =>
     createStyles({
-        IconCell: {
-            display: 'flex',
-            alignItems: 'center',
-            cursor: "pointer"
+        body: {
+            fontWeight: 400,
+            color: '#395596',
+            border: 'none',
+            borderBottom: 'solid 1px #f5f9fc',
+            padding: '8px 15px',
         },
     })
 )
 
 //styled and build new cell component
-const StyledTableCell = withStyles((theme:Theme) => ({
+const StyledTableCell = withStyles((theme: Theme) => ({
     head: {
         color: "#8cbaff",
         fontWeight: 600,
         padding: 4,
-        paddingLeft:theme.spacing(2),
-        border:'none',
+        paddingLeft: theme.spacing(2),
+        border: 'none',
         textTransform: 'none',
 
     },
     body: {
-        fontWeight:400,
+        fontWeight: 400,
         color: '#395596',
-        border:'none',
+        border: 'none',
         borderBottom: 'solid 1px #f5f9fc',
         padding: '8px 15px',
         alignItems: 'center'
@@ -52,11 +54,11 @@ const StyledTableCell = withStyles((theme:Theme) => ({
 }))(TableCell);
 
 export const Cell: FC<Props> = (props) => {
-    const { width='max-content' ,children, variant = "body" } = props
+    const { width = 'max-content', children } = props
     return (
-        <StyledTableCell 
-        width={width}
-        {...props}>
+        <StyledTableCell
+            width={width}
+            {...props}>
             {children}
         </StyledTableCell>
     )
@@ -64,22 +66,12 @@ export const Cell: FC<Props> = (props) => {
 
 // Cell checkBox
 export const CellCheckBox: FC<Props> = ({ checkAll, check = false, variant = "body" }) => {
-
-    const dispatch = useDispatch()
-
-    const handleAllSelect = () => {
-        if (variant === "head") {
-            dispatch(selectAllPerson())
-        }
-    }
-
     const classes = useStyles()
     return (
         <StyledTableCell
-            onClick={handleAllSelect}
             title={checkAll ? 'Seleccionar Todos' : ''}
             variant={variant}>
-            <div className={classes.IconCell}>
+            <div>
                 {
                     check
                         ? <CheckBoxIcon />
@@ -91,15 +83,16 @@ export const CellCheckBox: FC<Props> = ({ checkAll, check = false, variant = "bo
 }
 
 // IconCell 
-export const CellAction: FC<Props> = ({ children }) => {
+export const CellAction = (props) => {
+    const { children, align } = props
     const classes = useStyles()
 
     return (
-        <StyledTableCell 
-            variant="body">
-            <div className={classes.IconCell}>
-               <Typography>{children}</Typography> 
-            </div>
-        </StyledTableCell>
+        <TableCell
+            className={classes.body}
+            align={align}
+        >
+            {children}
+        </TableCell>
     )
 }

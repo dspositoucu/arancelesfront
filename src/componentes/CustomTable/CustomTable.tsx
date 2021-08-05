@@ -10,6 +10,8 @@ import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import ButtonIcon from '../Buttons/ButtonIcon';
+
 
 //modals 
 import Modal from '../Modals/Modal'
@@ -28,15 +30,13 @@ import { AppState } from '../../Redux/state/AppState';
 import { useFilter } from '../../hooks/useFilter';
 import { usePagination } from '../../hooks/usePagination';
 
-//forms
-//import Register from '../Forms/Register'
 
 //component
 import RowHeader from './RowHeader';
 import { Row } from '../Row';
 import MenuHeaderTable from './MenuHeaderTable';
 import TablePaginationActions from './TablePaginationActions'
-import { Cell } from '../Cell'
+import { Cell, CellAction } from '../Cell'
 import CollapseRow from './CollapseRow'
 
 interface Props {
@@ -49,11 +49,11 @@ interface Props {
     actionInRow: string[],
     rowChek: boolean,
     filterMenu: boolean,
-    collapseRow?: Function,
+    getDataTableSecondary?: Function,
     secondaryColumn?: String[],
     secondaryForms?: ReactNode[],
-    widthModal?:string,
-    heightModal?:string
+    widthModal?: string,
+    heightModal?: string
 }
 
 // estilos css-in-js
@@ -78,22 +78,22 @@ const useStyles = makeStyles(() =>
         }
     }));
 
-const CustomTable: FC<Props> = ({ 
-    filterSearchBar, 
-    tableData, 
-    columns, 
-    actionsInHeader, 
-    FormRegister, 
-    rowChek, 
-    filterMenu, 
-    collapseRow, 
-    secondaryColumn, 
+const CustomTable: FC<Props> = ({
+    filterSearchBar,
+    tableData,
+    columns,
+    actionsInHeader,
+    FormRegister,
+    rowChek,
+    filterMenu,
+    getDataTableSecondary,
+    secondaryColumn,
     secondaryForms,
     widthModal,
+    actionInRow,
     heightModal }) => {
     const dispatch = useDispatch()
     const classes = useStyles();
-    const [secondaryTable, setSecondaryTable] = useState([])
 
     //  estados de modales 
     const { modalRegister, modalEdit } = useSelector((state: AppState) => state.ModalState)
@@ -137,7 +137,7 @@ const CustomTable: FC<Props> = ({
                     height={heightModal}
                     closeModal={() => dispatch(openModalRegister())}
                     active={modalRegister}
-                    
+
                 >
                     {FormRegister}
                 </Modal>
@@ -162,7 +162,7 @@ const CustomTable: FC<Props> = ({
                         ? ActualPage(tableData, filterList)
                         : tableData
                     ).map((data, i) => {
-                        return !collapseRow
+                        return !getDataTableSecondary
                             ? <Row
                                 rowChek={rowChek}
                                 key={i}
@@ -178,9 +178,14 @@ const CustomTable: FC<Props> = ({
                                         )
                                     })
                                 }
+                                <CellAction align='right' width='100px'>
+                                    {
+                                        actionInRow.map(accion => <ButtonIcon endIcon={accion} data={data} />)
+                                    }
+                                </CellAction>
                             </Row>
                             : <CollapseRow
-                                cargarDatos={async (id) => await collapseRow(id)}
+                                cargarDatos={async (id) => await getDataTableSecondary(id)}
                                 id={data.id}
                                 forms={secondaryForms}
                                 key={i}
@@ -188,15 +193,20 @@ const CustomTable: FC<Props> = ({
                                 tableColapseHead={secondaryColumn}>
                                 {
                                     columns.map((key, j) => {
-                                        return key.title === " " ? null : 
-                                        <Cell
-                                            width={key.width}
-                                            key={j}>
-                                            {data[key.title.toLowerCase()]}
-                                        </Cell>
-    
+                                        return key.title === " " ? null :
+                                            <Cell
+                                                width={key.width}
+                                                key={j}>
+                                                {data[key.title.toLowerCase()]}
+                                            </Cell>
+
                                     })
                                 }
+                                <CellAction align='right' width='100px'>
+                                    {
+                                        actionInRow.map(accion => <ButtonIcon endIcon={accion} data={data} />)
+                                    }
+                                </CellAction>
                             </CollapseRow>
 
                     }) : null}

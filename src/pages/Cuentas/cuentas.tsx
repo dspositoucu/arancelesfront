@@ -18,7 +18,6 @@ const Cuentas = () => {
 
   const { listCuentas } = useSelector((state: AppState) => state.CuentasState)
 
-
   const dispatch = useDispatch()
 
   const cargarDatos = () => {
@@ -33,6 +32,10 @@ const Cuentas = () => {
   // -columns: corresponde a las columnas de la tabla que se quieren renderizar
   // -actions (OPCIONAL): acciones para realizar en la tabla 
 
+  /* LISTADO DE ACCIONES DISPONIBLES EN LAS FILAS: 
+    - editar
+  */
+  
   const columnas = [
     { title: "ID", width: '5%' },
     { title: "CodFac", width: '5%' },

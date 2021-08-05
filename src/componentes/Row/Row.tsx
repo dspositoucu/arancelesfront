@@ -14,7 +14,7 @@ import { AppState } from '../../Redux/state/AppState';
 //actions
 import { selectPerson } from '../../Redux/actions/personas/ActionCreator';
 import { openModalEdit } from '../../Redux/actions/modales/ActionCreatorModals';
-import { selectDataAction } from '../../Redux/actions/globalActions/ActionCreatorGlobal'
+import { selectDataAction } from '../../Redux/actions/globalActions/ActionCreatorGlobal';
 
 interface Props {
   data?: any,
@@ -46,17 +46,7 @@ export const Row = (props) => {
       {...props}
     >
       {rowChek && <CellCheckBox />}
-        {children}
-      <CellAction>
-        <ButtonIcon
-          endIcon="editar"
-          hover={false}
-          onClick={() => {
-            dispatch(openModalEdit());
-            dispatch(selectDataAction(data))
-          }}
-        />
-      </CellAction>
+      {children}
     </StyledTableRow>
   )
 }
