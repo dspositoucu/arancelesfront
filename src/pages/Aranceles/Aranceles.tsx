@@ -36,8 +36,6 @@ const Aranceles = () => {
       type: Boolean
     }
   ]
-
-
   const dispatch = useDispatch()
 
   const cargarDatos = () => {

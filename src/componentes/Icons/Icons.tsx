@@ -10,6 +10,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import ReceiptIcon from '@material-ui/icons/Receipt';
 
 
 interface Props {
@@ -20,6 +21,7 @@ const Icons: FC<Props> = ({ type }) => {
 
     const objIcon: ReactNode = {
         null:<></>,
+        recibo:<ReceiptIcon/>,
         quitar:<HighlightOffIcon/>,
         imprimir: <PrintIcon />,
         borrar: <DeleteIcon />,

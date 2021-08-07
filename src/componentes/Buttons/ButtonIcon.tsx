@@ -35,14 +35,15 @@ const useStyles = makeStyles(() =>
         },
     }))
 
-const ButtonIcon: FC<Props> = ({startIcon = "null", endIcon = "null", label, typeButton = "default", hover = false, data }) => {
+const ButtonIcon: FC<Props> = ({startIcon = "null", endIcon = "null", label, typeButton = "default", hover = false, data, onClick }) => {
     const dispatch = useDispatch()
 
     const acciones = {
         editar: () => {
             dispatch(openModalEdit());
             dispatch(selectDataAction(data))
-        }
+        },
+        nuevo: onClick
     }
     const classes = useStyles()
     return (

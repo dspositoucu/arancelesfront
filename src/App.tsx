@@ -3,9 +3,11 @@ import history from "./helpers/history";
 import { Tabs, Tab, AppBar, Typography, useMediaQuery } from "@material-ui/core";
 import { makeStyles, createStyles, Theme, ThemeProvider, createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
+
+
 //Components
 import Layout from './Layout'
-import AuthRoute from "./componentes/AuthRoute";
+import AuthRoute from "./componentes/AuthRoute"; 
 
 //Page
 import LoginPage from './pages/LoginPage/LoginPage'
@@ -75,9 +77,6 @@ function App() {
   const md = (minmd && !minlg)
   const lg = (minlg && !minxl)
   const xl = minxl
-
-
-  console.log("MEDIDAS MQ >>>>> ", sm, md, lg, xl)
 
   const outerTheme = createMuiTheme({
     spacing: sm ? 2.5 : md ? 3 : lg ? 4 : 8,

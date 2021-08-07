@@ -39,8 +39,6 @@ export const Row = (props) => {
   const handleSelectRow = (data: typesModels) => {
     dispatch(selectPerson(data))
   }
-
-
   return (
     <StyledTableRow
       {...props}

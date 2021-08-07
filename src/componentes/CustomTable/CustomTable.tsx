@@ -12,7 +12,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import ButtonIcon from '../Buttons/ButtonIcon';
 
-
 //modals 
 import Modal from '../Modals/Modal'
 
@@ -149,10 +148,7 @@ const CustomTable: FC<Props> = ({
                 filterSearchBar={filterSearchBar}
             />
             <Table className={classes.table} aria-label="tabla">
-                <RowHeader
-                    rowChek={rowChek}
-                    columns={columns}
-                >
+                <RowHeader columns={columns} >
                     {
                         columns.map((col, i) => <Cell variant="head" key={i}>{col.title}</Cell>)
                     }
@@ -164,11 +160,9 @@ const CustomTable: FC<Props> = ({
                     ).map((data, i) => {
                         return !getDataTableSecondary
                             ? <Row
-                                rowChek={rowChek}
                                 key={i}
                                 columns={columns}
-                                data={data}
-                            >
+                                data={data}>
                                 {
                                     columns.map((key, i) => {
                                         return (
@@ -180,7 +174,7 @@ const CustomTable: FC<Props> = ({
                                 }
                                 <CellAction align='right' width='100px'>
                                     {
-                                        actionInRow.map(accion => <ButtonIcon endIcon={accion} data={data} />)
+                                        actionInRow.map((accion,index) => <ButtonIcon key={index} endIcon={accion} data={data} />)
                                     }
                                 </CellAction>
                             </Row>
@@ -204,7 +198,7 @@ const CustomTable: FC<Props> = ({
                                 }
                                 <CellAction align='right' width='100px'>
                                     {
-                                        actionInRow.map(accion => <ButtonIcon endIcon={accion} data={data} />)
+                                        actionInRow.map((accion,index) => <ButtonIcon key={index} endIcon={accion} data={data} />)
                                     }
                                 </CellAction>
                             </CollapseRow>

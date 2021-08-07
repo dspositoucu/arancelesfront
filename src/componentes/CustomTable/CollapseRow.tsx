@@ -45,10 +45,10 @@ const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDat
         form1:false,
         form2:false
     })
-
-     const [formulario1, fomulario2] = forms
-
+    
+    const [formulario1, fomulario2] = forms
     const cargarTabla = async () => {
+        setSecondaryTable([])
         setSecondaryTable(await cargarDatos(id))
     }
     useEffect(() => {

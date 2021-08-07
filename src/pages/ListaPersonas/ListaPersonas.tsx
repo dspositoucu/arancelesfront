@@ -1,14 +1,18 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 // components
 import Table from '../../componentes/CustomTable'
+import ModalTable from '../../componentes/ModalTable/ModalTable';
 
 //modelos
 import { AppState } from '../../Redux/state/AppState';
 
 //lista de personas falsas 
 import ListaFalsa from '../../fakeData/personas.json'
+
+//custom hooks
+import useGetDataTable from '../../hooks/useGetDataTable';
 
 //formulario
 import FormPersonas from './FormPersonas'
@@ -24,6 +28,10 @@ import { PersonaApi } from '../../api/rest/PersonaApi';
 const ListaPersonas = () => {
   const dispatch = useDispatch()
   const { listPerson } = useSelector((state: AppState) => state.PersonState)
+
+  const { dataTableSecondary } = useGetDataTable(new PersonaApi().getCuentasByPersonaId(2))
+
+  console.log(" Tabla secundaria ",dataTableSecondary)
 
   const cargarDatos = () => {
     //if (ListaFalsa.length <= 0) {
