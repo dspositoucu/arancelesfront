@@ -31,7 +31,7 @@ const ListaPersonas = () => {
 
   const { dataTableSecondary } = useGetDataTable(new PersonaApi().getCuentasByPersonaId(2))
 
-  console.log(" Tabla secundaria ",dataTableSecondary)
+  console.log(" Tabla secundaria ", dataTableSecondary)
 
   const cargarDatos = () => {
     //if (ListaFalsa.length <= 0) {
@@ -50,6 +50,16 @@ const ListaPersonas = () => {
     { title: "Telefono" },
     { title: "Email" },
     { title: "Domicilio" }
+  ]
+
+  const modalTableColumns = [
+    { title: "Codigo", width: '10%'},
+    { title: "CodCar", width: '5%' },
+    { title: "CodFac", width: '5%' },
+    { title: "FecMov", width: '10%' },
+    { title: "Concepto", width: '50%' },
+    { title: "Debe", width: '10%', align:'right' },
+    { title: "Haber", width: '10%', align:'right'},
   ]
 
   useEffect(() => {
@@ -89,7 +99,10 @@ const ListaPersonas = () => {
     }
 
     // props para la tabla secundaria
-    secondaryForms={[<ReciboX />, <ReciboGeneral />]}
+    secondaryForms={[
+      <ModalTable columns={modalTableColumns} />,
+      <ReciboGeneral />
+    ]}
     secondaryColumn={["Nombre de cuenta", "CodCar", "Saldo", "Activo", "Autorizado", "Baja", "Nota"]}
   />
 }

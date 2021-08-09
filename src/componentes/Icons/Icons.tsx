@@ -11,6 +11,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import ReceiptIcon from '@material-ui/icons/Receipt';
+import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 
 
 interface Props {
@@ -31,7 +32,8 @@ const Icons: FC<Props> = ({ type }) => {
         user: <AccountCircleIcon/>,
         logout: <PowerSettingsNewIcon/>,
         editar: <EditIcon/>,
-        agregar:<AddIcon/>
+        agregar:<AddIcon/>,
+        ctacte:<AccountBalanceWalletIcon/>
     }
 
     return <> {objIcon[type as keyof Object]} </>

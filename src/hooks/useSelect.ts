@@ -6,10 +6,12 @@ const useSelect = <T>(request: Promise<T>) => {
     
     useEffect(() => {
         request
-            .then((resp: any) => setOpciones(resp))
+            .then((resp: any) => {
+                setOpciones(resp)
+            })
     }, [])
     return {
-        opciones
+        opciones,
     }
 }
 

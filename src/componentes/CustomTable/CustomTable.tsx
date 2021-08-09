@@ -39,6 +39,7 @@ import { Cell, CellAction } from '../Cell'
 import CollapseRow from './CollapseRow'
 
 interface Props {
+    modalTable?:ReactNode,
     tableData: any[]
     columns: any[],
     actionsInRow?: string[],
@@ -79,11 +80,11 @@ const useStyles = makeStyles(() =>
 
 const CustomTable: FC<Props> = ({
     filterSearchBar,
+    modalTable,
     tableData,
     columns,
     actionsInHeader,
     FormRegister,
-    rowChek,
     filterMenu,
     getDataTableSecondary,
     secondaryColumn,

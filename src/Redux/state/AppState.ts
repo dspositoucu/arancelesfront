@@ -22,6 +22,10 @@ export interface ICajaInitialState {
     movimientos: [] | any[]
 }
 
+export interface ICtacteInitialState {
+    ctacte: [] | any[]
+}
+
 export interface IUserInitialState {
     usuario: IUser | ''
 }
@@ -58,6 +62,10 @@ export interface IInformesInitialState {
     },
 }
 
+export interface IModalTableState {
+    dataTable:any[]
+}
+
 export interface ICuentasInitialState {
     listCuentas: ICuentas[] | [] | any[],
     detallesCuenta: ICuentas | any
@@ -89,5 +97,7 @@ export interface AppState {
     GlobalState: IGlobalInitialState,
     ArancelesState: IArancelesInitialState,
     BarridasState: IBarridasInitialState,
-    CajaState: ICajaInitialState
+    CajaState: ICajaInitialState,
+    CtacteState: ICtacteInitialState,
+    ModalTableState: IModalTableState
 }

@@ -7,7 +7,7 @@ import ButtonIcon from '../Buttons/ButtonIcon';
 
 // Custom hooks
 import { useForm, Form } from '../../hooks/useForm'
-import useDescripcion from '../../hooks/useDescripcion'; 
+import useDescripcion from '../../hooks/useDescripcion';
 import useSubmit from '../../hooks/useSubmit';
 //Actions
 
@@ -53,8 +53,13 @@ const ReciboGeneral = () => {
         quitarDescripcion,
         sumarMontos,
         handleChangeDesc,
-        nuevaDescripcion} = useDescripcion()
-
+        nuevaDescripcion } = useDescripcion({
+            Arancel:0,
+            Bonificacion:0,
+            Intereses:0,
+            Biblioteca:0,
+            Moratoria:0
+        })
 
     return (
         <Form
@@ -304,12 +309,12 @@ const ReciboGeneral = () => {
                             onChange={handleChangeDesc}
                         />
                     </Grid>
-                    <Grid direction="row" style={{display:"flex", alignItems:'baseline'}} item xs={2} >
+                    <Grid direction="row" style={{ display: "flex", alignItems: 'baseline' }} item xs={2} >
                         <Typography>$</Typography>
                         <Controls.Input
                             inputProps={{
                                 style: { textAlign: "right" }
-                              }}
+                            }}
                             name="monto"
                             value={nuevaDescripcion.monto}
                             onChange={handleChangeDesc}

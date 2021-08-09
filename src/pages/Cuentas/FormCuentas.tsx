@@ -29,7 +29,6 @@ const initialFValues = {
 }
 
 const FormCuentas = ({ width = "max-content" }) => {
-const autoCompleteRef = useRef()
     const {
         values,
         setValues,
@@ -104,21 +103,20 @@ const autoCompleteRef = useRef()
                             name="idgrupobarrida"
                             label="ID Grupo Barrida"
                             filtro={'descripcion'}
-                            value={values.idgrupobarrida}
-                            onSelect={handleChangeForm}
+                            valueautocomplete={values.idgrupobarrida}
+                            onChange={(event, value) => handleChangeForm({ target: { value: value.id, name: 'idgrupobarrida' } })}
                         />
                     </Grid>
                 </Grid>
                 <Grid container item xs={12} spacing={1}>
                     <Grid item xs={12}>
                         <Controls.AutocompleteSelect
-                            ref={autoCompleteRef}
                             promSelectList={getSedesListSelect()}
-                            value={values.idsede}
+                            valueautocomplete={values.idsede}
                             filtro={'descripcion'}
                             name="idsede"
                             label="ID Sede"
-                            onChange={(event,value,ref) => console.log("EVENTO ",event, "VALOR ",value, "REF ", autoCompleteRef.current)}
+                            onChange={(event, value) => handleChangeForm({ target: { value: value.id, name: 'idsede' } })}
                         />
                     </Grid>
                 </Grid>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
@@ -14,9 +15,14 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { Typography } from '@material-ui/core';
 
+//acciones
+import { getCtacte } from '../../Redux/actions/ctacte/CtacteActionCreator';
+
+//models
+import { AppState } from '../../Redux/state/AppState'
+
 //mmodal
 import Modal from '../Modals/Modal'
-import { FormatColorResetSharp } from '@material-ui/icons';
 
 const useRowStyles = makeStyles({
     root: {
@@ -25,28 +31,28 @@ const useRowStyles = makeStyles({
         },
     },
 
-    collapseTable:{
-        overflow:'hidden',
-        borderRadius:'5px',
-        background:'#FFF',
+    collapseTable: {
+        overflow: 'hidden',
+        borderRadius: '5px',
+        background: '#FFF',
     },
 
-    fondoCollapseTable:{
+    fondoCollapseTable: {
         background: '#8cbaff'
     }
-
 });
 
-const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDatos, forms,id }) => {
+const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDatos, forms, id }) => {
 
+    const dispatch = useDispatch()
     const [open, setOpen] = useState(false);
     const [secondaryTable, setSecondaryTable] = useState([])
     const [openModal, setOpenModal] = useState({
-        form1:false,
-        form2:false
+        form1: false,
+        form2: false
     })
-    
-    const [formulario1, fomulario2] = forms
+
+    const [Form1, Form2] = forms
     const cargarTabla = async () => {
         setSecondaryTable([])
         setSecondaryTable(await cargarDatos(id))
@@ -55,28 +61,28 @@ const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDat
         cargarTabla()
     }, [id])
 
-    const handleOpenModal = (form) =>{
-       // console.log("Event",event.target)
+    const handleOpenModal = (form) => {
+        // console.log("Event",event.target)
         setOpenModal({
             ...openModal,
-            [form]:!openModal[form]
+            [form]: !openModal[form]
         })
     }
     const classes = useRowStyles();
 
     return (
         <>
-        <Modal
-            active={openModal["form1"]}
-            closeModal={()=>handleOpenModal("form1")}>
-            {formulario1}
-        </Modal>
+            <Modal
+                active={openModal["form1"]}
+                closeModal={() => handleOpenModal("form1")}>
+                {Form1}
+            </Modal>
 
-        <Modal
-            active={openModal["form2"]}
-            closeModal={()=>handleOpenModal("form2")}>
-            {fomulario2}
-        </Modal>
+            <Modal
+                active={openModal["form2"]}
+                closeModal={() => handleOpenModal("form2")}>
+                {Form2}
+            </Modal>
             <TableRow className={classes.root}>
                 <Cell width={'25'}>
                     <IconButton aria-label="expand row" size="small" onClick={
@@ -89,7 +95,7 @@ const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDat
                 {children}
             </TableRow>
             <TableRow>
-                <TableCell  className={classes.fondoCollapseTable} style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={12}>
+                <TableCell className={classes.fondoCollapseTable} style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={12}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         {
                             secondaryTable.length
@@ -106,17 +112,21 @@ const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDat
                                                         <TableRow key={j}>
                                                             {
                                                                 tableColapseHead.map((key, z) => <Cell key={z}>{data[key.toLowerCase()]} </Cell>)
+                                                                
                                                             }
-                                                            <CellAction>
+                                                            <CellAction align='right' width='100px' >
                                                                 <ButtonIcon
-                                                                    endIcon="editar"
+                                                                    endIcon="ctacte"
                                                                     hover={false}
-                                                                    onClick={()=>handleOpenModal("form1")}
+                                                                    onClick={() => {
+                                                                        handleOpenModal("form1");
+                                                                        dispatch(getCtacte(data["idcuentapersona"]))
+                                                                    }}
                                                                 />
-                                                                   <ButtonIcon
-                                                                    endIcon="nuevo"
+                                                                <ButtonIcon
+                                                                    endIcon="recibo"
                                                                     hover={false}
-                                                                    onClick={()=>handleOpenModal("form2")}
+                                                                    onClick={() => handleOpenModal("form2")}
                                                                 />
                                                             </CellAction>
                                                         </TableRow>)

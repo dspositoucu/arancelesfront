@@ -22,8 +22,6 @@ const initialFValues = {
 }
 
 const FormAranceles = ({ selectList }) => {
-
-    
     const {
         values,
         setValues,
@@ -46,9 +44,10 @@ const FormAranceles = ({ selectList }) => {
                         <Controls.AutocompleteSelect
                             name="idcuenta"
                             label="Cuenta"
-                            onChange={handleChangeForm}
                             promSelectList={getCuentasListSelect()}
+                            valueautocomplete={values.idcuenta}
                             filtro={"descripcion"}
+                            onChange={(event, value) => handleChangeForm({ target: { value: value.id, name: 'idcuenta' }})}
                         />
                     </Grid>
 

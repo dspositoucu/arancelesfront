@@ -5,6 +5,7 @@ import Input from './Input';
 
 //import hook
 import useSelect from '../../hooks/useSelect';
+import { useState, useEffect } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -14,27 +15,35 @@ const useStyles = makeStyles((theme: Theme) =>
     }));
 
 const AutocompleteSelect = (props) => {
-
-    const { filtro, promSelectList, onChange, name } = props
-    
-    const { opciones } = useSelect(promSelectList)
-
     const classes = useStyles()
+
+    const { filtro, promSelectList, onChange, name, valueautocomplete, label } = props
+    const [opt,setOpt] = useState<any[]>([])
+    const defVal= {id:0,descripcion:"Sin Valor"}
+    const { opciones } = useSelect(promSelectList)
+    useEffect(()=>{
+     opciones.length && setOpt([defVal,...opciones])
+    },[opciones])
 
     return (
         <>
-            <Autocomplete
-                {...props}
-                MenuProps={{
-                    disableScrollLock: false,
-                    classes: { paper: classes.selectProps }
-                }}
-                disablePortal
-                id="combo-box-demo"
-                options={opciones}
-                getOptionLabel={(option: any) => option[filtro]}
-                renderInput={(params) => <Input name={name} {...params} />}
-            />
+            {
+                opt.length && 
+                <Autocomplete
+                    {...props}
+                    MenuProps={{
+                        disableScrollLock: false,
+                        classes: { paper: classes.selectProps }
+                    }}
+                    defaultValue={opt[valueautocomplete]}
+                    disablePortal
+                    placeholder={label}
+                    id="combo-box-demo"
+                    options={opt}
+                    getOptionLabel={(option: any) => option[filtro]}
+                    renderInput={(params) => <Input placeholder={label} {...params} />}
+                />
+            }
         </>
     )
 }

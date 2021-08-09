@@ -1,6 +1,6 @@
 import { useEffect, useState, ChangeEvent } from "react";
 
-const useDescripcion = () =>{
+const useDescripcion = (initalValue) =>{
 
     const [descripciones, setDescripciones] = useState([
         { id: '1', descripcion: "Arancel", monto: "0.00" },
@@ -11,6 +11,7 @@ const useDescripcion = () =>{
     ])
 
     const [nuevaDescripcion, setNuevaDescripcion] = useState({
+        id:(descripciones.length+1).toString(),
         descripcion: "",
         monto: "0.00",
     })
@@ -18,11 +19,8 @@ const useDescripcion = () =>{
     const agregarDescripcion = () => {
         setDescripciones([
             ...descripciones,
-            {
-                id: (descripciones.length + 1).toString(),
-                descripcion: nuevaDescripcion.descripcion,
-                monto: nuevaDescripcion.monto
-            }])
+            nuevaDescripcion
+            ])
     }
 
     const quitarDescripcion = (idDesc) => {
@@ -41,7 +39,6 @@ const useDescripcion = () =>{
 
     const handleChangeDesc = (event: ChangeEvent<HTMLInputElement>): void => {
         const { name, value } = event.target
-
         setNuevaDescripcion({
             ...nuevaDescripcion,
             [name]: value,

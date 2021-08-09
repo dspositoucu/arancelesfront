@@ -15,6 +15,9 @@ import cuentasReducer from './reducers/cuentasReducer';
 import arancelesReducer from './reducers/arancelesReducer';
 import barridasReducer from './reducers/barridasReducer';
 import cajaReducer from './reducers/cajaReducer';
+import ctacteReducer from './reducers/ctacteReducer';
+import modalTableReducer from './reducers/modalTableReducer';
+
 
 const rootReducers = combineReducers<AppState>({
     CuentasState:cuentasReducer,
@@ -25,7 +28,9 @@ const rootReducers = combineReducers<AppState>({
     GlobalState: globalReducer,
     ArancelesState:arancelesReducer,
     BarridasState:barridasReducer,
-    CajaState:cajaReducer
+    CajaState:cajaReducer,
+    CtacteState: ctacteReducer,
+    ModalTableState:modalTableReducer
 })
 
 const store :Store<AppState, AnyAction> = createStore(

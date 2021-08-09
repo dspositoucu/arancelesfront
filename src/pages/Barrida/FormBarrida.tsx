@@ -93,8 +93,10 @@ const FormBarrida = () => {
               label="Grupo Barrida"
               name="idgrupobarrida"
               filtro="descripcion"
+              valueautocomplete={values.idgrupobarrida}
               promSelectList={getListaGruposBarrida()}
-              onChange={handleChangeForm}
+              onChange={(event, value) => handleChangeForm({ target: { value: value.id, name: 'idgrupobarrida' } })}
+
             />
           </Grid>
         </Grid>

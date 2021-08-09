@@ -108,10 +108,11 @@ const FormPersonas = () => {
                         <Controls.AutocompleteSelect
                             promSelectList={getAllGeneros()}
                             filtro={'descripcion'}
+                            valueautocomplete={values.gender}
                             name="gender"
                             label="Genero"
                             value={values.gender}
-                            onChange={handleChangeForm}
+                            onChange={(event, value) => handleChangeForm({ target: { value: value.id, name: 'gender' } })}
                         />
                     </Grid>
                 </Grid>

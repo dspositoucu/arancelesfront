@@ -15,8 +15,8 @@ interface Props {
     label?: string,
     hover?: boolean,
     onClick?: (e?: any) => void,
-    typeButton?: ("filter" | "default" | "borrar" | "nuevo")
-    data?:any
+    typeButton?: string
+    data?: any
 }
 
 const useStyles = makeStyles(() =>
@@ -35,7 +35,7 @@ const useStyles = makeStyles(() =>
         },
     }))
 
-const ButtonIcon: FC<Props> = ({startIcon = "null", endIcon = "null", label, typeButton = "default", hover = false, data, onClick }) => {
+const ButtonIcon: FC<Props> = ({ startIcon = "null", endIcon = "null", label, typeButton = "default", hover = false, data, onClick }) => {
     const dispatch = useDispatch()
 
     const acciones = {
@@ -43,7 +43,9 @@ const ButtonIcon: FC<Props> = ({startIcon = "null", endIcon = "null", label, typ
             dispatch(openModalEdit());
             dispatch(selectDataAction(data))
         },
-        nuevo: onClick
+        nuevo: onClick,
+        recibo: onClick,
+        ctacte: onClick,
     }
     const classes = useStyles()
     return (

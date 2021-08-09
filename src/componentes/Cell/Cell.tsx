@@ -89,8 +89,9 @@ export const CellAction = (props) => {
 
     return (
         <TableCell
+            align='right'
+            width='100px'
             className={classes.body}
-            align={align}
         >
             {children}
         </TableCell>
