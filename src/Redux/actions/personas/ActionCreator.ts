@@ -11,6 +11,9 @@ import {
     ActionTypes
 } from './ActionTypes';
 
+//otras acciones
+import { setLoading } from '../globalActions/ActionCreatorGlobal';
+
 import { IPersona, typesModels } from '../../../models';
 
 const addPersonAction = (person: typesModels): AddPersonAction => {
@@ -69,9 +72,13 @@ export const cargarListaPersonasFalsas = (persona) => {
 
 export const getAllPersonas = () => {
     return (dispatch: Dispatch) => {
+        dispatch(setLoading())
         return new PersonaApi()
             .getAllPersonas()
-            .then(resp => dispatch(getPersonList(resp.data)))
+            .then(resp => {
+                dispatch(getPersonList(resp.data))
+                dispatch(setLoading())
+            })
             .catch(err => console.log(err))
     }
 }
@@ -88,8 +95,8 @@ export const addPersona = (persona: IPersona) => {
 export const getCuentasByPersona = (personaId) => {
     return new PersonaApi()
         .getCuentasByPersonaId(personaId)
-        .then(resp=>resp.data)
-        .catch(err=>console.log(err))
+        .then(resp => resp.data)
+        .catch(err => console.log(err))
 }
 
 export const getAllGeneros = () => {

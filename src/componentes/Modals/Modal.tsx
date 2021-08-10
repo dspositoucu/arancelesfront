@@ -1,18 +1,19 @@
 import React, { FC, useState, ReactNode } from 'react';
 import ReactDom from 'react-dom';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 interface Prop {
     active: boolean,
     closeModal: () => void,
     children: ReactNode,
-    width?:string,
-    height?:string
+    width?: string,
+    height?: string
 }
 
 const modalRoot = document.getElementById('modal')
 
-const Modal: FC<Prop> = ({ active, closeModal, children, width='80vw', height='max-content' }) => {
+const Modal: FC<Prop> = ({ active, closeModal, children, width = '80vw', height = 'max-content' }) => {
     const useStyles = makeStyles(() =>
         createStyles({
             fondo: {
@@ -24,7 +25,7 @@ const Modal: FC<Prop> = ({ active, closeModal, children, width='80vw', height='m
                 right: 0,
                 bottom: 0,
                 backgroundColor: 'rgba(0, 0, 0, .7)',
-                zIndex: 10000,
+                zIndex: 1,
             },
             modalContainer: {
                 top: '50%',
@@ -33,21 +34,29 @@ const Modal: FC<Prop> = ({ active, closeModal, children, width='80vw', height='m
                 display: 'grid',
                 placeItems: 'center',
                 transform: 'translate(-50%,-50%)',
-                zIndex: 80000,
+                zIndex: 2,
             },
             modal: {
+                position: 'relative',
                 width: width,
-                height:height,
-                borderRadius:10,
-                padding:25,
-                background:'#FFF',
+                height: height,
+                borderRadius: 15,
+                padding: 30,
+                background: '#FFF',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexDirection: 'column',
-                //position: 'fixed',
-                zIndex: 80000,
+                zIndex: 2,
             },
+            cerrar: {
+                position: 'absolute',
+                zIndex: 1000,
+                top: '0px',
+                right: '0px',
+                cursor: 'pointer'
+
+            }
         }));
 
     const classes = useStyles()
@@ -69,18 +78,20 @@ const Modal: FC<Prop> = ({ active, closeModal, children, width='80vw', height='m
         }, 300)
     }
 
-    console.log(closeModalBackground,closeModalContent)
+    console.log(closeModalBackground, closeModalContent)
 
     return modalRoot
         ? ReactDom.createPortal(
             <>
                 <div
-                    onClick={close}
-                    className={`${classes.fondo} openFondo ${ closeModalBackground ? closeModalBackground : ""}`}
+                    className={`${classes.fondo} openFondo ${closeModalBackground ? closeModalBackground : ""}`}
                 >
                 </div>
                 <div className={classes.modalContainer}>
-                    <div className={`${classes.modal} slideIn ${ closeModalContent ? closeModalContent : ""}`}>
+                    <div className={`${classes.modal} slideIn ${closeModalContent ? closeModalContent : ""}`}>
+                        <div onClick={close} className={classes.cerrar}>
+                            <HighlightOffIcon  fontSize="large" color="secondary" />
+                        </div>
                         {children}
                     </div>
                 </div>

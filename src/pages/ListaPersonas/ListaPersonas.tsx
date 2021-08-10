@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 // components
 import Table from '../../componentes/CustomTable'
 import ModalTable from '../../componentes/ModalTable/ModalTable';
+import Loading from '../../componentes/Loading/Loading';
 
 //modelos
 import { AppState } from '../../Redux/state/AppState';
@@ -28,7 +29,7 @@ import { PersonaApi } from '../../api/rest/PersonaApi';
 const ListaPersonas = () => {
   const dispatch = useDispatch()
   const { listPerson } = useSelector((state: AppState) => state.PersonState)
-
+  const { loading } = useSelector((state: AppState) => state.GlobalState)
   const { dataTableSecondary } = useGetDataTable(new PersonaApi().getCuentasByPersonaId(2))
 
   console.log(" Tabla secundaria ", dataTableSecondary)
@@ -53,13 +54,13 @@ const ListaPersonas = () => {
   ]
 
   const modalTableColumns = [
-    { title: "Codigo", width: '10%'},
+    { title: "Codigo", width: '10%' },
     { title: "CodCar", width: '5%' },
     { title: "CodFac", width: '5%' },
     { title: "FecMov", width: '10%' },
     { title: "Concepto", width: '50%' },
-    { title: "Debe", width: '10%', align:'right' },
-    { title: "Haber", width: '10%', align:'right'},
+    { title: "Debe", width: '10%', align: 'right' },
+    { title: "Haber", width: '10%', align: 'right' },
   ]
 
   useEffect(() => {
@@ -71,40 +72,44 @@ const ListaPersonas = () => {
   // -columns: corresponde a las columnas de la tabla que se quieren renderizar
   // -actions (OPCIONAL): acciones para realizar en la tabla 
 
-  return <Table
-    tableData={listPerson}
-    filterMenu={false}
-    columns={columns}
-    actionsInHeader={["imprimir", "nuevo", "borrar"]}
-    actionInRow={['editar']}
-    rowChek={false}
-    FormRegister={<FormPersonas />}
-    widthModal={'50vw'}
-    filterSearchBar={[
-      {
-        key: "NOMBRE",
-        label: "Nombre"
-      },
-      {
-        key: "NDOC",
-        label: "Nro Documneto"
-      }
-    ]}
-    getDataTableSecondary={
-      async (personaId) => {
-        return new PersonaApi()
-          .getCuentasByPersonaId(personaId)
-          .then(resp => resp.data)
-      }
-    }
+  return <>
+    {!loading ?
+      <Table
+        tableData={listPerson}
+        filterMenu={false}
+        columns={columns}
+        actionsInHeader={["imprimir", "nuevo", "borrar"]}
+        actionInRow={['editar']}
+        rowChek={false}
+        FormRegister={<FormPersonas />}
+        widthModal={'50vw'}
+        filterSearchBar={[
+          {
+            key: "NOMBRE",
+            label: "Nombre"
+          },
+          {
+            key: "NDOC",
+            label: "Nro Documneto"
+          }
+        ]}
+        getDataTableSecondary={
+          async (personaId) => {
+            return new PersonaApi()
+              .getCuentasByPersonaId(personaId)
+              .then(resp => resp.data)
+          }
+        }
 
-    // props para la tabla secundaria
-    secondaryForms={[
-      <ModalTable columns={modalTableColumns} />,
-      <ReciboGeneral />
-    ]}
-    secondaryColumn={["Nombre de cuenta", "CodCar", "Saldo", "Activo", "Autorizado", "Baja", "Nota"]}
-  />
+        // props para la tabla secundaria
+        secondaryForms={[
+          <ModalTable columns={modalTableColumns} />,
+          <ReciboGeneral />
+        ]}
+        secondaryColumn={["Nombre de cuenta", "CodCar", "Saldo", "Activo", "Autorizado", "Baja", "Nota"]}
+      />
+      : <Loading />}
+  </>
 }
 
 export default ListaPersonas

@@ -2,79 +2,70 @@ import { Reducer } from "redux";
 import { IGlobalInitialState } from "../state/AppState";
 import { ActionTypes, GlobalAction } from "../actions/globalActions/ActionTypeGlobal";
 
-const InitialState :IGlobalInitialState = {
-    tableData:[],
-    detallesData:{},
-    modalRegister:false,
-    modalEdit:false,
-    tableFilterinUse:false,
-    filterList:[],
-    filterTags :{
-        Alumnos_dados_de_baja:false,
-        Alumnos_becados_activos:false,
-        Alumnos_activos:false,
-        Alumnos_acreditan_banco:false,
-        Alumnos_con_fin_de_carrera:false,
-        Alumnos_con_año_de_gracia:false,
-        Alumnos_sin_cuenta:false,
-    },
+const InitialState: IGlobalInitialState = {
+    tableData: [],
+    detallesData: {},
+    modalRegister: false,
+    modalEdit: false,
+    tableFilterinUse: false,
+    filterList: [],
+    loading: false
 }
 
-const globalReducer :Reducer<IGlobalInitialState, GlobalAction> = ( state = InitialState, action:GlobalAction)=>{
+const globalReducer: Reducer<IGlobalInitialState, GlobalAction> = (state = InitialState, action: GlobalAction) => {
 
-    switch (action.type){
+    switch (action.type) {
 
-        case ActionTypes.SET_TABLE_FILTER_IN_USE :{
+        case ActionTypes.FAIL_REQUEST:{
+            return{
+                ...state
+            }
+        }
+
+        case ActionTypes.SUCCESS_REQUEST:{
+            return {
+                ...state
+            }
+        }
+
+        case ActionTypes.SET_LOADING: {
+            return {
+                ...state,
+                loading: !state.loading
+            }
+        }
+
+        case ActionTypes.SET_TABLE_FILTER_IN_USE: {
             return {
                 ...state,
                 tableFilterinUse: action.state
             }
         }
 
-        case ActionTypes.SET_FILTER_LIST :{
+        case ActionTypes.SET_FILTER_LIST: {
             return {
                 ...state,
                 filterList: action.filterList
             }
         }
 
-        case ActionTypes.REMOVE_FILTER_TAG: {
-            return {
-                ...state,
-                filterTags: {
-                    ...state.filterTags,
-                    [action.tag]: false
-                }
-            }
-        }
-
-        case ActionTypes.ADD_FILTER_TAG: {
-            return {
-                ...state,
-                filterTags: {
-                    ...state.filterTags,
-                    [action.filter]: !state.filterTags[action.filter as keyof Object]
-                }
-            }
-        }
-
-        case ActionTypes.SELECT_DATA :{
+        case ActionTypes.SELECT_DATA: {
             return {
                 ...state,
                 detallesData: action.selectData,
-            }   
-        }
-
-        case ActionTypes.MODAL_FORM_REGISTER :{
-            return {
-                ...state,
-                modalRegister: !state.modalRegister,
-                modalEdit:false,
-                detallesData:{}
             }
         }
 
-        case ActionTypes.MODAL_FORM_EDIT :{
+        case ActionTypes.MODAL_FORM_REGISTER: {
+            return {
+                ...state,
+                modalRegister: !state.modalRegister,
+                modalEdit: false,
+                detallesData: {}
+            }
+        }
+
+        case ActionTypes.MODAL_FORM_EDIT: {
             return {
                 ...state,
                 modalEdit: !state.modalEdit,

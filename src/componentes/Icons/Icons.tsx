@@ -13,27 +13,30 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 
-
 interface Props {
     type?: string,
+    color?: string,
+    size?: string
 }
 
-const Icons: FC<Props> = ({ type }) => {
+const Icons: FC<Props> = (props) => {
+    const { type, color='action', size='small' } = props
 
     const objIcon: ReactNode = {
-        null:<></>,
-        recibo:<ReceiptIcon/>,
-        quitar:<HighlightOffIcon/>,
+        null: <></>,
+        recibo: <ReceiptIcon />,
+        quitar: <HighlightOffIcon />,
         imprimir: <PrintIcon />,
         borrar: <DeleteIcon />,
         nuevo: <PersonAddIcon />,
         filter: <FilterListIcon />,
         close: <CloseIcon />,
-        user: <AccountCircleIcon/>,
-        logout: <PowerSettingsNewIcon/>,
-        editar: <EditIcon/>,
-        agregar:<AddIcon/>,
-        ctacte:<AccountBalanceWalletIcon/>
+        user: <AccountCircleIcon />,
+        logout: <PowerSettingsNewIcon />,
+        editar: <EditIcon />,
+        agregar: <AddIcon />,
+        ctacte: <AccountBalanceWalletIcon />,
+        cerrar: <HighlightOffIcon />
     }
 
     return <> {objIcon[type as keyof Object]} </>

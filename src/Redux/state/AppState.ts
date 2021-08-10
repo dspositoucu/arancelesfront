@@ -23,7 +23,11 @@ export interface ICajaInitialState {
 }
 
 export interface ICtacteInitialState {
-    ctacte: [] | any[]
+    ctacte: [] | any[],
+    totalDebe:string | number,
+    totalHaber:string | number,
+    total:string | number
+
 }
 
 export interface IUserInitialState {
@@ -37,15 +41,7 @@ export interface IGlobalInitialState {
     filterList: typesModels[] | [],
     modalRegister:boolean,
     modalEdit:boolean,
-    filterTags: {
-        Alumnos_dados_de_baja: boolean
-        Alumnos_becados_activos: boolean
-        Alumnos_activos: boolean
-        Alumnos_acreditan_banco: boolean
-        Alumnos_con_fin_de_carrera: boolean
-        Alumnos_con_año_de_gracia: boolean
-        Alumnos_sin_cuenta: boolean
-    },
+    loading:boolean
 }
 
 export interface IInformesInitialState {

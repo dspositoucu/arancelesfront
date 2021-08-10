@@ -16,7 +16,8 @@ interface Props {
     check?: boolean,
     variant?: "body" | "head" | "footer" | undefined
     checkAll?: boolean
-    width?: string
+    width?: string,
+    align?: "left" | "right" | "inherit" | "center" | "justify" 
 }
 
 //Style align center checkbox
@@ -54,11 +55,11 @@ const StyledTableCell = withStyles((theme: Theme) => ({
 }))(TableCell);
 
 export const Cell: FC<Props> = (props) => {
-    const { width = 'max-content', children } = props
+    const { width = 'max-content', children, align } = props
     return (
         <StyledTableCell
             width={width}
-            {...props}>
+            align={align}>
             {children}
         </StyledTableCell>
     )
@@ -84,12 +85,12 @@ export const CellCheckBox: FC<Props> = ({ checkAll, check = false, variant = "bo
 
 // IconCell 
 export const CellAction = (props) => {
-    const { children, align } = props
+    const { children, align="right" } = props
     const classes = useStyles()
 
     return (
         <TableCell
-            align='right'
+            align={align}
             width='100px'
             className={classes.body}
         >

@@ -37,7 +37,9 @@ const FormCuentas = ({ width = "max-content" }) => {
     } = useForm(initialFValues, true);
 
     const { formSubmit } = useSubmit(addCuentas, values)
-    console.log("VALORES DE FORMULARIO ", values)
+
+
+    console.log("VALOR DE FORMULARIO ", values)
     return (
         <Form
             width={width}
@@ -104,7 +106,10 @@ const FormCuentas = ({ width = "max-content" }) => {
                             label="ID Grupo Barrida"
                             filtro={'descripcion'}
                             valueautocomplete={values.idgrupobarrida}
-                            onChange={(event, value) => handleChangeForm({ target: { value: value.id, name: 'idgrupobarrida' } })}
+                            onChange={(event, value = { id: 0 }) => {
+
+                                handleChangeForm({ target: { value: !value ? 0 : value.id, name: 'idgrupobarrida' } })
+                            }}
                         />
                     </Grid>
                 </Grid>
@@ -116,7 +121,7 @@ const FormCuentas = ({ width = "max-content" }) => {
                             filtro={'descripcion'}
                             name="idsede"
                             label="ID Sede"
-                            onChange={(event, value) => handleChangeForm({ target: { value: value.id, name: 'idsede' } })}
+                            onChange={(event, value) => handleChangeForm({ target: { value: !value ? 0 : value.id, name: 'idsede' } })}
                         />
                     </Grid>
                 </Grid>

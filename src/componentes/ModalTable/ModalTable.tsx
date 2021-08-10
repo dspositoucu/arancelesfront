@@ -1,71 +1,88 @@
-import React, { useState, useEffect } from 'react';
+
 import { useSelector } from 'react-redux';
+import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import { CellAction } from '../Cell';
-import ButtonIcon from '../Buttons';
 import { AppState } from '../../Redux/state/AppState';
-
+import { Cell } from '../Cell';
+import FromMovimientosCtacte from '../Formularios/FromMovimientosCtacte';
 
 const useStyles = makeStyles({
     table: {
         minWidth: 650,
-        overflow: 'scroll',
+        borderRadius:20,
+        height:'100%',
     },
     tableContainer: {
-        height: '80vh'
+        height:'50%',
+        overflow: 'scroll',
+    },
+    container:{
+        height:'80vh',
+        width:"100%",
     },
     rowHeader: {
         background: '#fff',
-        width: '100%'
+        width: "100%"
+    },
+    formContainer: {
+        width:"100%",
+        height:'max-content',
     }
 });
 
 const ModalTable = ({ columns }) => {
-    console.log("COLUMNAS ", columns)
     const { ctacte } = useSelector((state: AppState) => state.CtacteState)
-    console.log("datos de la cuenta cte ", ctacte)
     const classes = useStyles();
     return (
-        <TableContainer component={Paper} className={classes.tableContainer}>
-            <Table className={classes.table} size="small" aria-label="a dense table">
-                <TableHead className={classes.rowHeader}>
-                    <TableRow>
+        <Grid container className={classes.container}>
+            <Grid item xs={12}>
+                <h2>
+                    titulo
+                </h2>
+            </Grid>
+            <Grid item xs={12} className={classes.tableContainer}>
+                <Table className={classes.table} size="small" aria-label="a dense table">
+                    <TableHead className={classes.rowHeader}>
+                        <TableRow>
+                            {
+                                columns.length && columns.map((col, i) =>
+                                    <Cell
+                                        variant="head"
+                                        width={col.width}
+                                        key={i}>{col.title}
+                                    </Cell>
+                                )
+                            }
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
                         {
-                            columns.length && columns.map((col, i) =>
-                                <TableCell
-                                    width={col.width}
-                                    key={i}>{col.title}
-                                </TableCell>)
+                            ctacte.length && ctacte.map(data =>
+                                <TableRow>
+                                    {
+                                        columns.map(key =>
+                                            <Cell
+                                                width={key.width}
+                                                align={key.align}
+                                            >
+                                                {data[key.title.toLowerCase()]}
+                                            </Cell>)
+                                    }
+                                </TableRow>
+                            )
                         }
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {
-                        ctacte.length && ctacte.map(data =>
-                            <TableRow>
-                                {
-                                    columns.map(key =>
-                                        <TableCell width={key.width}
-                                            component="th"
-                                            align={key.align}
-                                            scope="row"
-                                        >
-                                            {data[key.title.toLowerCase()]}
-                                        </TableCell>)
-                                }
-                            </TableRow>
-                        )
-                    }
-                </TableBody>
-            </Table>
-        </TableContainer>
+                    </TableBody>
+                </Table>
+
+            </Grid>
+            <Grid item xs={12} className={classes.formContainer}>
+                <FromMovimientosCtacte/>
+            </Grid>
+        </Grid>
     );
 }
 

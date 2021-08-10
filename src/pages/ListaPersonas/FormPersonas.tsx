@@ -20,7 +20,6 @@ const initialFValues = {
     telefono: '',
     domicilio: '',
     sexo: '',
-    departmentId: '',
     ndoc: '',
     cuit: '',
     tdoc: '',

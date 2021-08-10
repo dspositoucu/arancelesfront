@@ -11,7 +11,6 @@ import { AppState } from '../../Redux/state/AppState';
 
 //actions
 import { removeFilterTag } from '../../Redux/actions/informes/ActionCreatorInformes'
-import { globalSetTableFilterinUse } from '../../Redux/actions/globalActions/ActionCreatorGlobal';
 
 //interface
 import IFilterSearchBar from '../CustomTable/interface/IFilterSearchBar'
@@ -76,44 +75,6 @@ const useStyles = makeStyles((theme) =>
 
 const MenuHeaderTable: FC<Props> = ({ filter, buttonsList, filterSearchBar, filterMenu }) => {
 
-    const menuFilterData = [
-        {
-            Alumnos_dados_de_baja: () => dispatch(alumnosDadosDeBaja(false)),
-            filter: "Alumnos_dados_de_baja",
-        },
-
-        {
-            Alumnos_becados_activos: () => dispatch(becadosActivos(false)),
-            filter: "Alumnos_becados_activos"
-        },
-
-        {
-            Alumnos_activos: () => dispatch(alumnosActivos(false)),
-            filter: "Alumnos_activos"
-        },
-
-        {
-            Alumnos_acreditan_banco: () => dispatch(alumnosAcreditanEnBanco(false)),
-            filter: "Alumnos_acreditan_banco"
-        },
-
-        {
-            Alumnos_con_fin_de_carrera: () => dispatch(alumnosConFinDeCarrera(false)),
-            filter: "Alumnos_con_fin_de_carrera"
-        },
-
-        {
-            Alumnos_con_año_de_gracia: () => dispatch(alumnosConAñoDeGracia(false)),
-            filter: "Alumnos_con_año_de_gracia"
-        },
-
-        {
-            Alumnos_sin_cuenta: () => dispatch(alumnosSinCuenta(false)),
-            filter: "Alumnos_sin_cuenta"
-        },
-    ]
-
-
     const dispatch = useDispatch()
     const { filterTags } = useSelector((state: AppState) => state.InformesState)
 
@@ -136,11 +97,9 @@ const MenuHeaderTable: FC<Props> = ({ filter, buttonsList, filterSearchBar, filt
                     filterSearchBar={filterSearchBar}
                 />
                 {filterMenu && <FilterMenu />}
-
                 {
                     buttonsList.map(buttonType => <Buttons key={buttonType} type={buttonType} />)
                 }
-
 
             </div>
 

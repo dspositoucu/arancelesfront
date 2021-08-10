@@ -10,7 +10,7 @@ import { useState, useEffect } from 'react';
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         selectProps: {
-            height: 100
+            height: '100px'
         }
     }));
 
@@ -18,32 +18,30 @@ const AutocompleteSelect = (props) => {
     const classes = useStyles()
 
     const { filtro, promSelectList, onChange, name, valueautocomplete, label } = props
-    const [opt,setOpt] = useState<any[]>([])
-    const defVal= {id:0,descripcion:"Sin Valor"}
+    const [opt, setOpt] = useState<any[]>([])
+    const defVal = { id: 0, descripcion: "Sin Valor" }
     const { opciones } = useSelect(promSelectList)
-    useEffect(()=>{
-     opciones.length && setOpt([defVal,...opciones])
-    },[opciones])
+    useEffect(() => {
+        opciones.length && setOpt([defVal, ...opciones])
+    }, [opciones])
 
     return (
         <>
-            {
-                opt.length && 
-                <Autocomplete
-                    {...props}
-                    MenuProps={{
-                        disableScrollLock: false,
-                        classes: { paper: classes.selectProps }
-                    }}
-                    defaultValue={opt[valueautocomplete]}
-                    disablePortal
-                    placeholder={label}
-                    id="combo-box-demo"
-                    options={opt}
-                    getOptionLabel={(option: any) => option[filtro]}
-                    renderInput={(params) => <Input placeholder={label} {...params} />}
-                />
-            }
+            <Autocomplete
+                {...props}
+                MenuProps={{
+                    disableScrollLock: false,
+                    classes: { paper: classes.selectProps }
+                }}
+                onChange={onChange}
+                defaultValue={opt[valueautocomplete]}
+                disablePortal
+                placeholder={label}
+                id="combo-box-demo"
+                options={opt}
+                getOptionLabel={(option: any) => option[filtro]}
+                renderInput={(params) => <Input placeholder={label} {...params} />}
+            />
         </>
     )
 }
