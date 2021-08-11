@@ -4,7 +4,8 @@ import TableCell from '@material-ui/core/TableCell';
 import { withStyles } from "@material-ui/core/styles";
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import { Typography } from '@material-ui/core';
+import Controls from '../Forms/Controls';
+import { Typography, Grid } from '@material-ui/core';
 
 import { useDispatch } from 'react-redux'
 
@@ -17,7 +18,7 @@ interface Props {
     variant?: "body" | "head" | "footer" | undefined
     checkAll?: boolean
     width?: string,
-    align?: "left" | "right" | "inherit" | "center" | "justify" 
+    align?: "left" | "right" | "inherit" | "center" | "justify",
 }
 
 //Style align center checkbox
@@ -30,6 +31,9 @@ const useStyles = makeStyles(() =>
             borderBottom: 'solid 1px #f5f9fc',
             padding: '8px 15px',
         },
+        editCell: {
+            padding: 5
+        }
     })
 )
 
@@ -54,10 +58,11 @@ const StyledTableCell = withStyles((theme: Theme) => ({
     },
 }))(TableCell);
 
-export const Cell: FC<Props> = (props) => {
+export const Cell = (props) => {
     const { width = 'max-content', children, align } = props
     return (
         <StyledTableCell
+            {...props}
             width={width}
             align={align}>
             {children}
@@ -85,7 +90,7 @@ export const CellCheckBox: FC<Props> = ({ checkAll, check = false, variant = "bo
 
 // IconCell 
 export const CellAction = (props) => {
-    const { children, align="right" } = props
+    const { children, align = "right" } = props
     const classes = useStyles()
 
     return (
@@ -98,3 +103,32 @@ export const CellAction = (props) => {
         </TableCell>
     )
 }
+
+
+export const CellEdit = ({ row, name, onChange, width, align, values }) => {
+    const { isEditMode } = row;
+    const classes = useStyles()
+    return (
+        <TableCell
+            width={width}
+            align={align}
+            className={classes.editCell}
+        >
+            {isEditMode ? (
+
+                <Controls.Input
+                    inputProps={{ style: { fontSize: 12 } }}
+                    InputLabelProps={{ style: { fontSize: 12 } }}
+                    fullWidth
+                    label={name}
+                    value={values}
+                    name={name}
+                    onChange={onChange}
+                />
+
+            ) : (
+                row[name.toLowerCase()]
+            )}
+        </TableCell>
+    );
+};

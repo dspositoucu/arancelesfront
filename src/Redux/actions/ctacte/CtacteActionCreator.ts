@@ -6,10 +6,19 @@ import {
     GetCtacteDetailsAction,
     SelectCtacteAction,
     UpdateCtacteAction,
+    EditModeActionType,
+    RevertirActionType,
+    ActualizarActionType,
     ActionTypes
 } from './CtacteActionTypes';
 
-import { typesModels, ICuentas } from '../../../models';
+import { typesModels } from '../../../models';
+
+export const revertirAction = (): RevertirActionType => {
+    return {
+        type: ActionTypes.REVERTIR,
+    }
+}
 
 export const addAsientoAction = (asiento: typesModels): AddCtacteAction => {
     return {
@@ -47,12 +56,26 @@ export const updateCtacteAction = (idAsiento: number | string, newAsiento: types
     }
 }
 
+export const editModeAction = (idMov: number | string): EditModeActionType => {
+    return {
+        type: ActionTypes.EDIT_MODE,
+        idMov
+    }
+}
+
+export const actualizarAction = (newData:any): ActualizarActionType => {
+    return{
+        type: ActionTypes.ACTUALIZAR,
+        newData
+    }
+}
+
 export const getCtacte = (idCuentaPersona) => {
     return (dispatch: Dispatch) => {
         return new CtacteApi()
             .getCtacte(idCuentaPersona)
             .then(resp => dispatch(getCtacteList(resp.data)))
-            .catch(err=> console.log("ERROR GET CUENTA CORRIENTE ",  err))
+            .catch(err => console.log("ERROR GET CUENTA CORRIENTE ", err))
     }
 }
 

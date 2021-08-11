@@ -37,7 +37,6 @@ export const useForm = (initialFValues, validateOnChange = false) => {
     setValues(initialFValues);
   }
 
-
   return {
     values,
     setValues,
@@ -66,7 +65,7 @@ export const Form = ({ width = '100%', children, title, ...other }) => {
   return (
     <form className={classes.root} autoComplete="off" {...other}>
       <div className={classes.headerForm}>
-        <Typography variant="h4">{title}</Typography>
+        <Typography variant="h6">{title}</Typography>
       </div>
       {children}
     </form>

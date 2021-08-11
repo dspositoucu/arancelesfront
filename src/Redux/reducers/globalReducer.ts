@@ -51,7 +51,7 @@ const globalReducer: Reducer<IGlobalInitialState, GlobalAction> = (state = Initi
 
         case ActionTypes.SELECT_DATA: {
             return {
-                ...state,
+                ...state, 
                 detallesData: action.selectData,
             }
         }

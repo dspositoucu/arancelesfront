@@ -26,7 +26,9 @@ export interface ICtacteInitialState {
     ctacte: [] | any[],
     totalDebe:string | number,
     totalHaber:string | number,
-    total:string | number
+    total:string | number,
+    previous: any | {},
+    configForm: {} | any
 
 }
 

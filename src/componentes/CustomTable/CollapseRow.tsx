@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
+import { TableHead, TableRow } from '@material-ui/core';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import RowHeader from './RowHeader';
+import { Row } from '../Row';
 import { Cell, CellAction } from '../Cell'
 import ButtonIcon from '../Buttons/ButtonIcon';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
@@ -17,9 +17,6 @@ import { Typography } from '@material-ui/core';
 
 //acciones
 import { getCtacte } from '../../Redux/actions/ctacte/CtacteActionCreator';
-
-//models
-import { AppState } from '../../Redux/state/AppState'
 
 //mmodal
 import Modal from '../Modals/Modal'
@@ -33,16 +30,22 @@ const useRowStyles = makeStyles({
 
     collapseTable: {
         overflow: 'hidden',
-        borderRadius: '5px',
-        background: '#FFF',
+        background: '#FFF'
     },
 
-    fondoCollapseTable: {
-        background: '#8cbaff'
+    borderOpen: {
+        borderLeft: 'solid 5px #8cbaff ',
+        background: '#d9e8ff'
+    },
+
+    borderClose: {
+        borderLeft: 'solid 5px transparent ',
     }
+
 });
 
 const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDatos, forms, id }) => {
+
 
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false);
@@ -83,7 +86,7 @@ const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDat
                 closeModal={() => handleOpenModal("form2")}>
                 {Form2}
             </Modal>
-            <TableRow className={classes.root}>
+            <Row className={`${classes.root} ${open ? classes.borderOpen : classes.borderClose}`}>
                 <Cell width={'25'}>
                     <IconButton aria-label="expand row" size="small" onClick={
                         () => {
@@ -93,26 +96,28 @@ const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDat
                     </IconButton>
                 </Cell>
                 {children}
-            </TableRow>
-            <TableRow>
-                <TableCell className={classes.fondoCollapseTable} style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={12}>
+            </Row>
+            <Row className={`${open ? classes.borderOpen : classes.borderClose}`}>
+                <TableCell style={{ padding: 0, borderTop:"none" }} colSpan={12}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         {
                             secondaryTable.length
-                                ? <Box margin={1}>
+                                ? <Box >
                                     <Table className={classes.collapseTable} size="small" aria-label="purchases">
-                                        <RowHeader columns={tableColapseHead}>
-                                            {tableColapseHead.map((col, i) => <Cell key={i} variant={"head"}>{col}</Cell>)}
-                                        </RowHeader>
+                                        <TableHead>
+                                            <TableRow>
+                                                {tableColapseHead.map((col, i) => <Cell key={i} variant={"head"}>{col}</Cell>)}
+                                            </TableRow>
+                                        </TableHead>
                                         <TableBody>
                                             {
 
                                                 secondaryTable && secondaryTable.map((data, j) => {
                                                     return (
-                                                        <TableRow key={j}>
+                                                        <Row key={j}>
                                                             {
                                                                 tableColapseHead.map((key, z) => <Cell key={z}>{data[key.toLowerCase()]} </Cell>)
-                                                                
+
                                                             }
                                                             <CellAction align='right' width='100px' >
                                                                 <ButtonIcon
@@ -129,7 +134,7 @@ const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDat
                                                                     onClick={() => handleOpenModal("form2")}
                                                                 />
                                                             </CellAction>
-                                                        </TableRow>)
+                                                        </Row>)
                                                 })
                                             }
                                         </TableBody>
@@ -139,7 +144,7 @@ const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDat
                         }
                     </Collapse>
                 </TableCell>
-            </TableRow>
+            </Row>
         </>
     );
 }

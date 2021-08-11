@@ -12,8 +12,25 @@ export enum ActionTypes {
 
   UPDATE_CTACTE = 'UPDATE_CTACTE',
 
+  EDIT_MODE = "EDIT_MODE",
+
+  REVERTIR = "REVERTIR",
+
+  ACTUALIZAR = "ACTUALIZAR"
+
+}
+export interface ActualizarActionType {
+  type: ActionTypes.ACTUALIZAR
+  newData: any,
 }
 
+export interface RevertirActionType {
+  type: ActionTypes.REVERTIR
+}
+export interface EditModeActionType {
+  type: ActionTypes.EDIT_MODE,
+  idMov : number|string
+}
 export interface AddCtacteAction {
   type: ActionTypes.ADD_CTACTE,
   asiento:typesModels
@@ -41,8 +58,11 @@ export interface UpdateCtacteAction {
 }
 
 export type CtacteActions =
-AddCtacteAction  
+AddCtacteAction
+  |ActualizarActionType  
   |GetCtacteListAction
   |GetCtacteDetailsAction
+  |EditModeActionType
   |SelectCtacteAction
   |UpdateCtacteAction
+  |RevertirActionType

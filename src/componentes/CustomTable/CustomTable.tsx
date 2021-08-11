@@ -39,7 +39,7 @@ import { Cell, CellAction } from '../Cell'
 import CollapseRow from './CollapseRow'
 
 interface Props {
-    modalTable?:ReactNode,
+    modalTable?: ReactNode,
     tableData: any[]
     columns: any[],
     actionsInRow?: string[],
@@ -175,7 +175,7 @@ const CustomTable: FC<Props> = ({
                                 }
                                 <CellAction align='right' width='100px'>
                                     {
-                                        actionInRow.map((accion,index) => <ButtonIcon key={index} endIcon={accion} data={data} />)
+                                        actionInRow.map((accion, index) => <ButtonIcon key={index} endIcon={accion} data={data} />)
                                     }
                                 </CellAction>
                             </Row>
@@ -199,7 +199,7 @@ const CustomTable: FC<Props> = ({
                                 }
                                 <CellAction align='right' width='100px'>
                                     {
-                                        actionInRow.map((accion,index) => <ButtonIcon key={index} endIcon={accion} data={data} />)
+                                        actionInRow.map((accion, index) => <ButtonIcon key={index} endIcon={accion} data={data} />)
                                     }
                                 </CellAction>
                             </CollapseRow>
