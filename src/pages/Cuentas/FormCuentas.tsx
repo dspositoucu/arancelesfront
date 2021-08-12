@@ -34,7 +34,7 @@ const FormCuentas = ({ width = "max-content" }) => {
         setValues,
         handleChangeForm,
         resetForm,
-    } = useForm(initialFValues, true);
+    } = useForm(initialFValues);
 
     const { formSubmit } = useSubmit(addCuentas, values)
 

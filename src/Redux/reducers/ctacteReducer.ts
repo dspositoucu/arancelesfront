@@ -14,6 +14,14 @@ const InitialState: ICtacteInitialState = {
 const ctacteReducer: Reducer<ICtacteInitialState, CtacteActions> = (state = InitialState, action: CtacteActions) => {
 
     switch (action.type) {
+        case ActionTypes.RESET_CONFIG : {
+            return {
+                ...state,
+                configForm:{},
+                ctacte:[]
+            }
+        }
+
         case ActionTypes.GET_ALL_CTACTE: {
             return {
                 ...state,

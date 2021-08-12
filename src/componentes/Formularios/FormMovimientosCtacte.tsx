@@ -15,50 +15,55 @@ import useSubmit from '../../hooks/useSubmit';
 
 const FromMovimientosCtacte = () => {
 
-    const initialFValues = {
-        codigo: '',
-        codfac: '',
-        codcar: '',
+
+
+    const { configForm } = useSelector((state: AppState) => state.CtacteState)
+    const initialValue = {
         concepto: '',
         debe: '',
         haber: '',
-        fechamov: ''
+        fechamov: '',
+        codigo: '',
+        codfac: '',
+        codcar: '',
     }
-    const { configForm } = useSelector((state: AppState) => state.CtacteState)
-    const [ initialValue, setInitialValue ] = useState(initialFValues)
-
-    console.log("",configForm)
-
-    useEffect(()=>{
-        setInitialValue({
-            ...initialValue,
-            codigo:configForm.codigo,
-            codfac:configForm.codfac,
-            codcar:configForm.codcar
-        })
-    },[configForm.id])
-
     const {
         values,
+        setValues,
         handleChangeForm,
         resetForm,
-    } = useForm(initialValue, true);
+    } = useForm({
+        ...initialValue, 
+        codigo: configForm.codigo,
+        codfac: configForm.codfac,
+        codcar: configForm.codcar
+    });
 
-    console.log("DATOS FORM ", values)
+
+  useEffect(() => {
+        setValues({
+            ...values,
+            codigo: configForm.codigo,
+            codfac: configForm.codfac,
+            codcar: configForm.codcar
+        })
+    }, [configForm.id]) 
+
 
     return (
         <Form
             title="Agregar Movimientos de Cta.Cte. de Personas"
             ButtonSubmit="Agregar Mov Cta.cte."
             onSubmit={() => { }}>
-            <Grid container spacing={1}>
+            <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <Divider orientation="horizontal" light={true} />
                 </Grid>
-
                 <Grid container item xs={12} spacing={1}>
                     <Grid item xs={1}>
                         <Controls.Input
+                            inputProps={{ style: { fontSize: 12 } }}
+                            InputLabelProps={{ style: { fontSize: 12 } }}
                             name="codigo"
                             label="Codigo"
                             value={values.codigo}
@@ -66,6 +71,8 @@ const FromMovimientosCtacte = () => {
                     </Grid>
                     <Grid item xs={1}>
                         <Controls.Input
+                            inputProps={{ style: { fontSize: 12 } }}
+                            InputLabelProps={{ style: { fontSize: 12 } }}
                             label="CodCar"
                             name="codcar"
                             value={values.codcar}
@@ -74,6 +81,8 @@ const FromMovimientosCtacte = () => {
                     </Grid>
                     <Grid item xs={1}>
                         <Controls.Input
+                            inputProps={{ style: { fontSize: 12 } }}
+                            InputLabelProps={{ style: { fontSize: 12 } }}
                             name="codfac"
                             label="CodFac"
                             value={values.codfac}
@@ -81,10 +90,12 @@ const FromMovimientosCtacte = () => {
                     </Grid>
                     <Grid item xs={3}>
                         <Controls.Input
+                            inputProps={{ style: { fontSize: 12 } }}
                             name="fecmov"
                             type="date"
                             InputLabelProps={{
                                 shrink: false,
+                                style: { fontSize: 12 }
                             }}
                             value={values.fecmov}
                             onChange={handleChangeForm}
@@ -92,6 +103,8 @@ const FromMovimientosCtacte = () => {
                     </Grid>
                     <Grid item xs={4}>
                         <Controls.Input
+                            inputProps={{ style: { fontSize: 12 } }}
+                            InputLabelProps={{ style: { fontSize: 12 } }}
                             label="Concepto"
                             name="concepto"
                             value={values.concepto}
@@ -100,6 +113,8 @@ const FromMovimientosCtacte = () => {
                     </Grid>
                     <Grid item xs={1} >
                         <Controls.Input
+                            inputProps={{ style: { fontSize: 12 } }}
+                            InputLabelProps={{ style: { fontSize: 12 } }}
                             label="Debe"
                             name="debe"
                             value={values.debe}
@@ -108,6 +123,8 @@ const FromMovimientosCtacte = () => {
                     </Grid>
                     <Grid item xs={1} >
                         <Controls.Input
+                            inputProps={{ style: { fontSize: 12 } }}
+                            InputLabelProps={{ style: { fontSize: 12 } }}
                             label="Haber"
                             name="haber"
                             value={values.haber}

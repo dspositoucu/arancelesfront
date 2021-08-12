@@ -33,7 +33,7 @@ const FormPersonas = () => {
         setValues,
         handleChangeForm,
         resetForm,
-    } = useForm(initialFValues, true);
+    } = useForm(initialFValues);
 
     const { formSubmit } = useSubmit(addPersona, values)
 

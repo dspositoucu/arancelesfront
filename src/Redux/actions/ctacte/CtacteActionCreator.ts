@@ -9,6 +9,7 @@ import {
     EditModeActionType,
     RevertirActionType,
     ActualizarActionType,
+    ResetConfigActionType,
     ActionTypes
 } from './CtacteActionTypes';
 
@@ -17,6 +18,12 @@ import { typesModels } from '../../../models';
 export const revertirAction = (): RevertirActionType => {
     return {
         type: ActionTypes.REVERTIR,
+    }
+}
+
+export const resetConfigAction = (): ResetConfigActionType =>{
+    return {
+        type: ActionTypes.RESET_CONFIG
     }
 }
 

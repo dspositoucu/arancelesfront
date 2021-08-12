@@ -45,7 +45,7 @@ const ReciboGeneral = () => {
         setValues,
         handleChangeForm,
         resetForm,
-    } = useForm(initialFValues, true);
+    } = useForm(initialFValues);
 
     const {
         descripciones,

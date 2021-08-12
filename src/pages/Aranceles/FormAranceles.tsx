@@ -27,7 +27,7 @@ const FormAranceles = ({ selectList }) => {
         setValues,
         handleChangeForm,
         resetForm,
-    } = useForm(initialFValues,true);
+    } = useForm(initialFValues);
     
     
     console.log("valores formulario ",values)

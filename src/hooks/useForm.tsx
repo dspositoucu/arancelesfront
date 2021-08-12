@@ -8,7 +8,7 @@ import { selectDataAction } from '../Redux/actions/globalActions/ActionCreatorGl
 //model
 import { AppState } from '../Redux/state/AppState';
 
-export const useForm = (initialFValues, validateOnChange = false) => {
+export const useForm = (initialFValues) => {
   
   const [values, setValues] = useState(initialFValues);
 
@@ -31,7 +31,7 @@ export const useForm = (initialFValues, validateOnChange = false) => {
 
   useEffect(()=>{
     if(Object.entries(detallesData).length) cargarDatosEdit()
-  },[])
+  },[Object.values(initialFValues)[0]])
 
   const resetForm = () => {
     setValues(initialFValues);

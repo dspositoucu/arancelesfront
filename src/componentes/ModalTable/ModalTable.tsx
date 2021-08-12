@@ -67,9 +67,6 @@ const ModalTable = ({ columns }) => {
     return (
         <Grid container className={classes.container}>
             <Grid item xs={12}>
-                <h2>
-                    titulo
-                </h2>
             </Grid>
             <Grid item xs={12} className={classes.tableContainer}>
                 <Table className={classes.table} size="small" aria-label="a dense table">
@@ -79,6 +76,7 @@ const ModalTable = ({ columns }) => {
                                 columns.length && columns.map((col, i) =>
 
                                     <Cell
+                                        align={col.align}
                                         variant="head"
                                         width={col.width}
                                         key={i}>{col.title}

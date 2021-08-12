@@ -7,7 +7,7 @@ export enum ActionTypes {
   GET_ALL_CTACTE = 'GET_ALL_CTACTE',
 
   GET_CTACTE_DETAIL = 'GET_CTACTE_DETAIL',
-  
+
   SELECT_CUENTA = 'SELECT_CUENTA',
 
   UPDATE_CTACTE = 'UPDATE_CTACTE',
@@ -16,9 +16,16 @@ export enum ActionTypes {
 
   REVERTIR = "REVERTIR",
 
-  ACTUALIZAR = "ACTUALIZAR"
+  ACTUALIZAR = "ACTUALIZAR",
+
+  RESET_CONFIG = "RESET_CONFIG"
 
 }
+
+export interface ResetConfigActionType {
+  type: ActionTypes.RESET_CONFIG
+}
+
 export interface ActualizarActionType {
   type: ActionTypes.ACTUALIZAR
   newData: any,
@@ -29,16 +36,16 @@ export interface RevertirActionType {
 }
 export interface EditModeActionType {
   type: ActionTypes.EDIT_MODE,
-  idMov : number|string
+  idMov: number | string
 }
 export interface AddCtacteAction {
   type: ActionTypes.ADD_CTACTE,
-  asiento:typesModels
+  asiento: typesModels
 }
 
 export interface GetCtacteListAction {
   type: ActionTypes.GET_ALL_CTACTE,
-  listCtacte:typesModels[]
+  listCtacte: typesModels[]
 }
 
 export interface GetCtacteDetailsAction {
@@ -53,16 +60,17 @@ export interface SelectCtacteAction {
 
 export interface UpdateCtacteAction {
   type: ActionTypes.UPDATE_CTACTE,
-  idAsiento: number|string, 
-  newAsiento:typesModels
+  idAsiento: number | string,
+  newAsiento: typesModels
 }
 
 export type CtacteActions =
-AddCtacteAction
-  |ActualizarActionType  
-  |GetCtacteListAction
-  |GetCtacteDetailsAction
-  |EditModeActionType
-  |SelectCtacteAction
-  |UpdateCtacteAction
-  |RevertirActionType
+  AddCtacteAction
+  | ResetConfigActionType
+  | ActualizarActionType
+  | GetCtacteListAction
+  | GetCtacteDetailsAction
+  | EditModeActionType
+  | SelectCtacteAction
+  | UpdateCtacteAction
+  | RevertirActionType

@@ -31,7 +31,7 @@ const FormBarrida = () => {
     setValues,
     handleChangeForm,
     resetForm,
-  } = useForm(initialFValues, true);
+  } = useForm(initialFValues);
 
 
   return (
