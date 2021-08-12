@@ -24,19 +24,19 @@ const Icons: FC<Props> = (props) => {
 
     const objIcon: ReactNode = {
         null: <></>,
-        recibo: <ReceiptIcon />,
-        quitar: <HighlightOffIcon />,
-        imprimir: <PrintIcon />,
-        borrar: <DeleteIcon />,
-        nuevo: <PersonAddIcon />,
-        filter: <FilterListIcon />,
-        close: <CloseIcon />,
-        user: <AccountCircleIcon />,
-        logout: <PowerSettingsNewIcon />,
-        editar: <EditIcon />,
-        agregar: <AddIcon />,
-        ctacte: <AccountBalanceWalletIcon />,
-        cerrar: <HighlightOffIcon />
+        recibo: <ReceiptIcon fontSize="small" />,
+        quitar: <HighlightOffIcon fontSize="small" />,
+        imprimir: <PrintIcon fontSize="small" />,
+        borrar: <DeleteIcon fontSize="small" />,
+        nuevo: <PersonAddIcon fontSize="small" />,
+        filter: <FilterListIcon fontSize="small" />,
+        close: <CloseIcon fontSize="small" />,
+        user: <AccountCircleIcon fontSize="small" />,
+        logout: <PowerSettingsNewIcon fontSize="small" />,
+        editar: <EditIcon fontSize="small" />,
+        agregar: <AddIcon fontSize="small" />,
+        ctacte: <AccountBalanceWalletIcon fontSize="small" />,
+        cerrar: <HighlightOffIcon fontSize="small" />
     }
 
     return <> {objIcon[type as keyof Object]} </>

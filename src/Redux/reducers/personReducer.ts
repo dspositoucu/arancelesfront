@@ -8,11 +8,20 @@ const InitialState: IPersonInitialState = {
     selectListPerson: [],
     personDetails: {},
     allSelect: false,
+    cuentasByPersona:{}
 }
 
 const personReducer: Reducer<IPersonInitialState, PersonActions> = (state = InitialState, action: PersonActions) => {
 
     switch (action.type) {
+        case ActionTypes.CUENTAS_BY_PERSONA:{
+            const copy = {...state.cuentasByPersona}
+            return {
+                ...state,
+                cuentasByPersonas: {...copy, ...action.cuentasByPersona}
+            }
+        }
+
         case ActionTypes.ADD_PERSON: {
             let newArray = [action.person, ...state.listPerson]
             return {

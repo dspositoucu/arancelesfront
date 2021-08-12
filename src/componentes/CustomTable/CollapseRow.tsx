@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import { TableHead, TableRow } from '@material-ui/core';
@@ -10,13 +10,17 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import { Row } from '../Row';
 import { Cell, CellAction } from '../Cell'
-import ButtonIcon from '../Buttons/ButtonIcon';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { Typography } from '@material-ui/core';
+import Icon from '../Icons/Icono';
+
+import { AppState } from '../../Redux/state/AppState'; 
+import Loading from '../Loading/Loading';
 
 //acciones
 import { getCtacte } from '../../Redux/actions/ctacte/CtacteActionCreator';
+import { getCuentasByPersona } from '../../Redux/actions/personas/ActionCreator';
 
 //mmodal
 import Modal from '../Modals/Modal'
@@ -44,7 +48,7 @@ const useRowStyles = makeStyles({
 
 });
 
-const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDatos, forms, id }) => {
+const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDatos, forms, id, data }) => {
 
 
     const dispatch = useDispatch()
@@ -54,15 +58,15 @@ const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDat
         form1: false,
         form2: false
     })
-
     const [Form1, Form2] = forms
+    const { cuentasByPersona } = useSelector((state:AppState)=> state.PersonState) 
+
     const cargarTabla = async () => {
         setSecondaryTable([])
         setSecondaryTable(await cargarDatos(id))
     }
-    useEffect(() => {
-        cargarTabla()
-    }, [id])
+
+    
 
     const handleOpenModal = (form) => {
         // console.log("Event",event.target)
@@ -90,7 +94,8 @@ const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDat
                 <Cell width={'25'}>
                     <IconButton aria-label="expand row" size="small" onClick={
                         () => {
-                            setOpen(!open)
+                            setOpen(!open);
+                            cargarTabla()
                         }}>
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
@@ -98,7 +103,7 @@ const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDat
                 {children}
             </Row>
             <Row className={`${open ? classes.borderOpen : classes.borderClose}`}>
-                <TableCell style={{ padding: 0, borderTop:"none" }} colSpan={12}>
+                <TableCell style={{ padding: 0, borderTop: "none" }} colSpan={12}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         {
                             secondaryTable.length
@@ -120,19 +125,16 @@ const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDat
 
                                                             }
                                                             <CellAction align='right' width='100px' >
-                                                                <ButtonIcon
-                                                                    endIcon="ctacte"
-                                                                    hover={false}
+                                                                <IconButton
                                                                     onClick={() => {
                                                                         handleOpenModal("form1");
                                                                         dispatch(getCtacte(data["idcuentapersona"]))
-                                                                    }}
-                                                                />
-                                                                <ButtonIcon
-                                                                    endIcon="recibo"
-                                                                    hover={false}
-                                                                    onClick={() => handleOpenModal("form2")}
-                                                                />
+                                                                    }}>
+                                                                    <Icon.Ctacte fontSize="small" color="primary" />
+                                                                </IconButton>
+                                                                <IconButton onClick={() => handleOpenModal("form2")}>
+                                                                    <Icon.Recibo fontSize="small" color="primary" />
+                                                                </IconButton>
                                                             </CellAction>
                                                         </Row>)
                                                 })

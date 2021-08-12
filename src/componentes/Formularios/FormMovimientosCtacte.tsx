@@ -12,20 +12,13 @@ import Controls from '../Forms/Controls'
 import { useForm, Form } from '../../hooks/useForm'
 import useSubmit from '../../hooks/useSubmit';
 
-
 const FromMovimientosCtacte = () => {
-
-
-
     const { configForm } = useSelector((state: AppState) => state.CtacteState)
     const initialValue = {
         concepto: '',
         debe: '',
         haber: '',
         fechamov: '',
-        codigo: '',
-        codfac: '',
-        codcar: '',
     }
     const {
         values,
@@ -60,35 +53,7 @@ const FromMovimientosCtacte = () => {
                     <Divider orientation="horizontal" light={true} />
                 </Grid>
                 <Grid container item xs={12} spacing={1}>
-                    <Grid item xs={1}>
-                        <Controls.Input
-                            inputProps={{ style: { fontSize: 12 } }}
-                            InputLabelProps={{ style: { fontSize: 12 } }}
-                            name="codigo"
-                            label="Codigo"
-                            value={values.codigo}
-                            onChange={handleChangeForm} />
-                    </Grid>
-                    <Grid item xs={1}>
-                        <Controls.Input
-                            inputProps={{ style: { fontSize: 12 } }}
-                            InputLabelProps={{ style: { fontSize: 12 } }}
-                            label="CodCar"
-                            name="codcar"
-                            value={values.codcar}
-                            onChange={handleChangeForm}
-                        />
-                    </Grid>
-                    <Grid item xs={1}>
-                        <Controls.Input
-                            inputProps={{ style: { fontSize: 12 } }}
-                            InputLabelProps={{ style: { fontSize: 12 } }}
-                            name="codfac"
-                            label="CodFac"
-                            value={values.codfac}
-                            onChange={handleChangeForm} />
-                    </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={2}>
                         <Controls.Input
                             inputProps={{ style: { fontSize: 12 } }}
                             name="fecmov"
@@ -111,7 +76,7 @@ const FromMovimientosCtacte = () => {
                             onChange={handleChangeForm}
                         />
                     </Grid>
-                    <Grid item xs={1} >
+                    <Grid item xs={2} >
                         <Controls.Input
                             inputProps={{ style: { fontSize: 12 } }}
                             InputLabelProps={{ style: { fontSize: 12 } }}
@@ -121,7 +86,7 @@ const FromMovimientosCtacte = () => {
                             onChange={handleChangeForm}
                         />
                     </Grid>
-                    <Grid item xs={1} >
+                    <Grid item xs={2} >
                         <Controls.Input
                             inputProps={{ style: { fontSize: 12 } }}
                             InputLabelProps={{ style: { fontSize: 12 } }}

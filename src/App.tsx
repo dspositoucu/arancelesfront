@@ -82,7 +82,11 @@ function App() {
     spacing: sm ? 2.5 : md ? 3 : lg ? 4 : 8,
     typography:{
       fontSize: sm ? 12 : md ? 13 : lg ? 14 : 14,
-      
+    },
+    palette:{
+      primary:{
+        main:"#395596"
+      },
     }
   })
 

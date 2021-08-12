@@ -1,10 +1,9 @@
 import React, { FC } from 'react'
+interface Props { 
+    text:string,
+}
 
-
-interface Props { }
-
-
-const Alert: FC<Props> = (props) => {
+const Alert: FC<Props> = ({text}) => {
     return (
         <div>
             

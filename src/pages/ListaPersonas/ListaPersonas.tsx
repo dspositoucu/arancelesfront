@@ -30,9 +30,9 @@ const ListaPersonas = () => {
   const dispatch = useDispatch()
   const { listPerson } = useSelector((state: AppState) => state.PersonState)
   const { loading } = useSelector((state: AppState) => state.GlobalState)
-  const { dataTableSecondary } = useGetDataTable(new PersonaApi().getCuentasByPersonaId(2))
+/*   const { dataTableSecondary } = useGetDataTable(new PersonaApi().getCuentasByPersonaId(2))
 
-  console.log(" Tabla secundaria ", dataTableSecondary)
+  console.log(" Tabla secundaria ", dataTableSecondary) */
 
   const cargarDatos = () => {
     //if (ListaFalsa.length <= 0) {
@@ -52,13 +52,11 @@ const ListaPersonas = () => {
 
   const modalTableColumns = [
     { title: " ", width: 25 },
-    { title: "Codigo", width: 'max-content' },
-    { title: "CodCar", width: 'max-content' },
-    { title: "CodFac", width: 'max-content' },
     { title: "FecMov", width: 'max-content' },
     { title: "Concepto", width: '30%' },
-    { title: "Debe", width: 'max-content', align: 'right' },
-    { title: "Haber", width: 'max-content', align: 'right' },
+    { title: "Debe", width: '15%', align: 'right' },
+    { title: "Haber", width: '15%', align: 'right' },
+    { title: "Saldo", width: '15%', align: 'right' }
   ]
 
   useEffect(() => {

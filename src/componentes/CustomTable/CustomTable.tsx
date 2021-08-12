@@ -1,7 +1,8 @@
 import { FC, useState, ReactNode } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux'
-
+import Icon from '../Icons/Icono';
+import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -182,6 +183,7 @@ const CustomTable: FC<Props> = ({
                             : <CollapseRow
                                 cargarDatos={async (id) => await getDataTableSecondary(id)}
                                 id={data.id}
+                                data={data}
                                 forms={secondaryForms}
                                 key={i}
                                 tableColapseName={"Cuentas"}

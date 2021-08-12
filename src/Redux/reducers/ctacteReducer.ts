@@ -6,7 +6,7 @@ const InitialState: ICtacteInitialState = {
     ctacte: [],
     totalDebe: "",
     totalHaber: "",
-    total: "",
+    saldoTotal: "",
     previous: {},
     configForm: {}
 }
@@ -14,22 +14,31 @@ const InitialState: ICtacteInitialState = {
 const ctacteReducer: Reducer<ICtacteInitialState, CtacteActions> = (state = InitialState, action: CtacteActions) => {
 
     switch (action.type) {
-        case ActionTypes.RESET_CONFIG : {
+        case ActionTypes.RESET_CONFIG: {
             return {
                 ...state,
-                configForm:{},
-                ctacte:[]
+                configForm: {},
+                ctacte: []
             }
         }
 
         case ActionTypes.GET_ALL_CTACTE: {
+            let saldomov = 0
+            let saldoTotal = action.listCtacte.reduce((acc, curr) => { return acc + (curr["debe"] - curr["haber"]) }, 0).toFixed(1)
+            let totalDebe = action.listCtacte.reduce((acc, curr) => { return acc + curr["debe"] }, 0).toFixed(1)
+            let totalHaber = action.listCtacte.reduce((acc, curr) => { return acc + curr["haber"] }, 0).toFixed(1)
+
+            let ctacte = action.listCtacte.map(mov => {
+                saldomov = saldomov + mov['debe'] - mov['haber']
+                return { ...mov, saldo: saldomov.toFixed(1) }})
+
             return {
                 ...state,
                 configForm: action.listCtacte[0],
-                ctacte: action.listCtacte,
-                total: action.listCtacte.reduce((acc, curr) => { return acc + (curr["debe"] - curr["haber"]) }, 0),
-                totalDebe: action.listCtacte.reduce((acc, curr) => { return acc + curr["debe"] }, 0),
-                totalHaber: action.listCtacte.reduce((acc, curr) => { return acc + curr["haber"] }, 0)
+                ctacte: [...ctacte,{concepto:"<<<<TOTALES>>>>", debe:totalDebe, haber:totalHaber, saldo:saldoTotal}],
+                saldoTotal,
+                totalDebe,
+                totalHaber
             }
         }
 

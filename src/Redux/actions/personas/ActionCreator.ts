@@ -8,6 +8,7 @@ import {
     SelectAllPersonAction,
     DeletePeronAction,
     UpdatePersonAction,
+    CuentasByPersona,
     ActionTypes
 } from './ActionTypes';
 
@@ -65,6 +66,14 @@ export const updatePerson = (idPersona: number | string, newPersona: typesModels
     }
 }
 
+const getCuentasByIdPersonaAction = (cuentasByPersona:any):CuentasByPersona => {
+    return {
+        type: ActionTypes.CUENTAS_BY_PERSONA,
+        cuentasByPersona
+    }
+}
+
+
 // cargar lista de personas falsas 
 export const cargarListaPersonasFalsas = (persona) => {
     return getPersonList(persona)
@@ -92,11 +101,21 @@ export const addPersona = (persona: IPersona) => {
     }
 }
 
-export const getCuentasByPersona = (personaId) => {
-    return new PersonaApi()
-        .getCuentasByPersonaId(personaId)
-        .then(resp => resp.data)
-        .catch(err => console.log(err))
+export const getCuentasByPersona = (personaId,data:any) => {
+    return (dispatch: Dispatch) => {
+        dispatch(setLoading())
+        return new PersonaApi()
+            .getCuentasByPersonaId(personaId)
+            .then(resp => {
+                dispatch(setLoading());
+                dispatch(getCuentasByIdPersonaAction(
+                    {[personaId]:{cuentas:resp.data,...data}}
+                )) 
+                    console.log("QUE SERA ",{[personaId]:{cuentas:resp.data,...data}})
+                })
+            
+            .catch(err => console.log(err))
+    }
 }
 
 export const getAllGeneros = () => {

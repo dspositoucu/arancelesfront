@@ -16,7 +16,8 @@ interface Props {
     hover?: boolean,
     onClick?: (e?: any) => void,
     typeButton?: string
-    data?: any
+    data?: any,
+    centerIcon?:string
 }
 
 const useStyles = makeStyles(() =>
@@ -26,7 +27,9 @@ const useStyles = makeStyles(() =>
             boxShadow: "none",
             color: "#6E6893",
             textTransform: 'capitalize',
-            minWidth: 'max-content'
+            minWidth: 'max-content',
+            paddingLeft: 8,
+            paddingRight: 8,
         },
         hover: {
             '&:hover': {
@@ -35,7 +38,7 @@ const useStyles = makeStyles(() =>
         },
     }))
 
-const ButtonIcon: FC<Props> = ({ startIcon = "null", endIcon = "null", label, typeButton = "default", hover = false, data, onClick }) => {
+const ButtonIcon: FC<Props> = ({ centerIcon='null' , startIcon = "null", endIcon = "null", label, typeButton = "default", hover = false, data, onClick }) => {
     const dispatch = useDispatch()
 
     const acciones = {
@@ -55,7 +58,7 @@ const ButtonIcon: FC<Props> = ({ startIcon = "null", endIcon = "null", label, ty
             endIcon={<Icons type={endIcon} />}
             startIcon={<Icons type={startIcon} />}
         >
-            {label && `${label[0].toUpperCase() + label.slice(1)}`}
+            {label ? `${label[0].toUpperCase() + label.slice(1)}`:<Icons type={centerIcon}/>}
         </Button>
     )
 }

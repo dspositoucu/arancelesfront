@@ -47,7 +47,7 @@ const FormAranceles = ({ selectList }) => {
                             promSelectList={getCuentasListSelect()}
                             valueautocomplete={values.idcuenta}
                             filtro={"descripcion"}
-                            onChange={(event, value) => handleChangeForm({ target: { value: value.id, name: 'idcuenta' }})}
+                            onChange={(event, value) => handleChangeForm({ target: { value: !value ? 0 : value.id, name: 'idcuenta' } })}
                         />
                     </Grid>
 

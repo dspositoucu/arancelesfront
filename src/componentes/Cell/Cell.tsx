@@ -65,7 +65,7 @@ export const Cell = (props) => {
             {...props}
             width={width}
             align={align}>
-            {children}
+            <Typography variant="body2" >{children}</Typography>
         </StyledTableCell>
     )
 }
@@ -99,7 +99,7 @@ export const CellAction = (props) => {
             width='100px'
             className={classes.body}
         >
-            {children}
+            <Typography variant="body2">{children}</Typography>
         </TableCell>
     )
 }

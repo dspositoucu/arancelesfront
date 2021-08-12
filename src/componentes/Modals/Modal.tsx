@@ -1,6 +1,6 @@
 import React, { FC, useState, ReactNode } from 'react';
 import ReactDom from 'react-dom';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 interface Prop {
@@ -14,7 +14,7 @@ interface Prop {
 const modalRoot = document.getElementById('modal')
 
 const Modal: FC<Prop> = ({ active, closeModal, children, width = '80vw', height = 'max-content' }) => {
-    const useStyles = makeStyles(() =>
+    const useStyles = makeStyles((theme:Theme) =>
         createStyles({
             fondo: {
                 display: "flex",
@@ -40,14 +40,17 @@ const Modal: FC<Prop> = ({ active, closeModal, children, width = '80vw', height 
                 position: 'relative',
                 width: width,
                 height: height,
-                borderRadius: 15,
-                padding: 30,
+                borderRadius: 14,
+                padding: theme.spacing(2,3),
                 background: '#FFF',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexDirection: 'column',
                 zIndex: 2,
+                [theme.breakpoints.down("md")]:{
+                    height:'95vh'
+                }
             },
             cerrar: {
                 position: 'absolute',

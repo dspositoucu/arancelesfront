@@ -16,6 +16,7 @@ export interface IPersonInitialState {
     selectListPerson: [] | IPersona[] | any[]
     personDetails: {} | IPersona
     allSelect: boolean,
+    cuentasByPersona:any|{}
 }
 
 export interface ICajaInitialState {
@@ -26,7 +27,7 @@ export interface ICtacteInitialState {
     ctacte: [] | any[],
     totalDebe:string | number,
     totalHaber:string | number,
-    total:string | number,
+    saldoTotal:string | number,
     previous: any | {},
     configForm: {} | any
 
