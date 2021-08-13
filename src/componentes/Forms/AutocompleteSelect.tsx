@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         selectProps: {
             height: '100px'
+        },
+        marginNone: {
+            margin: 'none'
         }
     }));
 
@@ -35,12 +38,19 @@ const AutocompleteSelect = (props) => {
                 }}
                 onChange={onChange}
                 defaultValue={opt[valueautocomplete]}
+                inputVariant="outlined"
                 disablePortal
                 placeholder={label}
                 id="combo-box-demo"
                 options={opt}
                 getOptionLabel={(option: any) => option[filtro]}
-                renderInput={(params) => <Input placeholder={label} {...params} />}
+                renderInput={(params) => (
+                    <Input
+                        {...params}
+                        className={classes.marginNone}
+                        size="small"
+                        placeholder={label} />
+                )}
             />
         </>
     )

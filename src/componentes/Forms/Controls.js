@@ -4,6 +4,7 @@ import Select from "./Select";
 import Checkbox from "./Checkbox";
 import Button from "./Button";
 import AutocompleteSelect from "./AutocompleteSelect";
+import DateField from './DateField'
 
 const Controls = {
     Button,
@@ -11,7 +12,9 @@ const Controls = {
     Select,
     Checkbox,
     Input,
-    AutocompleteSelect
+    AutocompleteSelect,
+    DateField
+
 }
 
 export default Controls;
