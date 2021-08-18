@@ -34,13 +34,13 @@ const Barridas = () => {
     { title: "Descripcion" },
     { title: "Barrida" },
     { title: "Grupo" },
-    { title: "Generado" },
-    { title: "Enviado" },
-    { title: "Recibido" },
-    { title: "Entregado" },
-    { title: "FBarrida" },
-    { title: "Acreditacion" },
-    { title: "Recibos" }
+    { title: "Generado",},
+    { title: "Enviado", type: 'boolean' },
+    { title: "Recibido"  },
+    { title: "Entregado", name:"fechaentrega"},
+    { title: "FBarrida", name:"fechabarrida"},
+    { title: "Acreditacion", name:"fechaacreditacion"},
+    { title: "Recibos", name: "fecharecibos"}
   ]
 
   // El componente Table recibe dos props 

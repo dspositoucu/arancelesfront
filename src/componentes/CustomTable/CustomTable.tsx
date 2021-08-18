@@ -2,7 +2,6 @@ import { FC, useState, ReactNode } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux'
 import Icon from '../Icons/Icono';
-import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -13,6 +12,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import ButtonIcon from '../Buttons/ButtonIcon';
 
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from "@material-ui/core/IconButton";
+import DoneIcon from '@material-ui/icons/Done'
 //modals 
 import Modal from '../Modals/Modal'
 
@@ -96,6 +98,11 @@ const CustomTable: FC<Props> = ({
     const dispatch = useDispatch()
     const classes = useStyles();
 
+
+    const selectIconBoolean = (value) => {
+        return value ? <DoneIcon /> : <CloseIcon />
+    }
+
     //  estados de modales 
     const { modalRegister, modalEdit } = useSelector((state: AppState) => state.ModalState)
 
@@ -169,7 +176,11 @@ const CustomTable: FC<Props> = ({
                                     columns.map((key, i) => {
                                         return (
                                             <Cell width={key.width} key={i}>
-                                                {data[key.title.toLowerCase()]}
+                                                {
+                                                    key.type === "boolean"
+                                                        ? selectIconBoolean(data[key.title.toLowerCase()])
+                                                        : key.name ? data[key.name.toLowerCase()] : data[key.title.toLowerCase()]
+                                                }
                                             </Cell>
                                         )
                                     })

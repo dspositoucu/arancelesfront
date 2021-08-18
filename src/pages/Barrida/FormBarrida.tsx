@@ -15,7 +15,7 @@ import { useForm, Form } from '../../hooks/useForm'
 import useSubmit from '../../hooks/useSubmit';
 
 //Actions
-import { addPersona } from '../../Redux/actions/personas/ActionCreator';
+import { addBarrida } from '../../Redux/actions/barridas/BarridasActionCreator';
 import { getListaGruposBarrida } from '../../Redux/actions/barridas/BarridasActionCreator';
 
 const initialFValues = {
@@ -23,13 +23,14 @@ const initialFValues = {
   generado: '',
   enviado: '',
   recibido: '',
-  barrida: '',
+  nrobarrida: '',
   idgrupobarrida: '',
-  fbarrida: '',
-  recibos: '',
-  acreditacion: '',
-  entregado: ''
+  fechabarrida: '',
+  fecharecibos: '',
+  fechaacreditacion: '',
+  fechaentrega: ''
 }
+
 
 const FormBarrida = () => {
   const {
@@ -40,11 +41,15 @@ const FormBarrida = () => {
   } = useForm(initialFValues);
 
 
+  console.log("Valor de formulario", values)
+
+  const { formSubmit } = useSubmit(addBarrida, values)
+
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <Form
         title="Generar Barrida"
-        onSubmit={() => { }}>
+        onSubmit={formSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Divider orientation="horizontal" light={true} />
@@ -68,7 +73,7 @@ const FormBarrida = () => {
           </Grid>
 
           <Grid container item xs={12}>
-            <Controls.Input
+            <Controls.Checkbox
               label="Enviado"
               name="enviado"
               value={values.enviado}
@@ -88,8 +93,8 @@ const FormBarrida = () => {
           <Grid container item xs={12}>
             <Controls.Input
               label="Barrida"
-              name="barrida"
-              value={values.barrida}
+              name="nrobarrida"
+              value={values.nrobarrida}
               onChange={handleChangeForm}
             />
           </Grid>
@@ -110,21 +115,21 @@ const FormBarrida = () => {
 
           <Grid container alignItems="center" item xs={12}>
             <Grid item xs={12}>
-            <Controls.DateField
-                name="entregado"
-                value={values.entregado}
-                onChange={handleChangeForm}
+              <Controls.DateField
+                name="fechaEntrega"
+                value={values.fechaentrega}
+                onChange={(date, value) => handleChangeForm({ target: { value: new Date(date), name: "fechaentrega" } })}
                 title="Entregado"
               />
             </Grid>
           </Grid>
-
+        {console.log("Fecha Barrida ",values.fechabarrida)}
           <Grid container alignItems="center" item xs={12}>
             <Grid item xs={12}>
-            <Controls.DateField
-                name="fbarrida"
-                value={values.fbarrida}
-                onChange={handleChangeForm}
+              <Controls.DateField
+                name="fechabarrida"
+                value={values.fechabarrida}
+                onChange={(date, value) => handleChangeForm({ target: { value: new Date(date), name: "fechabarrida" } })}
                 title="Fecha de Barrida"
               />
             </Grid>
@@ -133,19 +138,20 @@ const FormBarrida = () => {
           <Grid container alignItems="center" item xs={12}>
             <Grid item xs={12}>
               <Controls.DateField
-                name="acreditacion"
-                value={values.acreditacion}
-                onChange={handleChangeForm}
+                name="fechaacreditacion"
+                value={values.fechaacreditacion }
+                onChange={(date, value) => handleChangeForm({ target: { value: new Date(date), name: "fechaacreditacion" } })}
+
                 title="Fecha de Acreditacion"
               />
             </Grid>
           </Grid>
           <Grid container alignItems="center" item xs={12}>
             <Grid item xs={12}>
-            <Controls.DateField
-                name="recibos"
-                value={values.recibos}
-                onChange={handleChangeForm}
+              <Controls.DateField
+                name="fecharecibos"
+                value={values.fecharecibos }
+                onChange={(date, value) => handleChangeForm({ target: { value: new Date(date), name: "fecharecibos" } })}
                 title="Fecha de recibo"
               />
             </Grid>

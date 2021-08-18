@@ -18,7 +18,7 @@ export const getBarridasListAction = (listBarridas: typesModels[]): GetBarridasL
     }
 }
 
-export const addBarridasAction = (barrida:typesModels) : AddBarridasAction => {
+export const addBarridasAction = (barrida: typesModels): AddBarridasAction => {
     return {
         type: ActionTypes.ADD_BARRIDAS,
         barrida
@@ -43,8 +43,8 @@ export const updateCuentas = (BarridasId: number | string, Barridas: typesModels
 }
 
 
- 
-export const cargarListaCuentasFalsas = (cuentas) =>{
+
+export const cargarListaCuentasFalsas = (cuentas) => {
     return getBarridasListAction(cuentas)
 }
 
@@ -61,23 +61,21 @@ export const getAllBarridas = () => {
 }
 
 
-export const addCuentas = (cuenta: ICuentas) => {
+export const addBarrida = (cuenta: ICuentas) => {
     return (dispatch: Dispatch) => {
-
-        return new BarridasApi()
+        const barridas = new BarridasApi()
+        barridas
             .addBarridas(cuenta)
-            .then(resp => {
-                dispatch(addBarridasAction(resp.data))
-            })
-            .catch(err => console.log(err))
-
+        barridas.getAllBarridas()
+            .then(resp=>dispatch(getBarridasListAction(resp.data)))   
+            .catch(err=>console.log("ERROR BARRIDAS ", err))
     }
 
 }
 
-export const getListaGruposBarrida = () =>{
+export const getListaGruposBarrida = () => {
     return new BarridasApi()
         .getListaGruposBarrida()
-        .then(resp=>resp.data)
-        .catch(err=>console.log(err))
+        .then(resp => resp.data)
+        .catch(err => console.log(err))
 }

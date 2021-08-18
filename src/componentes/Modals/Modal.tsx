@@ -40,7 +40,7 @@ const Modal: FC<Prop> = ({ active, closeModal, children, width = '80vw', height 
                 position: 'relative',
                 width: width,
                 height: height,
-                borderRadius: 14,
+                borderRadius: 5,
                 padding: theme.spacing(2,3),
                 background: '#FFF',
                 display: 'flex',
@@ -49,7 +49,7 @@ const Modal: FC<Prop> = ({ active, closeModal, children, width = '80vw', height 
                 flexDirection: 'column',
                 zIndex: 2,
                 [theme.breakpoints.down("md")]:{
-                    height:'95vh'
+                    height:'max-content'
                 }
             },
             cerrar: {

@@ -1,16 +1,28 @@
 import React, { FC } from 'react'
 import PropTypes from 'prop-types';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+
 import { KeyboardDatePicker, DatePicker } from '@material-ui/pickers';
 import { useField } from 'formik';
 
 
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        marginNone: {
+            margin: 'none'
+        }
+    }));
+
 
 const DateField = (props) => {
+
+    const classes = useStyles()
 
     const { name, title, value = null, onChange, simple=false } = props
     return (
         <div>
             <KeyboardDatePicker
+                className={classes.marginNone}
                 inputVariant="outlined"
                 margin="dense"
                 autoOk
@@ -19,7 +31,7 @@ const DateField = (props) => {
                 name={name}
                 disableToolbar={false}
                 onChange={onChange}
-                value={value & value || null}
+                value={value || null}
                 format="DD/MM/YYYY"
                 placeholder="10/10/2010"
             />

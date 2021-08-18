@@ -10,8 +10,8 @@ export class BarridasApi {
         return AxiosIntance.get(this.BaseUrl)
     }
 
-    addBarridas(cuenta): Promise<AxiosResponse> {
-        return AxiosIntance.post(this.BaseUrl, cuenta)
+    addBarridas(newBarrida): Promise<AxiosResponse> {
+        return AxiosIntance.post(this.BaseUrl, newBarrida)
     }
 
     getAllGruposBarridas(): Promise<AxiosResponse> {
