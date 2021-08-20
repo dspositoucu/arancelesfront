@@ -16,13 +16,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const DateField = (props) => {
 
-    const classes = useStyles()
+   // const classes = useStyles()
 
     const { name, title, value = null, onChange, simple=false } = props
     return (
-        <div>
             <KeyboardDatePicker
-                className={classes.marginNone}
                 inputVariant="outlined"
                 margin="dense"
                 autoOk
@@ -34,8 +32,8 @@ const DateField = (props) => {
                 value={value || null}
                 format="DD/MM/YYYY"
                 placeholder="10/10/2010"
+                style={{margin:0}}
             />
-        </div>
     )
 }
 

@@ -79,9 +79,9 @@ function App() {
   const xl = minxl
 
   const outerTheme = createMuiTheme({
-    spacing: sm ? 2.5 : md ? 3 : lg ? 4 : 8,
+    spacing: sm ? 3.25 : md ? 3.5 : lg ? 3.5 : 8,
     typography:{
-      fontSize: sm ? 12 : md ? 13 : lg ? 14 : 14,
+      fontSize: sm ? 12 : md ? 12 : lg ? 14 : 15,
     },
     palette:{
       primary:{
