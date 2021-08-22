@@ -71,16 +71,6 @@ const FormBarrida = () => {
               onChange={handleChangeForm}
             />
           </Grid>
-
-          <Grid container item xs={12}>
-            <Controls.Checkbox
-              label="Enviado"
-              name="enviado"
-              value={values.enviado}
-              onChange={handleChangeForm}
-            />
-          </Grid>
-
           <Grid container item xs={12}>
             <Controls.Input
               label="Recibido"
@@ -157,6 +147,15 @@ const FormBarrida = () => {
             </Grid>
           </Grid>
 
+          <Grid container item xs={12}>
+            <Controls.Checkbox
+              label="Enviado"
+              name="enviado"
+              value={values.enviado}
+              onChange={handleChangeForm}
+            />
+          </Grid>
+//==================BOTONES============================ 
           <Grid item xs={12}>
             <Divider orientation="horizontal" light={true} />
           </Grid>

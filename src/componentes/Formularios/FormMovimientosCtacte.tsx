@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react'
-import { Grid, Typography, Divider } from '@material-ui/core';
-
+import { Grid, Typography, Divider, Box } from '@material-ui/core';
+import IconButton from "@material-ui/core/IconButton";
+import Icon from '../Icons/Icono'
 //models
 import { AppState } from '../../Redux/state/AppState';
 
@@ -26,21 +27,21 @@ const FromMovimientosCtacte = () => {
         handleChangeForm,
         resetForm,
     } = useForm({
-        ...initialValue, 
+        ...initialValue,
         codigo: configForm.codigo,
         codfac: configForm.codfac,
         codcar: configForm.codcar
     });
 
 
-  useEffect(() => {
+    useEffect(() => {
         setValues({
             ...values,
             codigo: configForm.codigo,
             codfac: configForm.codfac,
             codcar: configForm.codcar
         })
-    }, [configForm.id]) 
+    }, [configForm.id])
 
 
     return (
@@ -96,27 +97,31 @@ const FromMovimientosCtacte = () => {
                             onChange={handleChangeForm}
                         />
                     </Grid>
-                </Grid>
-                <Grid item xs={12}>
-                    <Divider orientation="horizontal" light={true} />
-                </Grid>
-
-                <Grid spacing={1} container xs={12} item>
-                    <Grid item xs={3}>
+                    <Grid
+                        alignItems='center'
+                        justify='center'
+                        container xs={1}
+                        item >
+                        <IconButton 
+                            style={{padding:0}}
+                        >
+                            <Icon.limpiarForm />
+                        </IconButton>
                     </Grid>
-                    <Grid item container justify="flex-end" direction='row' xs={9}>
-                        <Controls.Button
-                            text="Limpiar Formulario"
-                            variant="secondary"
-                            onClick={resetForm} />
-                        <Controls.Button
-                            type="submit"
-                            variant="primary"
-                            text="Agregar Mov Cta.cte." />
+                    <Grid
+                        alignItems='center'
+                        justify='center'
+                        container xs={1}
+                        item>
+                        <IconButton 
+                            style={{padding:0}}
+                        >
+                            <Icon.Agregar />
+                        </IconButton>
                     </Grid>
                 </Grid>
             </Grid>
-        </Form>
+        </Form >
 
     )
 }

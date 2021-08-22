@@ -9,6 +9,8 @@ import AddIcon from '@material-ui/icons/Add';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
+import BackspaceIcon from '@material-ui/icons/Backspace';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 
 const Icon = {
@@ -22,9 +24,10 @@ const Icon = {
     User: AccountCircleIcon,
     Logout: PowerSettingsNewIcon,
     Editar: EditIcon,
-    Agregar: AddIcon,
+    Agregar: AddCircleIcon,
     Ctacte: AccountBalanceWalletIcon,
-    Cerrar: HighlightOffIcon
+    Cerrar: HighlightOffIcon,
+    limpiarForm: BackspaceIcon
 }
 
 export default Icon
