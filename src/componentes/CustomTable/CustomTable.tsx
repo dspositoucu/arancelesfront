@@ -235,7 +235,6 @@ const CustomTable: FC<Props> = ({
                             page={page}
                             SelectProps={{
                                 inputProps: { 'aria-label': 'rows per page' },
-                                native: true,
                             }}
                             onChangePage={handleChangePage}
                             onChangeRowsPerPage={handleChangeRowsPerPage}

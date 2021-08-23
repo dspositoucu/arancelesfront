@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Grid, Divider, Typography } from '@material-ui/core';
 import MomentUtils from '@date-io/moment';
+import FormContainer from '../../componentes/Forms/FormContainer';
 import {
   MuiPickersUtilsProvider
 } from '@material-ui/pickers';
@@ -11,7 +12,7 @@ import { Form as FormFormik } from 'formik';
 import Controls from '../../componentes/Forms/Controls'
 
 // Custom hooks
-import { useForm, Form } from '../../hooks/useForm'
+import { useForm } from '../../hooks/useForm'
 import useSubmit from '../../hooks/useSubmit';
 
 //Actions
@@ -47,13 +48,13 @@ const FormBarrida = () => {
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
-      <Form
+      <FormContainer
+        width="45vw"
+        LabelButtonSubmit="Generar Barrida"
+        resetForm={resetForm}
         title="Generar Barrida"
         onSubmit={formSubmit}>
         <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Divider orientation="horizontal" light={true} />
-          </Grid>
           <Grid container item xs={12}>
             <Controls.Input
               name="descripcion"
@@ -155,31 +156,8 @@ const FormBarrida = () => {
               onChange={handleChangeForm}
             />
           </Grid>
-//==================BOTONES============================ 
-          <Grid item xs={12}>
-            <Divider orientation="horizontal" light={true} />
-          </Grid>
-
-          <Grid spacing={1} container xs={12} item>
-            <Grid item xs={3}>
-              <Controls.Button
-                onClick={() => { }}
-                variant="primary"
-                text="Cancelar" />
-            </Grid>
-            <Grid item container justify="flex-end" direction='row' xs={9}>
-              <Controls.Button
-                text="Limpiar Formulario"
-                variant="secondary"
-                onClick={resetForm} />
-              <Controls.Button
-                type="submit"
-                variant="primary"
-                text="Generar Barrida" />
-            </Grid>
-          </Grid>
         </Grid>
-      </Form>
+      </FormContainer>
     </MuiPickersUtilsProvider>
   )
 }

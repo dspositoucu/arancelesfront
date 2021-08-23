@@ -1,7 +1,7 @@
 import { Grid, Divider, Typography } from '@material-ui/core';
 import Controls from '../../componentes/Forms/Controls'
-import { useForm, Form } from '../../hooks/useForm'
-
+import { useForm } from '../../hooks/useForm'
+import FormContainer from '../../componentes/Forms/FormContainer';
 //acciones
 import { getCuentasListSelect } from '../../Redux/actions/cuentas/CuentasActionCreator';
 
@@ -28,17 +28,20 @@ const FormAranceles = ({ selectList }) => {
         handleChangeForm,
         resetForm,
     } = useForm(initialFValues);
-    
-    
-    console.log("valores formulario ",values)
+
+
+    console.log("valores formulario ", values)
     return (
-        <Form
+        <FormContainer
+
+            LabelButtonSubmit="Crear Nuevo Arancel"
             title="Formulario de Aranceles"
-            onSubmit={() => { }}>
+            width="45vw"
+            onSubmit={() => { }}
+            resetForm={resetForm}
+        >
+
             <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <Divider orientation="horizontal" />
-                </Grid>
                 <Grid container item xs={12}>
                     <Grid item xs={12}>
                         <Controls.AutocompleteSelect
@@ -178,31 +181,8 @@ const FormAranceles = ({ selectList }) => {
                         />
                     </Grid>
                 </Grid>
-
-                <Grid item xs={12}>
-                    <Divider orientation="horizontal" light={true} />
-                </Grid>
-
-                <Grid spacing={1} container xs={12} item>
-                    <Grid item xs={3}>
-                        <Controls.Button
-                            onClick={() => { }}
-                            variant="primary"
-                            text="Cancelar" />
-                    </Grid>
-                    <Grid item container justify="flex-end" direction='row' xs={9}>
-                        <Controls.Button
-                            text="Limpiar Formulario"
-                            variant="secondary"
-                            onClick={resetForm} />
-                        <Controls.Button
-                            type="submit"
-                            variant="primary"
-                            text="Crear Nuevo Arancel" />
-                    </Grid>
-                </Grid>
             </Grid>
-        </Form>
+        </FormContainer>
     )
 }
 export default FormAranceles

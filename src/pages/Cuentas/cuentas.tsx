@@ -58,7 +58,6 @@ const Cuentas = () => {
     actionsInHeader={["imprimir", "nuevo"]}
     actionInRow={['editar']}
     rowChek={false}
-    widthModal={'60vw'}
     FormRegister={<FormCuentas width='100%' />}
   />
 }

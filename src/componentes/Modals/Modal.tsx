@@ -13,7 +13,7 @@ interface Prop {
 
 const modalRoot = document.getElementById('modal')
 
-const Modal: FC<Prop> = ({ active, closeModal, children, width = '80vw', height = 'max-content' }) => {
+const Modal: FC<Prop> = ({ active, closeModal, children, width = 'max-content', height = 'max-content' }) => {
     const useStyles = makeStyles((theme:Theme) =>
         createStyles({
             fondo: {
@@ -29,18 +29,18 @@ const Modal: FC<Prop> = ({ active, closeModal, children, width = '80vw', height 
             },
             modalContainer: {
                 top: '50%',
-                left: '50%',
+                right: '0',
                 position: 'fixed',
                 display: 'grid',
                 placeItems: 'center',
-                transform: 'translate(-50%,-50%)',
+                transform: 'translate(0,-50%)',
                 zIndex: 2,
+                boxSizing: 'border-box'
             },
             modal: {
                 position: 'relative',
                 width: width,
-                height: height,
-                borderRadius: 5,
+                height: '100vh',
                 padding: theme.spacing(2,3),
                 background: '#FFF',
                 display: 'flex',
@@ -48,9 +48,6 @@ const Modal: FC<Prop> = ({ active, closeModal, children, width = '80vw', height 
                 justifyContent: 'center',
                 flexDirection: 'column',
                 zIndex: 2,
-                [theme.breakpoints.down("md")]:{
-                    height:'max-content'
-                }
             },
             cerrar: {
                 position: 'absolute',

@@ -8,9 +8,9 @@ import { AppState } from '../../Redux/state/AppState';
 
 // Import Componentes
 import Controls from '../Forms/Controls'
-
+import FormContainer from '../Forms/FormContainer';
 // Custom hooks
-import { useForm, Form } from '../../hooks/useForm'
+import { useForm } from '../../hooks/useForm'
 import useSubmit from '../../hooks/useSubmit';
 
 const FromMovimientosCtacte = () => {
@@ -45,7 +45,10 @@ const FromMovimientosCtacte = () => {
 
 
     return (
-        <Form
+        <FormContainer
+            width="80vw"
+            resetForm={resetForm}
+            LabelButtonSubmit=""
             title="Agregar Movimientos de Cta.Cte. de Personas"
             ButtonSubmit="Agregar Mov Cta.cte."
             onSubmit={() => { }}>
@@ -102,8 +105,8 @@ const FromMovimientosCtacte = () => {
                         justify='center'
                         container xs={1}
                         item >
-                        <IconButton 
-                            style={{padding:0}}
+                        <IconButton
+                            style={{ padding: 0 }}
                         >
                             <Icon.limpiarForm />
                         </IconButton>
@@ -113,15 +116,15 @@ const FromMovimientosCtacte = () => {
                         justify='center'
                         container xs={1}
                         item>
-                        <IconButton 
-                            style={{padding:0}}
+                        <IconButton
+                            style={{ padding: 0 }}
                         >
                             <Icon.Agregar />
                         </IconButton>
                     </Grid>
                 </Grid>
             </Grid>
-        </Form >
+        </FormContainer >
 
     )
 }

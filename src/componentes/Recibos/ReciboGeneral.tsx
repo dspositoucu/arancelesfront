@@ -4,9 +4,9 @@ import { Divider, Grid, Typography, } from '@material-ui/core';
 // Import Componentes
 import Controls from '../../componentes/Forms/Controls'
 import ButtonIcon from '../Buttons/ButtonIcon';
-
+import FormContainer from '../Forms/FormContainer';
 // Custom hooks
-import { useForm, Form } from '../../hooks/useForm'
+import { useForm } from '../../hooks/useForm'
 import useDescripcion from '../../hooks/useDescripcion';
 import useSubmit from '../../hooks/useSubmit';
 //Actions
@@ -54,15 +54,18 @@ const ReciboGeneral = () => {
         sumarMontos,
         handleChangeDesc,
         nuevaDescripcion } = useDescripcion({
-            Arancel:0,
-            Bonificacion:0,
-            Intereses:0,
-            Biblioteca:0,
-            Moratoria:0
+            Arancel: 0,
+            Bonificacion: 0,
+            Intereses: 0,
+            Biblioteca: 0,
+            Moratoria: 0
         })
 
     return (
-        <Form
+        <FormContainer
+            width="80vw"
+            LabelButtonSubmit="Generar Recibo"
+            resetForm={resetForm}
             title="Recibo General">
             <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -374,30 +377,9 @@ const ReciboGeneral = () => {
                         <Typography>${sumarMontos()}</Typography>
                     </Grid>
                 </Grid>
-                {/* =========================================================== BOTONES =========================================================== */}
-
-                <Grid item xs={12}>
-                    <Divider orientation="horizontal" light={true} />
-                </Grid>
-                <Grid xs={6}>
-                    <Controls.Button
-                        onClick={() => { }}
-                        variant="primary"
-                        text="Cancelar" />
-                </Grid>
-                <Grid container justify="flex-end" xs={6}>
-                    <Controls.Button
-                        text="Limpiar Recibo"
-                        variant="secondary"
-                        onClick={resetForm} />
-                    <Controls.Button
-                        type="submit"
-                        variant="primary"
-                        text="Generar Recibo" />
-                </Grid>
             </Grid>
 
-        </Form >
+        </FormContainer >
     )
 }
 export default ReciboGeneral

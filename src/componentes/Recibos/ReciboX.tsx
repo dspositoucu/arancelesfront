@@ -5,9 +5,9 @@ import { Grid, } from '@material-ui/core';
 import Controls from '../../componentes/Forms/Controls'
 
 // Custom hooks
-import { useForm, Form } from '../../hooks/useForm'
+import { useForm } from '../../hooks/useForm'
 import useSubmit from '../../hooks/useSubmit';
-
+import FormContainer from '../Forms/FormContainer';
 //Actions
 import { addPersona } from '../../Redux/actions/personas/ActionCreator';
 
@@ -43,7 +43,10 @@ const ReciboX = () => {
     const { formSubmit } = useSubmit(addPersona, values)
 
     return (
-        <Form
+        <FormContainer
+            width="80vw"
+            resetForm={resetForm}
+            LabelButtonSubmit="Recibo X"
             title="Recibo X"
             onSubmit={formSubmit}>
             <Grid container>
@@ -124,26 +127,8 @@ const ReciboX = () => {
                     />
 
                 </Grid>
-                    <Grid container xs={12}>
-                        <Grid xs={6}>
-                            <Controls.Button
-                                onClick={() => { }}
-                                variant="primary"
-                                text="Cancelar" />
-                        </Grid>
-                        <Grid container justify="flex-end" xs={6}>
-                            <Controls.Button
-                                text="Limpiar Formulario"
-                                variant="secondary"
-                                onClick={resetForm} />
-                            <Controls.Button
-                                type="submit"
-                                variant="primary"
-                                text="Registrar Persona" />
-                        </Grid>
-                    </Grid>
             </Grid>
-        </Form>
+        </FormContainer>
     )
 }
 export default ReciboX

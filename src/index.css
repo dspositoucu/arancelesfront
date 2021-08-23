@@ -60,22 +60,22 @@ a:active:link:focus {
 
 @keyframes slideIn {
     0% {
-        transform: translateY(-3rem);
+        transform: translateX(3rem);
         opacity: 0;
     }
     100% {
-        transform: translateY(0);
+        transform: translateX(0);
         opacity: 1;
     }
 }
 
 @keyframes CloseModal {
     100% {
-        transform: translateY(-3rem);
+        transform: translateX(3rem);
         opacity: 0;
     }
     0% {
-        transform: translateY(0);
+        transform: translateX(0);
         opacity: 1;
     }
 }

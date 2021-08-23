@@ -13,7 +13,8 @@ import DateField from '../../componentes/Forms/DateField';
 import Controls from '../../componentes/Forms/Controls'
 
 // Custom hooks
-import { useForm, Form } from '../../hooks/useForm'
+import { useForm } from '../../hooks/useForm'
+import FormContainer from '../../componentes/Forms/FormContainer';
 import useSubmit from '../../hooks/useSubmit';
 
 //Actions
@@ -45,16 +46,13 @@ const FormCuentas = ({ width = "max-content" }) => {
     console.log("VALOR DE FORMULARIO ", values)
     return (
         <MuiPickersUtilsProvider utils={MomentUtils}>
-            <Form
-                width={width}
+            <FormContainer
+                LabelButtonSubmit="Crear Nueva Cuenta"
+                resetForm={resetForm}
+                width="45vw"
                 title="Nueva Cuenta"
-                ButtonSubmit="Registrar Nueva Persona"
                 onSubmit={formSubmit}>
                 <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <Divider orientation="horizontal" light={true} />
-                    </Grid>
-
                     <Grid container item xs={12} spacing={1}>
                         <Grid item xs={6}>
                             <Controls.Input
@@ -129,31 +127,8 @@ const FormCuentas = ({ width = "max-content" }) => {
                             />
                         </Grid>
                     </Grid>
-
-                    <Grid item xs={12}>
-                        <Divider orientation="horizontal" light={true} />
-                    </Grid>
-
-                    <Grid spacing={1} container xs={12} item>
-                        <Grid item xs={3}>
-                            <Controls.Button
-                                onClick={() => { }}
-                                variant="primary"
-                                text="Cancelar" />
-                        </Grid>
-                        <Grid item container justify="flex-end" direction='row' xs={9}>
-                            <Controls.Button
-                                text="Limpiar Formulario"
-                                variant="secondary"
-                                onClick={resetForm} />
-                            <Controls.Button
-                                type="submit"
-                                variant="primary"
-                                text="Crear Cuenta Nueva" />
-                        </Grid>
-                    </Grid>
                 </Grid>
-            </Form>
+            </FormContainer>
         </MuiPickersUtilsProvider>
     )
 }
