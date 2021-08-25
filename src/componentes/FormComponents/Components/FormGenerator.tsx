@@ -5,45 +5,45 @@ import Controls from '../Fields/Controls'
 import ErrorListener from './ErrorListener'
 import SubmitListener from './SubmitListener'
 import useIsMounted from './useIsMounted';
-
+import { Grid } from '@material-ui/core';
 export const FormGenerator = (props) => {
 
 
   const field = [
     {
-      name: 'firstName',
+      name: 'nombre',
       type: 'text',
       required: true,
-      label:"firstName"
+      label: "Nombre"
     },
     {
-      name: 'lastName',
+      name: 'apellido',
       type: 'text',
       required: true,
-      label:"lastName"
+      label: "Apellido"
     },
     {
       name: 'email',
       type: 'email',
       required: true,
-      label:"email"
+      label: "Email"
     },
   ]
 
   const SignupSchema = Yup.object().shape({
-    firstName: Yup.string()
-      .min(2, 'Too Short!')
-      .max(50, 'Too Long!'),
-    lastName: Yup.string()
-      .min(2, 'Too Short!')
-      .max(50, 'Too Long!'),
-    email: Yup.string().email('Invalid email'),
+    nombre: Yup.string()
+      .min(2, 'Muy corto, Min. 2 letras!')
+      .max(50, 'muy largo, Max 50 letras!'),
+    apellido: Yup.string()
+      .min(2, 'Muy corto, Min. 2 letras!')
+      .max(50, 'muy largo, Max 50 letras!'),
+    email: Yup.string().email('Email invalido'),
   });
 
   const dataFake = {
     email: '',
-    firstName: 'red',
-    lastName: '',
+    nombre: '',
+    apellido: '',
   }
 
   return (
@@ -61,14 +61,21 @@ export const FormGenerator = (props) => {
           e.preventDefault();
           handleSubmit(e)
         }}>
-          {
-            field.length && field.map((value)=>{
-              return (
-                <Controls.Input {...value}/>
-              )
-            })
-          }
-          <Controls.Button text="Enviar" variant="primary" type="submit"/>
+
+          <Grid container spacing={2}>
+            {
+              field.length && field.map((value) => {
+                return (
+                  <Grid item xs={12}>
+                    <Controls.Input {...value} />
+                  </Grid>
+                )
+              })}
+            <Grid item xs={12}>
+              <Controls.Button text="Enviar" variant="primary" type="submit" />
+            </Grid>
+          </Grid>
+
         </Form>
       )}
     </Formik>
