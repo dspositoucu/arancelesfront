@@ -13,7 +13,7 @@ import FormContainer from '../Forms/FormContainer';
 import { useForm } from '../../hooks/useForm'
 import useSubmit from '../../hooks/useSubmit';
 
-const FromMovimientosCtacte = () => {
+const FromMovimientosCtacte = ({width=''}) => {
     const { configForm } = useSelector((state: AppState) => state.CtacteState)
     const initialValue = {
         concepto: '',
@@ -46,16 +46,14 @@ const FromMovimientosCtacte = () => {
 
     return (
         <FormContainer
-            width="80vw"
+            width={width}
+            hidenButton
             resetForm={resetForm}
             LabelButtonSubmit=""
-            title="Agregar Movimientos de Cta.Cte. de Personas"
+            title="Agregar Movimiento"
             ButtonSubmit="Agregar Mov Cta.cte."
             onSubmit={() => { }}>
             <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <Divider orientation="horizontal" light={true} />
-                </Grid>
                 <Grid container item xs={12} spacing={1}>
                     <Grid item xs={2}>
                         <Controls.Input

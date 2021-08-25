@@ -1,16 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { useSelector } from 'react-redux';
-import { makeStyles, createStyles, Theme, Divider } from "@material-ui/core";
 import { Grid, } from '@material-ui/core';
-
 import MomentUtils from '@date-io/moment';
 import {
     MuiPickersUtilsProvider
 } from '@material-ui/pickers';
-import { Form as FormFormik } from 'formik';
-import DateField from '../../componentes/Forms/DateField';
 // Import Componentes
 import Controls from '../../componentes/Forms/Controls'
+import { FormGenerator } from '../../componentes/FormComponents/Components/FormGenerator';
 
 // Custom hooks
 import { useForm } from '../../hooks/useForm'
@@ -41,11 +36,13 @@ const FormCuentas = ({ width = "max-content" }) => {
     } = useForm(initialFValues);
 
     const { formSubmit } = useSubmit(addCuentas, values)
-
-
-    console.log("VALOR DE FORMULARIO ", values)
     return (
         <MuiPickersUtilsProvider utils={MomentUtils}>
+            <Grid container>
+                <Grid item xs={12}>
+                    <FormGenerator />
+                </Grid>
+            </Grid>
             <FormContainer
                 LabelButtonSubmit="Crear Nueva Cuenta"
                 resetForm={resetForm}
@@ -129,6 +126,7 @@ const FormCuentas = ({ width = "max-content" }) => {
                     </Grid>
                 </Grid>
             </FormContainer>
+
         </MuiPickersUtilsProvider>
     )
 }

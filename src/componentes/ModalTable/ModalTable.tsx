@@ -19,6 +19,8 @@ import RevertIcon from "@material-ui/icons/NotInterestedOutlined";
 //acciones
 import { editModeAction, revertirAction, actualizarAction } from '../../Redux/actions/ctacte/CtacteActionCreator';
 
+const width='70vw'
+
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         table: {
@@ -37,8 +39,8 @@ const useStyles = makeStyles((theme: Theme) =>
             }
         },
         container: {
-            height: '80vh',
-            width: "100%",
+            height: '100%',
+            width: width,
             [theme.breakpoints.down("md")]: {
                 height: '92vh'
             }
@@ -173,7 +175,7 @@ const ModalTable = ({ columns }) => {
             <Grid item xs={12} className={classes.formContainer}>
                 {
 
-                    Object.entries(configForm).length && <FormMovimientosCtacte />
+                    Object.entries(configForm).length && <FormMovimientosCtacte width={width} />
                 }
             </Grid>
         </Grid>
