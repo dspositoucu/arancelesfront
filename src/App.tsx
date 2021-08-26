@@ -7,7 +7,7 @@ import { makeStyles, createStyles, Theme, ThemeProvider, createMuiTheme, respons
 
 //Components
 import Layout from './Layout'
-import AuthRoute from "./componentes/AuthRoute"; 
+import AuthRoute from "./componentes/AuthRoute";
 
 //Page
 import LoginPage from './pages/LoginPage/LoginPage'
@@ -17,6 +17,7 @@ import Cuentas from './pages/Cuentas/Cuentas';
 import Aranceles from './pages/Aranceles/Aranceles';
 import Barridas from './pages/Barrida/Barridas'
 import Caja from './pages/Caja/Caja'
+import AlumnosSao from "./pages/AlumnosSao/AlumnosSao";
 
 
 
@@ -27,6 +28,7 @@ const tabsName = [
   { label: "Barridas", value: "/barridas" },
   { label: "Informes", value: "/informes" },
   { label: "Caja", value: "/caja" },
+  { label: 'Alumos Sao', value: "/alumnos_sao" }
 ]
 
 
@@ -80,12 +82,12 @@ function App() {
 
   const outerTheme = createMuiTheme({
     spacing: sm ? 3.25 : md ? 3.5 : lg ? 3.5 : 8,
-    typography:{
+    typography: {
       fontSize: sm ? 12 : md ? 12 : lg ? 14 : 15,
     },
-    palette:{
-      primary:{
-        main:"#395596"
+    palette: {
+      primary: {
+        main: "#395596"
       },
     }
   })
@@ -141,6 +143,10 @@ function App() {
 
                 <AuthRoute exact path="/caja">
                   <Caja />
+                </AuthRoute>
+
+                <AuthRoute exact path="/alumnos_sao">
+                  <AlumnosSao />
                 </AuthRoute>
               </Switch>
             </>

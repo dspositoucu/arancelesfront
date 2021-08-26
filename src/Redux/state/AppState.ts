@@ -16,7 +16,7 @@ export interface IPersonInitialState {
     selectListPerson: [] | IPersona[] | any[]
     personDetails: {} | IPersona
     allSelect: boolean,
-    cuentasByPersona:any|{}
+    cuentasByPersona: any | {}
 }
 
 export interface ICajaInitialState {
@@ -25,9 +25,9 @@ export interface ICajaInitialState {
 
 export interface ICtacteInitialState {
     ctacte: [] | any[],
-    totalDebe:string | number,
-    totalHaber:string | number,
-    saldoTotal:string | number,
+    totalDebe: string | number,
+    totalHaber: string | number,
+    saldoTotal: string | number,
     previous: any | {},
     configForm: {} | any
 
@@ -39,12 +39,12 @@ export interface IUserInitialState {
 
 export interface IGlobalInitialState {
     tableData: typesModels[] | []
-    detallesData:any | {}
+    detallesData: any | {}
     tableFilterinUse: boolean,
     filterList: typesModels[] | [],
-    modalRegister:boolean,
-    modalEdit:boolean,
-    loading:boolean
+    modalRegister: boolean,
+    modalEdit: boolean,
+    loading: boolean
 }
 
 export interface IInformesInitialState {
@@ -62,12 +62,16 @@ export interface IInformesInitialState {
 }
 
 export interface IModalTableState {
-    dataTable:any[]
+    dataTable: any[]
 }
 
 export interface ICuentasInitialState {
     listCuentas: ICuentas[] | [] | any[],
     detallesCuenta: ICuentas | any
+}
+
+export interface IAlumnosSaoState {
+    alumnosSao: [] | any[],
 }
 
 export interface IArancelesInitialState {
@@ -98,5 +102,6 @@ export interface AppState {
     BarridasState: IBarridasInitialState,
     CajaState: ICajaInitialState,
     CtacteState: ICtacteInitialState,
-    ModalTableState: IModalTableState
+    ModalTableState: IModalTableState,
+    AlumnosSaoState:IAlumnosSaoState
 }

@@ -17,6 +17,7 @@ import barridasReducer from './reducers/barridasReducer';
 import cajaReducer from './reducers/cajaReducer';
 import ctacteReducer from './reducers/ctacteReducer';
 import modalTableReducer from './reducers/modalTableReducer';
+import alumnosSaoReducer from './reducers/alumnosSaoReducer'; 
 
 
 const rootReducers = combineReducers<AppState>({
@@ -30,7 +31,8 @@ const rootReducers = combineReducers<AppState>({
     BarridasState:barridasReducer,
     CajaState:cajaReducer,
     CtacteState: ctacteReducer,
-    ModalTableState:modalTableReducer
+    ModalTableState:modalTableReducer,
+    AlumnosSaoState:alumnosSaoReducer
 })
 
 const store :Store<AppState, AnyAction> = createStore(
