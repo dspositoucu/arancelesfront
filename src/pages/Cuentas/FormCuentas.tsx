@@ -21,6 +21,7 @@ const initialFValues = {
     codfac: '',
     codcar: '',
     descripcion: '',
+    extension:'',
     area: '',
     idgrupobarrida: '',
     cantcuotas: '',
@@ -79,6 +80,20 @@ const FormCuentas = ({ width = "max-content" }) => {
                     </Grid>
                     <Grid container item xs={12} spacing={1}>
                         <Grid item xs={12}>
+                            <Controls.AutocompleteSelect
+                                promSelectList={getListaGruposBarrida()}
+                                name="extension"
+                                label="Actividades de Extension"
+                                filtro={'descripcion'}
+                                valueautocomplete={values.extension}
+                                onChange={(event, value = { id: 0 }) => {
+                                    handleChangeForm({ target: { value: !value ? 0 : value.id, name: 'extension' } })
+                                }}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Grid container item xs={12} spacing={1}>
+                        <Grid item xs={12}>
                             <Controls.Input
                                 label="Cantidad de Cuotas"
                                 name="cantcuotas"
@@ -106,7 +121,6 @@ const FormCuentas = ({ width = "max-content" }) => {
                                 filtro={'descripcion'}
                                 valueautocomplete={values.idgrupobarrida}
                                 onChange={(event, value = { id: 0 }) => {
-
                                     handleChangeForm({ target: { value: !value ? 0 : value.id, name: 'idgrupobarrida' } })
                                 }}
                             />

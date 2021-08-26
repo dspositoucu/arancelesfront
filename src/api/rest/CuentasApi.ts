@@ -24,4 +24,8 @@ export class CuentasApi {
     getSedesList() :Promise<AxiosResponse> {
         return AxiosIntance.get(`${this.BaseUrl}/sedes`)
     }
+
+    getActividadesExtension(): Promise<AxiosResponse>{
+        return AxiosIntance.get(`${this.BaseUrl}/actividadesExtencion`)
+    }
 }
