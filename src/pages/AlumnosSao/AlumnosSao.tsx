@@ -13,13 +13,10 @@ import { AppState } from '../../Redux/state/AppState';
 //Actions
 import { getAllNuevosAlunos, selectAlumno } from '../../Redux/actions/AlumnosSao/AlumnosSaoActionCreator';
 
+
 const AlumnosSao = () => {
-
   const { alumnosSao } = useSelector((state: AppState) => state.AlumnosSaoState)
-
-
   const dispatch = useDispatch()
-
   const cargarDatos = () => {
     dispatch(getAllNuevosAlunos())
   }
@@ -28,11 +25,11 @@ const AlumnosSao = () => {
   }, [])
 
   const columns = [
-    { title: "idp", width:'5%'},
-    { title: "apellido", width:'10%'},
-    { title: "nombre", width:'10%'},
-    { title: 'ndoc',width:'10%'},
-    { title: 'carreras', isArray:true, openModal:true}
+    { title: "idp", width: '5%' },
+    { title: "apellido", width: '10%' },
+    { title: "nombre", width: '10%' },
+    { title: 'ndoc', width: '10%' },
+    { title: 'carreras', isArray: true, openModal: true, action:selectAlumno }
   ]
 
   // El componente Table recibe dos props 
@@ -42,8 +39,8 @@ const AlumnosSao = () => {
 
   return <Table
     filterSearchBar={[
-      {key: "nombre",label: "Nombre"},
-      {key: "ndoc",label: "N° Doc"},
+      { key: "nombre", label: "Nombre" },
+      { key: "ndoc", label: "N° Doc" },
     ]}
     filterMenu={false}
     tableData={alumnosSao}
@@ -52,7 +49,7 @@ const AlumnosSao = () => {
     actionInRow={['editar']}
     rowChek={false}
     widthModal="45vw"
-    ModalDefault={<AlumnoSao/>}
+    ModalDefault={<AlumnoSao />}
   />
 }
 

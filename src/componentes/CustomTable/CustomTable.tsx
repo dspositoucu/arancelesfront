@@ -186,7 +186,8 @@ const CustomTable: FC<Props> = ({
                                                 openModal={()=>key.openModal && dispatch(openModal())} 
                                                 boolean={key.boolean} 
                                                 isArray={key.isArray} 
-                                                width={key.width} 
+                                                width={key.width}
+                                                action={key.action} 
                                                 key={i}>
                                                 {
                                                     key.name

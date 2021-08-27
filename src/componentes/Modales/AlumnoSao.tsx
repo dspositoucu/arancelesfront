@@ -1,51 +1,116 @@
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Grid, Typography } from '@material-ui/core'
+import { AppState } from '../../Redux/state/AppState'
+import { Grid, Typography, Divider } from '@material-ui/core'
 import Controls from '../Forms/Controls'
 
 import { getCuentasListSelect } from '../../Redux/actions/cuentas/CuentasActionCreator'
 
 const AlumnoSao = () => {
 
-    const values = {
-        idcuenta:''
-    }
+    const { selectAlumno } = useSelector((state: AppState) => state.AlumnosSaoState)
+
+    const [values, setvalue] = useState<any>({
+        apellido: '',
+        idcuenta: '',
+        nombre: '',
+        ndoc: '',
+        carreras: '',
+        idAlumno: ''
+    })
     return (
-        <div style={{height:'100%'}}>
-            <Grid container spacing={2}>
+        <div style={{ height: '100%', padding: '15px' }}>
+            <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <Typography variant={'h4'}>
-                        Nombre de la persona
+                        Vinculacion de Alumno con una Cuenta
                     </Typography >
                 </Grid>
                 <Grid item xs={12}>
-                    <Typography variant={'body1'}>
-                        DNI : 123123123
-                    </Typography>
+                    <Divider />
                 </Grid>
                 <Grid item xs={12}>
-                    <Typography variant={'body1'}>
-                        Carrera: cualquier carrera
-                    </Typography>
+                    <Typography variant={'h6'}>
+                        Datos del alumno :
+                    </Typography >
                 </Grid>
                 <Grid item xs={12}>
-                    <Typography variant={'body1'}>
-                        idAlumno: 123132
-                    </Typography>
+                    <Controls.Input
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        label="Apellido"
+                        name="apellido"
+                        variant="outlined"
+                        value={values.apellido}
+                        disabled
+                    />
                 </Grid>
                 <Grid item xs={12}>
-                    <Typography variant={'body1'}>
-                        Seleccionar cuenta
-                    </Typography>
+                    <Controls.Input
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        label="Nombre"
+                        name="nombre"
+                        variant="outlined"
+                        value={values.nombre}
+                        disabled
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <Controls.Input
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        label="DNI"
+                        name="ndoc"
+                        variant="outlined"
+                        value={values.ndoc}
+                        disabled
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <Controls.Input
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        label="Carrera"
+                        name="carreras"
+                        variant="outlined"
+                        value={values.carreras}
+                        disabled
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <Controls.Input
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        label="IdAlumno"
+                        name="idAlumnno"
+                        variant="outlined"
+                        value={values.idAlumno}
+                        disabled
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <Typography variant={'h6'}>
+                        Seleccionar cuenta para vincular
+                    </Typography >
                 </Grid>
                 <Grid item xs={12}>
                     <Controls.AutocompleteSelect
-                            name="idcuenta"
-                            label="Cuenta"
-                            promSelectList={getCuentasListSelect()}
-                            valueautocomplete={values.idcuenta}
-                            filtro={"descripcion"}
-                            onChange={(event, value) => console.log(value)}
+                        name="idcuenta"
+                        label="Cuenta"
+                        promSelectList={getCuentasListSelect()}
+                        valueautocomplete={values.idcuenta}
+                        filtro={"descripcion"}
+                        onChange={(event, value) => console.log(value)}
                     />
+                </Grid>
+                <Grid item xs={12}>
+                    <Controls.Button variant="primary" text="Vincular Alumno" />
                 </Grid>
                 <Grid item xs={12}>
                     <Controls.Button variant="primary" text="Nuevo Alumno" />
@@ -54,7 +119,5 @@ const AlumnoSao = () => {
             </Grid>
         </div>
     )
-
-
 }
 export default AlumnoSao

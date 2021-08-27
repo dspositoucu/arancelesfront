@@ -31,7 +31,7 @@ export interface GetAlumnosSaoDetailsAction {
 
 export interface SelectAlumnosSaoAction {
   type: ActionTypes.SELECT_ALUMNOS_SAO,
-  selectAlumnosSao: typesModels
+  selectAlumnosSao: typesModels, 
 }
 
 export interface UpdateAlumnosSaoAction {

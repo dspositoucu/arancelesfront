@@ -13,20 +13,18 @@ import Avatar from '@material-ui/core/Avatar';
 import { useDispatch } from 'react-redux'
 
 //actions
-
-
 interface Props {
-    children?: ReactNode | any |string,
+    children?: ReactNode | any | string,
     check?: boolean,
     variant?: "body" | "head" | "footer" | undefined
     checkAll?: boolean
     width?: string,
-    isArray?:boolean,
-    boolean?:boolean,
+    isArray?: boolean,
+    boolean?: boolean,
     align?: "left" | "right" | "inherit" | "center" | "justify",
-    openModal?:Function|any
-    allRowData?:{} | any
-    
+    openModal?: Function | any
+    allRowData?: {} | any
+
 }
 
 //Style align center checkbox
@@ -68,10 +66,11 @@ const StyledTableCell = withStyles((theme: Theme) => ({
 }))(TableCell);
 
 export const Cell = (props) => {
+    const dispatch = useDispatch()
     const selectIconBoolean = (value) => {
         return value ? <DoneIcon /> : <CloseIcon />
     }
-    const { width = 'max-content', children, align, isArray=false, boolean=false, openModal=null } = props
+    const { width = 'max-content', children, align, isArray = false, boolean = false, openModal = null, allRowData, action = null } = props
     return (
         <StyledTableCell
             {...props}
@@ -79,25 +78,26 @@ export const Cell = (props) => {
             align={align}>
             <Typography variant="body2" >
                 {
-                    boolean 
-                    ? selectIconBoolean(boolean) 
-                    : isArray 
-                    ? 
-                    <div style={{display:'flex',flexWrap:'wrap'}}>
-                       { children.split(',').map(value=>{
-                            return(
-                                <Chip
-                                    onClick={openModal && openModal}
-                                    style={{margin:'2px'}}
-                                    label={value}
-                                    clickable
-                                    variant="outlined"
-                                    color="primary"
-                                />
-                            )})}
-                    </div>
-                    :children
-
+                    boolean
+                        ? selectIconBoolean(boolean)
+                        : isArray
+                            ?
+                            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                                {children.split(',').map(value => {
+                                    return (
+                                        <Chip
+                                            onClick={() => { openModal && openModal();
+                                                            (typeof action === 'function') && dispatch(action({...allRowData, carreras:value}))}}
+                                            style={{ margin: '2px' }}
+                                            label={value}
+                                            clickable
+                                            variant="outlined"
+                                            color="primary"
+                                        />
+                                    )
+                                })}
+                            </div>
+                            : children
                 }
             </Typography>
         </StyledTableCell>
