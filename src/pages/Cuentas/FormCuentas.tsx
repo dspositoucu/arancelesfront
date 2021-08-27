@@ -13,7 +13,7 @@ import FormContainer from '../../componentes/Forms/FormContainer';
 import useSubmit from '../../hooks/useSubmit';
 
 //Actions
-import { getCuentasListSelect, getSedesListSelect } from '../../Redux/actions/cuentas/CuentasActionCreator';
+import { getCuentasListSelect, getSedesListSelect, getActividadesExtensionSelect } from '../../Redux/actions/cuentas/CuentasActionCreator';
 import { getListaGruposBarrida } from '../../Redux/actions/barridas/BarridasActionCreator';
 import { addCuentas } from '../../Redux/actions/cuentas/CuentasActionCreator'
 
@@ -39,11 +39,11 @@ const FormCuentas = ({ width = "max-content" }) => {
     const { formSubmit } = useSubmit(addCuentas, values)
     return (
         <MuiPickersUtilsProvider utils={MomentUtils}>
-            <Grid container>
+  {/*           <Grid container>
                 <Grid item xs={12}>
                     <FormGenerator />
                 </Grid>
-            </Grid>
+            </Grid> */}
             <FormContainer
                 LabelButtonSubmit="Crear Nueva Cuenta"
                 resetForm={resetForm}
@@ -81,13 +81,13 @@ const FormCuentas = ({ width = "max-content" }) => {
                     <Grid container item xs={12} spacing={1}>
                         <Grid item xs={12}>
                             <Controls.AutocompleteSelect
-                                promSelectList={getListaGruposBarrida()}
+                                promSelectList={getActividadesExtensionSelect()}
                                 name="extension"
                                 label="Actividades de Extension"
-                                filtro={'descripcion'}
+                                filtro={'nombre'}
                                 valueautocomplete={values.extension}
-                                onChange={(event, value = { id: 0 }) => {
-                                    handleChangeForm({ target: { value: !value ? 0 : value.id, name: 'extension' } })
+                                onChange={(event, value = { nombre: '' }) => {
+                                    handleChangeForm({ target: { value: !value ? '' : value.nombre, name: 'extension' } })
                                 }}
                             />
                         </Grid>

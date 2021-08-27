@@ -72,6 +72,7 @@ export interface ICuentasInitialState {
 
 export interface IAlumnosSaoState {
     alumnosSao: [] | any[],
+    selectAlumno:any | {}
 }
 
 export interface IArancelesInitialState {
@@ -83,6 +84,7 @@ export interface IBarridasInitialState {
 }
 
 export interface IModalInitialState {
+    defaultModal?:boolean,
     modalRegister?: boolean,
     modalEdit?: boolean,
     modalError?: boolean,

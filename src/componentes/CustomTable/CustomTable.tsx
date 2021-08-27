@@ -11,10 +11,6 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import ButtonIcon from '../Buttons/ButtonIcon';
-
-import CloseIcon from '@material-ui/icons/Close';
-import IconButton from "@material-ui/core/IconButton";
-import DoneIcon from '@material-ui/icons/Done'
 //modals 
 import Modal from '../Modals/Modal'
 
@@ -22,7 +18,7 @@ import Modal from '../Modals/Modal'
 import IFilterSearchBar from './interface/IFilterSearchBar';
 
 //actions
-import { openModalRegister } from '../../Redux/actions/modales/ActionCreatorModals';
+import { openModalRegister,openModal } from '../../Redux/actions/modales/ActionCreatorModals';
 
 //models
 import { typesModels, IPersona, IInformes } from '../../models'
@@ -57,6 +53,7 @@ interface Props {
     secondaryForms?: ReactNode[],
     widthModal?: string,
     heightModal?: string
+    ModalDefault?: ReactNode
 }
 
 // estilos css-in-js
@@ -94,17 +91,14 @@ const CustomTable: FC<Props> = ({
     secondaryForms,
     widthModal,
     actionInRow,
-    heightModal }) => {
+    heightModal,
+    ModalDefault
+}) => {
     const dispatch = useDispatch()
     const classes = useStyles();
 
-
-    const selectIconBoolean = (value) => {
-        return value ? <DoneIcon /> : <CloseIcon />
-    }
-
     //  estados de modales 
-    const { modalRegister, modalEdit } = useSelector((state: AppState) => state.ModalState)
+    const { modalRegister, modalEdit, defaultModal } = useSelector((state: AppState) => state.ModalState)
 
     // useFilter recibe la tabla a filtrar y devuelve 
     // una funcion handleFilter, la lista filtrada y
@@ -139,6 +133,18 @@ const CustomTable: FC<Props> = ({
     return (
         <TableContainer className={classes.tableContainer} component={Paper}>
             {/* ================= MODALES =================*/}
+
+            {
+                defaultModal &&
+                <Modal
+                    width={widthModal}
+                    height={heightModal}
+                    closeModal={() => dispatch(openModal())}
+                    active={defaultModal}
+                >
+                    {ModalDefault}
+                </Modal>
+            }
             {modalRegister &&
                 <Modal
                     width={widthModal}
@@ -175,11 +181,17 @@ const CustomTable: FC<Props> = ({
                                 {
                                     columns.map((key, i) => {
                                         return (
-                                            <Cell width={key.width} key={i}>
+                                            <Cell 
+                                                allRowData={data}
+                                                openModal={()=>key.openModal && dispatch(openModal())} 
+                                                boolean={key.boolean} 
+                                                isArray={key.isArray} 
+                                                width={key.width} 
+                                                key={i}>
                                                 {
-                                                    key.type === "boolean"
-                                                        ? selectIconBoolean(data[key.title.toLowerCase()])
-                                                        : key.name ? data[key.name.toLowerCase()] : data[key.title.toLowerCase()]
+                                                    key.name
+                                                        ? data[key.name.toLowerCase()]
+                                                        : data[key.title.toLowerCase()]
                                                 }
                                             </Cell>
                                         )

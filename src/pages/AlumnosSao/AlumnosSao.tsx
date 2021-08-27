@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // components
 import Table from '../../componentes/CustomTable'
-
+import AlumnoSao from '../../componentes/Modales/AlumnoSao'
 //lista cuentas falsas
 import listaCuentas from '../../fakeData/cuentas.json'
 
@@ -11,7 +11,7 @@ import listaCuentas from '../../fakeData/cuentas.json'
 import { AppState } from '../../Redux/state/AppState';
 
 //Actions
-import { getAllNuevosAlunos } from '../../Redux/actions/AlumnosSao/AlumnosSaoActionCreator';
+import { getAllNuevosAlunos, selectAlumno } from '../../Redux/actions/AlumnosSao/AlumnosSaoActionCreator';
 
 const AlumnosSao = () => {
 
@@ -32,7 +32,7 @@ const AlumnosSao = () => {
     { title: "apellido", width:'10%'},
     { title: "nombre", width:'10%'},
     { title: 'ndoc',width:'10%'},
-    { title: 'carreras'}
+    { title: 'carreras', isArray:true, openModal:true}
   ]
 
   // El componente Table recibe dos props 
@@ -51,6 +51,8 @@ const AlumnosSao = () => {
     actionsInHeader={["imprimir", "nuevo"]}
     actionInRow={['editar']}
     rowChek={false}
+    widthModal="45vw"
+    ModalDefault={<AlumnoSao/>}
   />
 }
 

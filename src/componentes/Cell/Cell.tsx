@@ -5,20 +5,28 @@ import { withStyles } from "@material-ui/core/styles";
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import Controls from '../Forms/Controls';
+import CloseIcon from '@material-ui/icons/Close';
+import DoneIcon from '@material-ui/icons/Done'
 import { Typography, Grid } from '@material-ui/core';
-
+import Chip from '@material-ui/core/Chip';
+import Avatar from '@material-ui/core/Avatar';
 import { useDispatch } from 'react-redux'
 
 //actions
 
 
 interface Props {
-    children?: ReactNode | any,
+    children?: ReactNode | any |string,
     check?: boolean,
     variant?: "body" | "head" | "footer" | undefined
     checkAll?: boolean
     width?: string,
+    isArray?:boolean,
+    boolean?:boolean,
     align?: "left" | "right" | "inherit" | "center" | "justify",
+    openModal?:Function|any
+    allRowData?:{} | any
+    
 }
 
 //Style align center checkbox
@@ -34,6 +42,7 @@ const useStyles = makeStyles(() =>
         editCell: {
             padding: 5
         }
+
     })
 )
 
@@ -59,13 +68,38 @@ const StyledTableCell = withStyles((theme: Theme) => ({
 }))(TableCell);
 
 export const Cell = (props) => {
-    const { width = 'max-content', children, align } = props
+    const selectIconBoolean = (value) => {
+        return value ? <DoneIcon /> : <CloseIcon />
+    }
+    const { width = 'max-content', children, align, isArray=false, boolean=false, openModal=null } = props
     return (
         <StyledTableCell
             {...props}
             width={width}
             align={align}>
-            <Typography variant="body2" >{children}</Typography>
+            <Typography variant="body2" >
+                {
+                    boolean 
+                    ? selectIconBoolean(boolean) 
+                    : isArray 
+                    ? 
+                    <div style={{display:'flex',flexWrap:'wrap'}}>
+                       { children.split(',').map(value=>{
+                            return(
+                                <Chip
+                                    onClick={openModal && openModal}
+                                    style={{margin:'2px'}}
+                                    label={value}
+                                    clickable
+                                    variant="outlined"
+                                    color="primary"
+                                />
+                            )})}
+                    </div>
+                    :children
+
+                }
+            </Typography>
         </StyledTableCell>
     )
 }

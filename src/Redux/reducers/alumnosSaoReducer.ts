@@ -4,6 +4,7 @@ import { IAlumnosSaoState } from '../state/AppState';
 
 const InitialState: IAlumnosSaoState = {
     alumnosSao:[],
+    selectAlumno:{}
 }
 
 const alumnosSaoReducer: Reducer<IAlumnosSaoState, AlumnosSaoActions> = (state = InitialState, action: AlumnosSaoActions) => {
@@ -13,6 +14,12 @@ const alumnosSaoReducer: Reducer<IAlumnosSaoState, AlumnosSaoActions> = (state =
             return {
                 ...state,
                 alumnosSao: action.listAlumnosSao 
+            }
+        }
+        case ActionTypes.SELECT_ALUMNOS_SAO:{
+            return {
+                ...state,
+                selectAlumno:action.selectAlumnosSao
             }
         }
         default: return state;

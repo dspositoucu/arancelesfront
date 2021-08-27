@@ -2,6 +2,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Input from './Input';
+import Controls from './Controls';
 
 //import hook
 import useSelect from '../../hooks/useSelect';
@@ -22,8 +23,9 @@ const AutocompleteSelect = (props) => {
 
     const { filtro, promSelectList, onChange, name, valueautocomplete, label } = props
     const [opt, setOpt] = useState<any[]>([])
-    const defVal = { id: 0, descripcion: "Sin Valor" }
+    const defVal = { id: 0, [filtro]: "Sin Valor" }
     const { opciones } = useSelect(promSelectList)
+
     useEffect(() => {
         opciones.length && setOpt([defVal, ...opciones])
     }, [opciones])
@@ -45,11 +47,14 @@ const AutocompleteSelect = (props) => {
                 options={opt}
                 getOptionLabel={(option: any) => option[filtro]}
                 renderInput={(params) => (
-                    <Input
+                    <Controls.Input
                         {...params}
+                        label={label}
                         className={classes.marginNone}
                         size="small"
-                        placeholder={label} />
+                        placeholder={label} 
+                        variant="outlined"
+                        />
                 )}
             />
         </>

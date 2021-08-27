@@ -1,5 +1,6 @@
 import { Dispatch } from 'redux';
 import { CuentasApi } from '../../../api/rest/CuentasApi';
+import { ActividadesExtensionApi } from '../../../api/rest/ActividadesExtensionApi';
 import {
     AddCuentasAction,
     GetCuentasListAction,
@@ -90,4 +91,11 @@ export const getSedesListSelect = () => {
         .getSedesList()
         .then(resp => resp.data)
         .catch(err => console.log(err))
+}
+
+export const getActividadesExtensionSelect = () => {
+    return new ActividadesExtensionApi()
+        .getActividadesExtension()
+        .then(resp=>resp.data)
+        .catch(err=>console.log(err))
 }

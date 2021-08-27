@@ -1,7 +1,13 @@
 export enum ActionTypes {
     MODAL_FORM_REGISTER = "MODAL_FORM_REGISTER",
     MODAL_FORM_EDIT = "MODAL_FORM_EDIT",
+    MODAL = "MODAL"
   }
+
+  export interface OpenModal {
+    type: ActionTypes.MODAL
+  }
+
   export interface OpenModalRegister {
     type: ActionTypes.MODAL_FORM_REGISTER,
   }
@@ -10,5 +16,6 @@ export enum ActionTypes {
   }
 
   export type ModalAction = 
-    OpenModalRegister 
+  OpenModal
+    |OpenModalRegister 
     | OpenModalEdit
