@@ -12,4 +12,8 @@ export class CajaApi {
         return AxiosIntance.get(`${this.BaseUrl}/modospago`)
     }
 
+    addMovimientoCaja(): Promise<AxiosResponse> {
+        return AxiosIntance.post(`${this.BaseUrl}`)
+    }
+
 }

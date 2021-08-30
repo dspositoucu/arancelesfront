@@ -46,9 +46,6 @@ const FormPersonas = () => {
             title="Nueva Persona"
             onSubmit={formSubmit}>
             <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <Divider orientation="horizontal" light={true} />
-                </Grid>
                 <Grid item container xs={12}>
                     <Controls.Input
                         name="codigo"
@@ -154,13 +151,6 @@ const FormPersonas = () => {
                         value={values.situaciontributaria}
                         onChange={handleChangeForm}
                     />
-                </Grid>
-                <Grid xs={12} container item>
-
-                </Grid>
-
-                <Grid item xs={12}>
-                    <Divider orientation="horizontal" light={true} />
                 </Grid>
             </Grid>
         </FormContainer>

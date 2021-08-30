@@ -102,17 +102,6 @@ const FromMovimientosCtacte = ({width=''}) => {
                         alignItems='center'
                         justify='center'
                         container xs={1}
-                        item >
-                        <IconButton
-                            style={{ padding: 0 }}
-                        >
-                            <Icon.limpiarForm />
-                        </IconButton>
-                    </Grid>
-                    <Grid
-                        alignItems='center'
-                        justify='center'
-                        container xs={1}
                         item>
                         <IconButton
                             style={{ padding: 0 }}

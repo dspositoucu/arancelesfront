@@ -14,7 +14,7 @@ interface Props {
     startIcon?: string,
     label?: string,
     hover?: boolean,
-    onClick?: (e?: any) => void,
+    onClick?:any
     typeButton?: string
     data?: any,
     centerIcon?:string
@@ -53,7 +53,7 @@ const ButtonIcon: FC<Props> = ({ centerIcon='null' , startIcon = "null", endIcon
     const classes = useStyles()
     return (
         <Button
-            onClick={acciones[endIcon] || acciones[startIcon]}
+            onClick={acciones[endIcon] || acciones[startIcon] || onClick}
             className={`${hover && classes.hover} ${classes[typeButton]}`}
             endIcon={<Icons type={endIcon} />}
             startIcon={<Icons type={startIcon} />}

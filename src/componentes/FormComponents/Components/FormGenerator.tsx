@@ -1,9 +1,7 @@
-import React, { FC } from 'react'
+import React, { FC, useRef } from 'react'
 import formik, { useField, Form, FormikProps, Formik } from 'formik';
 import * as Yup from 'yup';
-import Controls from '../Fields/Controls'
-import ErrorListener from './ErrorListener'
-import SubmitListener from './SubmitListener'
+import Controls from '../Fields/Controls';
 import useIsMounted from './useIsMounted';
 import { Grid } from '@material-ui/core';
 import { getCuentasListSelect } from '../../../Redux/actions/cuentas/CuentasActionCreator';
@@ -11,6 +9,9 @@ import { getCuentasListSelect } from '../../../Redux/actions/cuentas/CuentasActi
 
 export const FormGenerator = (props) => {
 
+  const formConfig={
+    spacing:2,
+  }
 
   const field = [
     {
@@ -64,7 +65,6 @@ export const FormGenerator = (props) => {
         <Form onSubmit={(e) => {
           e.preventDefault();
           handleSubmit(e)
-          console.log('VALORES DEL FORMULARIO   ',values)
         }}>
 
           <Grid container spacing={2}>

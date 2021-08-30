@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from 'react'
-import { Divider, Grid, Typography, } from '@material-ui/core';
+import { Divider, Grid, InputAdornment, Typography, } from '@material-ui/core';
 
 // Import Componentes
 import Controls from '../../componentes/Forms/Controls'
@@ -7,8 +7,6 @@ import ButtonIcon from '../Buttons/ButtonIcon';
 import FormContainer from '../Forms/FormContainer';
 // Custom hooks
 import { useForm } from '../../hooks/useForm'
-import useDescripcion from '../../hooks/useDescripcion';
-import useSubmit from '../../hooks/useSubmit';
 //Actions
 
 const initialFValues = {
@@ -47,19 +45,58 @@ const ReciboGeneral = () => {
         resetForm,
     } = useForm(initialFValues);
 
-    const {
-        descripciones,
-        agregarDescripcion,
-        quitarDescripcion,
-        sumarMontos,
-        handleChangeDesc,
-        nuevaDescripcion } = useDescripcion({
-            Arancel: 0,
-            Bonificacion: 0,
-            Intereses: 0,
-            Biblioteca: 0,
-            Moratoria: 0
+    const [descripcion, setDescripcion] = useState([
+        { id: '1', descripcion: "Arancel", monto: "0.00" },
+        { id: '2', descripcion: "Bonificacion", monto: "0.00" },
+        { id: '3', descripcion: "Intereses", monto: "0.00" },
+        { id: '4', descripcion: "Biblioteca", monto: "30.00" },
+        { id: '5', descripcion: "Moratoria", monto: "0.00" },
+    ])
+
+    const [nuevaDescripcion, setNuevaDescripcion] = useState({
+        descripcion: "",
+        monto: "0.00",
+    })
+    const agregarDescripcion = () => {
+        console.log("DESCRIPCIONES ", descripcion)
+        setDescripcion([
+            ...descripcion,
+            {
+                id: (descripcion.length + 1).toString(),
+                descripcion: nuevaDescripcion.descripcion,
+                monto: nuevaDescripcion.monto
+            }])
+    }
+    const quitarDescripcion = (idDesc) => {
+        setDescripcion(
+            descripcion.filter(desc => desc.id !== idDesc)
+        )
+    }
+    const sumarMontos = () => {
+        let monto = 0
+        descripcion.forEach(desc => {
+            monto += desc.monto ? parseFloat(desc.monto) : 0
         })
+        return monto
+    }
+    const handleChangeDesc = (event: ChangeEvent<HTMLInputElement>): void => {
+        const { name, value } = event.target
+
+        setNuevaDescripcion({
+            ...nuevaDescripcion,
+            [name]: value,
+        })
+    }
+
+    const handleChangeMonto = (event: ChangeEvent<HTMLInputElement>,id):any => {
+        const { value } = event.target
+        setDescripcion(descripcion.map(desc=>{
+            if(desc.id === id){
+                desc.monto = value
+            }
+            return desc 
+        }))
+    }
 
     return (
         <FormContainer
@@ -68,9 +105,6 @@ const ReciboGeneral = () => {
             resetForm={resetForm}
             title="Recibo General">
             <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <Divider orientation="horizontal" light={true} />
-                </Grid>
                 {/*============================================== fila ============================================== */}
                 <Grid item xs={1}>
                     <Controls.Input
@@ -136,7 +170,7 @@ const ReciboGeneral = () => {
                     />
 
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item container xs={6}>
                     <Grid container direction="row" justify="flex-end" spacing={1}>
                         <Grid item xs={4}>
                             <Controls.Input
@@ -222,7 +256,7 @@ const ReciboGeneral = () => {
                 </Grid>
 
                 {/*============================================== fila ============================================== */}
-                <Grid item xs={5}>
+                <Grid item container xs={5}>
                     <Grid container direction="row" spacing={1}>
                         <Grid item xs={4}>
                             <Controls.Input
@@ -275,7 +309,7 @@ const ReciboGeneral = () => {
                 {/*============================================== fila ============================================== */}
 
 
-                <Grid item xs={3}>
+                <Grid item xs={4}>
                     <Controls.Checkbox
                         name="matriculacompleta"
                         label="Matricula Completa"
@@ -283,7 +317,7 @@ const ReciboGeneral = () => {
                         onChange={handleChangeForm}
                     />
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={4}>
                     <Controls.Checkbox
                         name="derechoexamen"
                         label="Derecho de examen"
@@ -299,11 +333,16 @@ const ReciboGeneral = () => {
                     <Divider orientation="horizontal" light={true} />
                 </Grid>
                 <Grid item xs={12}>
-                    <Typography variant={'h5'}>
+                    <Typography variant={'h4'}>
                         Detalle de Factura / Recibo
                     </Typography>
                 </Grid>
                 <Grid item container direction="row" spacing={1} xs={12}>
+                    <Grid item xs={3}>
+                        <Typography variant={'h6'}>
+                            Descripciones
+                        </Typography>
+                    </Grid>
                     <Grid item xs={2}>
                         <Controls.Input
                             name="descripcion"
@@ -312,15 +351,16 @@ const ReciboGeneral = () => {
                             onChange={handleChangeDesc}
                         />
                     </Grid>
-                    <Grid direction="row" style={{ display: "flex", alignItems: 'baseline' }} item xs={2} >
-                        <Typography>$</Typography>
+                    <Grid direction="row" item xs={1} >
                         <Controls.Input
-                            inputProps={{
-                                style: { textAlign: "right" }
-                            }}
                             name="monto"
                             value={nuevaDescripcion.monto}
                             onChange={handleChangeDesc}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">$</InputAdornment>
+                                )
+                            }}
                         />
                     </Grid>
                     <Grid item xs={2}>
@@ -337,7 +377,7 @@ const ReciboGeneral = () => {
                 {/* =========================================================== ITEM DESCRIPCIONES =========================================================== */}
                 <Grid container spacing={1} xs={12}>
                     {
-                        descripciones.map((desc, i) => {
+                        descripcion.map((desc, i) => {
                             return (
                                 <Grid spacing={1} xs={4} alignItems="center" container key={i} item>
                                     <Grid item xs={2}>
@@ -348,10 +388,19 @@ const ReciboGeneral = () => {
                                     <Grid item xs={3}>
                                         <Divider orientation="horizontal" light={true} />
                                     </Grid>
-                                    <Grid item xs={2}>
-                                        <Typography variant={"subtitle2"}>
-                                            {desc.monto}
-                                        </Typography>
+                                    <Grid item xs={4}>
+                                        <Controls.Input
+                                            name={desc.id}
+                                            value={desc.monto}
+                                            InputProps={{
+                                                startAdornment: (
+                                                    <InputAdornment position="start">$</InputAdornment>
+                                                )
+                                            }}
+                                            onChange={(e) => { handleChangeMonto(e,desc.id) }}
+                                        />
+
+
                                     </Grid>
                                     <Grid item xs={1}>
                                         <ButtonIcon

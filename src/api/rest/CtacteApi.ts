@@ -8,4 +8,8 @@ export class CtacteApi {
         return AxiosIntance.get(`${this.BaseUrl}/${idCuentaPersona}`)
     }
 
+    getAddMovCtacte(idCuentaPersona, movCtacte): Promise<AxiosResponse> {
+        return AxiosIntance.post(`${this.BaseUrl}/${idCuentaPersona}`,movCtacte)
+    }
+
 }

@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme: Theme) =>
             margin: 'none',
             width:'100%'
         }
-
     }));
 
 const AutocompleteSelect = (props) => {

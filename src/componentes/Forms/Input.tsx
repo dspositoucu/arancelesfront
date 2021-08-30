@@ -5,7 +5,7 @@ export default function Input(props) {
 
     const { name, label, value, error = null, onChange, type, InputLabelProps } = props;
     return (
-        <div style={{display:'flex'}}>
+        <div style={{display:'flex', width:'100%'}}>
             <TextField
                 InputLabelProps={InputLabelProps}
                 type={type}
