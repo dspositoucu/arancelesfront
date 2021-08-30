@@ -6,6 +6,9 @@ import ErrorListener from './ErrorListener'
 import SubmitListener from './SubmitListener'
 import useIsMounted from './useIsMounted';
 import { Grid } from '@material-ui/core';
+import { getCuentasListSelect } from '../../../Redux/actions/cuentas/CuentasActionCreator';
+
+
 export const FormGenerator = (props) => {
 
 
@@ -44,6 +47,7 @@ export const FormGenerator = (props) => {
     email: '',
     nombre: '',
     apellido: '',
+    cuentas:''
   }
 
   return (
@@ -56,10 +60,11 @@ export const FormGenerator = (props) => {
         console.log("values", values, "actions", actions)
       }}
     >
-      {({ values, handleSubmit }) => (
+      {({ values, handleSubmit, ...formFunctions }) => (
         <Form onSubmit={(e) => {
           e.preventDefault();
           handleSubmit(e)
+          console.log('VALORES DEL FORMULARIO   ',values)
         }}>
 
           <Grid container spacing={2}>
@@ -67,10 +72,22 @@ export const FormGenerator = (props) => {
               field.length && field.map((value) => {
                 return (
                   <Grid item xs={12}>
-                    <Controls.Input {...value} />
+                    <Controls.Input {...value} formFunctions={formFunctions} />
                   </Grid>
                 )
               })}
+          <Grid item xs={12}>
+
+            <Controls.AutocompleteSelect
+              getAsyncOptions={getCuentasListSelect}
+              filtro='descripcion'
+              output="id"
+              valueautocomplete={values.cuentas}
+              label="Cuentas"
+              name="cuentas"
+              formFunctions={formFunctions}
+            />
+          </Grid>
             <Grid item xs={12}>
               <Controls.Button text="Enviar" variant="primary" type="submit" />
             </Grid>

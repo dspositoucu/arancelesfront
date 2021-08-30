@@ -39,12 +39,12 @@ const FormCuentas = ({ width = "max-content" }) => {
     const { formSubmit } = useSubmit(addCuentas, values)
     return (
         <MuiPickersUtilsProvider utils={MomentUtils}>
-  {/*           <Grid container>
+           <Grid container>
                 <Grid item xs={12}>
                     <FormGenerator />
                 </Grid>
-            </Grid> */}
-            <FormContainer
+            </Grid> 
+           {/*  <FormContainer
                 LabelButtonSubmit="Crear Nueva Cuenta"
                 resetForm={resetForm}
                 width="45vw"
@@ -139,7 +139,7 @@ const FormCuentas = ({ width = "max-content" }) => {
                         </Grid>
                     </Grid>
                 </Grid>
-            </FormContainer>
+            </FormContainer> */}
 
         </MuiPickersUtilsProvider>
     )
