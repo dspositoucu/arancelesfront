@@ -1,18 +1,36 @@
 import React from 'react'
 import { TextField } from '@material-ui/core';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(() =>
+    createStyles({
+        root: {
+            display: 'flex',
+            width: '100%',
+        },
+    }));
 
 export default function Input(props) {
 
-    const { name, label, value, error = null, onChange, type, InputLabelProps } = props;
+    const classes = useStyles()
+
+    const { name, label, value, error = null, onChange, type, InputLabelProps, verySmall = false } = props;
     return (
-        <div style={{display:'flex', width:'100%'}}>
+        <div className={classes.root}>
             <TextField
-                InputLabelProps={InputLabelProps}
+                InputLabelProps={{InputLabelProps}}
                 type={type}
-                style={{flexGrow:1}}
                 variant="outlined"
                 label={label}
                 name={name}
+                inputProps={
+                    verySmall
+                        ? {
+                            style: {
+                                padding: '5px 10px'
+                            }
+                        }
+                        : {}}
                 value={value}
                 onChange={onChange}
                 size="small"

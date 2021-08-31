@@ -16,4 +16,8 @@ export class CajaApi {
         return AxiosIntance.post(`${this.BaseUrl}`)
     }
 
+    setDataReciboGeneral(idCuentaPerosna):Promise <AxiosResponse>{
+        return AxiosIntance.get(`${this.BaseUrl}/setDataRecibo/${idCuentaPerosna}`)
+    }
+
 }

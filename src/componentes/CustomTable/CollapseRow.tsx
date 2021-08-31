@@ -48,8 +48,7 @@ const useRowStyles = makeStyles({
 
 });
 
-const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDatos, forms, id, data }) => {
-
+const CollapseTable = ({ tableColapseHead, children, cargarDatos, forms, id, data }) => {
 
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false);
@@ -58,18 +57,17 @@ const CollapseTable = ({ tableColapseHead, tableColapseName, children, cargarDat
         form1: false,
         form2: false
     })
+
     const [Form1, Form2] = forms
-    const { cuentasByPersona } = useSelector((state:AppState)=> state.PersonState) 
+
+    console.log("Cuentas personas ",secondaryTable)
 
     const cargarTabla = async () => {
         setSecondaryTable([])
         setSecondaryTable(await cargarDatos(id))
     }
 
-    
-
     const handleOpenModal = (form) => {
-        // console.log("Event",event.target)
         setOpenModal({
             ...openModal,
             [form]: !openModal[form]

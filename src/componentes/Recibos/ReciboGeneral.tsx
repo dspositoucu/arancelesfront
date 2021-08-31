@@ -52,7 +52,6 @@ const ReciboGeneral = () => {
         { id: '4', descripcion: "Biblioteca", monto: "30.00" },
         { id: '5', descripcion: "Moratoria", monto: "0.00" },
     ])
-
     const [nuevaDescripcion, setNuevaDescripcion] = useState({
         descripcion: "",
         monto: "0.00",
@@ -105,9 +104,11 @@ const ReciboGeneral = () => {
             resetForm={resetForm}
             title="Recibo General">
             <Grid container spacing={2}>
+
                 {/*============================================== fila ============================================== */}
                 <Grid item xs={1}>
                     <Controls.Input
+                        verySmall
                         name="codalu"
                         label="CodAlu"
                         value={values.codalu}
@@ -116,6 +117,7 @@ const ReciboGeneral = () => {
                 </Grid>
                 <Grid item xs={3}>
                     <Controls.Input
+                        verySmall
                         label="Nombre"
                         name="nombre"
                         value={values.nombre}
@@ -124,6 +126,7 @@ const ReciboGeneral = () => {
                 </Grid>
                 <Grid item xs={4}>
                     <Controls.Input
+                        verySmall
                         label="Cuenta"
                         name="cuenta"
                         value={values.cuenta}
@@ -134,6 +137,7 @@ const ReciboGeneral = () => {
                     <Grid container justify="flex-end" spacing={1} direction={'row'}>
                         <Grid item xs={4}>
                             <Controls.Input
+                                verySmall
                                 label="Nro"
                                 name="nro"
                                 value={values.nro}
@@ -142,6 +146,7 @@ const ReciboGeneral = () => {
                         </Grid>
                         <Grid item xs={6}>
                             <Controls.Input
+                                verySmall
                                 label="Sobre"
                                 name="sobre"
                                 value={values.sobre}
@@ -154,6 +159,7 @@ const ReciboGeneral = () => {
 
                 <Grid item xs={2}>
                     <Controls.Input
+                        verySmall
                         label="Cuotas"
                         name="cantcuotas"
                         value={values.cantcuotas}
@@ -163,6 +169,7 @@ const ReciboGeneral = () => {
 
                 <Grid item xs={4}>
                     <Controls.Input
+                        verySmall
                         label="Forma de pago"
                         name="modopago"
                         value={values.modopago}
@@ -174,6 +181,7 @@ const ReciboGeneral = () => {
                     <Grid container direction="row" justify="flex-end" spacing={1}>
                         <Grid item xs={4}>
                             <Controls.Input
+                                verySmall
                                 label="Fecha"
                                 name="fecha"
                                 type="date"
@@ -186,6 +194,7 @@ const ReciboGeneral = () => {
                         </Grid>
                         <Grid item xs={4}>
                             <Controls.Input
+                                verySmall
                                 label="Fecha de Ven."
                                 name="fechavto"
                                 type="date"
@@ -198,6 +207,7 @@ const ReciboGeneral = () => {
                         </Grid>
                         <Grid item xs={4}>
                             <Controls.Input
+                                verySmall
                                 label="Fecha de Pago"
                                 name="fechapago"
                                 type="date"
@@ -214,6 +224,7 @@ const ReciboGeneral = () => {
 
                 <Grid item xs={2}>
                     <Controls.Input
+                        verySmall
                         label="Pago Efectivo"
                         name="pagoefectivo"
                         value={values.pagoefectivo}
@@ -223,6 +234,7 @@ const ReciboGeneral = () => {
 
                 <Grid item xs={2}>
                     <Controls.Input
+                        verySmall
                         label="Beneficio"
                         name="beneficio"
                         value={values.beneficio}
@@ -231,6 +243,7 @@ const ReciboGeneral = () => {
                 </Grid>
                 <Grid item xs={2}>
                     <Controls.Input
+                        verySmall
                         label="Arancel"
                         name="arancel"
                         value={values.arancel}
@@ -240,6 +253,7 @@ const ReciboGeneral = () => {
 
                 <Grid item xs={2}>
                     <Controls.Input
+                        verySmall
                         label="Debito"
                         name="debito"
                         value={values.debito}
@@ -248,6 +262,7 @@ const ReciboGeneral = () => {
                 </Grid>
                 <Grid item xs={2}>
                     <Controls.Input
+                        verySmall
                         label="Otro Pago"
                         name="otropago"
                         value={values.otropago}
@@ -260,6 +275,7 @@ const ReciboGeneral = () => {
                     <Grid container direction="row" spacing={1}>
                         <Grid item xs={4}>
                             <Controls.Input
+                                verySmall
                                 label="Recibo"
                                 name="recibo"
                                 value={values.recibo}
@@ -268,6 +284,7 @@ const ReciboGeneral = () => {
                         </Grid>
                         <Grid item xs={8} >
                             <Controls.Input
+                                verySmall
                                 label="Concepto"
                                 name="concepto"
                                 value={values.concepto}
@@ -280,6 +297,7 @@ const ReciboGeneral = () => {
                     <Grid container direction="row" justify="flex-end" spacing={1}>
                         <Grid item xs={3}>
                             <Controls.Input
+                                verySmall
                                 label="Mes"
                                 name="mes"
                                 value={values.mes}
@@ -288,6 +306,7 @@ const ReciboGeneral = () => {
                         </Grid>
                         <Grid item xs={3}>
                             <Controls.Input
+                                verySmall
                                 label="dia"
                                 name="interes"
                                 value={values.dia}
@@ -296,6 +315,7 @@ const ReciboGeneral = () => {
                         </Grid>
                         <Grid item xs={3}>
                             <Controls.Input
+                                verySmall
                                 label="Cant dias"
                                 name="cantdias"
                                 value={values.cantdias}
@@ -345,6 +365,7 @@ const ReciboGeneral = () => {
                     </Grid>
                     <Grid item xs={2}>
                         <Controls.Input
+                            verySmall
                             name="descripcion"
                             label="Descripcion"
                             value={nuevaDescripcion.descripcion}
@@ -353,6 +374,7 @@ const ReciboGeneral = () => {
                     </Grid>
                     <Grid direction="row" item xs={1} >
                         <Controls.Input
+                            verySmall
                             name="monto"
                             value={nuevaDescripcion.monto}
                             onChange={handleChangeDesc}
@@ -390,6 +412,7 @@ const ReciboGeneral = () => {
                                     </Grid>
                                     <Grid item xs={4}>
                                         <Controls.Input
+                                            verySmall
                                             name={desc.id}
                                             value={desc.monto}
                                             InputProps={{

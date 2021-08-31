@@ -46,7 +46,7 @@ const AutocompleteSelect = (props) => {
                     classes: { paper: classes.selectProps }
                 }}
                 open={console.log("Abrir")}
-               // onChange={onChange}
+                onChange={onChange}
                 defaultValue={opt[valueautocomplete]}
                 inputVariant="outlined"
                 disablePortal

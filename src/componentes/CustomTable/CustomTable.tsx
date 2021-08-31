@@ -1,7 +1,6 @@
-import { FC, useState, ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux'
-import Icon from '../Icons/Icono';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -21,7 +20,6 @@ import IFilterSearchBar from './interface/IFilterSearchBar';
 import { openModalRegister,openModal } from '../../Redux/actions/modales/ActionCreatorModals';
 
 //models
-import { typesModels, IPersona, IInformes } from '../../models'
 import { AppState } from '../../Redux/state/AppState';
 
 //custom hooks
@@ -210,7 +208,6 @@ const CustomTable: FC<Props> = ({
                                 data={data}
                                 forms={secondaryForms}
                                 key={i}
-                                tableColapseName={"Cuentas"}
                                 tableColapseHead={secondaryColumn}>
                                 {
                                     columns.map((key, j) => {
