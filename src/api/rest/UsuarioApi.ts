@@ -8,4 +8,8 @@ export class UsuarioApi {
     login(user:any): Promise<AxiosResponse> {
         return AxiosIntance.post(this.BaseUrl, user)
     }
+
+    getAllUsuarios():Promise<AxiosResponse> {
+        return AxiosIntance.get('usuario/getAllusuarios')
+    }
 }

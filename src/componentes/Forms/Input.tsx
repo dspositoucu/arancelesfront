@@ -23,14 +23,6 @@ export default function Input(props) {
                 variant="outlined"
                 label={label}
                 name={name}
-                inputProps={
-                    verySmall
-                        ? {
-                            style: {
-                                padding: '5px 10px'
-                            }
-                        }
-                        : {}}
                 value={value}
                 onChange={onChange}
                 size="small"

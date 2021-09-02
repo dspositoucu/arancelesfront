@@ -15,6 +15,8 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { Typography } from '@material-ui/core';
 import Icon from '../Icons/Icono';
 
+import ReciboGeneral from '../Recibos/ReciboGeneral';
+
 import { AppState } from '../../Redux/state/AppState'; 
 import Loading from '../Loading/Loading';
 
@@ -60,7 +62,7 @@ const CollapseTable = ({ tableColapseHead, children, cargarDatos, forms, id, dat
 
     const [Form1, Form2] = forms
 
-    console.log("Cuentas personas ",secondaryTable)
+    const [dataFrom,setDataForm] = useState()  
 
     const cargarTabla = async () => {
         setSecondaryTable([])
@@ -86,7 +88,9 @@ const CollapseTable = ({ tableColapseHead, children, cargarDatos, forms, id, dat
             <Modal
                 active={openModal["form2"]}
                 closeModal={() => handleOpenModal("form2")}>
-                {Form2}
+                <ReciboGeneral
+                    data={dataFrom}
+                />
             </Modal>
             <Row className={`${classes.root} ${open ? classes.borderOpen : classes.borderClose}`}>
                 <Cell width={'25'}>
@@ -130,7 +134,9 @@ const CollapseTable = ({ tableColapseHead, children, cargarDatos, forms, id, dat
                                                                     }}>
                                                                     <Icon.Ctacte fontSize="small" color="primary" />
                                                                 </IconButton>
-                                                                <IconButton onClick={() => handleOpenModal("form2")}>
+                                                                <IconButton onClick={() => 
+                                                                    {setDataForm(data);
+                                                                    handleOpenModal("form2")}}>
                                                                     <Icon.Recibo fontSize="small" color="primary" />
                                                                 </IconButton>
                                                             </CellAction>

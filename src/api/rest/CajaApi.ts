@@ -4,12 +4,13 @@ import AxiosIntance from '../../axios/axiosInstace';
 export class CajaApi {
     private BaseUrl = 'caja'
 
+
     getAllMovimientos(): Promise<AxiosResponse> {
         return AxiosIntance.get(`${this.BaseUrl}/movimientos`)
     }
 
     getModosPago(): Promise<AxiosResponse> {
-        return AxiosIntance.get(`${this.BaseUrl}/modospago`)
+        return AxiosIntance.get(`recibos/modospago`)
     }
 
     addMovimientoCaja(): Promise<AxiosResponse> {
@@ -17,7 +18,7 @@ export class CajaApi {
     }
 
     setDataReciboGeneral(idCuentaPerosna):Promise <AxiosResponse>{
-        return AxiosIntance.get(`${this.BaseUrl}/setDataRecibo/${idCuentaPerosna}`)
+        return AxiosIntance.get(`recibos/setDataRecibo/${idCuentaPerosna}`)
     }
 
 }

@@ -56,3 +56,19 @@ export const getAllMovimientos = () => {
     }
 }
 
+export const getAllModosPagos = () => {
+    return new CajaApi()
+        .getModosPago()
+        .then(resp=>resp.data)
+        .catch(err=>console.log("ERROR CajaApi getAllModosPagos", err))
+}
+
+export const setDataReciboGeneral = (idCuentaPerosna) => {
+    return new CajaApi()
+        .setDataReciboGeneral(idCuentaPerosna)
+        .then(resp=>resp.data)
+        .catch(err=>console.log('ERROR CajaApi setDataReciboGeneral', err))
+        
+
+}
+

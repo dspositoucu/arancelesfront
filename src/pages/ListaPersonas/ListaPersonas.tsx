@@ -99,7 +99,7 @@ const ListaPersonas = () => {
       // props para la tabla secundaria
       secondaryForms={[
         <ModalTable columns={modalTableColumns} />,
-        <ReciboGeneral />
+        <ReciboGeneral data={{}}/>
       ]}
       secondaryColumn={["Nombre de cuenta", "CodCar", "Saldo", "Activo", "Autorizado", "Baja", "Nota"]}
     />

@@ -8,14 +8,14 @@ import FormContainer from '../Forms/FormContainer';
 // Custom hooks
 import { useForm } from '../../hooks/useForm'
 //Actions
+import { getAllModosPagos,setDataReciboGeneral } from '../../Redux/actions/caja/CajasActionCreator';
+
 
 const initialFValues = {
     codalu: '',
     cuenta: '',
     fecha: '',
     modopago: '',
-    nro: '',
-    sobre: '',
     fechavto: '',
     cantcuotas: '',
     nombre: '',
@@ -37,7 +37,18 @@ const initialFValues = {
 
 }
 
-const ReciboGeneral = () => {
+const ReciboGeneral = ({ data }) => {
+
+     const cargarDatos = () =>{
+        setDataReciboGeneral(data.idcuentapersona)
+            .then(resp=>setValues({...initialFValues,...resp[0]}))
+            .catch(err=>console.log(err))
+    }
+
+    useEffect(()=>{
+        cargarDatos()
+    },[])
+
     const {
         values,
         setValues,
@@ -52,6 +63,9 @@ const ReciboGeneral = () => {
         { id: '4', descripcion: "Biblioteca", monto: "30.00" },
         { id: '5', descripcion: "Moratoria", monto: "0.00" },
     ])
+    
+    console.log("valores del formulario ",values)
+    
     const [nuevaDescripcion, setNuevaDescripcion] = useState({
         descripcion: "",
         monto: "0.00",
@@ -87,37 +101,34 @@ const ReciboGeneral = () => {
         })
     }
 
-    const handleChangeMonto = (event: ChangeEvent<HTMLInputElement>,id):any => {
+    const handleChangeMonto = (event: ChangeEvent<HTMLInputElement>, id): any => {
         const { value } = event.target
-        setDescripcion(descripcion.map(desc=>{
-            if(desc.id === id){
+        setDescripcion(descripcion.map(desc => {
+            if (desc.id === id) {
                 desc.monto = value
             }
-            return desc 
+            return desc
         }))
     }
 
     return (
         <FormContainer
-            width="80vw"
+            width="65vw"
             LabelButtonSubmit="Generar Recibo"
             resetForm={resetForm}
             title="Recibo General">
             <Grid container spacing={2}>
-
                 {/*============================================== fila ============================================== */}
-                <Grid item xs={1}>
+                <Grid item xs={2}>
                     <Controls.Input
-                        verySmall
                         name="codalu"
                         label="CodAlu"
                         value={values.codalu}
                         onChange={handleChangeForm}
                     />
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={4}>
                     <Controls.Input
-                        verySmall
                         label="Nombre"
                         name="nombre"
                         value={values.nombre}
@@ -126,105 +137,70 @@ const ReciboGeneral = () => {
                 </Grid>
                 <Grid item xs={4}>
                     <Controls.Input
-                        verySmall
                         label="Cuenta"
                         name="cuenta"
                         value={values.cuenta}
                         onChange={handleChangeForm}
                     />
                 </Grid>
-                <Grid item xs={4}>
-                    <Grid container justify="flex-end" spacing={1} direction={'row'}>
-                        <Grid item xs={4}>
-                            <Controls.Input
-                                verySmall
-                                label="Nro"
-                                name="nro"
-                                value={values.nro}
-                                onChange={handleChangeForm}
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Controls.Input
-                                verySmall
-                                label="Sobre"
-                                name="sobre"
-                                value={values.sobre}
-                                onChange={handleChangeForm}
-                            />
-                        </Grid>
-                    </Grid>
-                </Grid>
-                {/*============================================== fila ============================================== */}
-
                 <Grid item xs={2}>
                     <Controls.Input
-                        verySmall
                         label="Cuotas"
                         name="cantcuotas"
                         value={values.cantcuotas}
                         onChange={handleChangeForm}
                     />
                 </Grid>
-
+                <Grid item xs={4}>
+                    <Controls.AutocompleteSelect
+                        promSelectList={getAllModosPagos()}
+                        name="modopago"
+                        label="Forma de pago"
+                        filtro={'descripcion'}
+                        valueautocomplete={values.modopago}
+                        onChange={(event, value = { nombre: '' }) => {
+                            handleChangeForm({ target: { value: !value ? '' : value.nombre, name: 'modopago' } })
+                        }}
+                    />
+                </Grid>
                 <Grid item xs={4}>
                     <Controls.Input
-                        verySmall
-                        label="Forma de pago"
-                        name="modopago"
-                        value={values.modopago}
+                        label="Fecha"
+                        name="fecha"
+                        type="date"
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        value={values.fecha}
                         onChange={handleChangeForm}
                     />
-
                 </Grid>
-                <Grid item container xs={6}>
-                    <Grid container direction="row" justify="flex-end" spacing={1}>
-                        <Grid item xs={4}>
-                            <Controls.Input
-                                verySmall
-                                label="Fecha"
-                                name="fecha"
-                                type="date"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                value={values.fecha}
-                                onChange={handleChangeForm}
-                            />
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Controls.Input
-                                verySmall
-                                label="Fecha de Ven."
-                                name="fechavto"
-                                type="date"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                value={values.fechavto}
-                                onChange={handleChangeForm}
-                            />
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Controls.Input
-                                verySmall
-                                label="Fecha de Pago"
-                                name="fechapago"
-                                type="date"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                value={values.fechapago}
-                                onChange={handleChangeForm}
-                            />
-                        </Grid>
-
-                    </Grid>
+                <Grid item xs={4}>
+                    <Controls.Input
+                        label="Fecha de Ven."
+                        name="fechavto"
+                        type="date"
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        value={values.fechavto}
+                        onChange={handleChangeForm}
+                    />
                 </Grid>
-
+                <Grid item xs={4}>
+                    <Controls.Input
+                        label="Fecha de Pago"
+                        name="fechapago"
+                        type="date"
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        value={values.fechapago}
+                        onChange={handleChangeForm}
+                    />
+                </Grid>
                 <Grid item xs={2}>
                     <Controls.Input
-                        verySmall
                         label="Pago Efectivo"
                         name="pagoefectivo"
                         value={values.pagoefectivo}
@@ -234,7 +210,6 @@ const ReciboGeneral = () => {
 
                 <Grid item xs={2}>
                     <Controls.Input
-                        verySmall
                         label="Beneficio"
                         name="beneficio"
                         value={values.beneficio}
@@ -243,7 +218,6 @@ const ReciboGeneral = () => {
                 </Grid>
                 <Grid item xs={2}>
                     <Controls.Input
-                        verySmall
                         label="Arancel"
                         name="arancel"
                         value={values.arancel}
@@ -253,7 +227,6 @@ const ReciboGeneral = () => {
 
                 <Grid item xs={2}>
                     <Controls.Input
-                        verySmall
                         label="Debito"
                         name="debito"
                         value={values.debito}
@@ -262,7 +235,6 @@ const ReciboGeneral = () => {
                 </Grid>
                 <Grid item xs={2}>
                     <Controls.Input
-                        verySmall
                         label="Otro Pago"
                         name="otropago"
                         value={values.otropago}
@@ -270,138 +242,83 @@ const ReciboGeneral = () => {
                     />
                 </Grid>
 
-                {/*============================================== fila ============================================== */}
-                <Grid item container xs={5}>
-                    <Grid container direction="row" spacing={1}>
-                        <Grid item xs={4}>
-                            <Controls.Input
-                                verySmall
-                                label="Recibo"
-                                name="recibo"
-                                value={values.recibo}
-                                onChange={handleChangeForm}
-                            />
-                        </Grid>
-                        <Grid item xs={8} >
-                            <Controls.Input
-                                verySmall
-                                label="Concepto"
-                                name="concepto"
-                                value={values.concepto}
-                                onChange={handleChangeForm}
-                            />
-                        </Grid>
-                    </Grid>
-                </Grid>
-                <Grid xs={7} item>
-                    <Grid container direction="row" justify="flex-end" spacing={1}>
-                        <Grid item xs={3}>
-                            <Controls.Input
-                                verySmall
-                                label="Mes"
-                                name="mes"
-                                value={values.mes}
-                                onChange={handleChangeForm}
-                            />
-                        </Grid>
-                        <Grid item xs={3}>
-                            <Controls.Input
-                                verySmall
-                                label="dia"
-                                name="interes"
-                                value={values.dia}
-                                onChange={handleChangeForm}
-                            />
-                        </Grid>
-                        <Grid item xs={3}>
-                            <Controls.Input
-                                verySmall
-                                label="Cant dias"
-                                name="cantdias"
-                                value={values.cantdias}
-                                onChange={handleChangeForm}
-                            />
-                        </Grid>
-                    </Grid>
-                </Grid>
-
-
-                {/*============================================== fila ============================================== */}
-
-
                 <Grid item xs={4}>
-                    <Controls.Checkbox
-                        name="matriculacompleta"
-                        label="Matricula Completa"
-                        value={values.matriculacompleta}
+                    <Controls.Input
+                        label="Recibo"
+                        name="recibo"
+                        value={values.recibo}
                         onChange={handleChangeForm}
                     />
                 </Grid>
-                <Grid item xs={4}>
-                    <Controls.Checkbox
-                        name="derechoexamen"
-                        label="Derecho de examen"
-                        value={values.derechoexamen}
+                <Grid item xs={8} >
+                    <Controls.Input
+                        label="Concepto"
+                        name="concepto"
+                        value={values.concepto}
                         onChange={handleChangeForm}
                     />
                 </Grid>
+                <Grid item xs={3}>
+                    <Controls.Input
+                        label="Mes"
+                        name="mes"
+                        value={values.mes}
+                        onChange={handleChangeForm}
+                    />
+                </Grid>
+                <Grid item xs={3}>
+                    <Controls.Input
+                        label="dia"
+                        name="interes"
+                        value={values.dia}
+                        onChange={handleChangeForm}
+                    />
+                </Grid>
+                <Grid item xs={3}>
+                    <Controls.Input
+                        label="Cant dias"
+                        name="cantdias"
+                        value={values.cantdias}
+                        onChange={handleChangeForm}
+                    />
+                </Grid>
+            </Grid>
 
-                {/*============================================== DETALLES DE FACTURA ============================================== */}
+            {/* detalles del recibo */}
+
+            <Grid item xs={4}>
+                <Controls.Checkbox
+                    name="matriculacompleta"
+                    label="Matricula Completa"
+                    value={values.matriculacompleta}
+                    onChange={handleChangeForm}
+                />
+            </Grid>
+            <Grid item xs={4}>
+                <Controls.Checkbox
+                    name="derechoexamen"
+                    label="Derecho de examen"
+                    value={values.derechoexamen}
+                    onChange={handleChangeForm}
+                />
+            </Grid>
 
 
+            <Grid container xs={12} spacing={2}>
                 <Grid item xs={12}>
                     <Divider orientation="horizontal" light={true} />
                 </Grid>
                 <Grid item xs={12}>
-                    <Typography variant={'h4'}>
+                    <Typography variant={'h6'}>
                         Detalle de Factura / Recibo
                     </Typography>
                 </Grid>
-                <Grid item container direction="row" spacing={1} xs={12}>
-                    <Grid item xs={3}>
-                        <Typography variant={'h6'}>
-                            Descripciones
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={2}>
-                        <Controls.Input
-                            verySmall
-                            name="descripcion"
-                            label="Descripcion"
-                            value={nuevaDescripcion.descripcion}
-                            onChange={handleChangeDesc}
-                        />
-                    </Grid>
-                    <Grid direction="row" item xs={1} >
-                        <Controls.Input
-                            verySmall
-                            name="monto"
-                            value={nuevaDescripcion.monto}
-                            onChange={handleChangeDesc}
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">$</InputAdornment>
-                                )
-                            }}
-                        />
-                    </Grid>
-                    <Grid item xs={2}>
-                        <ButtonIcon
-                            startIcon="agregar"
-                            label="Agregar Descripcion"
-                            onClick={agregarDescripcion}
-                        />
-                    </Grid>
-                </Grid>
-                <Grid item xs={12}>
-                    <Divider orientation="horizontal" light={true} />
-                </Grid>
                 {/* =========================================================== ITEM DESCRIPCIONES =========================================================== */}
-                <Grid container spacing={1} xs={12}>
+                <Grid item container spacing={1} xs={12}>
                     {
                         descripcion.map((desc, i) => {
                             return (
-                                <Grid spacing={1} xs={4} alignItems="center" container key={i} item>
+                                <Grid spacing={1} xs={6} alignItems="center" container key={i} item>
                                     <Grid item xs={2}>
                                         <Typography variant={"subtitle2"}>
                                             {desc.descripcion}
@@ -412,7 +329,7 @@ const ReciboGeneral = () => {
                                     </Grid>
                                     <Grid item xs={4}>
                                         <Controls.Input
-                                            verySmall
+                
                                             name={desc.id}
                                             value={desc.monto}
                                             InputProps={{
@@ -420,7 +337,7 @@ const ReciboGeneral = () => {
                                                     <InputAdornment position="start">$</InputAdornment>
                                                 )
                                             }}
-                                            onChange={(e) => { handleChangeMonto(e,desc.id) }}
+                                            onChange={(e) => { handleChangeMonto(e, desc.id) }}
                                         />
 
 
@@ -435,19 +352,50 @@ const ReciboGeneral = () => {
                                 </Grid>)
                         })
                     }
-                    {/* =========================================================== TOTAL =========================================================== */}
+                </Grid>
+{/* =========================================================== agregar nueva descripcion =========================================================== */}
+                <Grid container item spacing={1} xs={12}>
+                    <Grid item xs={4}>
+                        <Controls.Input
 
+                            name="descripcion"
+                            label="Descripcion"
+                            value={nuevaDescripcion.descripcion}
+                            onChange={handleChangeDesc}
+                            />
+                    </Grid>
+                    <Grid item xs={2} >
+                        <Controls.Input
+
+                            name="monto"
+                            value={nuevaDescripcion.monto}
+                            onChange={handleChangeDesc}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">$</InputAdornment>
+                                    )
+                                }}
+                                />
+                    </Grid>
+                    <Grid item xs={2}>
+                        <ButtonIcon
+                            startIcon="agregar"
+                            label="Agregar Descripcion"
+                            onClick={agregarDescripcion}
+                            />
+                    </Grid>
                 </Grid>
                 <Grid item xs={12}>
                     <Divider orientation="horizontal" light={true} />
                 </Grid>
-                <Grid container item justify="space-between">
-                    <Grid item xs={4} >
-                        <Typography>Total</Typography>
-                    </Grid>
-                    <Grid item style={{ textAlign: 'end' }} xs={2}>
-                        <Typography>${sumarMontos()}</Typography>
-                    </Grid>
+            </Grid>
+{/* =========================================================== TOTAL =========================================================== */}
+            <Grid container item justify="space-between">
+                <Grid item xs={4} >
+                    <Typography>Total</Typography>
+                </Grid>
+                <Grid item style={{ textAlign: 'end' }} xs={2}>
+                    <Typography>${sumarMontos()}</Typography>
                 </Grid>
             </Grid>
 

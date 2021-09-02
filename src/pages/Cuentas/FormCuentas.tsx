@@ -36,15 +36,18 @@ const FormCuentas = ({ width = "max-content" }) => {
         resetForm,
     } = useForm(initialFValues);
 
+
+    console.log("VALORES DEL FORMULARIO ",values)
+
     const { formSubmit } = useSubmit(addCuentas, values)
     return (
         <MuiPickersUtilsProvider utils={MomentUtils}>
-           <Grid container>
+{/*            <Grid container>
                 <Grid item xs={12}>
                     <FormGenerator />
                 </Grid>
-            </Grid> 
-           {/*  <FormContainer
+            </Grid>  */}
+            <FormContainer
                 LabelButtonSubmit="Crear Nueva Cuenta"
                 resetForm={resetForm}
                 width="45vw"
@@ -118,6 +121,7 @@ const FormCuentas = ({ width = "max-content" }) => {
                                 promSelectList={getListaGruposBarrida()}
                                 name="idgrupobarrida"
                                 label="ID Grupo Barrida"
+                                valorSalida="id"
                                 filtro={'descripcion'}
                                 valueautocomplete={values.idgrupobarrida}
                                 onChange={(event, value = { id: 0 }) => {
@@ -133,13 +137,14 @@ const FormCuentas = ({ width = "max-content" }) => {
                                 valueautocomplete={values.idsede}
                                 filtro={'descripcion'}
                                 name="idsede"
+                                valorSalida="id"
                                 label="ID Sede"
                                 onChange={(event, value) => handleChangeForm({ target: { value: !value ? 0 : value.id, name: 'idsede' } })}
                             />
                         </Grid>
                     </Grid>
                 </Grid>
-            </FormContainer> */}
+            </FormContainer>
 
         </MuiPickersUtilsProvider>
     )
