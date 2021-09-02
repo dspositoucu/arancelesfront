@@ -26,18 +26,16 @@ const AutocompleteSelect = (props) => {
     const { opciones } = useSelect(promSelectList)
     const [selectedMode, setSelectedMode] = useState(null)
 
-    const autocompleteRef = useRef()
+    const booleanOpciones =  opciones && opciones.length
 
     useEffect(() => {
-        opciones && opciones.length && setOpt(opciones)
-        opciones && opciones.length && valueautocomplete!=="" && setSelectedMode(opciones.filter(op=>op[valorSalida]===valueautocomplete)[0])
+        booleanOpciones && setOpt(opciones)
     }, [opciones])
 
     return (
         <>
             {<Autocomplete
-                value={selectedMode}
-                ref={autocompleteRef}
+                value={ booleanOpciones && opciones.filter(op=>op[valorSalida]===valueautocomplete)[0]}
                 {...props}
                 name="autocomplete"
                 MenuProps={{

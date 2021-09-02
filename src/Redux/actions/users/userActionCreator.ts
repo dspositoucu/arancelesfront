@@ -38,3 +38,10 @@ export const loginUser = (usuario: IUser) => {
     }
 }
 
+export const getAllUsuarios = () => {
+    return new UsuarioApi()
+        .getAllUsuarios()
+        .then(resp=>resp.data)
+        .catch(err=>console.log("ERROR getAllUsuario - UsuarioApi",err))
+}
+

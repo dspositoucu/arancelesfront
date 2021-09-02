@@ -16,6 +16,7 @@ import useSubmit from '../../hooks/useSubmit';
 import { getCuentasListSelect, getSedesListSelect, getActividadesExtensionSelect } from '../../Redux/actions/cuentas/CuentasActionCreator';
 import { getListaGruposBarrida } from '../../Redux/actions/barridas/BarridasActionCreator';
 import { addCuentas } from '../../Redux/actions/cuentas/CuentasActionCreator'
+import { getAllUsuarios } from '../../Redux/actions/users/userActionCreator';
 
 const initialFValues = {
     codfac: '',
@@ -25,7 +26,8 @@ const initialFValues = {
     area: '',
     idgrupobarrida: '',
     cantcuotas: '',
-    idsede: ''
+    idsede: '',
+    usuario:''
 }
 
 const FormCuentas = ({ width = "max-content" }) => {
@@ -140,6 +142,19 @@ const FormCuentas = ({ width = "max-content" }) => {
                                 valorSalida="id"
                                 label="ID Sede"
                                 onChange={(event, value) => handleChangeForm({ target: { value: !value ? 0 : value.id, name: 'idsede' } })}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Grid container item xs={12} spacing={1}>
+                        <Grid item xs={12}>
+                            <Controls.AutocompleteSelect
+                                promSelectList={getAllUsuarios()}
+                                valueautocomplete={values.usuario}
+                                filtro={'descripcion'}
+                                name="usuario"
+                                valorSalida="idCaja"
+                                label="Vincular Usuario"
+                                onChange={(event, value) => handleChangeForm({ target: { value: !value ? 0 : value.idCaja, name: 'usuario' } })}
                             />
                         </Grid>
                     </Grid>

@@ -3,7 +3,7 @@ import { getDataLocalStorage } from "../helpers/LocalStorage"
 
 const AxiosIntance = axios.create(
     {
-        baseURL: 'http://localhost:3001/api/v1',
+        baseURL: 'http://localhost:3003/api/v1',
     })
 AxiosIntance.interceptors.request.use(
     (config) => {
