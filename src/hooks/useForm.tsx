@@ -40,7 +40,8 @@ export const useForm = (initialFValues) => {
     values,
     setValues,
     handleChangeForm,
-    resetForm
+    resetForm,
+    formEdit: !!Object.entries(detallesData).length
   }
 }
   

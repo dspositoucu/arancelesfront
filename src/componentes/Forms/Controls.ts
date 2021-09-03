@@ -5,6 +5,7 @@ import Checkbox from "./Checkbox";
 import Button from "./Button";
 import AutocompleteSelect from "./AutocompleteSelect";
 import DateField from './DateField'
+import CheckboxFormik from "./CheckboxFormik";
 
 const Controls = {
     Button,
@@ -13,7 +14,8 @@ const Controls = {
     Checkbox,
     Input,
     AutocompleteSelect,
-    DateField
+    DateField,
+    CheckboxFormik
 
 }
 

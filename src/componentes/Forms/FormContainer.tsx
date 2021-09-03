@@ -20,7 +20,10 @@ const FormContainer = ({ width = '100%', children, title, LabelButtonSubmit = "n
     console.log("mostrar botones", hidenButton)
     const classes = useStyles();
     return (
-        <form className={classes.root} autoComplete="off" {...other}>
+        <form 
+            className={classes.root} 
+            autoComplete="off" {...other}
+            onSubmit={(e)=>e.preventDefault()}>
             <Grid style={{ height: '100%' }} container spacing={2} >
                 <Grid item style={{height:"max-content"}} xs={12}>
                     <Typography variant="h4">{title}</Typography>
