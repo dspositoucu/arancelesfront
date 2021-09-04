@@ -4,6 +4,7 @@ import MomentUtils from '@date-io/moment';
 import {
     MuiPickersUtilsProvider
 } from '@material-ui/pickers';
+
 // Import Componentes
 import Controls from '../../componentes/Forms/Controls'
 import { FormGenerator } from '../../componentes/FormComponents/Components/FormGenerator';
@@ -14,7 +15,7 @@ import FormContainer from '../../componentes/Forms/FormContainer';
 import useSubmit from '../../hooks/useSubmit';
 
 //Actions
-import { getCuentasListSelect, getSedesListSelect, getActividadesExtensionSelect } from '../../Redux/actions/cuentas/CuentasActionCreator';
+import { getCuentasListSelect, getSedesListSelect, getActividadesExtensionSelect, getTiposCuenta } from '../../Redux/actions/cuentas/CuentasActionCreator';
 import { getListaGruposBarrida } from '../../Redux/actions/barridas/BarridasActionCreator';
 import { addCuentas } from '../../Redux/actions/cuentas/CuentasActionCreator'
 import { getAllUsuarios } from '../../Redux/actions/users/userActionCreator';
@@ -26,8 +27,8 @@ const initialFValues = {
     area: '',
     idgrupobarrida: '',
     cantcuotas: '',
-    idsede: '',
-    idusuarios:[]
+    idtipocuenta:'',
+    idusuario:[]
 }
 
 const FormCuentas = ({ width = "max-content" }) => {
@@ -57,8 +58,8 @@ const FormCuentas = ({ width = "max-content" }) => {
                 resetForm={resetForm}
                 width="45vw"
                 title={formEdit ? values.descripcion : "Nueva Cuenta"}
-                onSubmit={()=>{}/* formSubmit */}>
-                <Grid container spacing={2}>
+                onSubmit={formSubmit}>
+                <Grid container spacing={3}>
                     <Grid container item xs={12} spacing={1}>
                         <Grid item xs={6}>
                             <Controls.Input
@@ -96,6 +97,7 @@ const FormCuentas = ({ width = "max-content" }) => {
                             : <Grid item xs={12}>
                                 <Controls.AutocompleteSelect
                                     promSelectList={getActividadesExtensionSelect()}
+                                    valorSalida="nombre"
                                     name="descripcion"
                                     label="Actividades de Extension"
                                     filtro={'nombre'}
@@ -130,6 +132,19 @@ const FormCuentas = ({ width = "max-content" }) => {
                         <Grid container item xs={12} spacing={1}>
                             <Grid item xs={12}>
                                 <Controls.AutocompleteSelect
+                                    promSelectList={getTiposCuenta()}
+                                    name="idtipocuenta"
+                                    label="Tipo de Cuenta"
+                                    valorSalida="id"
+                                    filtro='descripcion'
+                                    valueautocomplete={values.idtipocuenta}
+                                    onChange={handleChangeForm}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid container item xs={12} spacing={1}>
+                            <Grid item xs={12}>
+                                <Controls.AutocompleteSelect
                                     promSelectList={getListaGruposBarrida()}
                                     name="idgrupobarrida"
                                     label="ID Grupo Barrida"
@@ -143,25 +158,12 @@ const FormCuentas = ({ width = "max-content" }) => {
                         <Grid container item xs={12} spacing={1}>
                             <Grid item xs={12}>
                                 <Controls.AutocompleteSelect
-                                    promSelectList={getSedesListSelect()}
-                                    valueautocomplete={values.idsede}
-                                    filtro={'descripcion'}
-                                    name="idsede"
-                                    valorSalida="id"
-                                    label="ID Sede"
-                                    onChange={handleChangeForm}
-                                />
-                            </Grid>
-                        </Grid>
-                        <Grid container item xs={12} spacing={1}>
-                            <Grid item xs={12}>
-                                <Controls.AutocompleteSelect
                                     multiple={true}
                                     promSelectList={getAllUsuarios()}
-                                    valueautocomplete={values.idusuarios}
+                                    valueautocomplete={values.idusuario}
                                     filtro={'descripcion'}
-                                    name="idusuarios"
-                                    valorSalida="idCaja"
+                                    name="idusuario"
+                                    valorSalida="idUsuario"
                                     label="Vincular Usuario"
                                     onChange={handleChangeForm}
                                 />

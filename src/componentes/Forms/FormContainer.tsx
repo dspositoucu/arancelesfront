@@ -22,8 +22,7 @@ const FormContainer = ({ width = '100%', children, title, LabelButtonSubmit = "n
     return (
         <form 
             className={classes.root} 
-            autoComplete="off" {...other}
-            onSubmit={(e)=>e.preventDefault()}>
+            autoComplete="off" {...other}>
             <Grid style={{ height: '100%' }} container spacing={2} >
                 <Grid item style={{height:"max-content"}} xs={12}>
                     <Typography variant="h4">{title}</Typography>

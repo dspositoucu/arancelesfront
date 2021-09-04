@@ -35,15 +35,15 @@ const Cuentas = () => {
   /* LISTADO DE ACCIONES DISPONIBLES EN LAS FILAS: 
     - editar
   */
-  
+
   const columnas = [
     { title: "ID", width: '5%' },
     { title: "CodFac", width: '5%' },
     { title: "CodCar", width: '5%' },
     { title: "Descripcion" },
-    { title: "CantCuotas", width:'10%' },
-    { title: "IDSede" , width:'10%'},
-    { title: "Grupo Barrida" , width:'10%'},
+    { name: "tipocuenta", title: "Tipo Cuenta", width: '15%' },
+    { title: "CantCuotas", width: '10%' },
+    { title: "Grupo Barrida", width: '10%' },
   ]
   return <Table
     filterSearchBar={[

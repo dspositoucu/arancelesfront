@@ -28,4 +28,8 @@ export class CuentasApi {
     getActividadesExtension(): Promise<AxiosResponse>{
         return AxiosIntance.get(`${this.BaseUrl}/actividadesExtencion`)
     }
+
+    getTiposCuenta() :Promise<AxiosResponse> {
+        return AxiosIntance.get(`${this.BaseUrl}/tiposcuenta`)
+    }
 }

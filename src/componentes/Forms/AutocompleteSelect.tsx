@@ -21,60 +21,57 @@ const useStyles = makeStyles((theme: Theme) =>
 const AutocompleteSelect = (props) => {
     const classes = useStyles()
 
-    const { filtro, promSelectList, onChange, name, valueautocomplete, label,valorSalida=null, multiple=false } = props
-    const [opt, setOpt] = useState<any[]>([])
-    const { opciones } = useSelect(promSelectList)
-    const [selectedMode, setSelectedMode] = useState<any>([])
+    const { filtro, promSelectList, onChange, name, valueautocomplete, label, valorSalida = null, multiple = false } = props
 
-    console.log("asdadasdsadasdasda ",selectedMode)
+    const { opciones } = useSelect(promSelectList)
+    const [value, setValue] = useState<any>([])
 
     const setValueMultiple = () => {
-
-        if(!multiple) return
-        let copyOpt = [...opt]
-        let valueMultiple:any
-
-        if(typeof valueautocomplete === "string"){
+        if (!multiple) return
+        let selectValue:any = []
+        let valueMultiple: any
+        if (typeof valueautocomplete === "string") {
             valueMultiple = valueautocomplete.split(',')
             valueMultiple.forEach(data => {
-                copyOpt.forEach((data2, j) => {
-                    parseInt(data) !== data2[valorSalida] && copyOpt.splice(j, 1)
+                opciones.forEach((data2, j) => {
+                    parseInt(data) === data2[valorSalida] && selectValue.push(data2)
                 })
             })
-            setSelectedMode([...copyOpt])
-         } else{
-            setSelectedMode(copyOpt.filter(op=>op[valorSalida]===valueMultiple))
-         }
+            setValue(selectValue)
+        } else {
+            setValue(opciones.filter(op => op[valorSalida] === valueMultiple))
+        }
 
     }
-    const onChangeAutocomplete = (value:any) => {
-         setSelectedMode(value)
-        const sendValue = value.map((val:any)=>val[valorSalida])
-        onChange({ target: { value: !value.length ? [] : sendValue , name } })
+    const onChangeAutocomplete = (value: any) => {
+        setValue(value)
+        const sendValue = value.map((val: any) => val[valorSalida])
+            onChange({ target: { value: !value.length ? [] : sendValue, name } })
     }
-
-    const booleanOpciones =  opciones && opciones.length
+    const existOpt = opciones && opciones.length
 
     useEffect(() => {
         multiple && setValueMultiple()
-        booleanOpciones && setOpt(opciones)
     }, [opciones])
-
-    console.log()
 
     return (
         <>
             {<Autocomplete
-                value={!multiple ? (booleanOpciones && opciones.filter(op=>op[valorSalida]===valueautocomplete)[0]):selectedMode}
+                value={!multiple ? (existOpt && opciones.filter(op => op[valorSalida] === valueautocomplete)[0]) : value}
                 {...props}
                 multiple={multiple}
                 name="autocomplete"
+                getOptionSelected={(option: any, value) => {
+                    return  value ? value[valorSalida] === option[valorSalida] : true
+                }}
+                getOptionLabel={(option: any) => option[filtro] || ""}
+
                 MenuProps={{
                     disableScrollLock: false,
                     classes: { paper: classes.selectProps }
                 }}
-                onChange={(event,value:any)=>{
-                    multiple 
+                onChange={(event, value: any) => {
+                    multiple
                         ? onChangeAutocomplete([...value])
                         : onChange({ target: { value: !value ? 0 : value[valorSalida], name } })
                 }}
@@ -82,17 +79,16 @@ const AutocompleteSelect = (props) => {
                 disablePortal
                 placeholder={label}
                 id="combo-box-demo"
-                options={opt}
-                getOptionLabel={(option: any) => option[filtro]}
+                options={opciones}
                 renderInput={(params) => (
                     <Controls.Input
                         {...params}
                         label={label}
                         className={classes.marginNone}
                         size="small"
-                        placeholder={label} 
+                        placeholder={label}
                         variant="outlined"
-                        />
+                    />
                 )}
             />}
         </>

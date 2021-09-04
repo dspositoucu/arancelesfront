@@ -99,3 +99,10 @@ export const getActividadesExtensionSelect = () => {
         .then(resp=>resp.data)
         .catch(err=>console.log(err))
 }
+
+export const getTiposCuenta = () => {
+    return new CuentasApi() 
+        .getTiposCuenta()
+        .then(resp=>resp.data)
+        .catch(err=>console.log("ERROR getTiposCuentas - CuentasApi ",err))
+}
