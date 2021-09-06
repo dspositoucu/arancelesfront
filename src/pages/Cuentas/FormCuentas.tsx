@@ -109,7 +109,7 @@ const FormCuentas = ({ width = "max-content" }) => {
                         </Grid>
 
 
-                        <Grid container item xs={12} spacing={1}>
+                        <Grid container item xs={6} spacing={1}>
                             <Grid item xs={12}>
                                 <Controls.Input
                                     label="Cantidad de Cuotas"
@@ -119,7 +119,7 @@ const FormCuentas = ({ width = "max-content" }) => {
                                 />
                             </Grid>
                         </Grid>
-                        <Grid container item xs={12} spacing={1}>
+                        <Grid container item xs={6} spacing={1}>
                             <Grid item xs={12} >
                                 <Controls.Input
                                     label="Area"
