@@ -1,0 +1,112 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+::-webkit-scrollbar {
+    width: 5px;
+    background: #F2F0F9
+}
+
+::-webkit-scrollbar-thumb {
+    background: #6E6893;
+}
+
+::-webkit-scrollbar:horizontal {
+    height: 5px;
+    background: #F2F0F9
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+    background: #6E6893;
+}
+
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+a {
+    text-decoration: none !important;
+    outline: none !important;
+    color: #6E6893;
+}
+
+a:active:link:focus {
+    text-decoration: none;
+    color: currentColor
+}
+
+.login {
+    background-image: url('./assets/fondoInicio.svg');
+    background-size: auto auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.openFondo {
+    animation: openFondo .5s cubic-bezier(0.22, 1, 0.36, 1) 0s 1 normal none;
+}
+
+.slideIn {
+    animation: slideIn .5s cubic-bezier(0.22, 1, 0.36, 1) 0s 1 normal none;
+}
+
+.CloseModal {
+    animation: CloseModal .5s cubic-bezier(0.22, 1, 0.36, 1) 0s 1 normal none;
+}
+
+.CloseModalFondo {
+    animation: CloseModalFondo .5s cubic-bezier(0.22, 1, 0.36, 1) 0s 1 normal none;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(3rem);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes CloseModal {
+    100% {
+        transform: translateX(3rem);
+        opacity: 0;
+    }
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes openFondo {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes CloseModalFondo {
+    100% {
+        opacity: 0;
+    }
+    0% {
+        opacity: 1;
+    }
+}

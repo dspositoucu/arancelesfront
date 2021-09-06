@@ -1,0 +1,58 @@
+{
+    "menuData": [
+        {
+            "MenuOption": "Cuentas",
+            "SubMenu": [
+                "Lista de Personas"
+            ]
+        },
+        {
+            "MenuOption": "Personas",
+            "SubMenu": [
+                "Listado de Personas",
+                "Asignar Cuentas"
+            ]
+        },
+        {
+            "MenuOption": "Cajas",
+            "SubMenu": [
+                "Transferir Movimientos de Caja a CtaCte"
+            ]
+        },
+        {
+            "MenuOption": "Aranceles",
+            "SubMenu": [
+                "Aranceles Actuales",
+                "Definicion de Aranceles",
+                "Pasar Actuales al mes Siguiente",
+                "Establecer Aranceles Activos",
+                "Generar Debitos",
+                "Consulta y Registro de Asientos en CtaCte",
+                "Consulta de Moviemientos de CtaCte",
+                "Alta Masiva de Asientos CtaCte"
+            ]
+    
+        },
+        {
+            "MenuOption": "Informes",
+            "SubMenu": [
+                "CBU Alumnos",
+                "Ingreso Por Facultad Y Carrera",
+                "Ingreso Facultad - Carrera con detalle Movimiento",
+                "Debito Generados",
+                "Detalle de Saldos",
+                "Resumen de Saldos" 
+            ]
+        },
+        {
+            "MenuOption":"Banco",
+            "SubMenu":[
+                "Configuracion de Barrida",
+                "Feriados",
+                "SQL Barrida",
+                "Archivos de Barrida",
+                "Fechas de Barrida"
+            ]
+        }
+    ]
+}
