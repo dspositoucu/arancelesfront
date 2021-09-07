@@ -1,14 +1,12 @@
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import TextField from '@material-ui/core/TextField';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import Input from './Input';
 import Controls from './Controls';
 
 //import hook
 import useSelect from '../../hooks/useSelect';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(() =>
     createStyles({
         selectProps: {
             height: '100px'
@@ -20,10 +18,9 @@ const useStyles = makeStyles((theme) =>
 
 const AutocompleteSelect = (props) => {
     const classes = useStyles()
-
     const { filtro, promSelectList, onChange, name, valueautocomplete, label, valorSalida = null, multiple = false } = props
 
-    const { opciones } = useSelect(promSelectList)
+    const { opciones=[] } = useSelect(promSelectList)
     const [value, setValue] = useState([])
 
     const setValueMultiple = () => {

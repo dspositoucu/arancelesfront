@@ -69,7 +69,8 @@ const CustomTable = (props) => {
         widthModal,
         actionInRow,
         heightModal,
-        ModalDefault
+        ModalDefault,
+        rowMenu=null
     } =  props
 
     //  estados de modales 
@@ -175,7 +176,9 @@ const CustomTable = (props) => {
                                 }
                                 <CellAction align='right' width='100px'>
                                     {
-                                        actionInRow.map((accion, index) => <ButtonIcon key={index} endIcon={accion} data={data} />)
+                                       rowMenu 
+                                        ? rowMenu 
+                                        : actionInRow.map((accion, index) => <ButtonIcon key={index} endIcon={accion} data={data} />)
                                     }
                                 </CellAction>
                             </Row>

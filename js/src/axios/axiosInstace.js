@@ -7,7 +7,7 @@ const AxiosIntance = axios.create(
     })
 AxiosIntance.interceptors.request.use(
     (config) => {
-        const { access_token } = getStoredAuthToken() || ''
+        const access_token  = getStoredAuthToken() || ''
         if (access_token) {
             config.headers.Authorization = `Bearer ${access_token}`
         }

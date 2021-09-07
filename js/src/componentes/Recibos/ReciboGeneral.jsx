@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Divider, Grid, InputAdornment, Typography, } from '@material-ui/core';
 
 // Import Componentes
@@ -151,18 +151,17 @@ const ReciboGeneral = ({ data }) => {
                         onChange={handleChangeForm}
                     />
                 </Grid>
-                <Grid item xs={4}>
+                 <Grid item xs={4}>
                     <Controls.AutocompleteSelect
                         promSelectList={getAllModosPagos()}
                         name="modopago"
                         label="Forma de pago"
-                        filtro={'descripcion'}
+                        filtro='descripcion'
+                        valorSalida="id"
                         valueautocomplete={values.modopago}
-                        onChange={(event, value = { nombre: '' }) => {
-                            handleChangeForm({ target: { value: !value ? '' : value.nombre, name: 'modopago' } })
-                        }}
+                        onChange={handleChangeForm}
                     />
-                </Grid>
+                </Grid> 
                 <Grid item xs={4}>
                     <Controls.Input
                         label="Fecha"

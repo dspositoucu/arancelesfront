@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import { Link } from "react-router-dom";
 import { Tabs, Tab } from "@material-ui/core";
 import { makeStyles, createStyles, ThemeProvider } from '@material-ui/core/styles';
@@ -46,25 +46,23 @@ export default function AppBar() {
         { label: "Caja", value: "/caja" },
         { label: 'Alumos Sao', value: "/alumnos_sao" }
     ]
-    const [currentTab, setCurrentTab] = useState(window.location.pathname)
-    const filterTab = () => {
-        return tabs.findIndex( tab => tab.value === currentTab)
-    }
-    
+
+    const [currentTag, setCurrenTag] = useState('')
+
     const classes = useStyles()
     return (
         <Tabs
-            value={filterTab()}
+            value={currentTag}
             className={classes.tabs}
+            onChange={(e,currTag)=>setCurrenTag(currTag)}
             classes={{
                 indicator: classes.indicator
             }}>
             {tabs.map(tab => {
                 return <Tab
                     disableFocusRipple={true}
-                    onChange={(e, idx) => setCurrentTab(tabs[idx])}
                     disableRipple={true}
-                    className={`${classes.rootTab} ${currentTab === tab.value ? classes.tabSelect : classes.tab}`}
+                    className={`${classes.rootTab} ${window.location.pathname === tab.value ? classes.tabSelect : classes.tab}`}
                     value={tab.value}
                     label={tab.label}
                     component={Link}

@@ -38,7 +38,17 @@ const useStyles = makeStyles(() =>
         },
     }))
 
-const ButtonIcon = ({ centerIcon='null' , startIcon = "null", endIcon = "null", label, typeButton = "default", hover = false, data=null, onClick }) => {
+const ButtonIcon = ({ 
+    centerIcon='null' , 
+    startIcon = "null", 
+    endIcon = "null", 
+    label, typeButton = "default", 
+    hover = false, 
+    data=null, 
+    onClick,
+    textAlign="", 
+    width='auto',
+    ...other }) => {
     const dispatch = useDispatch()
 
     const acciones = {
@@ -53,12 +63,14 @@ const ButtonIcon = ({ centerIcon='null' , startIcon = "null", endIcon = "null", 
     const classes = useStyles()
     return (
         <Button
+            style={{width:`${width}`, display:'flex', justifyContent:`${textAlign==='right'? 'flex-end' : textAlign==='left' ? 'flex-start' : 'center'}`}}
             onClick={acciones[endIcon] || acciones[startIcon] || onClick}
             className={`${hover && classes.hover} ${classes[typeButton]}`}
             endIcon={<Icons type={endIcon} />}
             startIcon={<Icons type={startIcon} />}
         >
-            {label ? `${label[0].toUpperCase() + label.slice(1)}`:<Icons type={centerIcon}/>}
+            {!other.children && (label ? `${label[0].toUpperCase() + label.slice(1)}`:<Icons type={centerIcon}/>)}
+            {other.children && other.children}
         </Button>
     )
 }

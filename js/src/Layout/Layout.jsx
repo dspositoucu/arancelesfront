@@ -38,7 +38,7 @@ const Layout = ({ children }) => {
             <Header title="Sistema Aranceles" />
             <div className={classes.root}>
                 <div className={classes.childContainer}>
-                    {/* <AppBar/> */}       
+                    <AppBar/>       
                     <div className={classes.table}>
                         {children}
                     </div>

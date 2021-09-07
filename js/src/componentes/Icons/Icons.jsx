@@ -11,10 +11,11 @@ import AddIcon from '@material-ui/icons/Add';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
+import AttachFileIcon from '@material-ui/icons/AttachFile';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
-
-const Icons= (props) => {
-    const { type="", color='action', size='small' } = props
+const Icons = (props) => {
+    const { type = "", color = 'action', size = 'small' } = props
 
     const objIcon = {
         null: <></>,
@@ -30,7 +31,10 @@ const Icons= (props) => {
         editar: <EditIcon fontSize="small" />,
         agregar: <AddIcon fontSize="small" />,
         ctacte: <AccountBalanceWalletIcon fontSize="small" />,
-        cerrar: <HighlightOffIcon fontSize="small" />
+        cerrar: <HighlightOffIcon fontSize="small" />,
+        file: <AttachFileIcon fontSize="small" />,
+        view: <VisibilityIcon fontSize="small" />
+
     }
 
     return <> {objIcon[type]} </>

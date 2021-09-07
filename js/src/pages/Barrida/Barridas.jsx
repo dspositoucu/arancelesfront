@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 // components
 import Table from '../../componentes/CustomTable'
 import FormBarrida from './FormBarrida'
+import ActionMenu from '../../componentes/Menu/ActionMenu'
 //Actions
 import { getAllBarridas } from '../../Redux/actions/barridas/BarridasActionCreator'
 
@@ -24,13 +25,42 @@ const Barridas = () => {
     { title: "Descripcion" },
     { title: "Barrida" },
     { title: "Grupo" },
-    { title: "Generado",},
+    { title: "Generado", },
     { title: "Enviado", type: 'boolean' },
-    { title: "Recibido"  },
-    { title: "Entregado", name:"fechaentrega"},
-    { title: "FBarrida", name:"fechabarrida"},
-    { title: "Acreditacion", name:"fechaacreditacion"},
-    { title: "Recibos", name: "fecharecibos"}
+    { title: "Recibido" },
+    { title: "Entregado", name: "fechaentrega" },
+    { title: "FBarrida", name: "fechabarrida" },
+    { title: "Acreditacion", name: "fechaacreditacion" },
+    { title: "Recibos", name: "fecharecibos" }
+  ]
+
+
+  const optionsMenuAction = [
+    {
+      title: "Subir Archivo",
+      action: () => {},
+      icon: "file",
+      element:
+        <label style={{ width:"100%", textAlign:'left'}}>
+          <input type="file" style={{display:"none"}}/>
+          Subir Archivo
+        </label>
+    },
+    {
+      title: "Informe de rechazos",
+      action: () => {},
+      icon: "view"
+    },
+    {
+      title: "Pagaron mes Anterior y No Actual",
+      action: () => {},
+      icon: "view"
+    },
+    {
+      title: "Pagaron mes Actual y No Anterior",
+      action: () => {},
+      icon: "view"
+    }
   ]
 
   // El componente Table recibe dos props 
@@ -46,6 +76,7 @@ const Barridas = () => {
       },
     ]}
     filterMenu={false}
+    rowMenu={<ActionMenu options={optionsMenuAction} />}
     tableData={listBarridas}
     columns={columns}
     actionsInHeader={["imprimir", "nuevo"]}

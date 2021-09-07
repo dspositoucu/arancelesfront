@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 //Components
 import Table from '../../componentes/CustomTable'
 import FormCuentas from './FormCuentas'
+import Menu from '../../componentes/Menu/ActionMenu'
 
 //Actions
 import { getAllCuentas } from '../../Redux/actions/cuentas/CuentasActionCreator'
@@ -49,7 +50,7 @@ const Cuentas = () => {
     filterMenu={false}
     tableData={listCuentas}
     columns={columnas}
-    actionsInHeader={["imprimir", "nuevo"]}
+    actionsInHeader={["imprimir", "nuevo"]} 
     actionInRow={['editar']}
     rowChek={false}
     FormRegister={<FormCuentas width='100%' />}
